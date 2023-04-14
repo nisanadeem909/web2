@@ -1,0 +1,42 @@
+.container-home{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.img1{
+    width: 700px;
+    height: 600px;
+    margin-left: -9%;
+    margin-top: 6%;
+}
+
+.box1{
+    width: 30%;
+    margin-left: 10%;
+}
+
+h2{
+    font-size: 70px;
+}
+
+.b1{
+    margin: 15px;
+    width: 140px;
+    background-color: #0E312F;
+    color: white;
+    border-radius: 50px;
+    height: 35px;
+    border: 1px solid #0E312F;
+
+}
+
+.b2{
+    width: 140px;
+    background-color: white;
+   
+    border-radius: 50px;
+    height: 35px;
+    border: 1px solid #0E312F;
+
+}
