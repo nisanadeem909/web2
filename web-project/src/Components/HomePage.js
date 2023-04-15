@@ -20,9 +20,16 @@ function HomePage() {
 
    </div>
    <div className='service'>
-   <div className='box3'></div>
-   <div className='box4'></div>
-   <div className='box5'></div>
+   <div className='box3'>CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf
+   <button className='bs1'>Go</button>
+   </div>
+   <div className='box4'>CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf
+   <button className='bs1'>Go</button>
+   </div>
+   <div className='box5'>CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf
+   <button className='bs1'>Go</button>
+
+   </div>
    </div>
    </div>
 
