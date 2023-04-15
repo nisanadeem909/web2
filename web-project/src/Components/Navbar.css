@@ -17,7 +17,7 @@
     padding-top: 6px;
     width: 150px;
     height: 45px;
-    margin-left: -620px;
+    margin-left: 50px;
 
   }
   nav ul{
@@ -38,7 +38,7 @@
    
   }
   a.active,a:hover{
-    background: #1b9bff;
+    background: #027e74;
     transition: .5s;
   }
   .checkbtn{
