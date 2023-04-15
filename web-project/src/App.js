@@ -8,8 +8,9 @@ import HomePage from './Components/HomePage'
 
 function App() {
   return (
+   
     <BrowserRouter>
-      <Routes> 
+      <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
           {/*<Route path="blogs" element={<Blogs />} />
@@ -23,7 +24,8 @@ function App() {
       <LandingPage/>
         
     </div>*/
-  );
+
+ );
 }
 
 export default App;

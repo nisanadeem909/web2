@@ -1,0 +1,18 @@
+#ratingcompany-box{
+    border-radius: 5%;
+    /*border-color: green;
+    border-style: solid;*/
+    width: 150px;
+    height: 90px;
+    font-weight: bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-top:10px;
+    padding-left: 10px;
+    background-color:rgba(255,255,255,0.6);
+}
+
+.star{
+    color: #FFEA00;
+    font-size:20px;
+    
+}
