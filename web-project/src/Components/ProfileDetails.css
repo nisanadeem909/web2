@@ -1,0 +1,125 @@
+.container {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 2vh;
+    display: flex;
+}
+
+.profilePic {
+    width: 22vh;
+    height: 22vh;
+    background-color: gainsboro;
+    border-radius: 50%;
+    border: 1px solid #016960;
+    margin: 2%;
+    margin-left: 5%;
+}
+
+.details {
+    width: 75%;
+    padding: 1%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+label, p, button{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #015750;
+}
+
+#name {
+    font-size: 4vh;
+    font-weight: bold;
+}
+
+#username {
+    opacity: 70%;
+    font-size: 2vh;
+}
+
+hr {
+    opacity: 30%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.bio {
+    margin-top: 1%;
+    font-size: 2.5vh;
+}
+
+#conimg {
+    width: 3vh;
+    height: 3vh;
+}
+
+button {
+    background-color: #016960;
+    width: 11%;
+    border-radius: 3vh;
+    border: none;
+    height: 4vh;
+    margin-left: 5%;
+    margin-top: 0.7vh;
+}
+
+button label {
+    color: white;
+    margin-left: 1%;
+    font-size: 2.5vh;
+}
+
+button div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.network {
+    opacity: 80%;
+    display: flex;
+    font-size: 2.5vh;
+}
+
+#neticon {
+    width: 4.5vh;
+    height: 3.5vh;
+    margin-right: 1%;
+}
+
+button:hover {
+    background-color: #09a093;
+}
+
+#namebtn {
+    display: flex;
+}
+
+/*own profile only*/
+
+#btne {
+    width: 7%;
+}
+
+#editpfp {
+    background: none;
+    margin: 2%;
+    margin-left: 5%;
+    width: auto;
+    height: auto;
+    position: absolute;
+}
+
+.editpfp {
+    border-radius: 50%;
+    width: 4vh;
+    position: absolute;
+    top: 17vh;
+    left: 16vh;
+}
+
+#imgedit {
+    position: relative;
+    margin: 2%;
+    margin-left: 5%;
+}
