@@ -15,7 +15,7 @@
     width: 700px;
     margin-left: 5%;
     margin-top: 14%;
-    
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 h2{
@@ -24,22 +24,24 @@ h2{
 
 .b1{
     margin: 15px;
-    width: 140px;
+    width: 150px;
     background-color: #0E312F;
     color: white;
     border-radius: 50px;
-    height: 35px;
+    height: 45px;
     border: 1px solid #0E312F;
+    font-size: large;
 
 }
 
 .b2{
-    width: 140px;
+    width: 150px;
     background-color: white;
    
     border-radius: 50px;
-    height: 35px;
+    height: 45px;
     border: 1px solid #0E312F;
+    font-size: large;
 
 }
 
@@ -97,4 +99,19 @@ h2{
     border: 1px solid #C6CDC0;
     margin-top: 20px;
     
+}
+
+#loginp {
+    margin: 3%;
+    font-size: large;
+}
+
+#loginp a {
+    color: #016960;
+}
+
+#loginp a:hover {
+    color: #016960;
+    text-decoration: underline;
+    background: none;
 }
