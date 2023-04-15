@@ -1,27 +1,24 @@
 import React from 'react'
 import './Navbar.css';
-
+import logo1 from './logo1.png';
 
 function Navbar() {
     return (
         <div>
- <nav class="navbar">
-  <div id="trapezoid">
-    <a class="sub-home" href="#">Home</a>
-    <a href="#About" class="expandHome">About</a>
-     <div class="subnav">
-     <button class="subnavbtn">Clients<i class="fa fa-caret-down"></i></button>
-       
+        <nav>
+      <input type="checkbox" id="check"/>
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <img class="logo" src={logo1}/>
+      <ul>
+        <li><a class="active" href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Feedback</a></li>
+      </ul>
+    </nav>
     </div>
-  
-     <div class="subnav">
-     <button class="subnavbtn">Services<i class="fa fa-caret-down"></i></button>
-       
-      </div>
-    <a href="" class="expandHome">Contact</a>
-  </div>
-</nav>
- </div>
     );
   }
   
