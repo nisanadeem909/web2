@@ -3,7 +3,6 @@ import './ProfileEducation.css';
 import ReactDOM from "react-dom";
 import workicon from './workk.png'
 import editicon from './edit.png'
-import delicon from './trash.png'
 
 export default function PublicProfileEducation() {
 
