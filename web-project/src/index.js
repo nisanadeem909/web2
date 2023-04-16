@@ -2,18 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Post from './Components/Post';
-import Profile from './Components/Profile';
-
-
 import reportWebVitals from './reportWebVitals';
-import MakeCV from './Components/MakeCV';
-import LandingPage from './Components/LandingPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Post/>
+    <App />
   </React.StrictMode>
 );
 

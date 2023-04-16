@@ -9,6 +9,7 @@ import Post from './Components/Post'
 
 function App() {
   return (
+   
     <BrowserRouter>
       <Routes>
       <Route path="/" element={<Navbar />}>
@@ -24,7 +25,8 @@ function App() {
       <LandingPage/>
         
     </div>*/
-  );
+
+ );
 }
 
 export default App;
