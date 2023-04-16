@@ -16,7 +16,7 @@ export default function RecentlyAddedJobs() {
                                 <label className="listheading">Software Engineer</label>
                                 <label className="listsubheading1">ABC Software</label>
                                 <label className="listsubheading2">Lahore, Pakistan</label>
-                                <div>
+                                <div className="buttons">
                                     <button>Apply</button>
                                     <button>View Details</button>
                                 </div>
@@ -30,7 +30,7 @@ export default function RecentlyAddedJobs() {
                                 <label className="listheading">Intern</label>
                                 <label className="listsubheading1">TechSoft</label>
                                 <label className="listsubheading2">Islamabad, Pakistan</label>
-                                <div>
+                                <div className="buttons">
                                     <button>Apply</button>
                                     <button>View Details</button>
                                 </div>

@@ -13,8 +13,8 @@ button {
     border: none;
     border-radius: 3vh;
     margin-top: 2vh;
-    padding: 0.5vh;
-    margin-right: 2%;
+    padding: 0.8vh;
+    width: 20%;
 }
 
 button:hover {
@@ -28,8 +28,57 @@ button:hover {
     margin-left: 30%;
 }
 
+input, textarea, select {
+    border: none;
+    border-bottom: 2px solid #09a093;
+    background-color: azure;
+    width: 22vh;
+}
+
+textarea {
+    resize: none;
+    height: 15vh;
+}
+
+.postjob {
+    margin-top: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50vh;
+}
+
+.cancelbtn {
+    background-color: rgb(248, 248, 248);
+    color: #016960;
+}
+
+.cancelbtn:hover {
+    background-color: darkgray;
+    color: white;
+}
+
+.field {
+    display: flex;
+    justify-content: space-between;
+}
+
+input::placeholder, textarea::placeholder {
+    color:#015750;
+    opacity: 50%;
+}
+
 .buttons {
     display: flex;
+    justify-content: space-evenly;
+}
+
+hr {
+    border: none;
+    height: 0.1vh;
+    background-color: #016960;
+    margin-top: 5%;
+    opacity: 30%;
 }
 
 .icon {
@@ -44,7 +93,6 @@ button:hover {
     flex-direction: column;
     justify-content: space-evenly;
     margin-left: 4%;
-    width: 100%;
 }
 
 .listheading {
