@@ -8,7 +8,7 @@ export default function MakeCV() {
         <strong>Create a Professional CV </strong>
         <p>Fill in tha blanks and download your CV!</p>
         </div>
-        <br />
+        <br/>
         <button>Make CV</button>
       </div>
     </div>

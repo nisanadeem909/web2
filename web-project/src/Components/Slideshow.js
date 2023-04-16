@@ -15,7 +15,9 @@ export default function Slideshow() {
     
     <div>
         <AliceCarousel autoPlay autoPlayInterval="3000">
-      <div><img src={pic1} className="sliderimg"/> <div className='text1'><h2><span className='s1'>Get yourself Hired by connecting to huge network of comapnies!</span></h2></div></div>
+      <div>
+        <img src={pic1} className="sliderimg"/> <div className='text1'><h2><span className='s1'>Get yourself Hired by connecting to huge network of comapnies!</span></h2>
+      </div></div>
       
       <div><img src={pic2} className="sliderimg"/> <div className='text1'><h2><span className='s2'>Get yourself Hired by connecting to huge network of comapnies!</span></h2></div></div>
       <div><img src={pic3} className="sliderimg"/> <div className='text1'><h2><span className='s3'>Get yourself Hired by connecting to huge network of comapnies!</span></h2></div></div>

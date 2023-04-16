@@ -1,6 +1,6 @@
 .post-container{
     width: 500px;
-    height: 600px;
+    height: 700px;
     background-color: white;
     border-radius: 10px;
     border: 0.5px solid gray;
@@ -12,45 +12,73 @@
 .upper{
     padding-left: 15px;
     padding-top: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
 strong{
     padding-left: 7px;
+
    
 }
 
-p{
+.u-1{
+   margin-top: 40px;
+}
+
+.para{
+    display: flex;
+    flex-direction: row;
+    
+    margin-top: 5%;
+    margin-left: 20%;
+}
+
+.middle{
+    height: 40%;
+    width: 100%;
+}
+
+
+
+.pp{
     float: right;
     padding-right: 10px;
     margin-right: 5px;
-    margin-top: 11px;
+
+    margin-left: 200px;
     font-size: 15px;
     color: rgb(134, 130, 130);
 }
+
+
 
 .p1{
     border-radius: 50px;
     width: 50px;
     height: 50px;
+    margin-bottom: 50px;
     border: 1px solid gray;
+    
+   
     
 }
 
 .p2{
     width: 100%;
-    margin-top: 7px;
+    margin-top: -15px;
 }
 
 hr{
     background-color: black;
-    width: 95%;
+    width: 100%;
     border: 0.5px solid rgb(193, 186, 186);
-    margin-left: 10px;
-    margin-top: 30px;
+    
+    
 
 }
 
-.btn{
+.btns{
     display: flex;
     flex-direction: row;
    
@@ -107,7 +135,7 @@ hr{
     background-color: rgb(205, 200, 200);
     border-radius: 20px;
     margin-left: 2px;
-    margin-top: 1px;
+    margin-top: -8px;
     text-align: center;
 }
 
@@ -123,7 +151,8 @@ h6{
 .lp{
     color: black;
    
-    margin-top: 1px;
+ 
     font-size: 14px;
-    margin-left: -100px;
+
 }
+
