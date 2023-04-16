@@ -1,0 +1,24 @@
+.cv-container{
+    width: 300px;
+    height: 220px;
+    border: 1px solid gray;
+    background-color: white ;
+    box-shadow: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+.upper{
+    margin-top: 10px;
+}
+
+button{
+    background-color: #0E312F;
+    color: white;
+    width: 150px;
+    border-radius: 50px;
+    border: 1px solid #0E312F;
+
+    margin-top: 20px;
+}

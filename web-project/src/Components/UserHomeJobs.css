@@ -1,0 +1,78 @@
+.container {
+    background-color: rgba(255,255,255,0.6);
+    width: 25%;
+    padding: 1%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 2vh;
+}
+
+button {
+    background-color: #016960;
+    color: white;
+    font-size: 1.8vh;
+    border: none;
+    border-radius: 3vh;
+    margin-top: 2vh;
+    padding: 0.5vh;
+    margin-right: 2%;
+}
+
+button:hover {
+    background-color:#09a093;
+    color: white;
+}
+
+.heading {
+    font-size: 3vh;
+    font-weight: bold;
+    margin-left: 30%;
+}
+
+.buttons {
+    display: flex;
+}
+
+.icon {
+    border-radius: 50%;
+    width: 6vh;
+    height: 6vh;
+    border: 1px solid gray;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 4%;
+    width: 100%;
+}
+
+.listheading {
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+.listsubheading1 {
+    font-size: 1.8vh;
+}
+
+.listsubheading2 {
+    font-size: 1.8vh;
+    opacity: 70%;
+    margin-top: 0.5vh;
+}
+
+ul {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+li {
+    margin-top: 3%;
+    display: flex;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 1vh;
+    border-radius: 2vh;
+    width: 100%;
+}
