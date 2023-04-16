@@ -19,22 +19,22 @@
     text-align: left;
     display: flex;
     flex-direction: column;
+    margin-left: 5%;
+    margin-top: -1%;
 }
 
 .middle{
-    margin-top: -4%;
 }
 
 hr{
-    margin-top: 24%;
     width: 100%;
-    margin-left: -5%;
+    margin-top: -15%;
+
 }
 
 .upper{
-
-    margin-top: 5px;
-    margin-left: -15px;
+    margin-top: -5%;
+    margin-left: 25%;
 }
 
 

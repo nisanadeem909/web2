@@ -22,10 +22,12 @@ export default function Post() {
 
            <div className='middle'>
            <img className='p2' src={post} alt="" />
+           <div className='btnpara'>
            <div className='btns'>
            <button className='icons2' ><img className='icons11' src={like} alt="" /></button>
            <button className='icons2' ><img className='icons12' src={comment} alt="" /></button>
            <button className='icons2' ><img className='icons13' src={share} alt="" /></button>
+           </div>
            <div className='para'>
            <p className='pp1'> 14 likes </p>
            &nbsp; &nbsp;
@@ -33,12 +35,14 @@ export default function Post() {
            &nbsp;&nbsp;
            <p className='pp1'>14 shares </p>
 
-           </div>
+           
            </div>
            </div>
            
-
            <hr className='h'></hr>
+           </div>
+           
+
 
            <div className='last'>
            <img className='p3' src={person} alt="" />
@@ -50,7 +54,6 @@ export default function Post() {
            </div>
            </div>
            
-
            
         </div>
       

@@ -23,20 +23,25 @@ strong{
 }
 
 .u-1{
-   margin-top: 40px;
+   margin-top: 3%;
 }
 
 .para{
     display: flex;
     flex-direction: row;
     
-    margin-top: 5%;
+    margin-top: 1%;
     margin-left: 20%;
 }
 
 .middle{
     height: 40%;
     width: 100%;
+}
+
+.btnpara {
+    display: flex;
+    margin-top: 5%;
 }
 
 
@@ -70,10 +75,7 @@ strong{
 }
 
 hr{
-    background-color: black;
-    width: 100%;
-    border: 0.5px solid rgb(193, 186, 186);
-    
+    border: 1px solid gainsboro;
     
 
 }
@@ -81,7 +83,6 @@ hr{
 .btns{
     display: flex;
     flex-direction: row;
-   
     
 }
 
@@ -127,6 +128,7 @@ hr{
 .last{
     display: flex;
     flex-direction: row;
+    margin-top: 25%;
 }
 
 .comment-part{
