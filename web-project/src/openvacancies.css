@@ -19,16 +19,17 @@
 #emp-img{
     text-align: center;
     margin:auto;
+    
 }
 .button {
     
     border-radius: 4px;
-    background-color: #086522;
+   
     border: none;
     color: #FFFFFF;
     text-align: center;
     font-size: 10px;
-    
+    background-color: #016960;
     width: 80px;
     height:20px;
     transition: all 0.5s;

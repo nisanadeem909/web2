@@ -2,8 +2,8 @@
 #companyhistory-box{
     border-radius: 5%;
     /*border-color: green;*/
-    border-style: solid;
-    width: 350px;
+    
+    width: 500px;
     height: 200px;
     font-weight: bold;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -18,6 +18,7 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 14px;
     
+    
 }
 #years{
     color: gray;
@@ -25,6 +26,7 @@
     font-weight: normal;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 14px;
+    margin-left:20px;
 }
 #location{
     color: gray;
@@ -32,6 +34,7 @@
     font-weight: normal;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 14px;
+    margin-left:20px;
 }
 #about-text{
     color: black;
@@ -39,5 +42,12 @@
     font-weight: normal;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 14px;
+    margin-left:20px;
     
 }
+#about-company{
+    margin-left:20px;
+}
+/*#edit-btn-company{
+
+}*/
