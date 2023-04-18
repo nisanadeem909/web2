@@ -5,43 +5,44 @@
     list-style: none;
     box-sizing: border-box;
   }
+
   body{
-    font-family: sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
   nav{
     background: #0E312F;
     height: 50px;
     width: 100%;
   }
-  .logo{
+  .navb_logo{
     padding-top: 6px;
     width: 150px;
     height: 45px;
     margin-left: 50px;
 
   }
-  nav ul{
+  nav .navb_ul{
     float: right;
     margin-right: 100px;
   }
-  nav ul li{
+  nav .navb_ul .navb_li{
     display: inline-block;
     line-height: 80px;
     margin-left: 14px;
     margin-top: -14px;
   }
-  nav ul li a{
+  nav .navb_ul .navb_li a{
     color: white;
     font-size: 16px;
     padding: 7px 13px;
     border-radius: 3px;
    
   }
-  a.active,a:hover{
+  nav .navb_ul .navb_li a.active,nav .navb_ul .navb_li a:hover{
     background: #027e74;
     transition: .5s;
   }
-  .checkbtn{
+  .navb_checkbtn{
     font-size: 30px;
     color: white;
     float: right;
@@ -50,23 +51,23 @@
     cursor: pointer;
     display: none;
   }
-  #check{
+  #navb_check{
     display: none;
   }
   @media (max-width: 952px){
-    label.logo{
+    label.navb_logo{
       font-size: 30px;
       padding-left: 50px;
     }
-    nav ul li a{
+    nav .navb_ul .navb_li a{
       font-size: 16px;
     }
   }
   @media (max-width: 858px){
-    .checkbtn{
+    .navb_checkbtn{
       display: block;
     }
-    ul{
+    .navb_ul{
       position: fixed;
       width: 100%;
       height: 100vh;
@@ -76,19 +77,19 @@
       text-align: center;
       transition: all .5s;
     }
-    nav ul li{
+    nav .navb_ul .navb_li{
       display: block;
       margin: 50px 0;
       line-height: 30px;
     }
-    nav ul li a{
+    nav .navb_ul .navb_li a{
       font-size: 20px;
     }
-    a:hover,a.active{
+    nav .navb_ul .navb_li a:hover,nav .navb_ul .navb_li a.active{
       background: none;
-      color: #0082e6;
+      color: #027e74;
     }
-    #check:checked ~ ul{
+    #navb_check:checked ~ ul{
       left: 0;
     }
   }

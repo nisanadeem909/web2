@@ -1,19 +1,19 @@
-.container {
+.apost_container {
     background-color: rgba(255,255,255,0.6);
     display: flex;
     flex-direction: column;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 2vh;
     padding: 1%;
-    width: 50%;
+    width: 100%;
 }
 
-#heading {
+#post_heading {
     font-weight: bold;
     font-size: 3vh;
 }
 
-textarea {
+.post_textarea {
     width: 100%;
     height: 10vh;
     margin-top: 1%;
@@ -25,47 +25,49 @@ textarea {
     font-size: 2vh;
 }
 
-.buttons {
+.apost_buttons {
     margin-top: 1%;
     display: flex;
     justify-content: space-between;
 }
 
-#upload {
+#apost_upload {
     visibility: hidden;
 }
 
-#pic {
+#apost_pic {
     height: 2.5vh;
     width: 2.5vh;
     margin-right: 1vh;
 }
 
-#filelbl {
+#apost_filelbl {
     background-color: #016960;
     border-radius: 3vh;
     color: white;
     padding: 1vh;
-    margin-left: 1%;
+    margin: 1%;
+    font-size: 2.5vh;
+    height: 6vh;
 }
 
-#post {
+#apost_post {
     background-color: #016960;
     color: white;
     margin-right: 3%;
 }
 
-#cancel {
+#apost_cancel {
     background-color: rgb(248, 248, 248);
     color: #016960;
     border: 1px solid rgb(240, 240, 240);
 }
 
-#btn {
+#apost_btn {
     width: 25%;
 }
 
-button {
+.apost_button {
     font-size: 2.5vh;
     padding: 0.4%;
     border-radius: 3vh;
@@ -75,18 +77,18 @@ button {
 }
 
 
-#image {
+#apost_image {
     margin-left: 2.5vh;
     margin-top: 1vh;
     color:#014a44;
     opacity: 60%;
 }
 
-#filelbl:hover, #post:hover {
+#apost_filelbl:hover, #apost_post:hover {
     background-color: #09a093;
 }
 
-#cancel:hover {
+#apost_cancel:hover {
     background-color: darkgray;
     color: white;
 }
