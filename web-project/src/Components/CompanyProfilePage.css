@@ -1,0 +1,42 @@
+.companyprof_container {
+    display: grid;
+    grid-template-columns: 0.75fr 1.5fr 0.75fr;
+    grid-template-areas: "header header header"
+                         "left activity right"
+                         "footer footer footer";
+    grid-template-rows: 0.4fr 2fr 0.6fr;
+    grid-gap: 0.8rem;
+    width:100%;
+}
+
+.companyprof_left {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.8rem;
+}
+
+.companyprof_right {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.8rem;
+}
+
+.companyprof_header {
+    grid-area: header;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+}
+
+.companyprof_footer {
+    grid-area: footer;
+}
+
+.companyprof_activity {
+    grid-area: activity;
+}
+
+.companyprof_contact,.companyprof_history,.companyprof_rating {
+    margin-bottom: 0.8rem;
+}

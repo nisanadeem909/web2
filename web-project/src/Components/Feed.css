@@ -1,0 +1,11 @@
+.feed_container_k {
+    width: 100%;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 2vh;
+}
+
+.feed_ul_k {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

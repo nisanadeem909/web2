@@ -4,9 +4,6 @@
     background-color: rgba(255,255,255,0.6);
     border-radius: 10px;
     border: 0.5px solid gray;
-    
-
-
 }
 
 .post_upper{
@@ -132,7 +129,7 @@
 .post_last{
     display: flex;
     flex-direction: row;
-    margin-top: 30%;
+    margin-top: 44vh;
 }
 
 .post_comment-part{

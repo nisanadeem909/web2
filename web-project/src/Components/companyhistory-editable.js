@@ -8,12 +8,12 @@ function CompanyHistoryEditable() {
             <div id="about-company">About Us</div>
             <br></br>
             
-            <button id="edit-btn">Edit</button>
-            <div id="website">www.example-website.com
+            <button id="companyhistory-edit-btn">Edit</button>
+            <div id="companyhistory-website">www.example-website.com
             
             </div>
-            <div id="years">2010-present . 23 years</div>
-            <div id="location"> Texas, USA</div>
+            <div id="companyhistory-years">2010-present . 23 years</div>
+            <div id="companyhistory-location"> Texas, USA</div>
             <br></br>
             <p id="about-text">
 

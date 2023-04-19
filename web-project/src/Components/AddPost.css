@@ -6,6 +6,7 @@
     border-radius: 2vh;
     padding: 1%;
     width: 100%;
+    border: 1px solid gray;
 }
 
 #post_heading {

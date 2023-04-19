@@ -4,8 +4,9 @@ import Profile from './Profile'
 import MakeCV from './MakeCV'
 import RecentlyAddedJobs from './UserHomeJobRecs';
 import AddPost from './AddPost';
-import Post from './Post';
+import Feed from './Feed';
 import Footer from './Footer';
+import Search from './Search';
 import './UserHome.css'
 
 export default function UserHome() {
@@ -13,19 +14,21 @@ export default function UserHome() {
     return (
         <div className="uh_container">
             <div className="uh_searchbar">
-                <input type="text"></input>
+                <Search/>
             </div>
-            <div className="uh_profile">
-                <Profile/>
-            </div>
-            <div className="uh_cv">
-                <MakeCV/>
+            <div className='uh_prof_cv'>
+                <div className="uh_profile">
+                    <Profile/>
+                </div>
+                <div className="uh_cv">
+                    <MakeCV/>
+                </div>
             </div>
             <div className="uh_addpost">
                 <AddPost/>
             </div>
             <div className="uh_feed">
-                <Post/>
+                <Feed/>
             </div>
             <div className="uh_jobrecs">
                 <RecentlyAddedJobs/>
