@@ -1,0 +1,163 @@
+.post-container{
+    width: 100%;
+    height: 120vh;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 10px;
+    border: 0.5px solid gray;
+    
+
+
+}
+
+.post_upper{
+    padding-left: 30px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.post_strong{
+    padding-left: 7px;
+
+   
+}
+
+.post_u-1{
+   margin-top: 2%;
+
+}
+
+.post_para{
+    display: flex;
+    flex-direction: row;
+    
+    margin-top: 3%;
+    margin-right: 2%;
+}
+
+.post_middle{
+    height: 40%;
+    width: 100%;
+}
+
+.post_btnpara {
+    display: flex;
+    margin-top: 1%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+
+.post_pp{
+    float: right;
+    padding-right: 10px;
+    margin-right: 0;
+
+    margin-left: 60vh;
+    font-size: 15px;
+    color: rgb(134, 130, 130);
+}
+
+
+
+.post_p1{
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 50px;
+    border: 1px solid gray;
+    
+   
+    
+}
+
+.post_p2{
+    width: 100%;
+    margin-top: -15px;
+}
+
+.post_hr{
+    border: 1px solid gainsboro;
+    
+
+}
+
+.post_btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 15%;
+    margin: 2%;
+    
+}
+
+.post_icons11{
+    width: 30px;
+    height: 30px;
+   border-radius: 50%;
+
+}
+
+.post_icons12{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+   
+
+}
+
+.post_icons13{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+   
+
+}
+
+.post_icons2{
+   background: none;
+   border: none;
+}
+
+.post_p3{
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid gray;
+    margin-left: 10px;
+    
+}
+
+.post_last{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30%;
+}
+
+.post_comment-part{
+    width: 150px;
+    height: 30px;
+    background-color: rgb(205, 200, 200);
+    border-radius: 20px;
+    margin-left: 2px;
+    text-align: center;
+}
+
+.post_h6{
+    margin-left: 5px;
+}
+
+.post_comment-l{
+    display: flex;
+    flex-direction: column;
+}
+
+.post_lp{
+    color: black;
+   
+ 
+    font-size: 14px;
+
+}
+

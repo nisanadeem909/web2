@@ -1,0 +1,94 @@
+.apost_container {
+    background-color: rgba(255,255,255,0.6);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 2vh;
+    padding: 1%;
+    width: 100%;
+}
+
+#post_heading {
+    font-weight: bold;
+    font-size: 3vh;
+}
+
+.post_textarea {
+    width: 100%;
+    height: 10vh;
+    margin-top: 1%;
+    resize:vertical;
+    border: none;
+    border-bottom: 2px solid #09a093;
+    background-color: rgb(249, 255, 255);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2vh;
+}
+
+.apost_buttons {
+    margin-top: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#apost_upload {
+    visibility: hidden;
+}
+
+#apost_pic {
+    height: 2.5vh;
+    width: 2.5vh;
+    margin-right: 1vh;
+}
+
+#apost_filelbl {
+    background-color: #016960;
+    border-radius: 3vh;
+    color: white;
+    padding: 1vh;
+    margin: 1%;
+    font-size: 2.5vh;
+    height: 6vh;
+}
+
+#apost_post {
+    background-color: #016960;
+    color: white;
+    margin-right: 3%;
+}
+
+#apost_cancel {
+    background-color: rgb(248, 248, 248);
+    color: #016960;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+#apost_btn {
+    width: 25%;
+}
+
+.apost_button {
+    font-size: 2.5vh;
+    padding: 0.4%;
+    border-radius: 3vh;
+    width: 40%;
+    height: 5vh;
+    border: none;
+}
+
+
+#apost_image {
+    margin-left: 2.5vh;
+    margin-top: 1vh;
+    color:#014a44;
+    opacity: 60%;
+}
+
+#apost_filelbl:hover, #apost_post:hover {
+    background-color: #09a093;
+}
+
+#apost_cancel:hover {
+    background-color: darkgray;
+    color: white;
+}
