@@ -16,7 +16,7 @@ export default function AddPost() {
     const cancel = () => {
         txt.current.value = "";
         img.current.value = null;
-        var div = document.getElementById("image");
+        var div = document.getElementById("apost_image");
         div.innerText = "";
     }
 
@@ -24,25 +24,25 @@ export default function AddPost() {
         if (img.current != null)
         {
             var path = img.current.value;
-            var div = document.getElementById("image");
+            var div = document.getElementById("apost_image");
             div.innerText = path.slice(path.indexOf("fakepath\\")+9) + " selected";
         }
     }
 
     return (
-        <div className="container">
-            <label id="heading">Post Something</label>
-            <div className="postcontent">
-                <textarea ref={txt}></textarea>
-                <div className="buttons">
-                    <label id="filelbl" for="upload"><img id="pic" src={picicon}/>Upload Photo</label>
-                    <input type="file" accept='image/*' id="upload" ref={img} onChange={upload}></input>
-                    <div id="btn">
-                    <button id="post" onClick={post}>Post</button>
-                    <button id="cancel" onClick={cancel}>Cancel</button>
+        <div className="apost_container">
+            <label id="post_heading">Post Something</label>
+            <div className="apost_postcontent">
+                <textarea className="post_textarea" ref={txt}></textarea>
+                <div className="apost_buttons">
+                    <label id="apost_filelbl" for="apost_upload"><img id="apost_pic" src={picicon}/>Upload Photo</label>
+                    <input type="file" accept='image/*' id="apost_upload" ref={img} onChange={upload}></input>
+                    <div id="apost_btn">
+                    <button className="apost_button" id="apost_post" onClick={post}>Post</button>
+                    <button className="apost_button" id="apost_cancel" onClick={cancel}>Cancel</button>
                     </div>
                 </div>
-                <div id="image"></div>
+                <div id="apost_image"></div>
             </div>
         </div>
     );

@@ -7,23 +7,23 @@ export default function Profile() {
   return (
     <div>
         <div className='profile-container'>
-            <div className='box'>
-            <img className='p1' src={person} alt="" />
+            <div className='profile_box'>
+            <img className='prof_p1' src={person} alt="" />
             </div>
             <br />
-            <div className='upper'>
+            <div className='prof_upper'>
             <strong>Nisa Nadeem</strong>
             </div>
-            <div className='middle'>
+            <div className='prof_middle'>
             <p>BS Software Engineering Student at FAST Nuces Lahore </p>
             </div>
            
-           <hr />
+           <hr className='prof_hr'/>
 
-           <div className='last'>
-            <p className='lp1'>Email: nisanadeem90@gmail.com</p>
+           <div className='prof_last'>
+            <p className='prof_lp1'>Email: nisanadeem90@gmail.com</p>
           
-            <p className='lp1'>Contact: 0309 4444444</p>
+            <p className='prof_lp1'>Contact: 0309 4444444</p>
            </div>
 
         </div>
