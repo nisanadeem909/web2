@@ -1,43 +1,37 @@
-.uh_container {
+.kch_container {
     display: grid;
     grid-template-columns: 0.75fr 1.5fr 0.75fr;
     grid-template-areas: ". search ." 
-                        "profcv addpost jobs" 
-                        "profcv feed jobs" 
+                        "profile addpost jobs" 
+                        "profile feed jobs" 
                         "footer footer footer";
     grid-template-rows: 0.2fr 0.5fr 2.7fr 0.6fr;
     grid-gap: 0.8rem;
     width:100%;
 }
 
-.uh_prof_cv {
-    grid-area: profcv;
-    display: flex;
-    flex-direction: column;
+.kch_profile {
+    grid-area: profile;
 }
 
-.uh_searchbar {
+.kch_searchbar {
     grid-area: search;
     /*position: sticky;
     top: 8vh;*/
 }
 
-.uh_cv {
-    margin-top: 5%;
-}
-
-.uh_jobrecs {
+.kch_jobpost {
     grid-area: jobs;
 }
 
-.uh_footer {
+.kch_footer {
     grid-area: footer;
 }
 
-.uh_feed {
+.kch_feed {
     grid-area: feed;
 }
 
-.uh_addpost {
+.kch_addpost {
     grid-area: addpost;
 }

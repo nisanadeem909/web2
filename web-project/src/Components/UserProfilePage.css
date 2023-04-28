@@ -1,0 +1,38 @@
+.userprof_public_container {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    grid-template-areas: "header header"
+                         "left activity"
+                         "footer footer";
+    grid-template-rows: 0.4fr 2fr 0.6fr;
+    grid-gap: 0.8rem;
+    width:100%;
+}
+
+.userprof_public_header {
+    grid-area: header;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+}
+
+.userprof_public_left {
+    grid-area: left;
+    margin-left: 0.8rem;
+}
+
+.userprof_public_education {
+    margin-top: 0.8rem;
+}
+
+.userprof_public_workexp {
+    margin-top: 0.8rem;
+}
+
+.userprof_public_activity {
+    grid-area: activity;
+    margin-right: 0.8rem;
+}
+
+.userprof_public_footer {
+    grid-area: footer;
+}

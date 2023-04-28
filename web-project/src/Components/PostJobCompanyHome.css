@@ -1,18 +1,19 @@
-.container {
+.ch_postjob_container {
     background-color: rgba(255,255,255,0.6);
-    width: 25%;
+    width: 100%;
     padding: 1%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 2vh;
+    border: 1px solid gray;
 }
 
-.heading {
+.ch_postjob_heading {
     font-size: 3vh;
     font-weight: bold;
-    margin-left: 30%;
+    margin-left: 35%;
 }
 
-hr {
+.ch_postjob_hr {
     border: none;
     height: 0.1vh;
     background-color: #016960;
@@ -20,12 +21,14 @@ hr {
     opacity: 30%;
 }
 
-.inner {
+.ch_postjob_inner {
     margin-top: 5%;
     font-size: 2vh;
+    text-align: center;
+    padding-bottom: 5%;
 }
 
-button {
+.ch_postjob_button {
     background-color: #016960;
     color: white;
     font-size: 2.5vh;
@@ -33,5 +36,8 @@ button {
     border-radius: 3vh;
     margin-top: 2vh;
     padding: 0.8vh;
-    margin-left: 35%;
+}
+
+.ch_postjob_button:hover {
+    background-color: #09a093;
 }

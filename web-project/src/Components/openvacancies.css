@@ -1,8 +1,7 @@
 #openvacancies-box{
     border-radius: 5%;
-    /*border-color: green;
-    border-style: solid;*/
-    width: 250px;
+    border: 1px solid gray;
+    width: 100%;
     height: 400px;
     font-weight: bold;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -10,46 +9,55 @@
     padding-left: 10px;
     background-color:rgba(255,255,255,0.6);
 }
-#emp-name{
+#openvacancies-emp-name{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size:13px;
+    font-size:2vh;
     font-weight: normal;
     margin-left:40px;
 }
-#emp-img{
+
+#openvacancies-our-employees {
+  font-size: 3vh;
+}
+
+#openvacancies-emp-img{
     text-align: center;
     margin:auto;
-    border-radius: 50%;
-    width:35px;
-    height:35px;
-    background-color: #016960;
     float:left;
     
 }
-.button {
+
+.openvacancies-emp-icon {
+  border: 1px solid #016960;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 50%;
+}
+
+.openvacancies-button {
     
     border-radius: 4px;
    
     border: none;
     color: #FFFFFF;
     text-align: center;
-    font-size: 10px;
+    font-size: 1.8vh;
     background-color: #016960;
-    width: 80px;
+    width: 30%;
     height:20px;
     transition: all 0.5s;
     cursor: pointer;
 
   }
   
-  .button span {
+  .openvacancies-button span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
   }
   
-  .button span:after {
+  .openvacancies-button span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -58,11 +66,11 @@
     transition: 0.5s;
   }
   
-  .button:hover span {
+  .openvacancies-button:hover span {
     padding-right: 25px;
   }
   
-  .button:hover span:after {
+  .openvacancies-button:hover span:after {
     opacity: 1;
     right: 0;
   }

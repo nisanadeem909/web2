@@ -2,16 +2,10 @@ import { Outlet, Link } from "react-router-dom";
 import './Navbar.css';
 import logo1 from './logo1.png';
 
-const Layout = () => {
-  return (
-    <>
-      <nav>
-      <input type="checkbox" id="navb_check"/>
-      <label for="navb_check" class="navb_checkbtn">
-        <i class="navb_fas navb_fa-bars"></i>
-      </label>
-      <img class="navb_logo" src={logo1}/>
-        <ul className="navb_ul">
+const Layout = (props) => {
+
+  var navlayout = 
+    <ul className="navb_ul">
           <li className="navb_li">
             <Link to="/">Home</Link>
           </li>
@@ -24,7 +18,64 @@ const Layout = () => {
           <li className="navb_li">
             <Link to="/">Login</Link>
           </li>
-        </ul>
+        </ul>;
+
+  if (props.type)
+  {
+    if (props.type == "user")
+    {
+      navlayout = <ul className="navb_ul">
+                      <li className="navb_li">
+                        <Link to="/user">Home</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/user">Network</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/user">Jobs</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/user">Notifications</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/user/ownprofile">Profile</Link>
+                      </li>
+                  </ul>;
+    }
+    else if (props.type == "company")
+    {
+      navlayout = <ul className="navb_ul">
+                      <li className="navb_li">
+                        <Link to="/company">Home</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/company">Network</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/company">Vacancies</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/company">Employees</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/company">Notifications</Link>
+                      </li>
+                      <li className="navb_li">
+                        <Link to="/company/ownprofile">Profile</Link>
+                      </li>
+                  </ul>;
+    }
+  }
+
+  return (
+    <>
+      <nav>
+      <input type="checkbox" id="navb_check"/>
+      <label for="navb_check" class="navb_checkbtn">
+        <i class="navb_fas navb_fa-bars"></i>
+      </label>
+      <img class="navb_logo" src={logo1}/>
+        {navlayout}
       </nav>
 
       <Outlet />

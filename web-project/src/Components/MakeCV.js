@@ -5,7 +5,7 @@ export default function MakeCV() {
     <div>
       <div className='cv-container'>
         <div className='upperCV'>
-        <strong>Create a Professional CV </strong>
+        <strong id="cv-title">Create a Professional CV </strong>
         <p>Fill in tha blanks and download your CV!</p>
         </div>
         <br/>

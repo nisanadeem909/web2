@@ -7,23 +7,23 @@ import editicon from './edit.png'
 export default function PublicProfileEducation() {
 
     return (
-        <div className="container">
-            <div className="section">
-            <div className="header">
-                    <label className="heading">Work Experience</label>
-                    <button class="addbtn">+</button>
+        <div className="kprofile_container">
+            <div className="kprofile_section">
+            <div className="kprofile_header">
+                    <label className="kprofile_heading">Work Experience</label>
+                    <button class="kprofile_addbtn">+</button>
                 </div>
-                <ul>
-                    <li className="work">
-                        <img className="icon" src={workicon}></img>
-                        <div className="text">
-                            <label className="listheading">Teaching Assistant</label>
-                            <label className="listsubheading1">National University of Emerging and Computer Sciences</label>
-                            <div className="libtn">
-                                <label className="listsubheading2">2023-2023</label>
+                <ul className="kprofile_ul">
+                    <li className="kprofile_work kprofile_li">
+                        <img className="kprofile_icon" src={workicon}></img>
+                        <div className="kprofile_text">
+                            <label className="kprofile_listheading">Teaching Assistant</label>
+                            <label className="kprofile_listsubheading1">National University of Emerging and Computer Sciences</label>
+                            <div className="kprofile_libtn">
+                                <label className="kprofile_listsubheading2">2023-2023</label>
                                 <div>
-                                    <button className="editbtn"><img className="editicon" src={editicon} alt="Edit"/></button>
-                                    <button className="removebtn">-</button>
+                                    <button className="kprofile_editbtn"><img className="kprofile_editicon" src={editicon} alt="Edit"/></button>
+                                    <button className="kprofile_removebtn">-</button>
                                 </div>
                             </div>
                         </div>
