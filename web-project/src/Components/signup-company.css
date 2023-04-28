@@ -1,0 +1,36 @@
+#nab-company-wrapper{
+    background-color:aliceblue;
+    width:100vh;
+    height:70vh;
+    border-radius: 4vh;
+}
+#nab-signup-companyname{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 10%;
+}
+#nab-signup-company-password{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 5%;
+}
+#nab-signup-submit-btn{
+    background-color: #016960;
+    border-radius: 4px;
+   
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+   
+    background-color: #016960;
+    width: 30%;
+    height:20%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left:35%;
+    font-size:18px;
+    margin-top:10%;
+
+    padding-bottom: 8px;
+    padding-top: 8px;
+}

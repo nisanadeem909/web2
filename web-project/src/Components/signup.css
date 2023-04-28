@@ -1,0 +1,65 @@
+
+.nab-wrapper-signup{
+	width: 100%;
+    
+	border-radius: 20px;
+	
+	/*margin: 5em auto;*/
+	display: flex;
+    background-color: white;
+}
+#emerald{
+    width:90%;
+    height:90%;
+}
+
+.nab-signup-left-side{
+	background-color: #008080;
+    width: 30%;
+    height:100vh;
+	/*border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;*/
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+}
+.nab-signuppage-right-side{
+	width: 80%;
+	height: 100vh;
+	
+	overflow: hidden;
+	
+	border-radius: 10px;
+  
+	
+}
+.nab-tabs{
+    direction: flex;
+}
+#signupuser-btn{
+    background-color: #008080; /* Green */
+    border-color: #008080;
+    border-width: 1px;
+    padding: 8px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    width:45%;
+    color:white;
+}
+#signupcompany-btn{
+    background-color: white; /* Green */
+    border-color: #008080;
+    border-width: 1px;
+    color: #008080;
+    padding: 10px 30px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    width:45%;
+}
