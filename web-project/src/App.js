@@ -22,6 +22,7 @@ function App() {
           <Route index element={<HomePage />} />
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
+          
   <Route path="*" element={<NoPage />} />*/}
         </Route>
         <Route path="/user" element={<Navbar type="user"/>}>

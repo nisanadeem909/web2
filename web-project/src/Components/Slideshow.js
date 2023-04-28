@@ -1,9 +1,9 @@
 import React from 'react'
 
 import './Slideshow.css';
-import pic1 from './image1.jpg';
-import pic2 from './image2.jpg';
-import pic3 from './image3.jpg';
+import pic1 from './image1.png';
+import pic2 from './image2.png';
+import pic3 from './image3.png';
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 
@@ -16,11 +16,13 @@ export default function Slideshow() {
     <div>
         <AliceCarousel autoPlay autoPlayInterval="3000">
       <div>
-        <img src={pic1} className="sliderimg"/> <div className='text1'><h2><span className='s1'>Get yourself Hired by connecting to huge network of comapnies!</span></h2>
-      </div></div>
       
-      <div><img src={pic2} className="sliderimg"/> <div className='text1'><h2><span className='s2'>Get yourself Hired by connecting to huge network of comapnies!</span></h2></div></div>
-      <div><img src={pic3} className="sliderimg"/> <div className='text1'><h2><span className='s3'>Get yourself Hired by connecting to huge network of comapnies!</span></h2></div></div>
+        <div className='nisa-img1' ><img src={pic1} className="sliderimg1"/>  <div className='nisa-text1'> <label className='nisatt1'>Connect with Comapnies and Employees!</label></div></div>
+      <button></button>
+      </div>
+      
+      <div className='nisa-img2'><img src={pic2} className="sliderimg2"/> </div>
+      <div><img src={pic3} className="sliderimg"/> </div>
       
     </AliceCarousel>  
     
