@@ -18,6 +18,7 @@ function App() {
           <Route path="userhome" element={<UserHome></UserHome>}></Route>
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
+          
   <Route path="*" element={<NoPage />} />*/}
         </Route>
       </Routes>
