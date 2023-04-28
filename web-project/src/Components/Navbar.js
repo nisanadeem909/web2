@@ -13,10 +13,10 @@ const Layout = (props) => {
             <Link to="/">About</Link>
           </li>
           <li className="navb_li">
-            <Link to="/">Signup</Link>
+            <Link to="/signup">Signup</Link>
           </li>
           <li className="navb_li">
-            <Link to="/">Login</Link>
+            <Link to="/login">Login</Link>
           </li>
         </ul>;
 

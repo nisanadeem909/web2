@@ -12,6 +12,8 @@ import UserPublicProfilePage from './Components/UserPublicProfilePage';
 import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
+import Login from './Components/login';
+import Signup from './Components/signup';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Routes>
       <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
+          <Route path="login" element={<Login/>}></Route>
+          <Route path="signup" element={<Signup/>}></Route>
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           
