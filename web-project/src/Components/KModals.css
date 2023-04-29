@@ -1,0 +1,42 @@
+#kmodal_addskill {
+    margin-top: -2vh;
+    font-weight: bold;
+    margin-bottom: 3vh;
+}
+
+.kmodal_addskill_con {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.kmodal_inputfields {
+    background-color: rgb(249, 255, 255);
+    border: 1px solid #016960;
+    border-radius: 1vh;
+    padding: 1%;
+}
+
+.kmodal_buttons {
+    background-color: #0E312F;
+    border-radius: 3vh;
+    border: none;
+    height: 4vh;
+    margin-left: 5%;
+    margin-top: 2vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    color: white;
+}
+
+.kmodal_buttons:hover {
+    background-color: #016960;
+}
+
+.kmodal_hr {
+    border-color: rgba(4, 67, 51, 0.3)
+}
