@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import '../App.css';
-/*import axios from 'axios';
-import { saveAs } from 'file-saver';*/
+
 import PersonalDetails from './PersonalDetails';
 import Experience from './Experience';
 import Project from './Project';
 import Education from './Education';
-import Success from './Success';
+import { PDFViewer } from '@react-pdf/renderer';
 import Extras from './Extras';
+import CVTemplateOne from './CVTemplateOne';
+import CVTemplateTwo from './CVTemplateTwo';
+
 
 class UserForm extends Component {
 
@@ -49,6 +51,13 @@ class UserForm extends Component {
         edu2_qualification: '',
         edu2_desc: '',
 
+
+        edu3_school: '',
+        edu3_year: '',
+        edu3_qualification: '',
+        edu3_desc: '',
+
+
         extra_1: '',
         extra_2: '',
         extra_3: '',
@@ -85,44 +94,14 @@ class UserForm extends Component {
 
 
 
-    handleChange = ({ target: { value, name } }) => this.setState({ [name]: value })
+    handleChange = ({ target: { value, name } }) => this.setState({ [name]: value }) 
 
-    /*formSubmit = (e) => {
-        e.preventDefault();
+    
+    
 
-        const data = {
-            name: this.state.name,
-            email: this.state.email,
-            phone: this.state.phone,
-            linkedin: this.state.linkedin,
-            github: this.state.github,
-            skills: this.state.skills
-        }
-
-
-        axios.post('/create-pdf', data)
-            .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
-            .then((res) => {
-                const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-
-                saveAs(pdfBlob, 'Resume.pdf');
-            });
-
-        e.target.reset();
-
-    } */
-
-    /*createAndDownloadPdf = () => {
-      axios.post('/create-pdf', this.state)
-           .then(() => axios.get('fetch-pdf', { responseType: 'blob' }))
-           .then((res) => {
-              const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-  
-              saveAs(pdfBlob, 'Resume.pdf');
-           })
-    } */
     render() {
         const { step } = this.state;
+        const { type } = this.props;
        
         switch (step) {
             case 1:
@@ -163,7 +142,7 @@ class UserForm extends Component {
                 return (
                     <div className="App pt-5 mt-5">
                         <div className="container col-lg-8 mx-auto text-center">
-
+                           
                             <Project
                                 values={this.state}
                                 prevStep={this.prevStep}
@@ -185,7 +164,6 @@ class UserForm extends Component {
                             <Education
                                 values={this.state}
                                 prevStep={this.prevStep}
-                                /*submitted={this.submitted}*/
                                 nextStep={this.nextStep}
                                 handleChange={this.handleChange}
                             />
@@ -198,32 +176,14 @@ class UserForm extends Component {
             case 5:
 
                 return (
-                    <div className="App pt-5 mt-5">
-                        <div className="container col-lg-8 mx-auto text-center">
-
-                            <Extras
-                                values={this.state}
-                                prevStep={this.prevStep}
-                                nextStep={this.nextStep}
-                                submitted={this.submitted}
-                                handleChange={this.handleChange}
-                            />
-                        </div>
-                        <br />
-                    </div>
-                );
-
-            case 6:
-
-                return (
-                    
-                    <div className="App pt-5 mt-5">
-                        <div className="container col-lg-8 mx-auto text-center">
-
-                            <Success />
-                        </div>
-                        <br />
-                    </div>
+                    <PDFViewer height = {window.innerHeight} width = "100%">
+                        if({type === true})
+                    <CVTemplateOne values = {this.state}    />
+                       else
+                       <CVTemplateTwo values = {this.state}    />
+                     </PDFViewer>
+                   
+                
                 );
 
         }

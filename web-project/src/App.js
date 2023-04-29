@@ -12,6 +12,9 @@ import UserPublicProfilePage from './Components/UserPublicProfilePage';
 import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
+import CVViewer from './Components/CVViewer';
+import UserForm from './Components/UserForm';
+import Education from './Components/Education';
 
 function App() {
   return (
@@ -30,6 +33,10 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
+            <Route path='cvviewer' element={<CVViewer />} />
+            <Route path="cvviewer/userform" element={<UserForm/>} />
+        
+            
         </Route>
         <Route path="/company" element={<Navbar type="company"/>}>
             <Route index element={<CompanyHome />} />
@@ -37,6 +44,7 @@ function App() {
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
         </Route>
+
       </Routes>
     </BrowserRouter>
     /*
