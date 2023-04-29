@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ProfileEducation.css'
 import './KModals.css'
+import editicon from './edit.png'
 
 const style = {
     position: 'absolute',
@@ -21,57 +22,56 @@ const style = {
 export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
-  const newStartDate = useRef(null);
-  const newEndDate = useRef(null);
-
-  const [selectedSchool,setSelectedSchool] = useState(null);
-  const [selectedDegree,setSelectedDegree] = useState(null);
-  const [selectedMajor,setSelectedMajor] = useState(null);
+  const newStartDate = useRef(props.selectedEduc.startYear);
+  const newEndDate = useRef(props.selectedEduc.endYear);
 
   const [schoolList,setSchoolList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "LGS", "value" : "LGS"}]);
   const [degreeList,setDegreeList] = useState([{"label": "Bachelors", "value": "BS"}, {"label": "Masters", "value": "MS"},{"label": "A Level", "value": "AL"},{"label": "PhD", "value": "PHD"},{"label": "O Level", "value": "OL"}]);
   const [majorList,setMajorList] = useState([{"label": "Computer Science", "value": "CS"},{"label": "Software Engineering", "value": "SE"},{"label": "Mathematics", "value": "MT"},{"label": "Medical Science", "value": "MED"}]);
 
-  const addEduc=()=>{
-        //alert(newEduc.current.value);
-        
-        /*var school = newSchool.current.value;
-        var degree = newDegree.current.value;
-        var major = newMajor.current.value;*/
+  var tempDegree = degreeList.filter((obj)=>obj.label === props.selectedEduc.degree)[0];
+  var tempMajor = majorList.filter((obj)=>obj.label === props.selectedEduc.major)[0];
+  
+  const [selectedSchool,setSelectedSchool] = useState({"label": props.selectedEduc.school,"value":props.selectedEduc.school});
+  const [selectedDegree,setSelectedDegree] = useState({"label": tempDegree.label,"value": tempDegree.value});
+  const [selectedMajor,setSelectedMajor] = useState({"label": tempMajor.label,"value": tempMajor.value});
 
-        if (!selectedDegree || !selectedDegree || !selectedDegree )
-        {
-          alert("Please select all fields!");
-          return;
-        }
+  const handleClose = () => {
+    setSelectedSchool({"label": props.selectedEduc.school,"value":props.selectedEduc.school});
+    setSelectedDegree({"label": tempDegree.label,"value": tempDegree.value});
+    setSelectedMajor({"label": tempMajor.label,"value": tempMajor.value});
 
-        
+    setOpen(false);
+  }
+
+  const editEduc=()=>{
+
         var startdate = newStartDate.current.value;
         var enddate = newEndDate.current.value;
 
-        if (isNaN(startdate) || isNaN(enddate))
-        {
-          alert("Please select all fields!");
-          return;
-        }
+        if (!startdate)
+          startdate = props.selectedEduc.startYear;
+
+        if (!enddate)
+            enddate = props.selectedEduc.endYear;
 
         if (startdate > enddate)
         {
-          alert("Start Date must be before End Date!");
+          alert("Start Year cannot be greater than End Year!");
           return;
         }
-
+        
         var newEduc = {'school': selectedSchool.label, 'degree': selectedDegree.label, 'major': selectedMajor.label, 'startYear': startdate, 'endYear': enddate};
 
-        props.addNewEduc(newEduc);
+        props.changeEduc(newEduc,props.selectedEduc);
         handleClose();
   }
 
+
   return (
     <div>
-      <button className="kprofile_addbtn" onClick={handleOpen}>+</button>
+      <button className="kprofile_editbtn" onClick={handleOpen}><img className="kprofile_editicon" src={editicon} alt="Edit"/></button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -79,7 +79,7 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
             <div className='kmodal_header'>
-                <h4 id="kmodal_addskill" className='kmodal_title'>Add Education</h4>
+                <h4 id="kmodal_addskill" className='kmodal_title'>Edit Education</h4>
                 <button className="kmodal_crossBtn" onClick={handleClose}>X</button>
             </div>
             <hr className='kmodal_hr'/>
@@ -89,31 +89,34 @@ export default function BasicModal(props) {
               <Select options={schoolList}
                 placeholder="School/University"
                 className='kmodal_dropdown'
-                onChange={(choice) => setSelectedSchool(choice)}/>
+                onChange={(choice) => setSelectedSchool(choice)}
+                value={selectedSchool}/>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Degree: </label>
               <Select options={degreeList}
                 placeholder="Degree"
                 className='kmodal_dropdown'
-                onChange={(choice) => setSelectedDegree(choice)}/>
+                onChange={(choice) => setSelectedDegree(choice)}
+                value={selectedDegree}/>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Major: </label>
               <Select options={majorList}
                 placeholder="Major Field of Study"
                 className='kmodal_dropdown'
-                onChange={(choice) => setSelectedMajor(choice)}/>
+                onChange={(choice) => setSelectedMajor(choice)}
+                value={selectedMajor}/>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Start Year: </label>
-              <input className='kmodal_date_input' type="number" ref={newStartDate} min="1900" max="3000"></input>
+              <input className='kmodal_date_input' type="number" ref={newStartDate} min="1900" max="3000" placeholder={props.selectedEduc.startYear}></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>End Year: </label>
-              <input className='kmodal_date_input' type="number" ref={newEndDate} min="1900" max="3000"></input>
+              <input className='kmodal_date_input' type="number" ref={newEndDate} min="1900" max="3000" placeholder={props.selectedEduc.endYear}></input>
             </div>
-            <button className='kmodal_buttons kmodal_center_btn' onClick={addEduc}>Add to Profile</button>
+            <button className='kmodal_buttons kmodal_center_btn' onClick={editEduc}>Confirm Changes</button>
           </div>
         </Box>
       </Modal>

@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import eduicon from './educ.jpg'
 import editicon from './edit.png'
 import AddEducationModal from './AddEducationModal'
+import EditEducationModal from './EditEducationModal'
 
 export default function PrivateProfileEducation() {
 
@@ -12,6 +13,20 @@ export default function PrivateProfileEducation() {
     const add=(newEduc)=>{
         var list = [...educList];
         list.push(newEduc);
+        setEducList(list);
+    }
+
+    const editEduc=(newEduc,oldEduc)=>{
+        var list = [...educList];
+        const index = list.indexOf(oldEduc);
+        if (index != -1)
+        {
+            list[index].school = newEduc.school;
+            list[index].degree = newEduc.degree;
+            list[index].major = newEduc.major;
+            list[index].startYear = newEduc.startYear;
+            list[index].endYear = newEduc.endYear;
+        }
         setEducList(list);
     }
 
@@ -30,8 +45,8 @@ export default function PrivateProfileEducation() {
                             <label className="kprofile_listsubheading1">{list_item.school}</label>
                             <div className="kprofile_libtn">
                                 <label className="kprofile_listsubheading2">{list_item.startYear}-{list_item.endYear}</label>
-                                <div>
-                                    <button className="kprofile_editbtn"><img className="kprofile_editicon" src={editicon} alt="Edit"/></button>
+                                <div className='kprofile_editrembtns'>
+                                    <EditEducationModal selectedEduc={list_item} changeEduc={editEduc}/>
                                     <button className="kprofile_removebtn">-</button>
                                 </div>
                             </div>
