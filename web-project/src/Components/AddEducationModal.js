@@ -41,7 +41,7 @@ export default function BasicModal(props) {
         var degree = newDegree.current.value;
         var major = newMajor.current.value;*/
 
-        if (!selectedDegree || !selectedDegree || !selectedDegree )
+        if (!selectedSchool || !selectedDegree || !selectedMajor )
         {
           alert("Please select all fields!");
           return;
