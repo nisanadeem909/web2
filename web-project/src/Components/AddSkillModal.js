@@ -44,11 +44,11 @@ export default function BasicModal(props) {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="kmodal_addskill"
+        aria-labelledby="kmodal_addeduc"
       >
         <Box sx={style}>
             <div className='kmodal_header'>
-                <h4 id="kmodal_addskill" className='kmodal_title'>Add a Skill</h4>
+                <h4 id="kmodal_addeduc" className='kmodal_title'>Add a Skill</h4>
                 <button className="kmodal_crossBtn" onClick={handleClose}>X</button>
             </div>
             <hr className='kmodal_hr'/>
