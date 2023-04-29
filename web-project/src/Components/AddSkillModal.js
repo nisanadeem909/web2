@@ -47,9 +47,12 @@ export default function BasicModal(props) {
         aria-labelledby="kmodal_addskill"
       >
         <Box sx={style}>
-            <div><h4 id="kmodal_addskill">Add a Skill</h4></div>
+            <div className='kmodal_header'>
+                <h4 id="kmodal_addskill" className='kmodal_title'>Add a Skill</h4>
+                <button className="kmodal_crossBtn" onClick={handleClose}>X</button>
+            </div>
             <hr className='kmodal_hr'/>
-          <div className='kmodal_addskill_con'>
+          <div className='kmodal_container'>
             <label>New Skill: </label>
             <input ref={newSkill} type="text" className='kmodal_inputfields'></input>
             <button className='kmodal_buttons' onClick={addSkill}>Add to Profile</button>

@@ -1,13 +1,12 @@
-#kmodal_addskill {
-    margin-top: -2vh;
+.kmodal_title {
     font-weight: bold;
-    margin-bottom: 3vh;
 }
 
-.kmodal_addskill_con {
+.kmodal_container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-top: 4vh;
 }
 
 * {
@@ -38,5 +37,23 @@
 }
 
 .kmodal_hr {
-    border-color: rgba(4, 67, 51, 0.3)
+    border-color: rgba(4, 67, 51, 0.3);
+}
+
+.kmodal_header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -2vh;
+    margin-bottom: -2vh;
+}
+
+.kmodal_crossBtn {
+    background: none;
+    border: none;
+    color: gray;
+
+}
+
+.kmodal_crossBtn:hover {
+    color: black;
 }
