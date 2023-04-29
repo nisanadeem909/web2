@@ -1,10 +1,12 @@
-
+body{
+    background-image: ;
+}
 
 .card.animated.fadeInLeft{
     width: 55%;
-    height: 500px;
-    background-color: gray;
-    opacity : 0.9;
+    height: 1100px;
+    background-color: rgb(196, 193, 193);
+    
     margin-top: 5%;
     margin-left: 20%;
     border-radius: 2%;
@@ -12,8 +14,31 @@
 
 }
 
+.col-lg-4.text-left{
+    margin-bottom: 10px;
+}
+
+.nisa-pd-label{
+
+    display: inline-block;
+    width: 350px;
+    margin-left: -30%;
+    color: black;
+    font-size: 18px;
+    
+}
+
+
+
 .form-control{
-    margin-left: 10%;
+    width: 30%;
+    border-radius: 5px;
+}
+
+.form-controlD{
+    width: 30%;
+    height: 80px;
+    border-radius: 5px;
 }
 
 .card-body{
@@ -28,8 +53,11 @@
 
 .btn.btn-info{
     background-color: #0E312F;
-    width: 10%;
+    width: 13%;
     color: white;
-    border: none;
+    border: 1px solid white;
     height: 30px;
+    margin-right: 2%;
+    margin-top: 5%;
+
 }
