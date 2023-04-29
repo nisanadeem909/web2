@@ -5,6 +5,7 @@ import eduicon from './educ.jpg'
 import editicon from './edit.png'
 import AddEducationModal from './AddEducationModal'
 import EditEducationModal from './EditEducationModal'
+import DeleteConfirmationModal from './DeleteConfirmationModal'
 
 export default function PrivateProfileEducation() {
 
@@ -30,6 +31,15 @@ export default function PrivateProfileEducation() {
         setEducList(list);
     }
 
+    const remove=(oldEduc)=>{
+        var list = [...educList];
+        const index = list.indexOf(oldEduc);
+        if (index > -1) {
+            list.splice(index, 1);
+        }
+        setEducList(list);
+    }
+
     return (
         <div className="kprofile_container">
             <div className="kprofile_section">
@@ -47,7 +57,7 @@ export default function PrivateProfileEducation() {
                                 <label className="kprofile_listsubheading2">{list_item.startYear}-{list_item.endYear}</label>
                                 <div className='kprofile_editrembtns'>
                                     <EditEducationModal selectedEduc={list_item} changeEduc={editEduc}/>
-                                    <button className="kprofile_removebtn">-</button>
+                                    <DeleteConfirmationModal selectedItem={list_item} remove={remove}/>
                                 </div>
                             </div>
                         </div>

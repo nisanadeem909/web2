@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import workicon from './workk.png'
 import AddWorkExpModal from './AddWorkExpModal'
 import EditWorkExpModal from './EditWorkExpModal'
+import DeleteConfirmationModal from './DeleteConfirmationModal'
 
 export default function PublicProfileEducation() {
 
@@ -28,6 +29,15 @@ export default function PublicProfileEducation() {
         setWorkList(list);
     }
 
+    const remove=(oldExp)=>{
+        var list = [...workList];
+        const index = list.indexOf(oldExp);
+        if (index > -1) {
+            list.splice(index, 1);
+        }
+        setWorkList(list);
+    }
+
     return (
         <div className="kprofile_container">
             <div className="kprofile_section">
@@ -45,7 +55,7 @@ export default function PublicProfileEducation() {
                                 <label className="kprofile_listsubheading2">{list_item.startYear}-{list_item.endYear}</label>
                                 <div className='kprofile_editrembtns'>
                                     <EditWorkExpModal selectedExp={list_item} changeExp={edit}/>
-                                    <button className="kprofile_removebtn">-</button>
+                                    <DeleteConfirmationModal selectedItem={list_item} remove={remove}/>
                                 </div>
                             </div>
                         </div>

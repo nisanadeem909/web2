@@ -78,7 +78,7 @@ export default function BasicModal(props) {
             <hr className='kmodal_hr'/>
           <div className='kmodal_educ_container'>
             <div className='kmodal_field'>
-              <label className='kmodal_large_text'>organization: </label>
+              <label className='kmodal_large_text'>Organization: </label>
               <Select options={companyList}
                 placeholder="Company you worked for"
                 className='kmodal_dropdown'
