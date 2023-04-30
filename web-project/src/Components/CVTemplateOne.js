@@ -205,7 +205,7 @@ class CVTemplateOne extends Component {
           <Text style={styles.contentT}>{values.edu2_qualification} -- {values.edu2_school}</Text>
           <Text style={styles.contentT}>{values.edu3_qualification} -- {values.edu3_school}</Text>
 
-          <Text style={styles.titleT}>Languages</Text>
+          <Text style={styles.titleT}>Skills</Text>
           <Text style={styles.contentT}>{values.extra_1}</Text>
           <Text style={styles.contentT}>{values.extra_2}</Text>
           <Text style={styles.contentT}>{values.extra_3}</Text>

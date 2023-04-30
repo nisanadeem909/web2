@@ -178,10 +178,9 @@ class UserForm extends Component {
                 return (
                     <PDFViewer height = {window.innerHeight} width = "100%">
                       
-                     if({type} === true )
+                  
                        <CVTemplateOne values = {this.state}    />
-                       else
-                       <CVTemplateTwo></CVTemplateTwo>
+                       
                         
                        
                      </PDFViewer>
