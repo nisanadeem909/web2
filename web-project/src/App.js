@@ -12,7 +12,10 @@ import UserPublicProfilePage from './Components/UserPublicProfilePage';
 import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
-
+import ManageEmp from './Components/ManageEmployees';
+import AllJobs from './Components/JobComparisonPage';
+import Login from './Components/login';
+import Signup from './Components/signup';
 function App() {
   return (
    
@@ -20,6 +23,8 @@ function App() {
       <Routes>
       <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
+          <Route path="login" element={<Login/>}></Route>
+          <Route path="signup" element={<Signup/>}></Route>
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           
@@ -30,12 +35,14 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
+            <Route path="myjobs" element={<AllJobs />} />
         </Route>
         <Route path="/company" element={<Navbar type="company"/>}>
             <Route index element={<CompanyHome />} />
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
+            <Route path="manageemployees" element={<ManageEmp />} />
         </Route>
       </Routes>
     </BrowserRouter>

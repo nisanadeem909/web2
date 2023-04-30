@@ -1,0 +1,136 @@
+#nab-currentjobs-wrapper{
+    border-radius: 5%;
+    border: 1px solid gray;
+    width: 100%;
+    height: 100%;
+    
+    background-color:rgba(255,255,255,0.6);
+}
+#nab-compare-div{
+    display: flex;
+    flex-direction: row;
+    margin-left: 15%;
+    width: 100%;
+    /*float:right;*/
+    
+}
+.nab-comparejobs-button{
+    border-radius: 5%;
+   
+    border: #016960;
+    border-style: solid;
+    color: #016960;
+    text-align: center;
+    font-size: 2.5vh;
+    
+    /*background-color: #016960;*/ /*enable this when 3 jobs are selected*/
+    width: 40%;
+    height:10%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-top: 12px;
+   
+    
+}
+#select3jobs{
+    
+    height:20%;
+    width:100%;
+    
+    text-align:left;
+    font-size:13px;
+    padding:2%;
+    margin-top: 2%;
+}
+#nab-innerjobs-wrapper
+{
+    background-color: #016960;
+    border-radius: 5%;
+    color: black;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 5vh;
+    
+}
+#nab-currentjobs-btn-group{
+    display: flex;
+    flex-direction: row;
+}
+#nab-currentjobs-checkbox-wrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+}
+#nab-currentjobs-checkbox{
+    font-size: 15px;
+    
+    height:fit-content;
+    margin-top: 5px;
+}
+#select-for-comp{
+    font-size: 15px;
+    text-align: center;
+    height:fit-content;
+}
+
+.nab-currentjobs-button {
+    
+    border-radius: 5%;
+   
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2vh;
+    background-color: #016960;
+    width: 30%;
+    height:10%;
+    transition: all 0.5s;
+    cursor: pointer;
+    padding: 2%;
+  }
+  
+  .nab-currentjobs-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .nab-currentjobs-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .nab-currentjobs-button:hover span {
+    padding-right: 25px;
+  }
+  
+  .nab-currentjobs-button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  #currentjobs-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #currentjobs-table td, #currentjobs-table th {
+    border: 0px solid #ddd;
+    padding: 8px;
+  }
+  
+  #currentjobs-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #currentjobs-table tr:hover {background-color: #ddd;}
+  
+  #currentjobs-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }

@@ -1,0 +1,12 @@
+#nab-manageemp-wrapper{
+    margin-left: 2%;
+}
+#currentemp{
+   float:left;
+   width:70%;
+    
+}
+#empreq{
+    float:left;
+    width:30%
+}
