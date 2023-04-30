@@ -47,11 +47,11 @@ class Extras extends Component {
 
                         <div className="col-lg-6 md-form">
                             <input type="text" name="extra_1" className="form-control" defaultValue={values.status === 1 ? '' : values.extra_1} onChange={handleChange} required />
-                            <label htmlFor="extra_1">Languages</label>
+                            <label className='nisa-pd-label' htmlFor="extra_1">Languages</label>
                         </div>
                         <div className="col-lg-6 md-form">
                             <input type="text" name="extra_2" className="form-control" defaultValue={values.status === 1 ? '' : values.extra_2} onChange={handleChange} required />
-                            <label htmlFor="extra_2">Hobbies</label>
+                            <label className='nisa-pd-label' htmlFor="extra_2">Hobbies</label>
                         </div>
                     </div>
                     <br />

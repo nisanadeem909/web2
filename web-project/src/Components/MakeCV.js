@@ -1,7 +1,22 @@
 import React from 'react'
 import './MakeCV.css';
+import { useNavigate } from 'react-router-dom';
+
+
 export default function MakeCV() {
+
+
+  
+  const navigate = useNavigate();
+
+  const gotoContact = () =>
+  {
+    navigate("cvviewer");
+  }
+
+
   return (
+
     <div>
       <div className='cv-container'>
         <div className='upperCV'>
@@ -9,7 +24,7 @@ export default function MakeCV() {
         <p>Fill in tha blanks and download your CV!</p>
         </div>
         <br/>
-        <button className='buttonCV'>Make CV</button>
+        <button onClick={() =>gotoContact()} className='buttonCV'>Make CV</button>
       </div>
     </div>
   )
