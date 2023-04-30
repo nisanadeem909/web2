@@ -12,6 +12,9 @@ import UserPublicProfilePage from './Components/UserPublicProfilePage';
 import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
+import Login from './Components/login';
+import Signup from './Components/signup';
+import ViewJobDetails from './Components/ViewJobDetails'
 
 import ManageEmp from './Components/ManageEmployees';
 import AllJobs from './Components/JobComparisonPage';
@@ -48,6 +51,8 @@ function App() {
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
 
+            <Route path="viewjob" element={<ViewJobDetails />} />
+
             <Route path="myjobs" element={<AllJobs />} />
 
             <Route path='cvviewer' element={<CVViewer />} />
@@ -55,6 +60,7 @@ function App() {
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
             <Route path='jobs' element={<Jobs/>} />         
+
 
         </Route>
 
