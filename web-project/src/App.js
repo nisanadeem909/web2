@@ -17,6 +17,7 @@ import UserForm from './Components/UserForm';
 import Education from './Components/Education';
 import Network from './Components/Network';
 import Notifications from './Components/Notifications';
+import Jobs from './Components/Jobs';
 
 
 function App() {
@@ -40,7 +41,8 @@ function App() {
             <Route path='cvviewer' element={<CVViewer />} />
             <Route path="cvviewer/userform" element={<UserForm/>} />
             <Route path='network' element={<Network />} /> 
-            <Route path='notifications' element={<Notifications/>} />         
+            <Route path='notifications' element={<Notifications/>} />  
+            <Route path='jobs' element={<Jobs/>} />         
         </Route>
 
         <Route path="/company" element={<Navbar type="company"/>}>

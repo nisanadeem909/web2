@@ -32,7 +32,7 @@ const Layout = (props) => {
                         <Link to="/user/network">Network</Link>
                       </li>
                       <li className="navb_li">
-                        <Link to="/user">Jobs</Link>
+                        <Link to="/user/jobs">Jobs</Link>
                       </li>
                       <li className="navb_li">
                         <Link to="/user/notifications">Notifications</Link>

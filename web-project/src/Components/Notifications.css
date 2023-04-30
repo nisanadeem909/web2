@@ -84,6 +84,10 @@
     margin-left: 10px;
 }
 
+.nisa-notify-post{
+    display: flex;
+    flex-direction: row;
+}
 
 .nisa-label{
     color: black;
