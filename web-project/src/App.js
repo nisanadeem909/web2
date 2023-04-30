@@ -42,7 +42,6 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
-            <Route path="viewjob" element={<ViewJobDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
