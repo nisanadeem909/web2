@@ -50,6 +50,8 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
+            <Route path='network' element={<Network />} /> 
+            <Route path='notifications' element={<Notifications/>} />  
         </Route>
 
       </Routes>
