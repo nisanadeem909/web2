@@ -17,7 +17,7 @@ export default function Jobs() {
         <button className='nisa-job-btn2'>Compare Jobs</button>
 
         <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
+            <button class="dropbtn">Filters</button>
             <div class="dropdown-content">
                 <a href="#">Salary</a>
                 <a href="#">Location</a>
