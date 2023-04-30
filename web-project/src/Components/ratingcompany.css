@@ -25,3 +25,30 @@
 .star-rating {
     margin-left: 5%;
 }
+
+.ratingcompany-flexrow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ratingcompany-btn {
+    background-color: #016960;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    border-radius: 3vh;
+    border: none;
+    margin-right: 1vh;
+    margin-top: 0.4vh;
+    color: white;
+    font-size: 2vh;
+}
+
+.ratingcompany-btn:hover {
+    background-color: #09a093;
+}
+
+.ratingcompany-rating {
+    margin-left: 5%;
+    font-size: 2.7vh;
+    color: rgb(1, 105, 96,0.7);
+}

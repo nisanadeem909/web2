@@ -131,3 +131,20 @@
     color: gray;
     margin-top: 1%;
 }
+
+.kmodal_inputrange {
+    width: 20vh;
+    color:#016960;
+    appearance: none;
+    height: 1vh;
+    margin-top: 1vh;
+    background-color: gainsboro;
+}
+
+.kmodal_inputrange::-webkit-slider-thumb {
+    appearance: none;
+    width: 2vh;
+    height: 2vh;
+    background-color:#016960;
+    border-radius: 50%;
+}
