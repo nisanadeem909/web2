@@ -1,12 +1,12 @@
 import React from 'react'
 import './login.css';
 import img from './people.jpeg';
-
+import Footer from './Footer';
 function LoginPage() {
     return (
         
 
-        <div >
+        <div id="nab-wraplogin" >
             <div class="nab-wrapper-login">
                 
                 <div class="nab-login-left-side">
@@ -41,6 +41,8 @@ function LoginPage() {
                     </div>
     </div>
              </div>
+
+             <Footer/>
         </div>
         
     );

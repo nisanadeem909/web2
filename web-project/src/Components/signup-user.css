@@ -1,9 +1,9 @@
 #nab-user-wrapper{
     background-color:aliceblue;
-    width:100vh;
+    width:90%;
     height:70vh;
     border-radius: 4vh;
-    
+    font-size: 20px;
     
 }
 #nab-signup-username{

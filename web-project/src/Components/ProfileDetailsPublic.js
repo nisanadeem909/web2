@@ -3,7 +3,7 @@ import './ProfileDetails.css';
 import picture from './dummy.jpg'
 import connecticon from './follow.png'
 import networkicon from './network.png'
-
+import workicon from './workk.png'
 export default function ProfileDetails() {
 
     var btn = 
@@ -27,6 +27,12 @@ export default function ProfileDetails() {
                 <label id = "profdetails_username">{username}</label>
                 <div className="profdetails_bio">
                     <p>{bio}</p>
+                        
+                        <br></br>
+                        <div className="profdetails_workplace">
+                            <img id="profdetails_neticon" src={workicon}></img>
+                            <label>Works At Mindstorm Studios</label>
+                        </div>
                         <hr className='profdetails_hr'></hr>
                 </div>
                 <div className="profdetails_network">

@@ -29,11 +29,11 @@ function SignUpBoth()
         document.getElementById("signupcompany-btn").style.color = "white";
     }
     return(
-        <div className='signup_container'>
-    <div class="nab-wrapper-signup">
-         <div class="nab-login-left-side">    
-                <img id="emerald" src={img} alt="emeraldimg" />
-        </div>
+        <div id="nab-wrapsignup">
+            <div class="nab-wrapper-signup">
+            <div class="nab-login-left-side">    
+                    <img id="emerald" src={img} alt="emeraldimg" />
+            </div>
 
           
         

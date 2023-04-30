@@ -1,0 +1,15 @@
+#nab-alljobs-wrapper{
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 4.5%;
+}
+
+#alljobs-currentemp{
+    flex:40%;
+    
+}
+#alljobs-empreq{
+    flex:60%;
+    
+}

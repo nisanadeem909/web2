@@ -36,22 +36,22 @@ class Experience extends Component {
                         </div>
                         
                         <div className="col-lg-4 text-left">
-                            <label>Institute/Organisation*</label>
+                            <label className='nisa-pd-label'>Institute/Organisation*</label>
                             <input type="text" name="exp1_org" className="form-control" defaultValue={values.status === 1 ? '' : values.exp1_org} onChange={handleChange} required />
                         </div>
                         <div className="col-lg-4 text-left">
-                            <label>Position*</label>
+                            <label className='nisa-pd-label'>Position*</label>
                             <input type="text" name="exp1_pos" className="form-control" defaultValue={values.status === 1 ? '' : values.exp1_pos} onChange={handleChange} required />
                         </div>
                         <div className="col-lg-4 text-left">
-                            <label>Duration*</label>
+                            <label className='nisa-pd-label'>Duration*</label>
                             <input type="text" name="exp1_dur" className="form-control" defaultValue={values.status === 1 ? '' : values.exp1_dur} onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="row col-lg-10 mx-auto">
                         <div className="col-lg-12 text-left">
-                            <label>Description*</label>
-                            <input type="text" name="exp1_desc" className="form-control" defaultValue={values.status === 1 ? '' : values.exp1_desc} onChange={handleChange} required />
+                            <label className='nisa-pd-label'>Description*</label>
+                            <input type="text" name="exp1_desc" className="form-controlD" defaultValue={values.status === 1 ? '' : values.exp1_desc} onChange={handleChange} required />
                         </div>
                     </div>
 
@@ -61,26 +61,27 @@ class Experience extends Component {
 
                     <div className="row col-lg-10 mx-auto">
                         <div className="col-lg-12 text-left">
-                            <h3><b><i className="fas fa-check-circle mr-1"></i>2</b></h3>
+                            
                             <hr/>
+                            <h3><b><i className="fas fa-check-circle mr-1"></i>2</b></h3>
                         </div>
                         <div className="col-lg-4 text-left">
-                            <label>Institute/Organisation*</label>
+                            <label className='nisa-pd-label'>Institute/Organisation*</label>
                             <input type="text" name="exp2_org" className="form-control" defaultValue={values.status === 1 ? '' : values.exp2_org} onChange={handleChange} required />
                         </div>
                         <div className="col-lg-4 text-left">
-                            <label>Position*</label>
+                            <label className='nisa-pd-label'>Position*</label>
                             <input type="text" name="exp2_pos" className="form-control" defaultValue={values.status === 1 ? '' : values.exp2_pos} onChange={handleChange} required />
                         </div>
                         <div className="col-lg-4 text-left">
-                            <label>Duration*</label>
+                            <label className='nisa-pd-label'>Duration*</label>
                             <input type="text" name="exp2_dur" className="form-control" defaultValue={values.status === 1 ? '' : values.exp2_dur} onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="row col-lg-10 mx-auto">
                         <div className="col-lg-12 text-left">
-                            <label>Description*</label>
-                            <input type="text" name="exp2_desc" className="form-control" defaultValue={values.status === 1 ? '' : values.exp2_desc} onChange={handleChange} required />
+                            <label className='nisa-pd-label'>Description*</label>
+                            <input type="text" name="exp2_desc" className="form-controlD" defaultValue={values.status === 1 ? '' : values.exp2_desc} onChange={handleChange} required />
                         </div>
                     </div>
                     <br/>

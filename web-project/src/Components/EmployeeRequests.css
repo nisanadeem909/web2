@@ -1,0 +1,93 @@
+#nab2-current-emp-wrapper{
+    border-radius: 5%;
+    border: 1px solid gray;
+    width: 80%;
+    height: 100%;
+    
+    background-color:rgba(255,255,255,0.6);
+}
+
+#nab2-inner-emp-wrapper
+{
+    background-color: #016960;
+    border-radius:5%;
+    border: 1px solid gray;
+    color: black;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 5vh;
+}
+#nab-emp-detail-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+#nab-empreq-name{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:3vh;
+    font-weight: normal;
+    width:100%;
+    margin-left: 3%;
+   
+}
+#nab-emp-des{
+    
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:2vh;
+    font-weight: normal;
+    color: gray;
+    margin-left:3%;
+}
+#wrap-wrap-wrap{
+    display:flex;
+    flex-direction: row;
+}
+.empreq-works-emp-icon{
+    float:left;
+    margin-right: 2%;
+    height:7vh;
+}
+
+.empreq-wrap-works-emp-icon {
+    float:left;
+    border: 1px solid #016960;
+    width: 7vh;
+    height: 7vh;
+    border-radius: 50%;
+}
+
+#btn-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.nab-accept-btn {
+    
+    border-radius: 50%;
+   
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 3vh;
+    background-color: #016960;
+    width: 60%;
+    height:30%;
+    transition: all 0.5s;
+    cursor: pointer;
+    padding: 5%;
+    font-weight: bold;
+    
+  }
+  .nab-decline-btn {
+    
+    border-radius: 50%;
+   
+    border: none;
+    background-color: #FFFFFF;
+    text-align: center;
+    font-size: 3vh;
+    color: #016960;
+    width: 60%;
+    height:30%;
+    transition: all 0.5s;
+    cursor: pointer;
+    padding: 5%;
+    font-weight: bold;
+  }
