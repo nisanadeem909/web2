@@ -83,7 +83,12 @@ label, p, button{
     display: flex;
     font-size: 2.5vh;
 }
-
+/*Added by Nabeeha*/
+.profdetails_workplace {
+    opacity: 80%;
+    display: flex;
+    font-size: 2.5vh;
+}
 #profdetails_neticon {
     width: 4.5vh;
     height: 3.5vh;

@@ -1,4 +1,6 @@
-
+#nab-wraplogin{
+    background-color: white;
+}
 .nab-wrapper-login{
 	width: 100%;
     
@@ -78,8 +80,8 @@
     margin-left:10%;
 }
 .nab-login-left-side{
-	background-color: #008080;
-    width: 80%;
+	background-color: white;
+    width: 100%;
     height:100vh;
 	/*border-top-left-radius: 20px;
 	border-bottom-left-radius: 20px;*/

@@ -1,8 +1,9 @@
 #nab-company-wrapper{
     background-color:aliceblue;
-    width:100vh;
+    width:90%;
     height:70vh;
     border-radius: 4vh;
+    font-size:20px;
 }
 #nab-signup-companyname{
     width: 60%;
@@ -23,14 +24,16 @@
     text-align: center;
    
     background-color: #016960;
-    width: 30%;
+    width: 40%;
     height:20%;
     transition: all 0.5s;
     cursor: pointer;
-    margin-left:35%;
+    margin-left:30%;
     font-size:18px;
     margin-top:10%;
 
-    padding-bottom: 8px;
-    padding-top: 8px;
+    padding-bottom: 11px;
+    padding-top: 11px;
+    padding-right:10px;
+    padding-left:10px;
 }

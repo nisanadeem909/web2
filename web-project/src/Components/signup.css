@@ -1,4 +1,6 @@
-
+#nab-wrapsignup{
+background-color: white;
+}
 .nab-wrapper-signup{
 	width: 100%;
     
@@ -9,13 +11,13 @@
     background-color: white;
 }
 #emerald{
-    width:90%;
+    width:70%;
     height:90%;
 }
 
 .nab-signup-left-side{
-	background-color: #008080;
-    width: 30%;
+	background-color: white;
+    width: 10%;
     height:100vh;
 	/*border-top-left-radius: 20px;
 	border-bottom-left-radius: 20px;*/
@@ -25,9 +27,9 @@
 	color: #fff;
 }
 .nab-signuppage-right-side{
-	width: 80%;
+	width: 60%;
 	height: 100vh;
-	
+	margin-right: 5%;
 	overflow: hidden;
 	
 	border-radius: 10px;
