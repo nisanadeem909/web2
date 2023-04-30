@@ -14,6 +14,7 @@ import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
 import Login from './Components/login';
 import Signup from './Components/signup';
+import ViewJobDetails from './Components/ViewJobDetails'
 
 function App() {
   return (
@@ -34,12 +35,14 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
+            <Route path="viewjob" element={<ViewJobDetails />} />
         </Route>
         <Route path="/company" element={<Navbar type="company"/>}>
             <Route index element={<CompanyHome />} />
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
+            <Route path="viewjob" element={<ViewJobDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
