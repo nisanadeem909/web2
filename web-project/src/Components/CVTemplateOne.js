@@ -228,12 +228,7 @@ class CVTemplateOne extends Component {
       <Text style={styles.contentU}>{values.exp2_desc}</Text>
       
 
-      <View style={styles.container}>
-        <Text style={styles.bulletPoint}>•</Text>
-        <Text style={styles.text}>{values.exp3_org}                                                                 {values.exp3_dur}</Text>
-      </View>
-      <Text style={styles.contentU}>{values.exp3_desc}</Text>
-      
+     
 
           </View>
 
