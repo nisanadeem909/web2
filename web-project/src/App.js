@@ -12,10 +12,21 @@ import UserPublicProfilePage from './Components/UserPublicProfilePage';
 import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
+
 import ManageEmp from './Components/ManageEmployees';
 import AllJobs from './Components/JobComparisonPage';
 import Login from './Components/login';
 import Signup from './Components/signup';
+
+import CVViewer from './Components/CVViewer';
+import UserForm from './Components/UserForm';
+import Education from './Components/Education';
+import Network from './Components/Network';
+import Notifications from './Components/Notifications';
+import Jobs from './Components/Jobs';
+
+
+
 function App() {
   return (
    
@@ -30,20 +41,36 @@ function App() {
           
   <Route path="*" element={<NoPage />} />*/}
         </Route>
+
         <Route path="/user" element={<Navbar type="user"/>}>
             <Route index element={<UserHome />} />
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
+
             <Route path="myjobs" element={<AllJobs />} />
+
+            <Route path='cvviewer' element={<CVViewer />} />
+            <Route path="cvviewer/userform" element={<UserForm/>} />
+            <Route path='network' element={<Network />} /> 
+            <Route path='notifications' element={<Notifications/>} />  
+            <Route path='jobs' element={<Jobs/>} />         
+
         </Route>
+
         <Route path="/company" element={<Navbar type="company"/>}>
             <Route index element={<CompanyHome />} />
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
+
             <Route path="manageemployees" element={<ManageEmp />} />
+
+            <Route path='network' element={<Network />} /> 
+            <Route path='notifications' element={<Notifications/>} />  
+
         </Route>
+
       </Routes>
     </BrowserRouter>
     /*

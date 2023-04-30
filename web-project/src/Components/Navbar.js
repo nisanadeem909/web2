@@ -29,13 +29,16 @@ const Layout = (props) => {
                         <Link to="/user">Home</Link>
                       </li>
                       <li className="navb_li">
-                        <Link to="/user">Network</Link>
+                        <Link to="/user/network">Network</Link>
                       </li>
                       <li className="navb_li">
-                        <Link to="/user/myjobs">Jobs</Link>
+
+
+                        <Link to="/user/jobs">Jobs</Link>
+
                       </li>
                       <li className="navb_li">
-                        <Link to="/user">Notifications</Link>
+                        <Link to="/user/notifications">Notifications</Link>
                       </li>
                       <li className="navb_li">
                         <Link to="/user/ownprofile">Profile</Link>
@@ -49,7 +52,7 @@ const Layout = (props) => {
                         <Link to="/company">Home</Link>
                       </li>
                       <li className="navb_li">
-                        <Link to="/company">Network</Link>
+                        <Link to="/company/network">Network</Link>
                       </li>
                       <li className="navb_li">
                         <Link to="/company">Vacancies</Link>
@@ -58,7 +61,7 @@ const Layout = (props) => {
                         <Link to="/company/ManageEmployees">Employees</Link>
                       </li>
                       <li className="navb_li">
-                        <Link to="/company">Notifications</Link>
+                        <Link to="/company/notifications">Notifications</Link>
                       </li>
                       <li className="navb_li">
                         <Link to="/company/ownprofile">Profile</Link>
