@@ -15,6 +15,7 @@ import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
 import CVViewer from './Components/CVViewer';
 import UserForm from './Components/UserForm';
 import Education from './Components/Education';
+import Network from './Components/Network';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
             <Route path='cvviewer' element={<CVViewer />} />
             <Route path="cvviewer/userform" element={<UserForm/>} />
+            <Route path='network' element={<Network />} />
         
             
         </Route>
