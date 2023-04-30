@@ -101,6 +101,15 @@
     width: 60vh;
 }
 
+.kmodal_textarea {
+    width: 60vh;
+    height: 10vh;
+    resize: none;
+    border: 1px solid lightgray;
+    border-radius: 1vh;
+    padding: 1vh;
+}
+
 .kmodal_date_input {
     border: 1px solid lightgray;
     border-radius: 1vh;
@@ -114,4 +123,11 @@
 
 .kmodal_msg {
     margin-bottom: -3vh;
+}
+
+.kmodal_input_label_small {
+    font-size: 1.5vh;
+    margin-left: 32%;
+    color: gray;
+    margin-top: 1%;
 }

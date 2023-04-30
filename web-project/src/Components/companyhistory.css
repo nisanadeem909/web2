@@ -68,3 +68,7 @@
     font-size:12px;
     margin-bottom: 5%;
 }
+
+#companyhistory-edit-btn:hover {
+    background-color: #09a093;
+}
