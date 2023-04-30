@@ -16,6 +16,8 @@ import CVViewer from './Components/CVViewer';
 import UserForm from './Components/UserForm';
 import Education from './Components/Education';
 import Network from './Components/Network';
+import Notifications from './Components/Notifications';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           
   <Route path="*" element={<NoPage />} />*/}
         </Route>
+
         <Route path="/user" element={<Navbar type="user"/>}>
             <Route index element={<UserHome />} />
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
@@ -36,10 +39,10 @@ function App() {
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
             <Route path='cvviewer' element={<CVViewer />} />
             <Route path="cvviewer/userform" element={<UserForm/>} />
-            <Route path='network' element={<Network />} />
-        
-            
+            <Route path='network' element={<Network />} /> 
+            <Route path='notifications' element={<Notifications/>} />         
         </Route>
+
         <Route path="/company" element={<Navbar type="company"/>}>
             <Route index element={<CompanyHome />} />
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
