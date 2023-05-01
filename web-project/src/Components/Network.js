@@ -7,7 +7,7 @@ import bgnetwork from './networkpic.png';
 
 export default function Network() {
     var array2 = new Array();
-
+   
   return (
     <div className='nisa-network-container'>
        

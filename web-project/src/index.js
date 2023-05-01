@@ -10,6 +10,9 @@ import CVViewer from './Components/CVViewer';
 
 
 
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   /*<React.StrictMode>

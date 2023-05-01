@@ -18,8 +18,6 @@ import ViewJobDetails from './Components/ViewJobDetails'
 
 import ManageEmp from './Components/ManageEmployees';
 import AllJobs from './Components/JobComparisonPage';
-import Login from './Components/login';
-import Signup from './Components/signup';
 
 import CVViewer from './Components/CVViewer';
 import UserForm from './Components/UserForm';
