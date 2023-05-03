@@ -20,29 +20,45 @@ const style = {
 
 export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  var changed = false;
+
+  const handleOpen = () =>{
+    changed = false;
+    setOpen(true);
+  }
+  //const handleClose = () => setOpen(false);
 
   const newWebsite = useRef(props.selectedItem.website);
   const newPhone = useRef(props.selectedItem.phone);
   const newEmail = useRef(props.selectedItem.email);
 
+  const [stateWebsite,setWebsite] = useState(props.selectedItem.website);
+  const [statePhone,setPhone] = useState(props.selectedItem.phone);
+  const [stateEmail,setEmail] = useState(props.selectedItem.email);
+
+  const handleClose = () => {
+    if (!changed)
+    {
+        setWebsite(props.selectedItem.website);
+        setEmail(props.selectedItem.email);
+        setPhone(props.selectedItem.phone);
+    }
+
+    setOpen(false);
+  }
+
   const editAboutUs=()=>{
+        changed = true;
         //alert(selectedCity.label);
         var phn = newPhone.current.value;
         var eml = newEmail.current.value;
         var webs = newWebsite.current.value;
 
-        if (!phn)
-            phn = props.selectedItem.phone;
-
-        if (!eml)
-            eml = props.selectedItem.email;
-
-        if (!webs)
-            webs = props.selectedItem.website;
-
-        
+        if (!phn && !eml && !webs)
+        {
+          alert('Please add at least one contact option.');
+          return;
+        }
 
         var newContact = {'website': webs,'phone': phn, 'email': eml};
 
@@ -67,15 +83,15 @@ export default function BasicModal(props) {
           <div className='kmodal_educ_container'>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Website: </label>
-              <input className='kmodal_date_input' type="text" ref={newWebsite} placeholder={props.selectedItem.website}></input>
+              <input className='kmodal_date_input' type="text" ref={newWebsite} value={stateWebsite} placeholder="Company Website for contact" onChange={()=>setWebsite(newWebsite.current.value)}></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Phone: </label>
-              <input className='kmodal_date_input' type="text" ref={newPhone} placeholder={props.selectedItem.phone}></input>
+              <input className='kmodal_date_input' type="text" ref={newPhone} value={statePhone} placeholder="Company contact number" onChange={()=>setPhone(newPhone.current.value)}></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Email: </label>
-              <input className='kmodal_date_input' type="text" ref={newEmail} placeholder={props.selectedItem.email}></input>
+              <input className='kmodal_date_input' type="text" ref={newEmail} value={stateEmail} placeholder="Company email address" onChange={()=>setEmail(newEmail.current.value)}></input>
             </div>
             <button className='kmodal_buttons kmodal_center_btn' onClick={editAboutUs}>Confirm Changes</button>
         </div>

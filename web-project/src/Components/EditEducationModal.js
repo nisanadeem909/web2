@@ -21,10 +21,18 @@ const style = {
 
 export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  var changed = false;
+
+  const handleOpen = () =>{
+    changed = false;
+    setOpen(true);
+  }
 
   const newStartDate = useRef(props.selectedEduc.startYear);
   const newEndDate = useRef(props.selectedEduc.endYear);
+
+  const [stateStartDate,setStartDate] = useState(props.selectedEduc.startYear);
+  const [stateEndDate,setEndDate] = useState(props.selectedEduc.endYear);
 
   const [schoolList,setSchoolList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "LGS", "value" : "LGS"}]);
   const [degreeList,setDegreeList] = useState([{"label": "Bachelors", "value": "BS"}, {"label": "Masters", "value": "MS"},{"label": "A Level", "value": "AL"},{"label": "PhD", "value": "PHD"},{"label": "O Level", "value": "OL"}]);
@@ -38,9 +46,18 @@ export default function BasicModal(props) {
   const [selectedMajor,setSelectedMajor] = useState({"label": tempMajor.label,"value": tempMajor.value});
 
   const handleClose = () => {
-    setSelectedSchool({"label": props.selectedEduc.school,"value":props.selectedEduc.school});
-    setSelectedDegree({"label": tempDegree.label,"value": tempDegree.value});
-    setSelectedMajor({"label": tempMajor.label,"value": tempMajor.value});
+    ///setSelectedSchool({"label": selectedSchool.school,"value":selectedSchool.school});
+    //setSelectedDegree({"label": selectedDegree.label,"value": selectedDegree.value});
+    //setSelectedMajor({"label": selectedMajor.label,"value": selectedMajor.value});
+
+    if (!changed)
+    {
+        setStartDate(props.selectedEduc.startYear);
+        setEndDate(props.selectedEduc.endYear);
+        setSelectedSchool({"label": props.selectedEduc.school,"value":props.selectedEduc.school});
+        setSelectedDegree({"label": tempDegree.label,"value": tempDegree.value});
+        setSelectedMajor({"label": tempMajor.label,"value": tempMajor.value});
+    }
 
     setOpen(false);
   }
@@ -50,11 +67,19 @@ export default function BasicModal(props) {
         var startdate = newStartDate.current.value;
         var enddate = newEndDate.current.value;
 
-        if (!startdate)
-          startdate = props.selectedEduc.startYear;
+        if (!startdate || !enddate)
+        {
+          alert("Please enter all fields!");
+          return;
+        }
 
-        if (!enddate)
-            enddate = props.selectedEduc.endYear;
+        var currYear = (new Date()).getFullYear();
+
+        if (startdate > currYear)
+        {
+            alert("Start Year cannot be greater than Present Year!");
+            return;
+        }
 
         if (startdate > enddate)
         {
@@ -110,11 +135,11 @@ export default function BasicModal(props) {
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Start Year: </label>
-              <input className='kmodal_date_input' type="number" ref={newStartDate} min="1900" max="3000" placeholder={props.selectedEduc.startYear}></input>
+              <input className='kmodal_date_input' type="number" ref={newStartDate} min="1900" max="3000" value={stateStartDate} placeholder="Starting year" onChange={()=>setStartDate(newStartDate.current.value)}></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>End Year: </label>
-              <input className='kmodal_date_input' type="number" ref={newEndDate} min="1900" max="3000" placeholder={props.selectedEduc.endYear}></input>
+              <input className='kmodal_date_input' type="number" ref={newEndDate} min="1900" max="3000" value={stateEndDate} placeholder="Ending year or Expected ending year" onChange={()=>setEndDate(newEndDate.current.value)}></input>
             </div>
             <button className='kmodal_buttons kmodal_center_btn' onClick={editEduc}>Confirm Changes</button>
           </div>
