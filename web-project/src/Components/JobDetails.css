@@ -25,6 +25,14 @@
     grid-gap: 1rem;
 }
 
+.keditjob-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'editjobdetails' 'footer';
+    grid-gap: 1rem;
+}
+
 .kviewjob-jobsforyou {
     grid-area: jobrecs;
     margin-left: 5rem;
@@ -35,6 +43,12 @@
     margin-right: 5rem;
 }
 
+.kviewjob-editjobdetails {
+    grid-area: editjobdetails;
+    margin-left: 15rem;
+    margin-right: 15rem;
+}
+
 .kviewjob-footer {
     grid-area: footer;
 }
@@ -42,6 +56,12 @@
 .kjobdetails_applyicon {
     width: 4.5vh;
     height: 4.5vh;
+}
+
+.kjobdetails_editicon {
+    width: 3.5vh;
+    height: 3.5vh;
+    margin-bottom:0.8vh;
 }
 
 .kjobdetails_applyBtn {
@@ -146,7 +166,7 @@
     background-color: #016960;
     color: white;
     font-size: 2.5vh;
-    border-radius: 2vh;
+    border-radius: 1.8vh;
     border: none;
     padding-left: 1vh;
     padding-right: 1vh;
@@ -158,4 +178,27 @@
 
 .kjobdetails_companyBtn:hover {
     background-color: #09a093;
+}
+
+.kjobdetails_smallbtn {
+    background-color: #016960;
+    color: white;
+    font-size: 2.5vh;
+    border-radius: 1.8vh;
+    border: none;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    padding-bottom: 1vh;
+    height: 4vh;
+    margin-top: 0.5vh;
+    margin-right: 1%;
+}
+
+.kjobdetails_smallbtn:hover {
+    background-color: #09a093;
+}
+
+.kjobdetails_flexspacebtwn {
+    display: flex;
+    justify-content: space-between;
 }

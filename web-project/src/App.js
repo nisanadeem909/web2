@@ -18,8 +18,6 @@ import ViewJobDetails from './Components/ViewJobDetails'
 
 import ManageEmp from './Components/ManageEmployees';
 import AllJobs from './Components/JobComparisonPage';
-import Login from './Components/login';
-import Signup from './Components/signup';
 
 import CVViewer from './Components/CVViewer';
 import UserForm from './Components/UserForm';
@@ -27,6 +25,7 @@ import Education from './Components/Education';
 import Network from './Components/Network';
 import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
+import EditJobDetails from './Components/EditJobDetails'
 
 
 
@@ -74,6 +73,8 @@ function App() {
 
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
+            <Route path="viewotherjob" element={<ViewJobDetails />} />
+            <Route path="editvacancy" element={<EditJobDetails />} />
 
         </Route>
 
