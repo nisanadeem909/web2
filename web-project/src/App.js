@@ -27,6 +27,9 @@ import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
 import EditJobDetails from './Components/EditJobDetails'
 
+import PostJobPage from './Components/PostJobPage'
+import ApplyJobPage from './Components/ApplyJobPage'
+
 
 
 function App() {
@@ -58,7 +61,8 @@ function App() {
             <Route path="cvviewer/userform" element={<UserForm/>} />
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
-            <Route path='jobs' element={<Jobs/>} />         
+            <Route path='jobs' element={<Jobs/>} />  
+            <Route path="applyjob" element={<ApplyJobPage />} />       
 
 
         </Route>
@@ -75,6 +79,8 @@ function App() {
             <Route path='notifications' element={<Notifications/>} />  
             <Route path="viewotherjob" element={<ViewJobDetails />} />
             <Route path="editvacancy" element={<EditJobDetails />} />
+            <Route path="postjob" element={<PostJobPage />} />
+            
 
         </Route>
 
