@@ -25,6 +25,7 @@ import Education from './Components/Education';
 import Network from './Components/Network';
 import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
+import EditProfile from './Components/EditProfile';
 
 
 
@@ -48,6 +49,7 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
+            <Route path="ownprofile/editprofile" element={<EditProfile />} />
 
             <Route path="viewjob" element={<ViewJobDetails />} />
 

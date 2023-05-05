@@ -1,0 +1,145 @@
+.nisa-edit-container1{
+     background-color: rgba(255,255,255,0.6);
+     width: 80vw;
+     height: 90vh;
+     margin-top: 3%;
+     margin-left: 10%;
+     box-shadow: 10px 5px 80px 0.02px #acaaaa;
+    
+    
+}
+
+.nisa-edit-container2{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}   
+
+.nisa-edit-container3{
+    display: flex;
+    flex-direction: row;
+}   
+
+.edit-hr{
+
+    height: 500px;
+    width: 10px;
+    background-color: black;
+    margin-right: 10px;
+   
+
+
+}
+
+.edit-img2{
+position: absolute;
+}
+
+.edit-nisa-edit{
+    width: 100px;
+    color: #0E312F;
+    background-color: #0E312F;
+   
+    margin-left: 35%;
+    
+}
+
+.edit-nisa-img1{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 1px solid darkgreen;
+    margin-left: 30%;
+    margin-top: 20%;
+}
+input[type="file"] {
+    display: none;
+}
+
+.nisa-edit-label2{
+    font-size: 25px;
+    margin-top: 50px;
+    margin-left: 50px;
+    text-decoration: underline;
+}
+
+.nisa-edit
+
+.nisa-edit-input{
+   
+    width: 200px;
+    margin-left: 30px;
+  
+    
+
+}
+
+.nisa-edit-input:hover{
+   
+   
+    border: 2px solid #0E312F;
+
+}
+
+.nisa-edit-label{
+   
+    margin-top: 20px;
+}
+
+.nisa-edit-container4{
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    margin-left: 40px;
+}
+
+.nisa-edit-labelnew{
+    margin-top: 395px;
+    font-size: 25px;
+    margin-right: 5px;
+   
+}
+
+.nisa-edit-container6{
+    display: flex;
+    flex-direction: column;
+   
+    width: 240px;
+}
+
+.nisa-test{
+    margin-top: 405px;
+   
+    width: 200px;
+    height: 25px;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    background-color: #0E312F;
+    color: white;
+    cursor: pointer;
+    width: 100px;
+    margin-left: 35%;
+    padding: 5px;
+}
+
+.edit-hr2{
+
+    height: 430px;
+    width: 1px;
+    background-color: black;
+    margin-top: 5%;
+    margin-left: 10px;
+
+
+}
+
+.edit-person{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin-left: 27%;
+    margin-top: 18%;
+}
