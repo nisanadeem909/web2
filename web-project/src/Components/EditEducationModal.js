@@ -23,11 +23,6 @@ export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
   var changed = false;
 
-  const handleOpen = () =>{
-    changed = false;
-    setOpen(true);
-  }
-
   const newStartDate = useRef(props.selectedEduc.startYear);
   const newEndDate = useRef(props.selectedEduc.endYear);
 
@@ -45,6 +40,12 @@ export default function BasicModal(props) {
   const [selectedDegree,setSelectedDegree] = useState({"label": tempDegree.label,"value": tempDegree.value});
   const [selectedMajor,setSelectedMajor] = useState({"label": tempMajor.label,"value": tempMajor.value});
 
+  const handleOpen = () =>{
+    changed = false;
+    //alert(selectedDegree.label);
+    setOpen(true);
+  }
+
   const handleClose = () => {
     ///setSelectedSchool({"label": selectedSchool.school,"value":selectedSchool.school});
     //setSelectedDegree({"label": selectedDegree.label,"value": selectedDegree.value});
@@ -55,9 +56,13 @@ export default function BasicModal(props) {
         setStartDate(props.selectedEduc.startYear);
         setEndDate(props.selectedEduc.endYear);
         setSelectedSchool({"label": props.selectedEduc.school,"value":props.selectedEduc.school});
+        tempDegree = degreeList.filter((obj)=>obj.label === props.selectedEduc.degree)[0];
+        tempMajor = majorList.filter((obj)=>obj.label === props.selectedEduc.major)[0];
         setSelectedDegree({"label": tempDegree.label,"value": tempDegree.value});
         setSelectedMajor({"label": tempMajor.label,"value": tempMajor.value});
     }
+
+   // alert(selectedDegree.label);
 
     setOpen(false);
   }

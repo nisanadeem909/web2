@@ -21,11 +21,20 @@ const style = {
 
 export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  var changed = false;
+
+  const handleOpen = () =>{
+    changed = false;
+    setOpen(true);
+  }
 
   const newStartDate = useRef(props.selectedExp.startYear);
   const newEndDate = useRef(props.selectedExp.endYear);
   const newPosition = useRef(props.selectedExp.position);
+
+  const [stateStartDate,setStartDate] = useState(props.selectedExp.startYear);
+  const [stateEndDate,setEndDate] = useState(props.selectedExp.endYear);
+  const [statePosition,setPosition] = useState(props.selectedExp.position);
 
   const [companyList,setCompanyList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "Google", "value" : "Google"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "McDonalds", "value" : "McDonalds"}, {"label": "LGS", "value" : "LGS"}, {"label": "educative", "value" : "educative"}]);
 
@@ -34,7 +43,15 @@ export default function BasicModal(props) {
   const [selectedCompany,setSelectedCompany] = useState({"label": tempComp.label,"value": tempComp.value});
 
   const handleClose = () => {
-    setSelectedCompany({"label": tempComp.label,"value": tempComp.value});
+    if (!changed)
+    {
+        setStartDate(props.selectedExp.startYear);
+        setEndDate(props.selectedExp.endYear);
+        setPosition(props.selectedExp.position);
+        tempComp = companyList.filter((obj)=>obj.label === props.selectedExp.organization)[0];
+        setSelectedCompany({"label": tempComp.label,"value": tempComp.value});
+    }
+    
     setOpen(false);
   }
 
@@ -44,14 +61,11 @@ export default function BasicModal(props) {
         var enddate = newEndDate.current.value;
         var pos = newPosition.current.value;
 
-        if (!startdate)
-          startdate = props.selectedExp.startYear;
-
-        if (!enddate)
-            enddate = props.selectedExp.endYear;
-
-        if (!pos)
-            pos = props.selectedExp.position;
+        if (!startdate || !enddate || !pos)
+        {
+            alert("Please fill all fields!");
+            return;
+        }
 
         if (startdate > enddate)
         {
@@ -90,15 +104,15 @@ export default function BasicModal(props) {
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Designation: </label>
-              <input className='kmodal_date_input' type="text" ref={newPosition} placeholder={props.selectedExp.position}></input>
+              <input className='kmodal_date_input' type="text" ref={newPosition} value={statePosition} placeholder="Job Position" onChange={()=>setPosition(newPosition.current.value)}></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Start Year: </label>
-              <input className='kmodal_date_input' type="number" ref={newStartDate} min="1900" max="3000" placeholder={props.selectedExp.startYear}></input>
+              <input className='kmodal_date_input' type="number" ref={newStartDate} min="1900" max="3000" value={stateStartDate} placeholder="Starting year" onChange={()=>setStartDate(newStartDate.current.value)}></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>End Year: </label>
-              <input className='kmodal_date_input' type="number" ref={newEndDate} min="1900" max="3000" placeholder={props.selectedExp.endYear}></input>
+              <input className='kmodal_date_input' type="number" ref={newEndDate} min="1900" max="3000" value={stateEndDate} placeholder="Ending year (if applicable)" onChange={()=>setEndDate(newEndDate.current.value)}></input>
             </div>
             <button className='kmodal_buttons kmodal_center_btn' onClick={editExp}>Confirm Changes</button>
           </div>
