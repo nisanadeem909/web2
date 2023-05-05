@@ -7,9 +7,11 @@ export default function ApplyJob() {
     var name = 'Komal Waseem'; // name of logged in user
     var jobDetails = {'position':'Internship', 'company': 'Devsinc'};
    
+    const [schoolList,setSchoolList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "LGS", "value" : "LGS"}]);
     const [degreeList,setDegreeList] = useState([{"label": "Bachelors", "value": "BS"}, {"label": "Masters", "value": "MS"},{"label": "A Level", "value": "AL"},{"label": "PhD", "value": "PHD"},{"label": "O Level", "value": "OL"}]);
     const [majorList,setMajorList] = useState([{"label": "Computer Science", "value": "CS"},{"label": "Software Engineering", "value": "SE"},{"label": "Mathematics", "value": "MT"},{"label": "Medical Science", "value": "MED"}]);
 
+    const [selectedSchool,setSelectedSchool] = useState(null);
     const [selectedDegree,setSelectedDegree] = useState(null);
     const [selectedMajor,setSelectedMajor] = useState(null);
 
@@ -54,6 +56,13 @@ export default function ApplyJob() {
                 className='kpostjobform-field-dropdown'
                 onChange={(choice) => setSelectedMajor(choice)}
                 />
+          </div>
+          <div className='kpostjobform-field'>
+            <label className='kpostjobform-field-heading'>School of Last Degree:</label>
+              <Select options={schoolList}
+                    placeholder="School/University"
+                    className='kpostjobform-field-dropdown'
+                    onChange={(choice) => setSelectedSchool(choice)}/>
           </div>
           <div className='kpostjobform-field'>
             <label className='kpostjobform-field-heading'>Years of Experience:</label>

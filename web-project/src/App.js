@@ -29,6 +29,8 @@ import EditJobDetails from './Components/EditJobDetails'
 
 import PostJobPage from './Components/PostJobPage'
 import ApplyJobPage from './Components/ApplyJobPage'
+import UserCompareApplicantsBtn from './Components/UserCompareApplicantsBtnPage'
+import UserCompareApplicants from './Components/UserCompareApplicantsPage'
 
 
 
@@ -62,7 +64,10 @@ function App() {
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
             <Route path='jobs' element={<Jobs/>} />  
-            <Route path="applyjob" element={<ApplyJobPage />} />       
+            <Route path="applyjob" element={<ApplyJobPage />} />
+            <Route path="applyjob/applied" element={<UserCompareApplicantsBtn />} />
+            <Route path="applyjob/applied/compareapps" element={<UserCompareApplicants />} />
+                   
 
 
         </Route>

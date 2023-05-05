@@ -1,0 +1,215 @@
+.kcompareappbtnpage-container, .kcompareapppage-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+}
+
+.kcompareappbtnpage-content {
+    background-color: rgb(255,255,255,0.6);
+    margin-top: -5vh;
+    height: 54.3vh;
+    padding-top: 7%;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.kcompareappbtnpage-para {
+    font-size: 5vh;
+}
+
+.kcompareappbtnpage-btn-con {
+    display: flex;
+    margin-top: 3%;
+}
+
+.kcompareappbtnpage-btn {
+    width: 35vh;
+    margin-right: 2%;
+    font-size: 3vh;
+    padding: 1vh;
+    background-color: #016960;
+    color: white;
+    border: none;
+    border-radius: 2vh;
+}
+
+.kcompareappbtnpage-btn:hover {
+    background-color: #09a093;
+}
+
+
+/**********************************************************************************/
+
+.kcompareapppage-main {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 2.2vh;
+}
+
+.kcompareapp-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "header header" "topapps topskills" "explevel edulevel";
+    grid-gap: 1.5rem;
+    background-color: rgb(255,255,255,0.6);
+}
+
+.kcompareapp-header {
+    grid-area: header;
+    background-color:  #016960;
+    color: white;
+    padding: 1vh;
+    text-align: center;
+    font-size: 3.2vh;
+}
+
+.kcompareapp-topapps {
+    grid-area: topapps;
+    margin-left: 5%;
+}
+
+.kcompareapp-topappskills {
+    grid-area: topskills;
+    margin-right: 5%;
+}
+
+.kcompareapp-appexplevel {
+    grid-area: explevel;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+.kcompareapp-appedulevel {
+    grid-area: edulevel;
+    margin-bottom: 5%;
+    margin-right: 5%;
+}
+
+.kcompareapp-section {
+    /*border: 1px ridge gainsboro;
+    border-radius: 2vh;*/
+    padding: 3%;
+}
+
+.kcompareapp-section-label {
+    font-size: 2.8vh;
+    font-weight: bold;
+}
+
+.kcompareapp-section-hr {
+    margin:0;
+    margin-top: 1.5vh;
+    border-color: rgba(1, 105, 96,0.2);
+}
+
+.ktopapps-percent {
+    border-radius: 50%;
+    border: 0.7vh solid #016960;
+    font-size: 4vh;
+    padding: 2vh;
+}
+
+.ktopapps-percent-con {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ktopapps-percent-text {
+    width: 44vh;
+    font-size: 2.5vh;
+}
+
+.ktopapps-flexcon {
+    margin: 10% 0 0 3%;
+}
+
+.ktopapps-number {
+    font-size: 3.5vh;
+    font-weight: bold;
+}
+
+.ktopapps-label {
+    font-size: 2.5vh;
+}
+
+.ktopskills-content {
+    margin-top: 7%;
+}
+
+.ktopskills-heading {
+    font-size: 2.5vh;
+}
+
+.ktopskills-skill-con {
+    margin-top: 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.ktopskills-skill  {
+    font-size: 2.5vh;
+    text-align: center;
+    border-radius: 2vh;
+}
+
+.ktopskills-skill-have {
+    background-color: #016960;
+    color: white;
+}
+
+.ktopskills-skill-nothave {
+    background-color: darkgray;
+    color: gainsboro;
+}
+
+.kexplevel-content {
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 35vh;
+}
+
+.kexplevel-exp {
+    display: flex;
+    flex-direction: column;
+}
+
+.kexplevel-exp-lbl {
+    font-size: 2.5vh;
+    font-weight: bold;
+}
+
+.kexplevel-progress {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 1.7vh;
+    margin-top: 1vh;
+    border-radius: 2vh;
+}
+
+.kexplevel-progress::-webkit-progress-bar {
+    background-color: rgba(0,0,0,0);
+}
+
+.kexplevel-progress::-webkit-progress-value {
+    background-color: #016960;
+    border-radius: 2vh;
+}
+
+.kedulevel-content {
+    margin-top: 7%;
+}
+
+.kedulevel-percent {
+    font-size: 4.5vh;
+    font-weight: bold;
+}
+
+.kedulevel-lbl {
+    font-size: 2.5vh;
+}
