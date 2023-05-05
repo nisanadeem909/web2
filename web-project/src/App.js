@@ -12,8 +12,8 @@ import UserPublicProfilePage from './Components/UserPublicProfilePage';
 import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
-import Login from './Components/login';
-import Signup from './Components/signup';
+
+
 import ViewJobDetails from './Components/ViewJobDetails'
 
 import ManageEmp from './Components/ManageEmployees';
@@ -27,7 +27,7 @@ import Education from './Components/Education';
 import Network from './Components/Network';
 import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
-
+import CompareApplicants from './Components/CompareApplicants';
 
 
 function App() {
@@ -74,6 +74,9 @@ function App() {
 
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
+            
+            {/*This line is temporary - DELETE LATER - will be linked to Nisa's page */}
+            <Route path='compareapplicants' element={<CompareApplicants/>} />  
 
         </Route>
 

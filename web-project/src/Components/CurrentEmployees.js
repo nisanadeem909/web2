@@ -16,7 +16,7 @@ function CurrentEmployeesComponent() {
              <div id="nab-current-emp-table">
              <table id="customers">
                     
-                    <tr>
+                    {/*<tr>
                         <td>
                         <img className='works-emp-icon' src={empicon}></img>
                             &nbsp;&nbsp;
@@ -28,7 +28,7 @@ function CurrentEmployeesComponent() {
                         <td>
                             <button class="nab-openvacancies-button">Remove</button>    
                         </td>
-                    </tr>
+                    </tr>*/}
                     <tr>
                         <td>
                         <img className='works-emp-icon' src={empicon}></img>
