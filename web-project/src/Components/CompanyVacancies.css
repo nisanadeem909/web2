@@ -1,0 +1,64 @@
+.nisa-vaca-container1{
+    width: 100%;
+}
+
+.nisa-vaca-img1{
+    width: 80px;
+    height: 70px;
+    margin-left: 70%;
+    margin-top: 10px;
+}
+
+.nisa-vaca-lb{
+    font-size: 20px;
+    margin-top: 25px;
+}
+
+.nisa-vaca-container2{
+    display: flex;
+    flex-direction: row;
+   
+}
+
+.nisa-vaca-label{
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 15px;
+}
+
+.nisa-vaca-btn2{
+    margin-left: 73.5%;
+    background-color: #0E312F;
+    border: black;
+    color: white;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 100px;
+}
+
+.nisa-vaca-btn1{
+    width: 100px;
+    height: 30px;
+    margin-top: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    background-color: #0E312F;
+    color: white;
+    font-size: 17px;
+    border-radius: 5px;
+}
+
+.nisa-vaca-btn1:hover{
+    background-color: rgb(118, 181, 150);
+    color: #0E312F;
+    cursor: pointer;
+}
+
+.nisa-vaca-btn2:hover{
+    background-color: rgb(118, 181, 150);
+    color: #0E312F;
+    cursor: pointer;
+}

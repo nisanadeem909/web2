@@ -21,7 +21,7 @@ export default function ProfileDetails() {
     const edit=()=> {
 
        
-        navigate("editprofile",{ state: { id : 10, namee: 'Jobify User' } });
+        navigate("editprofile");
         
         
                

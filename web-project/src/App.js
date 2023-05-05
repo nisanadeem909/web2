@@ -26,6 +26,7 @@ import Network from './Components/Network';
 import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
 import EditProfile from './Components/EditProfile';
+import CompanyVacancies from './Components/CompanyVacancies';
 
 
 
@@ -74,7 +75,7 @@ function App() {
 
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
-
+            <Route path='vacancies' element={<CompanyVacancies />} /> 
         </Route>
 
       </Routes>

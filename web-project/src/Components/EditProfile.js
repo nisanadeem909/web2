@@ -7,8 +7,7 @@ import { useState } from "react";
 import { useLocation } from 'react-router-dom';
 export default function EditProfile() {
 
-  const {state} = useLocation();
-   const { id, namee } = state;
+ 
 
 
   return (
@@ -37,7 +36,7 @@ export default function EditProfile() {
         
       
                 <label className='nisa-edit-label'>
-                  Name:{id}
+                  Name:
                 </label>
                 <input className='nisa-edit-input' type="text" />
 
