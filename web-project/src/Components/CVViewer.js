@@ -6,6 +6,7 @@
  import cvtwo from './cvtwo.png';
 import { useNavigate } from 'react-router-dom';
 import UserForm from './UserForm';
+import Footer from './Footer'
 
  
  export default function CVViewer() {
@@ -52,6 +53,8 @@ import UserForm from './UserForm';
     </div>
 
      </div>
+
+     <Footer></Footer>
      </div>
    )
  }
