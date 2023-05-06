@@ -19,7 +19,7 @@
 .kpostjobform-container {
     display: flex;
     flex-direction: column;
-    background-color: #c4c1c1;
+    background-color: rgba(255,255,255,0.6);
     border-radius: 2vh;
 }
 

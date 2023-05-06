@@ -23,7 +23,7 @@ export default function JobDetails() {
     <div className='kjobdetails-container'>
         <div className='kjobdetails_header'>
             <label className='kjobdetails_position'>{jobDetails.position}</label>
-            <button className='kjobdetails_applyBtn'>Apply <img src={applyIcon} alt='' className='kjobdetails_applyicon'></img></button>
+            <button className='kjobdetails_applyBtn' onClick={()=>navigate('/user/applyjob')}>Apply <img src={applyIcon} alt='' className='kjobdetails_applyicon'></img></button>
         </div>
         <div className="kjobdetails_subheader">
             <label>{companyDetails.Location.city}, {companyDetails.Location.country}</label>

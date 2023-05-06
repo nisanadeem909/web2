@@ -31,6 +31,9 @@ import PostJobPage from './Components/PostJobPage'
 import ApplyJobPage from './Components/ApplyJobPage'
 import UserCompareApplicantsBtn from './Components/UserCompareApplicantsBtnPage'
 import UserCompareApplicants from './Components/UserCompareApplicantsPage'
+import ViewApplicationPage from './Components/ViewApplicationPage'
+import AboutUs from './Components/AboutUs'
+import Error from './Components/ErrorPage'
 
 
 
@@ -43,6 +46,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="login" element={<Login/>}></Route>
           <Route path="signup" element={<Signup/>}></Route>
+          <Route path="about" element={<AboutUs/>}></Route>
+          <Route path="*" element={<Error/>}></Route>
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           
@@ -67,6 +72,7 @@ function App() {
             <Route path="applyjob" element={<ApplyJobPage />} />
             <Route path="applyjob/applied" element={<UserCompareApplicantsBtn />} />
             <Route path="applyjob/applied/compareapps" element={<UserCompareApplicants />} />
+            <Route path="*" element={<Error/>}></Route>
                    
 
 
@@ -85,6 +91,9 @@ function App() {
             <Route path="viewotherjob" element={<ViewJobDetails />} />
             <Route path="editvacancy" element={<EditJobDetails />} />
             <Route path="postjob" element={<PostJobPage />} />
+            <Route path="viewapplication" element={<ViewApplicationPage />} />
+            <Route path="*" element={<Error/>}></Route>
+            
             
 
         </Route>

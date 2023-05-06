@@ -2,16 +2,20 @@ import React from 'react'
 import jobicon from './workk.png'
 
 import './openvacancies.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function OpenVacanciesEditable() {
+
+  const navigate=useNavigate();
+
     return (
         <div id="openvacancies-box">
              <div id="openvacancies-our-employees">Current Vacancies</div>   
              
              <br></br>
              
-             <button class="openvacancies-button"> <span>Add New</span></button>
+             <button class="openvacancies-button" onClick={()=>navigate('/company/postjob')}> <span>Add New</span></button>
               
               <br></br><br></br>
               <div id="openvacancies-emp-img"><img className='openvacancies-emp-icon' src={jobicon}/></div>

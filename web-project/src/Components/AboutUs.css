@@ -1,0 +1,53 @@
+.kaboutus-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'main' 'footer';
+    grid-gap: 0;
+}
+
+.kaboutus-main {
+    grid-area: main;
+    background-color: rgba(255,255,255,0.6);
+    margin-top: -2vh;
+    min-height: 95vh;
+}
+
+.kaboutus-footer {
+    grid-area: footer;
+}
+
+.kaboutus-logo {
+    background-color: #0E312F;
+    border-radius: 1.4vh;
+    height: 6vh;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    width: 17vh;
+    margin-left: 45.5%;
+}
+
+.kaboutus-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin-top: 13%;
+}
+
+.kaboutus-title {
+    font-size: 5vh;
+    margin-top: 2%;
+}
+
+.kaboutus-hr {
+    border-color: rgba(14, 49, 47,0.3);
+    width: 40%;
+    margin-left: 31%;
+}
+
+.kaboutus-paragraph {
+    font-size: 2.8vh;
+    width: 40%;
+    margin-left: 31%;
+}
