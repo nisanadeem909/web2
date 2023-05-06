@@ -18,8 +18,6 @@ import ViewJobDetails from './Components/ViewJobDetails'
 
 import ManageEmp from './Components/ManageEmployees';
 import AllJobs from './Components/JobComparisonPage';
-import Login from './Components/login';
-import Signup from './Components/signup';
 
 import CVViewer from './Components/CVViewer';
 import UserForm from './Components/UserForm';
@@ -27,7 +25,13 @@ import Education from './Components/Education';
 import Network from './Components/Network';
 import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
+
+import EditProfile from './Components/EditProfile';
+import CompanyVacancies from './Components/CompanyVacancies';
+import ApplicantsView from './Components/ApplicantsView';
+
 import CompareApplicants from './Components/CompareApplicants';
+
 
 
 function App() {
@@ -50,6 +54,7 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
+            <Route path="ownprofile/editprofile" element={<EditProfile />} />
 
             <Route path="viewjob" element={<ViewJobDetails />} />
 
@@ -74,9 +79,14 @@ function App() {
 
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
+
+            <Route path='vacancies' element={<CompanyVacancies />} /> 
+            <Route path='vacancies/viewapplicants' element={<ApplicantsView />} /> 
+
             
-            {/*This line is temporary - DELETE LATER - will be linked to Nisa's page */}
+           
             <Route path='compareapplicants' element={<CompareApplicants/>} />  
+
 
         </Route>
 

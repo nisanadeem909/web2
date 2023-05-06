@@ -1,21 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ProfileDetails.css';
 import picture from './dummy.jpg'
 import editicon from './edit.png'
 import networkicon from './network.png'
 import workicon from './workk.png'
+import { useNavigate } from 'react-router-dom';
+import EditProfile from './EditProfile';
 export default function ProfileDetails() {
-
-    const edit=()=> {
-
-    }
-
-
 
     var cons = 0;
     var username = "@komalwaseem";
     var name = "Komal Waseem";
     var bio = "This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. This is a bio. ";
+    
+    const [contact,setDetails] = useState({name: 'Jobify User',username:'someone@jobify.com',Bio:'This is biooo bioooo biooo biooooooooooooooooooo'});
+
+  
+    const navigate = useNavigate();
+  
+    const edit=()=> {
+
+       
+        navigate("editprofile");
+        
+        
+               
+    }
+
+
 
     var profilepic = picture; // dummy picture to use if no profile picture applied
     
@@ -28,7 +40,7 @@ export default function ProfileDetails() {
             <div className="profdetails_details">
                 <div id="profdetails_namebtn">
                     <label id = "profdetails_name">{name}</label>
-                    <button id="profdetails_btne" className='profdetails_button' onClick={edit()}><div><img src={editicon} id="profdetails_conimg"></img><label>Edit</label></div></button>
+                    <button id="profdetails_btne" className='profdetails_button' onClick={() =>edit()}><div><img src={editicon} id="profdetails_conimg"></img><label>Edit</label></div></button>
                 </div>
                 <label id = "profdetails_username">{username}</label>
                 

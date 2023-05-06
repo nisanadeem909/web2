@@ -9,11 +9,13 @@
   body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
+  
   nav{
     background: #0E312F;
     height: 50px;
     width: 100%;
     position: sticky;
+    z-index: 1;
     top: 0;
   }
   .navb_logo{

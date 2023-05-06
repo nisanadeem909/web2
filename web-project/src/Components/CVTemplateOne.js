@@ -189,7 +189,7 @@ class CVTemplateOne extends Component {
           <Text style={styles.title}>{values.name} </Text>
           <Text style={styles.content}>{values.skills}</Text>
           <Text style={styles.content}>{values.github}</Text>
-          <Text style={styles.content}>{values.email} | {values.contact}</Text>
+          <Text style={styles.content}>{values.email} </Text>
      </View>
    </View>
 
@@ -218,7 +218,7 @@ class CVTemplateOne extends Component {
           <View style={styles.container}>
           <Text style={styles.bulletPoint}>•</Text>
           <Text style={styles.text}>{values.exp1_org}                                                       {values.exp1_dur}</Text>
-        </View>
+          </View>
         <Text style={styles.contentU}>{values.exp1_desc}</Text>
       
       <View style={styles.container}>
@@ -231,6 +231,26 @@ class CVTemplateOne extends Component {
      
 
           </View>
+
+          <View style={styles.sectionU}>
+          <Text style={styles.titleU}>Projects</Text>
+          <View style={styles.container}>
+          <Text style={styles.bulletPoint}>•</Text>
+          <Text style={styles.text}>{values.proj1_title}                     </Text>
+          </View>
+        <Text style={styles.contentU}>{values.proj1_desc}</Text>
+      
+      <View style={styles.container}>
+          <Text style={styles.bulletPoint}>•</Text>
+        <Text style={styles.text}>{values.proj2_title}                           </Text>
+      </View>
+      <Text style={styles.contentU}>{values.proj2_desc}</Text>
+      
+
+     
+
+          </View>
+
 
 </View>
 
