@@ -28,7 +28,10 @@
   nav .navb_ul{
     float: right;
     margin-right: 5%;
+    display:flex;
+    flex:row;
   }
+  
   nav .navb_ul .navb_li{
     display: inline-block;
     line-height: 80px;
@@ -58,6 +61,7 @@
   #navb_check{
     display: none;
   }
+  
   @media (max-width: 952px){
     label.navb_logo{
       font-size: 30px;
@@ -98,3 +102,157 @@
     }
   }
   
+  /*Nabeeha*/
+  
+.nab-dropdown {
+  background-color: aqua;
+  width:15%;
+  height:1vh;
+  padding:1%;
+  margin-right: 30px;
+}
+
+.nab-dropbtn {
+  
+  cursor: pointer;
+  
+  width:0vh;
+  height:0vh;
+  background-color: bisque;
+  /*font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;*/
+}
+
+ .nab-dropdown:hover .nab-dropbtn, .nab-dropbtn:focus {
+ 
+}
+
+.nab-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  color:black;
+  min-width: 160px;
+  height:200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+
+  margin-top: -19px;
+  margin-left: -70px;
+  
+}
+
+
+#nab-dropdown-items a:hover {
+  text-decoration: underline;
+  background-color: #f9f9f9;
+}
+
+.show {
+  display:flex;
+  flex-direction: column;
+}
+#nab-dropdown-items{
+  
+  position: relative;
+
+}
+
+#nab-dropdown-items a {
+  
+  color: black;
+  
+  text-decoration: underline;
+  display:flex;
+  flex-direction: row;
+  
+}
+#profile-head-section{
+  height:50px;
+  
+  text-align: center;
+ 
+}
+#nab-editprof-btn{
+  width:100%;
+  padding:1%;
+  height:10%;
+  background-color: antiquewhite;
+}
+#navbar-profile-link{
+  display: flex;
+  flex-direction: column;
+}
+#navbar-nab-human-icon{
+  border-radius: 50%;
+  
+  height:40px;
+  width:40px;
+  
+}
+#nab-human-icon{
+  border-radius: 50%;
+  
+  height:40px;
+  width:40px;
+}
+#nab-logout-icon{
+  height:20px;
+  width:20px;
+}
+#profile-line-hr{
+  width: 100%;
+  height:1px;
+  background-color: gray;
+  margin-top:30px;
+  padding:0px;
+}
+#nab-editprof{
+  
+  width:80px;
+  height:10px;
+  position: relative;
+  text-align: center;
+}
+#nab-profile-icon{
+
+  width:20px;
+  height:20px;
+}
+#nab-logout{
+  width:80px;
+  height:10px;
+  
+  text-align: center;
+  
+}
+#nab-logout-section{
+  margin-bottom: 50px;
+}
+#nab-logout-div{
+  margin-bottom: 80px;
+}
+#nab-logount{
+  height:50px;
+}
+
+.editprofile-button{
+  
+  background-color: #f9f9f9;
+  border-color:  #f9f9f9;;
+  
+  padding: 0;
+border: none;
+background: none;
+  
+  
+}
+.editprofile-button:hover{
+  text-decoration: underline;
+}

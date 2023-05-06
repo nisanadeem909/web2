@@ -1,5 +1,5 @@
-#nab-currentjobs-wrapper{
- 
+#nab-currentapps-wrapper{
+    border-radius: 5%;
     border: 1px solid gray;
     width: 100%;
     height: 100%;
@@ -14,7 +14,7 @@
     /*float:right;*/
     
 }
-.nab-comparejobs-button{
+.nab-compareapps-button{
     border-radius: 5%;
    
     border: #016960;
@@ -23,7 +23,7 @@
     text-align: center;
     font-size: 2.5vh;
     
-    /*background-color: #016960;*/ /*enable this when 3 jobs are selected*/
+    /*background-color: #016960;*/ /*enable this when 3 apps are selected*/
     width: 40%;
     height:10%;
     transition: all 0.5s;
@@ -32,7 +32,7 @@
    
     
 }
-#select3jobs{
+#select3apps{
     
     height:20%;
     width:100%;
@@ -42,9 +42,8 @@
     padding:2%;
     margin-top: 2%;
 }
-#nab-innerjobs-wrapper
+#nab-innerapps-wrapper
 {
-    background-color: #016960;
     background-color: #016960;
     border-radius: 20px 20px 0px 0px;
     color: black;
@@ -53,16 +52,16 @@
     text-align: center;
     
 }
-#nab-currentjobs-btn-group{
+#nab-currentapps-btn-group{
     display: flex;
     flex-direction: row;
 }
-#nab-currentjobs-checkbox-wrapper{
+#nab-currentapps-checkbox-wrapper{
     display: flex;
     flex-direction: row;
     margin-top: 2%;
 }
-#nab-currentjobs-checkbox{
+#nab-currentapps-checkbox{
     font-size: 15px;
     
     height:fit-content;
@@ -74,7 +73,7 @@
     height:fit-content;
 }
 
-.nab-currentjobs-button {
+.nab-currentapps-button {
     
     border-radius: 5%;
    
@@ -90,14 +89,14 @@
     padding: 2%;
   }
   
-  .nab-currentjobs-button span {
+  .nab-currentapps-button span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
   }
   
-  .nab-currentjobs-button span:after {
+  .nab-currentapps-button span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -106,30 +105,30 @@
     transition: 0.5s;
   }
   
-  .nab-currentjobs-button:hover span {
+  .nab-currentapps-button:hover span {
     padding-right: 25px;
   }
   
-  .nab-currentjobs-button:hover span:after {
+  .nab-currentapps-button:hover span:after {
     opacity: 1;
     right: 0;
   }
-  #currentjobs-table {
+  #currentapps-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
   }
   
-  #currentjobs-table td, #currentjobs-table th {
+  #currentapps-table td, #currentapps-table th {
     border: 0px solid #ddd;
     padding: 8px;
   }
   
-  #currentjobs-table tr:nth-child(even){background-color: #f2f2f2;}
+  #currentapps-table tr:nth-child(even){background-color: #f2f2f2;}
   
-  #currentjobs-table tr:hover {background-color: #ddd;}
+  #currentapps-table tr:hover {background-color: #ddd;}
   
-  #currentjobs-table th {
+  #currentapps-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
