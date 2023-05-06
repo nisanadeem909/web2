@@ -1,0 +1,109 @@
+.kpostjobpage-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'form' 'footer';
+    grid-gap: 1rem;
+}
+
+.kpostjobpage-form {
+    grid-area: form;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+.kpostjobpage-footer {
+    grid-area: footer;
+}
+
+.kpostjobform-container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 2vh;
+}
+
+.kpostjobform-header {
+    background-color: #0e312f;
+    color: white;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-size: 4vh;
+    text-align: center;
+    border-top-right-radius: 2vh;
+    border-top-left-radius: 2vh;
+    border-bottom: 0.1vh solid white;
+}
+
+.kpostjobform-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 2.5vh;
+}
+
+.kpostjobform-field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+
+.kpostjobform-field-input, .kpostjobform-field-lbl, .kpostjobform-field-dropdown {
+    width: 42vh;
+    height: 4vh;
+    font-size: 2.2vh;
+    padding: 0.3vh;
+    border-radius: 1vh;
+}
+
+.kpostjobform-field-input {
+    border-color: gainsboro;
+}
+
+.kpostjobform-field-dropdown {
+    margin-bottom: 2%;
+}
+
+.kpostjobform-field-textarea {
+    width: 42vh;
+    height: 20vh;
+    font-size: 2.2vh;
+    resize: none;
+    padding: 0.4vh;
+    border-radius: 1vh;
+    border-color: gainsboro;
+}
+
+.kpostjobform-btns {
+    display: flex;
+    justify-content: center;
+}
+
+.kpostjobform-postbtn, .kpostjobform-cancelbtn {
+    width: 10vh;
+    border-radius: 1vh;
+    border: 1px solid white;
+}
+
+.kpostjobform-postbtn {
+    margin-right: 2%;
+    background-color: #0e312f;
+    color: white;
+}
+
+.kpostjobform-postbtn:hover {
+    background-color: #016960;
+}
+
+.kpostjobform-cancelbtn {
+    background-color: gray;
+    color: white;
+}
+
+.kpostjobform-cancelbtn:hover {
+    background-color: darkgray;
+}
+

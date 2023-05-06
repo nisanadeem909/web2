@@ -1,0 +1,42 @@
+.kerror-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'main' 'footer';
+    grid-gap: 0;
+}
+
+.kerror-main {
+    grid-area: main;
+    background-color: rgba(255,255,255,0.6);
+    margin-top: -2vh;
+    min-height: 95vh;
+}
+
+.kerror-footer {
+    grid-area: footer;
+}
+
+.kerror-inner {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.kerror-icon {
+    height: 30vh;
+    opacity: 60%;
+    width: 35vh;
+    margin-left: 41.5%;
+}
+
+.kerror-title {
+    font-size: 5vh;
+    font-weight: bold;
+    margin-top: 1%;
+}
+
+.kerror-para {
+    font-size: 2.8vh;
+}

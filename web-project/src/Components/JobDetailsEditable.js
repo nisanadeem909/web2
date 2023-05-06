@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './JobDetails.css';
 import applyIcon from './applyy.png'
 import eduIcon from './edu.png'
@@ -8,6 +8,7 @@ import salaryIcon from './salaryi.png'
 import leaveIcon from './leavei.png'
 import jobIcon from './workk.png'
 import { useNavigate } from "react-router-dom";
+import EditVacancyModal from './EditVacancyModal'
 
 export default function JobDetails() {
 
@@ -15,15 +16,19 @@ export default function JobDetails() {
 
     //salary, location, working hours, paid leaves, degree, experience, description, company,
 
-    var jobDetails = {'salary': '50000','workingHours':'3','paidLeaves':'8', 'position': 'Internship', 'datePosted':'12/12/2022','requirements':{'degree':'Bachelors', 'major':'Computer Science','experience':'2'},'description':'This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. '};
+    const [jobDetails,setJobDetails] = useState({'salary': '50000','workingHours':'3','paidLeaves':'8', 'position': 'Internship', 'datePosted':'12/12/2022','requirements':{'degree':'Bachelors', 'major':'Computer Science','experience':'2'},'description':'This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. '});
     var companyDetails = {'Location':{'country': 'Pakistan', 'city':'Lahore'},'name':'Devsinc','rating':'4.5'};
     var noOfApplicants = 12;
+
+    const edit=(newItem)=>{
+        setJobDetails(newItem);
+    }
 
   return (
     <div className='kjobdetails-container'>
         <div className='kjobdetails_header'>
             <label className='kjobdetails_position'>{jobDetails.position}</label>
-            <button className='kjobdetails_applyBtn' onClick={()=>navigate('/user/applyjob')}>Apply <img src={applyIcon} alt='' className='kjobdetails_applyicon'></img></button>
+            <button className='kjobdetails_applyBtn'>View Applicants <img src={applyIcon} alt='' className='kjobdetails_applyicon'></img></button>
         </div>
         <div className="kjobdetails_subheader">
             <label>{companyDetails.Location.city}, {companyDetails.Location.country}</label>
@@ -31,7 +36,10 @@ export default function JobDetails() {
             <label>{noOfApplicants} Applicants</label>
         </div>
         <div className='kjobdetails_aboutjob'>
-            <label className='kjobdetails_aboutjob_title'>About the Job</label>
+            <div class="kjobdetails_flexspacebtwn">
+                <label className='kjobdetails_aboutjob_title'>About the Job</label>
+                <EditVacancyModal selectedItem={jobDetails} changeVacancy={edit}/>
+            </div>
             <hr className='kjobdetails_hr'/>
             <div className='kjobdetails_aboutjob_inner'>
                 <label><img src={eduIcon} className='kjobdetails_smallicon'></img>Degree requirements: &nbsp; {jobDetails.requirements.degree} in {jobDetails.requirements.major} or related fields</label>
@@ -53,7 +61,7 @@ export default function JobDetails() {
                     <label className='kjobdetails_aboutcompany_title'>{companyDetails.name}</label>
                     <label className='kjobdetails_aboutcompany_location'>{companyDetails.Location.city}, {companyDetails.Location.country}</label>
                 </div>
-                <button className='kjobdetails_companyBtn' onClick={()=>navigate('/user/publiccompanyprofile')}>View Company</button>
+                <button className='kjobdetails_companyBtn' onClick={()=>navigate('/company/ownprofile')}>Go to Profile</button>
             </div>
         </div>
     </div>

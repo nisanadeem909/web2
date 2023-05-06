@@ -25,6 +25,15 @@ import Education from './Components/Education';
 import Network from './Components/Network';
 import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
+import EditJobDetails from './Components/EditJobDetails'
+
+import PostJobPage from './Components/PostJobPage'
+import ApplyJobPage from './Components/ApplyJobPage'
+import UserCompareApplicantsBtn from './Components/UserCompareApplicantsBtnPage'
+import UserCompareApplicants from './Components/UserCompareApplicantsPage'
+import ViewApplicationPage from './Components/ViewApplicationPage'
+import AboutUs from './Components/AboutUs'
+import Error from './Components/ErrorPage'
 
 import EditProfile from './Components/EditProfile';
 import CompanyVacancies from './Components/CompanyVacancies';
@@ -43,6 +52,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="login" element={<Login/>}></Route>
           <Route path="signup" element={<Signup/>}></Route>
+          <Route path="about" element={<AboutUs/>}></Route>
+          <Route path="*" element={<Error/>}></Route>
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           
@@ -64,7 +75,12 @@ function App() {
             <Route path="cvviewer/userform" element={<UserForm/>} />
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
-            <Route path='jobs' element={<Jobs/>} />         
+            <Route path='jobs' element={<Jobs/>} />  
+            <Route path="applyjob" element={<ApplyJobPage />} />
+            <Route path="applyjob/applied" element={<UserCompareApplicantsBtn />} />
+            <Route path="applyjob/applied/compareapps" element={<UserCompareApplicants />} />
+            <Route path="*" element={<Error/>}></Route>
+                   
 
 
         </Route>
@@ -79,6 +95,13 @@ function App() {
 
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
+            <Route path="viewotherjob" element={<ViewJobDetails />} />
+            <Route path="editvacancy" element={<EditJobDetails />} />
+            <Route path="postjob" element={<PostJobPage />} />
+            <Route path="viewapplication" element={<ViewApplicationPage />} />
+            <Route path="*" element={<Error/>}></Route>
+            
+            
 
             <Route path='vacancies' element={<CompanyVacancies />} /> 
             <Route path='vacancies/viewapplicants' element={<ApplicantsView />} /> 

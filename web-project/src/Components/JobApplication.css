@@ -1,0 +1,147 @@
+.kviewapppage-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'main' 'footer';
+    grid-gap: 1rem;
+}
+
+.kviewapppage-app {
+    grid-area: main;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+.kviewapppage-footer {
+    grid-area: footer;
+}
+
+.kjobapp-container {
+    background-color: rgba(255,255,255,0.6);
+    width: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.kjobapp-header {
+    background-color: #0e312f;
+    color: white;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-size: 4vh;
+    text-align: center;
+    border-top-right-radius: 2vh;
+    border-top-left-radius: 2vh;
+    border-bottom: 0.1vh solid white;
+    width: 100%;
+}
+
+.kjobapp-content {
+    padding: 3% 15% 3% 15%;
+    display: flex;
+    flex-direction: column;
+}
+
+.kjobapp-content-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.kjobapp-content-header-date {
+    font-size: 2vh;
+    font-weight: normal;
+    margin-top: 1vh;
+    color: gray;
+}
+
+.kjobapp-content-hr {
+    margin-top: 2%;
+    border-color:rgba(14, 49, 47,0.1);
+}
+
+.kjobapp-content-profile {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 3%;
+}
+
+.kjobapp-content-profile-summary {
+    display: flex;
+    width: 60%;
+}
+
+.kjobapp-content-profile-pic {
+    width: 8vh;
+    height: 8vh;
+    border-radius: 50%;
+    border: 0.1vh solid rgba(14, 49, 47,0.3);
+}
+
+.kjobapp-content-profile-names {
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.kjobapp-content-name {
+    font-size: 3vh;
+}
+
+.kjobapp-content-username {
+    font-size: 2vh;
+    color: gray;
+}
+
+.kjobapp-btn {
+    background-color: #016960;
+    color: white;
+    font-size: 2.5vh;
+    border-radius: 2vh;
+    border: none;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    height: 5vh;
+}
+
+.kjobapp-btn:hover {
+    background-color: #09a093;
+}
+
+.kjobapp-content-application {
+    display: flex;
+    flex-direction: column;
+}
+
+.kjobapp-content-appfield {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+
+.kjobapp-content-appfield-title {
+    font-size: 2.5vh;
+}
+
+.kjobapp-content-appfield-value {
+    font-size: 2.3vh;
+    background-color: white;
+    width: 45vh;
+    border: 0.3vh inset gainsboro;
+    border-radius: 1vh;
+    padding-left: 1.5vh;
+}
+
+.kjobapp-content-btn-con {
+    text-align: center;
+}
+
+#kjobapp-resumebtn {
+    margin-right: 3%;
+}
