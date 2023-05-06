@@ -27,6 +27,7 @@ import Notifications from './Components/Notifications';
 import Jobs from './Components/Jobs';
 import EditProfile from './Components/EditProfile';
 import CompanyVacancies from './Components/CompanyVacancies';
+import ApplicantsView from './Components/ApplicantsView';
 
 
 
@@ -76,6 +77,7 @@ function App() {
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
             <Route path='vacancies' element={<CompanyVacancies />} /> 
+            <Route path='vacancies/viewapplicants' element={<ApplicantsView />} /> 
         </Route>
 
       </Routes>

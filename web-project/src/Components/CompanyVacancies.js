@@ -2,8 +2,21 @@ import React from 'react'
 import './CompanyVacancies.css'
 import vaca from './vaca.png'
 import jobicon from './workk.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function CompanyVacancies() {
+
+    const navigate = useNavigate();
+  
+    const view=()=> {
+
+       
+        navigate("viewapplicants");
+        
+        
+               
+    }
+
   return (
     <div className='nisa-vaca-container1'>
          <div className='nisa-vaca-container2'>
@@ -28,7 +41,7 @@ export default function CompanyVacancies() {
           </div>
 
           <div className='nisa-notify-post'>
-          <button className='nisa-vaca-btn1'>Applicants</button>
+          <button onClick={() =>view()} className='nisa-vaca-btn1'>Applicants</button>
           <button className='nisa-vaca-btn1'>Edit</button>
           <button className='nisa-vaca-btn1'>Delete</button>
        
@@ -48,7 +61,7 @@ export default function CompanyVacancies() {
           </div>
 
           <div className='nisa-notify-post'>
-          <button className='nisa-vaca-btn1'>Applicants</button>
+          <button onClick={() =>view()} className='nisa-vaca-btn1'>Applicants</button>
           <button className='nisa-vaca-btn1'>Edit</button>
           <button className='nisa-vaca-btn1'>Delete</button>
        
@@ -68,7 +81,7 @@ export default function CompanyVacancies() {
           </div>
 
           <div className='nisa-notify-post'>
-          <button className='nisa-vaca-btn1'>Applicants</button>
+          <button onClick={() =>view()} className='nisa-vaca-btn1'>Applicants</button>
           <button className='nisa-vaca-btn1'>Edit</button>
           <button className='nisa-vaca-btn1'>Delete</button>
        

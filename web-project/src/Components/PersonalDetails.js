@@ -45,14 +45,39 @@ class PersonalDetails extends Component {
                         <div className="col-lg-6 text-left">
                             <label className='nisa-pd-label'>Github</label>
                             <input type="text" name="github" placeholder='' className="form-control" defaultValue={values.status === 1 ? '' : values.github} onChange={handleChange} />
+                            
+                        
+                        </div>
+                        <div className="col-lg-6 text-left">
+                            <label className='nisa-pd-label'>Degree* </label>
+                            <input type="text" name="skills" placeholder='Software Engineer , Manager' className="form-control"  defaultValue={values.status === 1 ? '' : values.skills} onChange={handleChange} />
+                            
+                        
                         </div>
                     </div>
                     <br />
                     <div className="row col-lg-10 mx-auto">
                         <div className="col-lg-12 text-left">
-                            <label className='nisa-pd-label'>Skill* </label>
-                            <input type="text" name="skills" placeholder='Software Engineer , Manager' className="form-control"  defaultValue={values.status === 1 ? '' : values.skills} onChange={handleChange} />
+                           <label className='nisa-pd-label'>Skill-1* </label>
+                            <input type="text" name="extra_1" placeholder='JavaScript' className="form-control"  defaultValue={values.status === 1 ? '' : values.extra_1} onChange={handleChange} />
+                            
                         </div>
+
+                        <div className="col-lg-6 text-left">
+                        <label className='nisa-pd-label'>Skill-2* </label>
+                            <input type="text" name="extra_2"  className="form-control"  defaultValue={values.status === 1 ? '' : values.extra_2} onChange={handleChange} />
+
+                        </div>
+
+                        <div className="col-lg-6 text-left">
+                        <label className='nisa-pd-label'>Skill-3* </label>
+                            <input type="text" name="extra_3"  className="form-control"  defaultValue={values.status === 1 ? '' : values.extra_3} onChange={handleChange} />
+                            
+                        </div>
+
+
+                        
+
                     </div>
                     <br />
                     <div className="container text-center"><button type="submit" className="btn btn-info">Next<i className="fas fa-angle-right ml-1"></i></button></div>
