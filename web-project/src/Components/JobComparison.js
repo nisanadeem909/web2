@@ -51,7 +51,7 @@ function JobComparison() {
                 
                 <tr>
                     <td><button class="uides-btn"><span>UI Designer at Narsun Studios </span></button></td>
-                    <td><button class="uides-btn"><span>UI Designer at Mindstorm Studios </span></button></td>
+                    <td><button class="uides-btn"><span>UI Designer at Mindstorm </span></button></td>
                     
                 </tr>
                 <tr>

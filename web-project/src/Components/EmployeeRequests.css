@@ -1,16 +1,16 @@
 #nab2-current-emp-wrapper{
-    border-radius: 5%;
+    border-radius: 20px 20px 0px 0px;
     border: 1px solid gray;
     width: 80%;
     height: 100%;
-    
+    text-align: center;
     background-color:rgba(255,255,255,0.6);
 }
 
 #nab2-inner-emp-wrapper
 {
     background-color: #016960;
-    border-radius:5%;
+    border-radius: 20px 20px 0px 0px;
     border: 1px solid gray;
     color: black;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -65,27 +65,27 @@
     border: none;
     color: #FFFFFF;
     text-align: center;
-    font-size: 3vh;
+    font-size: 2.25vh;
     background-color: #016960;
-    width: 60%;
-    height:30%;
+    width: 100%;
+    height:10%;
     transition: all 0.5s;
     cursor: pointer;
     padding: 5%;
     font-weight: bold;
-    
+    position: relative;
   }
   .nab-decline-btn {
-    
+    position: relative;
     border-radius: 50%;
    
     border: none;
     background-color: #FFFFFF;
     text-align: center;
-    font-size: 3vh;
+    font-size: 2.25vh;
     color: #016960;
-    width: 60%;
-    height:30%;
+    width: 100%;
+    height:10%;
     transition: all 0.5s;
     cursor: pointer;
     padding: 5%;
