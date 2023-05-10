@@ -5,6 +5,7 @@ const cors = require('cors')
 
 const session = require('express-session');
 const mongoose = require('mongoose');
+//const { default: UserPrivateProfilePage } = require('../src/Components/CompanyPublicProfilePage');
 
 const app = express();
 app.use(express.json())
@@ -21,8 +22,8 @@ app.use(session({
 
 app.get('/', cors(), (req, res) => {
 })
-
-app.post("/", async(req,res)=>{
+/*
+app.post("/login", async(req,res)=>{
     const{email, password}=req.body
     // console.log("ygygt")
     
@@ -63,57 +64,38 @@ app.post("/", async(req,res)=>{
         console.log(e);
     }
 })
-
-// app.get('/SignUp1', cors(), (req, res) => {
-// })
-
-app.post("/SignUp1", async(req,res)=>{
-    const{username,email, password}=req.body
-   
-    const data = {
-        username:username,
-        email:email,
-        password:password
-    }
-
-    try{
-        const check = await User.findOne({email:email, password:password})
-       
-        if(check)
-        {
-            res.json("exists")
-            // console.log(check)
+*/
+//const User = new mongoose.model("User", userSchema);
+app.post("/signup", async(req,res)=>{
+    //const{username,email, password}=req.body;
+    console.log(req.body);
+    var e = req.body.email;
+    var p = req.body.password;
+    var u = req.body.username;
+    const user = new User({email:e,password:p,username:p});/*third argument mei koi masla hai */
+    console.log("username= " +  req.body.username);
+    let output;
+    user.save().then(()=>{
+        //res.render("secrets");
+    }).catch((err)=>{
+        console.log(err);
+    })
+/console.log(output);/
+    
+    /*await User.findOne({username:username},(err,user)=>{
+        if(user){
+            res.send({message:"user already exist"})
+        }else {
+            const user = new User({username,email,password});
+            user.save(err=>{
+                if(err){
+                    res.send(err)
+                }else{
+                    res.send({message:"sucessfull"})
+                }
+            })
         }
-        else{
-            res.json("notexists")
-
-           try 
-           {
-            const result =  await User.insertMany([data]);
-            // console.log(result);
-            // res.status(200).send("Data inserted successfully");
-            } 
-            catch (error) 
-            {
-                // if (error.message.includes("User Validation Failed")) 
-                // {
-                //     // Handle the validation error
-                //     res.json("Uservalidationfailed.");
-
-                // } 
-                // else 
-                // {
-                //     res.json("password_error")
-                //     // console.log("An error occurred while inserting data.");
-                // }
-            }
-
-        }
-    }
-    catch(e){
-        res.json("error")
-        console.log(e);
-    }
+    })*/
 })
 
 
