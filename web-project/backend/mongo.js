@@ -30,6 +30,25 @@ const userSchema = new Schema({
     required: true,
     minlength: 6
   }
+  ,
+  bio:{
+    type: String
+
+  },
+
+  worksAt:{
+    type: String
+    
+  },
+
+  profilePicture:{
+    type: String
+  },
+
+  skills :{
+    type: [String],
+    
+  }
 
 }, {
   timestamps: true,
@@ -38,3 +57,67 @@ const userSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+const connection = new Schema({
+  follower: {
+    type: String
+    
+  },
+  following: {
+   type: String
+  }
+}, {
+  timestamps: true,
+});
+
+const Connection = mongoose.model('Connection', userSchema);
+
+module.exports = Connection;
+
+
+
+const jobapplication = new Schema({
+  applicantname: {
+    type: String
+    
+  },
+  jobid: {
+   type: Number
+  },
+  company: {
+   type: String
+  },
+  dob: {
+   type: Date
+  },
+  applicantusername: {
+   type: String
+  },
+  email: {
+   type: String
+  },
+  phone: {
+   type: Number
+  },
+  lastdegree: [
+   "degree",
+   "major",
+   "university"
+  ],
+  yearsExp : {
+    type: Number
+  },
+  answer:{
+    type : String
+  },
+  resume:{
+    type: String
+  }
+
+}, {
+  timestamps: true,
+});
+
+const Jobapplication = mongoose.model('Jobapplication', userSchema);
+
+module.exports = Jobapplication;

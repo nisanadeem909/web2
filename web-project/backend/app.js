@@ -72,7 +72,9 @@ app.post("/signup", async(req,res)=>{
     var e = req.body.email;
     var p = req.body.password;
     var u = req.body.username;
-    const user = new User({email:e,password:p,username:p});/*third argument mei koi masla hai */
+    var biop = "abc";
+    var skill = ["js","html"];
+    const user = new User({email:e,password:p,username:p,bio:biop,skills:skill });/*third argument mei koi masla hai */
     console.log("username= " +  req.body.username);
     let output;
     user.save().then(()=>{
@@ -80,7 +82,7 @@ app.post("/signup", async(req,res)=>{
     }).catch((err)=>{
         console.log(err);
     })
-/console.log(output);/
+  console.log(output);
     
     /*await User.findOne({username:username},(err,user)=>{
         if(user){

@@ -3,8 +3,7 @@ import './App.css';
 import Navbar from './Components/Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from './Components/login';
-import Signup from './Components/signup';
+
 import LandingPage from './Components/LandingPage'
 import HomePage from './Components/HomePage'
 import Post from './Components/Post'
@@ -39,8 +38,7 @@ import UserCompareApplicants from './Components/UserCompareApplicantsPage'
 import ViewApplicationPage from './Components/ViewApplicationPage'
 import AboutUs from './Components/AboutUs'
 import Error from './Components/ErrorPage'
-import Login from './Components/login'
-import Signup from './Components/signup'
+
 import EditProfile from './Components/EditProfile';
 import CompanyVacancies from './Components/CompanyVacancies';
 import ApplicantsView from './Components/ApplicantsView';
