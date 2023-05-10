@@ -15,8 +15,6 @@ import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
 
-import Login from './Components/login.js'
-import Signup from './Components/signup.js'
 
 
 import ViewJobDetails from './Components/ViewJobDetails'
@@ -39,8 +37,7 @@ import UserCompareApplicants from './Components/UserCompareApplicantsPage'
 import ViewApplicationPage from './Components/ViewApplicationPage'
 import AboutUs from './Components/AboutUs'
 import Error from './Components/ErrorPage'
-import Login from './Components/login'
-import Signup from './Components/signup'
+
 import EditProfile from './Components/EditProfile';
 import CompanyVacancies from './Components/CompanyVacancies';
 import ApplicantsView from './Components/ApplicantsView';
