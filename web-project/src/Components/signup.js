@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import './signup.css';
+import axios from 'axios'
 import img from './people.jpeg';
+//import img from './signupimg.JPG';
 import SignUpUser from './signup-user'
 import SignUpCompany from './signup-company'
 //import {useState} from 'react'
 import Footer from './Footer'
-function SignUpBoth()
+const SignUpBoth = ()=>
 {
     const [flag,setFlag] = useState(true);
     
@@ -55,11 +57,13 @@ function SignUpBoth()
     );
 }
 
-function SignupPage(props) {
+const SignupPage = (props) =>{
+    
     const isUser = props.isUser;
+    
     if (isUser){
         return (
-            <SignUpUser />
+            <SignUpUser  />
         );
     }
     else{
