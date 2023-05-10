@@ -15,6 +15,9 @@ import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
 
+import Login from './Components/login.js'
+import Signup from './Components/signup.js'
+
 
 import ViewJobDetails from './Components/ViewJobDetails'
 
