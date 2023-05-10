@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './Components/Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Login from './Components/login';
+import Signup from './Components/signup';
 import LandingPage from './Components/LandingPage'
 import HomePage from './Components/HomePage'
 import Post from './Components/Post'
@@ -12,6 +14,9 @@ import UserPublicProfilePage from './Components/UserPublicProfilePage';
 import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
+
+import Login from './Components/login.js'
+import Signup from './Components/signup.js'
 
 
 import ViewJobDetails from './Components/ViewJobDetails'

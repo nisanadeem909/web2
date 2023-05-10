@@ -2,9 +2,40 @@ import React from 'react'
 import './signup.css';
 import img from './people.jpeg';
 import './signup-user.css';
+import axios from 'axios';
+import {useState} from 'react';
 
-
-function SignupUser() {
+const SignupUser = () => {
+    const [user,setUser] = useState({
+        name:"",
+        email:"",
+        password: ""
+    });
+    
+    const handleChange = e =>{
+        const {name,value} = e.target;
+        setUser({
+        ...user,//spread operator 
+        [name]:value
+        })
+    };
+    
+    const registerUser = ({}) =>{
+        const {name,email,password} = user;    
+        alert("i am in register name = ");
+        alert(user.name);
+        alert(user.email);
+        alert(user.password);
+        if (name && email && password)
+        {
+                axios.post("http://localhost:8000/signup",user )
+                    .then(res=>alert(res.message))
+        }
+        else{
+            alert("invalid input")
+        }
+        
+    };
     
     return(
     <div>
@@ -12,26 +43,27 @@ function SignupUser() {
 
         <form>
             <div>
-                <input id="nab-signup-username" type="text" name="name" placeholder="Username" required/>
+                <input id="nab-signup-username" value={user.name} onChange={handleChange} type="text" name="name" placeholder="Username" required/>
             </div>
+            {/*<div>
+                <input id="nab-signup-password" value={user.email} onChange={handleChange} type="text" name="name" placeholder="Full Name" required />
+    </div>*/}
             <div>
-                <input id="nab-signup-password" type="text" name="name" placeholder="Full Name" required />
-            </div>
-            <div>
-                <input id="nab-signup-password" type="text" name="name" placeholder="Email"required />
+                <input id="nab-signup-password" value={user.email} onChange={handleChange} type="text" name="email" placeholder="Email"required />
             </div>
             <div >
                
-                <input id="nab-signup-password"type="password" name="password" placeholder="Password" required/>
+                <input id="nab-signup-passwor" value={user.password} onChange={handleChange} type="password" name="password" placeholder="Password" required/>
             </div>
             
-            <div >
+            {/*<div >
                
                 <input id="nab-signup-password"type="password" name="password" placeholder="Confirm Password" required/>
-            </div>
+</div>*/}
            
             <div>
-                <input type="submit" id="nab-signup-submit-btn" value="Signup as User" required/>
+               <button type="submit" onClick={registerUser}>Sign Up As User</button>
+               {/* <input type="submit"  id="nab-signup-submit-btn" value="Signup as User" required/>*/}
             </div>
         </form>
 
