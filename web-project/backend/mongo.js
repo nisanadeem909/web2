@@ -64,7 +64,12 @@ const userSchema = new Schema({
     position: String,
     startYear: Number,
     endYear: Number
-  }]
+  }],
+
+  name: {
+    type: String,
+    required: true
+  }
 
 }, {
   timestamps: true,
@@ -110,13 +115,9 @@ const companySchema = new Schema({
     type: String
   },
 
-  avgRating:{
-    type: Decimal128
-  },
-
   ratings: [{
     username: String,
-    rating: Decimal128
+    rating: Number
   }],
 
   aboutUs : {
@@ -132,6 +133,11 @@ const companySchema = new Schema({
     email: String,
     phone: String,
     website: String
+  },
+
+  name: {
+    type: String,
+    required: true
   }
 
 }, {
@@ -146,7 +152,6 @@ const notificationSchema = new Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     minlength: 3
   },
