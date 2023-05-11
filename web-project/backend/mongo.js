@@ -156,7 +156,7 @@ const connection = new Schema({
 });
 
 
-const Connection = mongoose.model('Connection', userSchema);
+const Connection = mongoose.model('Connection', connection);
 
 module.exports = Connection;
 
@@ -242,7 +242,7 @@ const jobapplication = new Schema({
 });
 
 
-const Jobapplication = mongoose.model('Jobapplication', userSchema);
+const Jobapplication = mongoose.model('Jobapplication', jobapplication);
 
 module.exports = Jobapplication;
 
