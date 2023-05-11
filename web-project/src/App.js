@@ -16,7 +16,6 @@ import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
 
 
-
 import ViewJobDetails from './Components/ViewJobDetails'
 
 import ManageEmp from './Components/ManageEmployees';
@@ -37,7 +36,6 @@ import UserCompareApplicants from './Components/UserCompareApplicantsPage'
 import ViewApplicationPage from './Components/ViewApplicationPage'
 import AboutUs from './Components/AboutUs'
 import Error from './Components/ErrorPage'
-
 import EditProfile from './Components/EditProfile';
 import CompanyVacancies from './Components/CompanyVacancies';
 import ApplicantsView from './Components/ApplicantsView';
