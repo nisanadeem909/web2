@@ -49,6 +49,7 @@ const userSchema = new Schema({
   skills :{
     type: [String],
     
+
   },
 
   education: [{
@@ -69,6 +70,7 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: true
+
   }
 
 }, {
@@ -203,6 +205,18 @@ const companySchema = new Schema({
   timestamps: true,
 });
 
+
+module.exports = User;
+
+const connection = new Schema({
+  follower: {
+    type: String
+    
+  },
+  following: {
+   type: String
+  }
+
 const Company = mongoose.model('Company', companySchema);
 
 module.exports = Company;
@@ -236,9 +250,54 @@ const notificationSchema = new Schema({
     required: true
   }
 
+
 }, {
   timestamps: true,
 });
+
+
+const Connection = mongoose.model('Connection', userSchema);
+
+module.exports = Connection;
+
+
+
+const jobapplication = new Schema({
+  applicantname: {
+    type: String
+    
+  },
+  jobid: {
+   type: Number
+  },
+  company: {
+   type: String
+  },
+  dob: {
+   type: Date
+  },
+  applicantusername: {
+   type: String
+  },
+  email: {
+   type: String
+  },
+  phone: {
+   type: Number
+  },
+  lastdegree: [
+   "degree",
+   "major",
+   "university"
+  ],
+  yearsExp : {
+    type: Number
+  },
+  answer:{
+    type : String
+  },
+  resume:{
+    type: String
 
 const Notification = mongoose.model('Notification', notificationSchema);
 
@@ -285,20 +344,23 @@ const postSchema = new Schema({
 
   sharedBy:{
     type: [String]
+
   }
 
 }, {
   timestamps: true,
 });
 
+
+const Jobapplication = mongoose.model('Jobapplication', userSchema);
+
+module.exports = Jobapplication;
+
 const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;
 
-  }, {
-    timestamps: false,
-  }
-);
+
 const EmployeeRequests = mongoose.model('EmployeeRequests',EmployeeRequestSchema);
 module.exports = EmployeeRequests;
 
@@ -349,3 +411,4 @@ const JobsSchema = new Schema(
 );
 const Jobs = mongoose.model('Jobs',JobsSchema);
 module.exports = Jobs;
+
