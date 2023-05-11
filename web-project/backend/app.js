@@ -81,7 +81,7 @@ app.post("/signup", async(req,res)=>{
     }).catch((err)=>{
         console.log(err);
     })
-console.log(output);
+/*console.log(output);*/
     
     /*await User.findOne({username:username},(err,user)=>{
         if(user){
