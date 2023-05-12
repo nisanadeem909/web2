@@ -10,68 +10,73 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true
 });
 
 const Schema = mongoose.Schema;
-
-/*-------------------------Current Employees Table----------------------*/
-const CurrentEmployeesSchema = new Schema(
-  {
-
-    EmployeeUsername:{
-      type: String,
-      unique:true,
-      required: true
-    },
-    EmployeeName:{
-      type: String,
-      required: true
-    },
-    Designation:{
-      type: String,
-      required: true
-    },
-    CompanyName :{
-      type:String,
-      required: true
-    },
-    CompanyUsername :{
-      type:String,
-      required: true
-    }
-
-  }, {
-    timestamps: false,
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    minlength: 3
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
   }
-);
-const CurrentEmployees = mongoose.model('CurrentEmployees',CurrentEmployeesSchema);
-module.exports = CurrentEmployees;
+  ,
+  bio:{
+    type: String
 
-/*-------------------------Employee Request Table----------------------*/
-const EmployeeRequestSchema = new Schema(
-  {
-    EmployeeUsername:{
-      type: String,
-      required: true
-    },
-    EmployeeName:{
-      type: String,
-      required: true
-    },
-    Designation:{
-      type: String,
-      required: true
-    },
-    CompanyName :{
-      type:String,
-      required: true
-    },
-    CompanyUsername :{
-      type:String,
-      required: true
-    }
+  },
+
+  worksAt:{
+    type: String
+
+  },
+
+  profilePicture:{
+    type: String
+  },
+
+  skills :{
+    type: [String],
+
+  },
+
+  education: [{
+    school: String,
+    degree: String,
+    major: String,
+    startYear: Number,
+    endYear: Number
+  }],
+
+  experience: [{
+    company: String,
+    position: String,
+    startYear: Number,
+    endYear: Number
+  }],
+
+  name: {
+    type: String,
+    required: true
   }
-   );
 
-   const EmployeeRequests = mongoose.model('EmployeeRequests',EmployeeRequestSchema);
-   module.exports = EmployeeRequests;
+}, {
+  timestamps: true,
+});
+
+const User = mongoose.model('User', userSchema);
+
+//module.exports = User;
 
 const companySchema = new Schema({
   username: {
@@ -139,8 +144,68 @@ const companySchema = new Schema({
 });
 
 const Company = mongoose.model('Company', companySchema);
+/*-------------------------Current Employees Table----------------------*/
+const CurrentEmployeesSchema = new Schema(
+  {
 
-module.exports = Company;
+    EmployeeUsername:{
+      type: String,
+      unique:true,
+      required: true
+    },
+    EmployeeName:{
+      type: String,
+      required: true
+    },
+    Designation:{
+      type: String,
+      required: true
+    },
+    CompanyName :{
+      type:String,
+      required: true
+    },
+    CompanyUsername :{
+      type:String,
+      required: true
+    }
+
+  }, {
+    timestamps: false,
+  }
+);
+const CurrentEmployees = mongoose.model('CurrentEmployees',CurrentEmployeesSchema);
+//module.exports = CurrentEmployees;
+
+/*-------------------------Employee Request Table----------------------*/
+const EmployeeRequestSchema = new Schema(
+  {
+    EmployeeUsername:{
+      type: String,
+      required: true
+    },
+    EmployeeName:{
+      type: String,
+      required: true
+    },
+    Designation:{
+      type: String,
+      required: true
+    },
+    CompanyName :{
+      type:String,
+      required: true
+    },
+    CompanyUsername :{
+      type:String,
+      required: true
+    }
+  }
+   );
+
+   const EmployeeRequests = mongoose.model('EmployeeRequests',EmployeeRequestSchema);
+   //module.exports = EmployeeRequests;
+
 
 
 
@@ -158,7 +223,7 @@ const connection = new Schema({
 
 const Connection = mongoose.model('Connection', connection);
 
-module.exports = Connection;
+//module.exports = Connection;
 
 
 
@@ -198,7 +263,7 @@ const notificationSchema = new Schema({
 
 const Notification = mongoose.model('Notification', notificationSchema);
 
-module.exports = Notification;
+//module.exports = Notification;
 
 
 
@@ -244,7 +309,7 @@ const jobapplication = new Schema({
 
 const Jobapplication = mongoose.model('Jobapplication', jobapplication);
 
-module.exports = Jobapplication;
+//module.exports = Jobapplication;
 
 const postSchema = new Schema({
   username: {
@@ -298,7 +363,7 @@ const postSchema = new Schema({
 
 const Post = mongoose.model('Post', postSchema);
 
-module.exports = Post;
+//module.exports = Post;
 
 
 
@@ -349,5 +414,15 @@ const JobsSchema = new Schema(
   }
 );
 const Jobs = mongoose.model('Jobs',JobsSchema);
-module.exports = Jobs;
-
+//module.exports = Jobs;
+module.exports ={
+  User,
+  Company,
+  Jobs,
+  Post,
+  Jobapplication,
+  Notification,
+  Connection,
+  EmployeeRequests,
+  CurrentEmployees
+};

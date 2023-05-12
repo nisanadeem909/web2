@@ -62,6 +62,9 @@ const SignupPage = (props) =>{
     const isUser = props.isUser;
     
     if (isUser){
+        
+       
+        
         return (
             <SignUpUser  />
         );
