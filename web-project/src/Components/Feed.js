@@ -2,7 +2,7 @@ import React from 'react';
 import './Feed.css';
 import Post from './Post';
 
-export default function Feed() {
+export default function Feed(props) {
   return (
     <div className="feed_container_k">
         <ul className='feed_ul_k'>

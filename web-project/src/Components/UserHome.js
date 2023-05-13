@@ -8,17 +8,39 @@ import Feed from './Feed';
 import Footer from './Footer';
 import Search from './Search';
 import './UserHome.css'
-
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 export default function UserHome() {
+    const [user, setUser] = useState('');
+    const [username, setUsername] = useState('');
+    /*const location = useLocation();
+  const user = location.state.user;*/
+  
+
+  useEffect(() => {
+    const sessionID = sessionStorage.getItem('sessionID');
+    setUsername(sessionID);
+   
+    axios.get(`http://localhost:8000/${sessionID}`)
+      .then(res => {
+        console.log(res.data);
+        setUser(res.data.username); 
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+
 
     return (
         <div className="uh_container">
             <div className="uh_searchbar">
+          
                 <Search/>
             </div>
             <div className='uh_prof_cv'>
                 <div className="uh_profile">
-                    <Profile/>
+                    <Profile user= {user} />
                 </div>
                 <div className="uh_cv">
                     <MakeCV/>
