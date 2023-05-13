@@ -7,6 +7,7 @@ import {useState} from 'react';
 
 const SignupUser = () => {
     const [user,setUser] = useState({
+        fullname:"",
         username:"",
         email:"",
         password: ""
@@ -21,15 +22,16 @@ const SignupUser = () => {
     };
     
     const registerUser = ({}) =>{
-        const {username,email,password} = user;    
-        alert("i am in register name = ");
+        const {fullname,username,email,password} = user;    
+        /*alert("i am in register name = ");
+        alert(user.fullname);
         alert(user.username);
         alert(user.email);
-        alert(user.password);
-        if (username && email && password)
+        alert(user.password);*/
+        if (fullname && username && email && password)
         {
-                axios.post("http://localhost:8000/signup",user )
-                    .then(res=>alert(res.message))
+                axios.post("http://localhost:8000/signupuser",user )
+                    .then((res => {alert(res.data)}));
         }
         else{
             alert("invalid input")
@@ -45,15 +47,15 @@ const SignupUser = () => {
             <div>
                 <input id="nab-signup-username" value={user.username} onChange={handleChange} type="text" name="username" placeholder="Username" required/>
             </div>
-            {/*<div>
-                <input id="nab-signup-password" value={user.email} onChange={handleChange} type="text" name="name" placeholder="Full Name" required />
-    </div>*/}
+            <div>
+                <input id="nab-signup-password" value={user.fullname} onChange={handleChange} type="text" name="fullname" placeholder="Full Name" required />
+            </div>
             <div>
                 <input id="nab-signup-password" value={user.email} onChange={handleChange} type="text" name="email" placeholder="Email"required />
             </div>
             <div >
                
-                <input id="nab-signup-passwor" value={user.password} onChange={handleChange} type="password" name="password" placeholder="Password" required/>
+                <input id="nab-signup-password" value={user.password} onChange={handleChange} type="password" name="password" placeholder="Password" required/>
             </div>
             
             {/*<div >
@@ -62,8 +64,9 @@ const SignupUser = () => {
 </div>*/}
            
             <div>
-               <button type="submit" onClick={registerUser}>Sign Up As User</button>
-               {/* <input type="submit"  id="nab-signup-submit-btn" value="Signup as User" required/>*/}
+
+               <button id="nab-signup-submit-btn" type="submit" onClick={registerUser}>Sign Up As User</button>
+               
             </div>
         </form>
 
