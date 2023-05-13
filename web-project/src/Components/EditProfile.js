@@ -1,18 +1,38 @@
 import React from 'react'
 import './EditProfile.css'
 import editpic from './editpic.png';
-import person from './person.png';
+import person from './dummy.jpg';
 import editicon from './edit.png';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
+import Select from 'react-select'
+import Footer from './Footer';
+import axios from 'axios'
 export default function EditProfile() {
+  
+  const [companyList,setCompanyList] = useState([]);
 
+  const [selectedCompany,setSelectedCompany] = useState(null);
  
+  useEffect(() => {
+    axios.post("http://localhost:8000/getcompanydropdownlist").then((response) => {
+        //alert(response.data);
+        setCompanyList(response.data);
+        /*if (companyList)
+        {
+          tempComp = companyList.filter((obj)=>obj.label === props.selectedExp.company)[0];
+          setSelectedCompany({"label": tempComp.label,"value": tempComp.value});
+        }*/
+    })
+    .catch(function (error) {
+        alert(error);
+    });
+  }, [/*companyList*/]);
 
 
   return (
    
-
+<div>
     <div className='nisa-edit-container1'>
 
       <div className='nisa-notif-container1'>
@@ -24,7 +44,6 @@ export default function EditProfile() {
 
 
     <div className='nisa-edit-container3'>
-      <div className='edit-hr'></div>
 
       <div className='nisa-edit-container2'>
           <img src={person} className="edit-nisa-img1"/>
@@ -41,72 +60,29 @@ export default function EditProfile() {
                 <input className='nisa-edit-input' type="text" />
 
                 <label className='nisa-edit-label'>
-                  Username:  
+                  Current Working Place:  
                 </label>
-                <input className='nisa-edit-input' type="text" />
+                <Select options={companyList}
+                placeholder="Company you worked for"
+                className='nisa-edit-input'
+                onChange={(choice) => setSelectedCompany(choice)}/>
 
                 <label className='nisa-edit-label'>
                   Bio:  
                 </label>
-                <input className='nisa-edit-input' type="text" />
+                <textarea className='nisa-edit-input kta-editprof' ></textarea>
                 
-        
-
+                <div className='keditprof-btns'>
+                  <button className="keditprof-savebtn">Save Changes</button>
+                  <button className="keditprof-cancelbtn">Cancel</button>
+                </div>
            
       </div>
 
-      <div className='edit-hr2'></div>
-
-      <div className='nisa-edit-container4'>
-       
-        <label className='nisa-edit-label2'> Education :</label>
-        <label className='nisa-edit-label'>
-                  Degree:
-                </label>
-                <input className='nisa-edit-input' type="text" />
-
-                <label className='nisa-edit-label'>
-                  Institute:  
-                </label>
-                <input className='nisa-edit-input' type="text" />
-
-                <label className='nisa-edit-label'>
-                  Duration:  
-                </label>
-                <input className='nisa-edit-input' type="text" />
-          
-                
-      </div>
-      <label className='nisa-edit-labelnew'>
-                 Skills:
-                </label>
-      <input className='nisa-test' type="text" />
-
-      <div className='nisa-edit-container6'>
-      <label className='nisa-edit-label2'> Experience :</label>
-      <label className='nisa-edit-label'>
-                  Organization:
-                </label>
-                <input className='nisa-edit-input' type="text" />
-
-                <label className='nisa-edit-label'>
-                  Position:  
-                </label>
-                <input className='nisa-edit-input' type="text" />
-
-                <label className='nisa-edit-label'>
-                  Duration:  
-                </label>
-                <input className='nisa-edit-input' type="text" />
-          
-      
-    
-     </div>
-          
-                
-
       </div>
       
+    </div>
+    <Footer/>
     </div>
     
   )

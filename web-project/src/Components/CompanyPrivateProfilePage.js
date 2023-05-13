@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './CompanyProfilePage.css'
 import ProfileDetails from './ProfileDetailsPrivate'
 import CompanyHistory from './companyhistory-editable'
@@ -8,12 +8,30 @@ import Feed from './Feed';
 import Footer from './Footer';
 import Contact from './contactcompany-editable';
 import OpenVacancies from './openvacancies-editable'
+import axios from 'axios'
 
 export default function UserPrivateProfilePage() {
+
+    const [company,setCompany] = useState(null);
+    const [cons,setCons] = useState(null);
+
+    useEffect(() => {
+        //post request to server to get profile details 
+        axios.post("http://localhost:8000/getcompanyprofiledetails").then((response) => {
+            //alert(response.data);
+            setCompany(response.data.company);
+            setCons(response.data.cons);
+            //alert('hi');
+        })
+        .catch(function (error) {
+            alert(error);
+        });
+    }, []);
+
     return (
         <div className='companyprof_container'>
             <div className="companyprof_header">
-                <ProfileDetails/>
+                <ProfileDetails user={company} type="company" cons={cons}/>
             </div>
             <div className="companyprof_left">
                 <div className="companyprof_history">

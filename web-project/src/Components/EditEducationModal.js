@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import Select from 'react-select'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ProfileEducation.css'
 import './KModals.css'
 import editicon from './edit.png'
+import axios from 'axios'
 
 const style = {
     position: 'absolute',
@@ -29,14 +30,36 @@ export default function BasicModal(props) {
   const [stateStartDate,setStartDate] = useState(props.selectedEduc.startYear);
   const [stateEndDate,setEndDate] = useState(props.selectedEduc.endYear);
 
-  const [schoolList,setSchoolList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "LGS", "value" : "LGS"}]);
+  const [schoolList,setSchoolList] = useState([]);
   const [degreeList,setDegreeList] = useState([{"label": "Bachelors", "value": "BS"}, {"label": "Masters", "value": "MS"},{"label": "A Level", "value": "AL"},{"label": "PhD", "value": "PHD"},{"label": "O Level", "value": "OL"}]);
   const [majorList,setMajorList] = useState([{"label": "Computer Science", "value": "CS"},{"label": "Software Engineering", "value": "SE"},{"label": "Mathematics", "value": "MT"},{"label": "Medical Science", "value": "MED"}]);
+
+  useEffect(() => {
+    //post request to server to get profile details 
+    axios.post("http://localhost:8000/getschooldropdownlist").then((response) => {
+        //alert(response.data);
+        setSchoolList(response.data);
+        //alert('hi');
+    })
+    .catch(function (error) {
+        alert("Axios Error:" + error);
+    });
+  }, []);
+
+  var tempSchool;
+
+  useEffect(() => {
+      if (schoolList)
+      {
+        tempSchool = schoolList.filter((obj)=>obj.label === props.selectedEduc.school)[0];
+        setSelectedSchool(tempSchool);
+      }
+  }, [schoolList]);
 
   var tempDegree = degreeList.filter((obj)=>obj.label === props.selectedEduc.degree)[0];
   var tempMajor = majorList.filter((obj)=>obj.label === props.selectedEduc.major)[0];
   
-  const [selectedSchool,setSelectedSchool] = useState({"label": props.selectedEduc.school,"value":props.selectedEduc.school});
+  const [selectedSchool,setSelectedSchool] = useState(null);
   const [selectedDegree,setSelectedDegree] = useState({"label": tempDegree.label,"value": tempDegree.value});
   const [selectedMajor,setSelectedMajor] = useState({"label": tempMajor.label,"value": tempMajor.value});
 
@@ -51,11 +74,13 @@ export default function BasicModal(props) {
     //setSelectedDegree({"label": selectedDegree.label,"value": selectedDegree.value});
     //setSelectedMajor({"label": selectedMajor.label,"value": selectedMajor.value});
 
+
     if (!changed)
     {
         setStartDate(props.selectedEduc.startYear);
         setEndDate(props.selectedEduc.endYear);
-        setSelectedSchool({"label": props.selectedEduc.school,"value":props.selectedEduc.school});
+        tempSchool = schoolList.filter((obj)=>obj.label === props.selectedEduc.school)[0];
+        setSelectedSchool({"label": tempSchool.label,"value":tempSchool.value});
         tempDegree = degreeList.filter((obj)=>obj.label === props.selectedEduc.degree)[0];
         tempMajor = majorList.filter((obj)=>obj.label === props.selectedEduc.major)[0];
         setSelectedDegree({"label": tempDegree.label,"value": tempDegree.value});

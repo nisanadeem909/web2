@@ -131,3 +131,17 @@ label, p, button{
     margin: 2%;
     margin-left: 5%;
 }
+
+.profdetails_workbutton {
+    width: auto;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    margin-left: -0.5%;
+    color: white;
+}
+
+.kprofile_lbl_no {
+    font-size: 2.5vh;
+    margin-left: 2vh;
+    color: rgb(118, 118, 118);
+}

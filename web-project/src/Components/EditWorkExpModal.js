@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import Select from 'react-select'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ProfileEducation.css'
 import './KModals.css'
+import axios from 'axios';
 import editicon from './edit.png'
 
 const style = {
@@ -36,11 +37,25 @@ export default function BasicModal(props) {
   const [stateEndDate,setEndDate] = useState(props.selectedExp.endYear);
   const [statePosition,setPosition] = useState(props.selectedExp.position);
 
-  const [companyList,setCompanyList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "Google", "value" : "Google"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "McDonalds", "value" : "McDonalds"}, {"label": "LGS", "value" : "LGS"}, {"label": "educative", "value" : "educative"}]);
+  const [companyList,setCompanyList] = useState([]);
+  var tempComp;
 
-  var tempComp = companyList.filter((obj)=>obj.label === props.selectedExp.organization)[0];
+  const [selectedCompany,setSelectedCompany] = useState(null);
 
-  const [selectedCompany,setSelectedCompany] = useState({"label": tempComp.label,"value": tempComp.value});
+  useEffect(() => {
+    axios.post("http://localhost:8000/getcompanydropdownlist").then((response) => {
+        //alert(response.data);
+        setCompanyList(response.data);
+        if (companyList)
+        {
+          tempComp = companyList.filter((obj)=>obj.label === props.selectedExp.company)[0];
+          setSelectedCompany({"label": tempComp.label,"value": tempComp.value});
+        }
+    })
+    .catch(function (error) {
+        alert(error);
+    });
+  }, [companyList]);
 
   const handleClose = () => {
     if (!changed)
@@ -48,7 +63,7 @@ export default function BasicModal(props) {
         setStartDate(props.selectedExp.startYear);
         setEndDate(props.selectedExp.endYear);
         setPosition(props.selectedExp.position);
-        tempComp = companyList.filter((obj)=>obj.label === props.selectedExp.organization)[0];
+        tempComp = companyList.filter((obj)=>obj.label === props.selectedExp.company)[0];
         setSelectedCompany({"label": tempComp.label,"value": tempComp.value});
     }
     
@@ -73,7 +88,7 @@ export default function BasicModal(props) {
           return;
         }
 
-        var newExp = {'organization': selectedCompany.label, 'position': pos, 'startYear': startdate, 'endYear': enddate};
+        var newExp = {'company': selectedCompany.label, 'position': pos, 'startYear': startdate, 'endYear': enddate};
 
         props.changeExp(newExp,props.selectedExp);
         handleClose();
