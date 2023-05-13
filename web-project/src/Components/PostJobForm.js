@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PostJob(props) {
 
-    var name = "Company Name";
+    var name = "Loading";
 
     const navigate = useNavigate();
 
