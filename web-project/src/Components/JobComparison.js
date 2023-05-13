@@ -7,30 +7,10 @@ import './JobComparison.css';
 import narsun from './narsun.jpg'
 import mindstorm from './mindstorm.jpg'
 import empicon from './dummy.jpg'
-function CurrentJobRow()
-{
-    return(
-        <tr>
-        <td>
-        <img className='works-emp-icon' src={empicon}></img>
-            &nbsp;&nbsp;
-            <a href="/">Mindstorm Studios</a>
-        </td>
-        <td>
-            DevOpsEngineer
-        </td>
-       
-    </tr>);
-}
 
-function JobComparison() {
+function JobComparison(props) {
     
-    const componentArray = [
-        <CurrentJobRow key="example-key-1"/>,
-        <CurrentJobRow key="example-key-2" />,
-        <CurrentJobRow key="example-key-3" />,
-        <CurrentJobRow key="example-key-4" />
-    ];
+    
     
     return (
 

@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './Components/Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import Login from './Components/login';
+import Signup from './Components/signup'
 
 import LandingPage from './Components/LandingPage'
 import HomePage from './Components/HomePage'
