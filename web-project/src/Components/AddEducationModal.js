@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import Select from 'react-select'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ProfileEducation.css'
 import './KModals.css'
+import axios from 'axios'
 
 const style = {
     position: 'absolute',
@@ -30,9 +31,21 @@ export default function BasicModal(props) {
   const [selectedDegree,setSelectedDegree] = useState(null);
   const [selectedMajor,setSelectedMajor] = useState(null);
 
-  const [schoolList,setSchoolList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "LGS", "value" : "LGS"}]);
+  const [schoolList,setSchoolList] = useState([]);
   const [degreeList,setDegreeList] = useState([{"label": "Bachelors", "value": "BS"}, {"label": "Masters", "value": "MS"},{"label": "A Level", "value": "AL"},{"label": "PhD", "value": "PHD"},{"label": "O Level", "value": "OL"}]);
   const [majorList,setMajorList] = useState([{"label": "Computer Science", "value": "CS"},{"label": "Software Engineering", "value": "SE"},{"label": "Mathematics", "value": "MT"},{"label": "Medical Science", "value": "MED"}]);
+
+  useEffect(() => {
+    //post request to server to get profile details 
+    axios.post("http://localhost:8000/getschooldropdownlist").then((response) => {
+        //alert(response.data);
+        setSchoolList(response.data);
+        //alert('hi');
+    })
+    .catch(function (error) {
+        alert("Axios Error:" + error);
+    });
+  }, []);
 
   const addEduc=()=>{
         //alert(newEduc.current.value);

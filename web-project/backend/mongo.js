@@ -42,7 +42,6 @@ const CurrentEmployeesSchema = new Schema(
   }
 );
 const CurrentEmployees = mongoose.model('CurrentEmployees',CurrentEmployeesSchema);
-module.exports = CurrentEmployees;
 
 /*-------------------------Employee Request Table----------------------*/
 const EmployeeRequestSchema = new Schema(
@@ -71,7 +70,6 @@ const EmployeeRequestSchema = new Schema(
    );
 
    const EmployeeRequests = mongoose.model('EmployeeRequests',EmployeeRequestSchema);
-   module.exports = EmployeeRequests;
 
 const companySchema = new Schema({
   username: {
@@ -140,7 +138,6 @@ const companySchema = new Schema({
 
 const Company = mongoose.model('Company', companySchema);
 
-module.exports = Company;
 
 
 
@@ -158,7 +155,6 @@ const connection = new Schema({
 
 const Connection = mongoose.model('Connection', connection);
 
-module.exports = Connection;
 
 
 
@@ -198,7 +194,6 @@ const notificationSchema = new Schema({
 
 const Notification = mongoose.model('Notification', notificationSchema);
 
-module.exports = Notification;
 
 
 
@@ -244,7 +239,6 @@ const jobapplication = new Schema({
 
 const Jobapplication = mongoose.model('Jobapplication', jobapplication);
 
-module.exports = Jobapplication;
 
 const postSchema = new Schema({
   username: {
@@ -298,7 +292,6 @@ const postSchema = new Schema({
 
 const Post = mongoose.model('Post', postSchema);
 
-module.exports = Post;
 
 
 
@@ -320,14 +313,18 @@ const JobsSchema = new Schema(
       type:String,
       required: true
     },
+    CompanyUsername :{
+      type:String,
+      required: true
+    },
     Description :{
       type:String
     },
     DegreeRequired :{
-      type: [String]
+      type: String
     },
     MajorRequired :{
-      type: [String]
+      type: String
     },
     YearsofExperience :{
       type:Number
@@ -349,5 +346,81 @@ const JobsSchema = new Schema(
   }
 );
 const Jobs = mongoose.model('Jobs',JobsSchema);
-module.exports = Jobs;
 
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    minlength: 3
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  }
+  ,
+  bio:{
+    type: String
+
+  },
+
+  worksAt:{
+    type: String
+
+  },
+
+  profilePicture:{
+    type: String
+  },
+
+  skills :{
+    type: [String],
+
+  },
+
+  education: [{
+    school: String,
+    degree: String,
+    major: String,
+    startYear: Number,
+    endYear: Number
+  }],
+
+  experience: [{
+    company: String,
+    position: String,
+    startYear: Number,
+    endYear: Number
+  }],
+
+  name: {
+    type: String,
+    required: true
+  }
+
+}, {
+  timestamps: true,
+});
+
+const User = mongoose.model('User', userSchema);
+
+module.exports ={
+  User,
+  Company,
+  Jobs,
+  Post,
+  Jobapplication,
+  Notification,
+  Connection,
+  EmployeeRequests,
+  CurrentEmployees
+};

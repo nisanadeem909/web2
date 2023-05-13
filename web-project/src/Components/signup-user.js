@@ -7,7 +7,7 @@ import {useState} from 'react';
 
 const SignupUser = () => {
     const [user,setUser] = useState({
-        name:"",
+        username:"",
         email:"",
         password: ""
     });
@@ -21,12 +21,12 @@ const SignupUser = () => {
     };
     
     const registerUser = ({}) =>{
-        const {name,email,password} = user;    
+        const {username,email,password} = user;    
         alert("i am in register name = ");
-        alert(user.name);
+        alert(user.username);
         alert(user.email);
         alert(user.password);
-        if (name && email && password)
+        if (username && email && password)
         {
                 axios.post("http://localhost:8000/signup",user )
                     .then(res=>alert(res.message))
@@ -43,7 +43,7 @@ const SignupUser = () => {
 
         <form>
             <div>
-                <input id="nab-signup-username" value={user.name} onChange={handleChange} type="text" name="name" placeholder="Username" required/>
+                <input id="nab-signup-username" value={user.username} onChange={handleChange} type="text" name="username" placeholder="Username" required/>
             </div>
             {/*<div>
                 <input id="nab-signup-password" value={user.email} onChange={handleChange} type="text" name="name" placeholder="Full Name" required />

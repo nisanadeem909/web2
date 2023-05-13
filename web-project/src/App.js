@@ -41,6 +41,8 @@ import CompanyVacancies from './Components/CompanyVacancies';
 import ApplicantsView from './Components/ApplicantsView';
 
 import CompareApplicants from './Components/CompareApplicants';
+import Login from './Components/login.js'
+import Signup from './Components/signup.js'
 
 
 
@@ -91,6 +93,7 @@ function App() {
             <Route path="publicuserprofile" element={<UserPublicProfilePage />} />
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
+            <Route path="ownprofile/editprofile" element={<EditProfile />} />
 
             <Route path="manageemployees" element={<ManageEmp />} />
 

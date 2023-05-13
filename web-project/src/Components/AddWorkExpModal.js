@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import './ProfileEducation.css'
 import './KModals.css'
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -29,7 +30,19 @@ export default function BasicModal(props) {
 
   const [selectedCompany,setSelectedCompany] = useState(null);
 
-  const [companyList,setCompanyList] = useState([{"label": "FAST", "value" : "FAST"}, {"label": "Google", "value" : "Google"}, {"label": "LUMS", "value" : "LUMS"}, {"label": "McDonalds", "value" : "McDonalds"}, {"label": "LGS", "value" : "LGS"}, {"label": "educative", "value" : "educative"}]);
+  const [companyList,setCompanyList] = useState([]);
+
+  useEffect(() => {
+    //post request to server to get profile details 
+    axios.post("http://localhost:8000/getcompanydropdownlist").then((response) => {
+        //alert(response.data);
+        setCompanyList(response.data);
+        //alert('hi');
+    })
+    .catch(function (error) {
+        alert(error);
+    });
+  }, []);
 
   const addExp=()=>{
 
@@ -55,8 +68,8 @@ export default function BasicModal(props) {
           alert("Start Year cannot be greater than End Year!");
           return;
         }
-
-        var newExp = {'organization': selectedCompany.label, 'position': pos, 'startYear': startdate, 'endYear': enddate};
+        
+        var newExp = {'company': selectedCompany.label, 'position': pos, 'startYear': startdate, 'endYear': enddate};
 
         props.addNewExp(newExp);
         handleClose();
