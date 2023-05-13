@@ -72,3 +72,30 @@
 #companyhistory-edit-btn:hover {
     background-color: #09a093;
 }
+
+.komal-noinfoyet {
+    font-size: 2.8vh;
+    color: rgb(105, 105, 105);
+    margin-left: 5%;
+    font-weight: normal;
+}
+#companyhistory-add-btn{
+    background-color: #016960;
+    border-radius: 2vh;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2.5vh;
+    background-color: #016960;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left:20px;
+    margin-bottom: 5%;
+    font-weight: normal;
+}
+
+#companyhistory-add-btn:hover {
+    background-color: #09a093;
+}

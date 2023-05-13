@@ -20,61 +20,30 @@ const style = {
 
 export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
-  var changed = false;
 
   const handleOpen = () =>{
-    changed = false;
     setOpen(true);
   }
-  //const handleClose = () => setOpen(false);
 
-  const newstartYear = useRef(props.selectedItem.startYear);
-  const newendYear = useRef(props.selectedItem.endYear);
-  //const newYears = useRef(props.selectedItem.years);
-  const newWebsite = useRef(props.selectedItem.website);
-  const newCity = useRef(props.selectedItem.city);
-  const newCountry = useRef(props.selectedItem.country);
-  const newText = useRef(props.selectedItem.text);
+  const newstartYear = useRef(null);
+  const newendYear = useRef(null);
+  const newWebsite = useRef(null);
+  const newCity = useRef(null);
+  const newCountry = useRef(null);
+  const newText = useRef(null);
 
   const [countryList,setCountryList] = useState([{"label": "Pakistan", "value" : "PK"}, {"label": "USA", "value" : "US"}, {"label": "UK", "value" : "UK"}, {"label": "Australia", "value" : "AU"}, {"label": "India", "value" : "IN"}, {"label": "Canada", "value" : "CA"}]);
   const [cityList,setCityList] = useState([{"label": "Lahore", "value" : "LHR", 'country':'PK'}, {"label": "Islamabad", "value" : "ISL", 'country':'PK'},{"label": "Karachi", "value" : "KHI", 'country':'PK'},{"label": "Mumbai", "value" : "MMB", 'country':'IN'},{"label": "New Delhi", "value" : "DLH", 'country':'IN'},{"label": "Toronto", "value" : "TOR", 'country':'CA'},{"label": "New York", "value" : "NYC", 'country':'US'},{"label": "Los Angeles", "value" : "LA", 'country':'US'},{"label": "Melbourne", "value" : "MEL", 'country':'AU'},{"label": "Sydney", "value" : "SYD", 'country':'AU'},{"label": "London", "value" : "LDN", 'country':'UK'}]);
-  
 
-  var tempCountry = countryList.filter((obj)=>obj.label === props.selectedItem.country)[0];
-  var tempCity = cityList.filter((obj)=>obj.label === props.selectedItem.city)[0];
-  var speccities = cityList.filter((obj)=>obj.country == tempCountry.value);
-
-  const [selectedCountry,setSelectedCountry] = useState({"label": tempCountry.label,"value": tempCountry.value});
-  const [selectedCity,setSelectedCity] = useState({"label": tempCity.label,"value": tempCity.value, "country": tempCity.country});
-  const [specificCityList,setSpecificCityList] = useState(speccities);
-
-
-  const [statestartYear,setStartYear] = useState(props.selectedItem.startYear);
-  const [stateEndYear,setEndYear] = useState(props.selectedItem.endYear);
-  const [stateWebsite,setWebsite] = useState(props.selectedItem.website);
- // const [stateText,setText] = useState(props.selectedItem.aboutUsText);
+  const [selectedCountry,setSelectedCountry] = useState(null);
+  const [selectedCity,setSelectedCity] = useState(null);
+  const [specificCityList,setSpecificCityList] = useState(null);
 
   const handleClose = () => {
-    //setStates({"label": selectedCountry.label,"value": selectedCountry.value});
-    //setSelectedCity({"label": selectedCity.label,"value": selectedCity.value, "country": selectedCity.country});
-
-    if (!changed) 
-    {
-        setStartYear(props.selectedItem.startYear);
-        setEndYear(props.selectedItem.endYear);
-        setWebsite(props.selectedItem.website);
-        //setText(props.selectedItem.aboutUsText);
-        setStates({"label": tempCountry.label,"value": tempCountry.value});
-        setSelectedCity({"label": tempCity.label,"value": tempCity.value, "country": tempCity.country});
-    }
-
-
     setOpen(false);
   }
 
-  const editAboutUs=()=>{
-        changed = true;
-        //alert(selectedCity.label);
+  const addAboutUs=()=>{
         var startYear = newstartYear.current.value;
         var endYear = newendYear.current.value;
         var webs = newWebsite.current.value;
@@ -82,7 +51,7 @@ export default function BasicModal(props) {
         var txt = newText.current.value;
         var years;
 
-        if (!selectedCity || !startYear || !endYear || !txt || !webs)
+        if (!selectedCity || !startYear || !endYear || !txt || !webs || !selectedCountry)
         {
             alert("Please select/enter all fields!");
             return;
@@ -113,7 +82,7 @@ export default function BasicModal(props) {
 
             if (endYear > currYear)
             {
-                alert("Start Year cannot be greater than Present Year!");
+                alert("End Year cannot be greater than Present Year!");
                 return;
             }
 
@@ -121,11 +90,11 @@ export default function BasicModal(props) {
             years = totalYears;
         }
 
-        
+        //alert(endYear);
 
         var newAboutUs = {'website': webs,'text': txt, 'years': years, 'startYear': startYear, 'endYear': endYear, 'city': cit, 'country':countr};
-
-        props.changeAboutUs(newAboutUs);
+       // alert(newAboutUs);
+        props.addAboutUs(newAboutUs);
         handleClose();
   }
 
@@ -140,7 +109,7 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <button id="companyhistory-edit-btn" onClick={handleOpen}>Edit</button>
+      <button id="companyhistory-add-btn" onClick={handleOpen}>Add About Us</button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -148,7 +117,7 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
             <div className='kmodal_header'>
-                <h4 id="kmodal_addskill" className='kmodal_title'>Edit About Us</h4>
+                <h4 id="kmodal_addskill" className='kmodal_title'>Add About Us</h4>
                 <button className="kmodal_crossBtn" onClick={handleClose}>X</button>
             </div>
             <hr className='kmodal_hr'/>
@@ -171,22 +140,22 @@ export default function BasicModal(props) {
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Website: </label>
-              <input className='kmodal_date_input' type="text" ref={newWebsite} value={stateWebsite} placeholder="Company Website" onChange={()=>setWebsite(newWebsite.current.value)}></input>
+              <input className='kmodal_date_input' type="text" ref={newWebsite} placeholder="Company Website"></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Start Year: </label>
-              <input className='kmodal_date_input' type="number" ref={newstartYear} min="1900" max="3000" value={statestartYear} placeholder="Year company was started" onChange={()=>setStartYear(newstartYear.current.value)}></input>
+              <input className='kmodal_date_input' type="number" ref={newstartYear} min="1900" max="3000" placeholder="Year company was started"></input>
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>End Year: </label>
-              <input className='kmodal_date_input' type="text" ref={newendYear} value={stateEndYear} placeholder="Ending year" onChange={()=>setEndYear(newendYear.current.value)}></input>
+              <input className='kmodal_date_input' type="text" ref={newendYear} placeholder="Ending year"></input>
             </div>
             <label className='kmodal_input_label_small'>Write 'present' if present.</label>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Text: </label>
-              <textArea className='kmodal_textarea' ref={newText} placeholder="Description">{props.selectedItem.text}</textArea>
+              <textArea className='kmodal_textarea' ref={newText} placeholder="Description"></textArea>
             </div>
-            <button className='kmodal_buttons kmodal_center_btn' onClick={editAboutUs}>Confirm Changes</button>
+            <button className='kmodal_buttons kmodal_center_btn' onClick={addAboutUs}>Confirm Changes</button>
         </div>
         </Box>
       </Modal>

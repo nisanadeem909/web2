@@ -56,3 +56,10 @@
     color:black;
     margin-left: 20px;
 }
+
+.komal-noinfoyet {
+    font-size: 2.8vh;
+    color: rgb(105, 105, 105);
+    margin-left: 5%;
+    font-weight: normal;
+}

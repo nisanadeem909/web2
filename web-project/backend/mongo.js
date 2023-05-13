@@ -117,7 +117,7 @@ const companySchema = new Schema({
     city: String,
     website: String,
     startYear: Number,
-    endYear: Number,
+    endYear: String,
     text: String
   },
 
@@ -244,7 +244,6 @@ const postSchema = new Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     minlength: 3
   },

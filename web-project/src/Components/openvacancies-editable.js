@@ -1,13 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import jobicon from './workk.png'
 
 import './openvacancies.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 function OpenVacanciesEditable() {
 
   const navigate=useNavigate();
+  const [vacancyCon,setVacCon] = useState(<label>Loading</label>);
+
+  useEffect(() => {
+    const sessionID = sessionStorage.getItem('sessionID');
+    const param = {"user":sessionID};
+
+    axios.post("http://localhost:8000/getcompanyjobs",param).then((response) => {
+            //alert(response.data);
+            //alert(JSON.stringify(response.data.data));
+            if (response.data.data == "error")
+              alert("error");
+            else
+               setVacCon(<ul>{response.data.data.map((list_item)=><li> <div id="openvacancies-emp-img"><img className='openvacancies-emp-icon' src={jobicon}/></div>
+               <div id="openvacancies-emp-name">&nbsp;&nbsp;{list_item.Designation}</div>&nbsp;&nbsp;
+ 
+               <br></br><br></br></li>)}</ul>);
+            //{educList.map((list_item)=>
+            //alert('hi');
+        })
+        .catch(function (error) {
+            alert(error);
+        });
+  }, []);
 
     return (
         <div id="openvacancies-box">
@@ -15,35 +39,9 @@ function OpenVacanciesEditable() {
              
              <br></br>
              
-             <button class="openvacancies-button" onClick={()=>navigate('/company/postjob')}> <span>Add New</span></button>
-              
+             {vacancyCon}
               <br></br><br></br>
-              <div id="openvacancies-emp-img"><img className='openvacancies-emp-icon' src={jobicon}/></div>
-              <div id="openvacancies-emp-name">&nbsp;&nbsp;ReactJS Developer</div>&nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Edit Details </span></button>
-              &nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Delete </span></button>
-
-              <br></br><br></br>
-              <div id="openvacancies-emp-img"><img className='openvacancies-emp-icon' src={jobicon}/></div>
-              <div id="openvacancies-emp-name">&nbsp;&nbsp;Project Manager</div>&nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Edit Details </span></button>
-              &nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Delete </span></button>
-
-              <br></br><br></br>
-              <div id="openvacancies-emp-img"><img className='openvacancies-emp-icon' src={jobicon}/></div>
-              <div id="openvacancies-emp-name">&nbsp;&nbsp;PHP Developer</div>&nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Edit Details </span></button>
-              &nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Delete </span></button>
-
-              <br></br><br></br>
-              <div id="openvacancies-emp-img"><img className='openvacancies-emp-icon' src={jobicon}/></div>
-              <div id="openvacancies-emp-name">&nbsp;&nbsp;Senior Architect</div>&nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Edit Details </span></button>
-              &nbsp;&nbsp;
-              <button class="openvacancies-button"><span>Delete </span></button>
+              <button class="openvacancies-button" onClick={()=>navigate('/company/vacancies')}> <span>View All</span></button>
               
        </div>
     );
