@@ -57,7 +57,7 @@ app.post("/signupuser", async(req,res)=>{
          res.end();
      }
      else {
-             const user = new User({username:u,email:e,password:p,education:edu,name:n});
+             const user = new User({username:u,email:e,password:p,name:n});
              console.log("user =" + user);
              user.save().then(()=>{
                  console.log("account created successfully");
@@ -235,10 +235,8 @@ app.get('/:sessionID', (req, res) => {
 
 
 app.post("/getuserprofiledetails", async(req,res)=>{
-    //console.log(req.body);
-
-    // get username from session!!!
-    var uname = 'komal';
+    console.log(req.body);
+    var uname = req.body.user;
 
     var user = await User.findOne({username: uname});
 
@@ -252,7 +250,7 @@ app.post("/getuserprofiledetails", async(req,res)=>{
 
     var info = {'user':user,'cons':{'followers': followers, 'following': following}}
 
-    //user = {...user, 'cons':}
+    console.log(info);
     
     res.json(info);
 
@@ -261,10 +259,8 @@ app.post("/getuserprofiledetails", async(req,res)=>{
 })
 
 app.post("/getcompanyprofiledetails", async(req,res)=>{
-    //console.log(req.body);
-
-    // get username from session!!!
-    var uname = 'fastlhr';
+    console.log(req.body);
+    var uname = req.body.user;
 
     var user = await Company.findOne({username: uname});
 
@@ -278,7 +274,7 @@ app.post("/getcompanyprofiledetails", async(req,res)=>{
 
     var info = {'company':user,'cons':{'followers': followers, 'following': following}}
 
-    //user = {...user, 'cons':}
+    console.log(info);
     
     res.json(info);
 
