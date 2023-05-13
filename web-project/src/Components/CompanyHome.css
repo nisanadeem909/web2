@@ -12,16 +12,20 @@
 
 .kch_profile {
     grid-area: profile;
+    margin-left: 2rem;
 }
 
 .kch_searchbar {
     grid-area: search;
+    margin-left: 2rem;
     /*position: sticky;
     top: 8vh;*/
 }
 
 .kch_jobpost {
     grid-area: jobs;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .kch_footer {
@@ -30,8 +34,10 @@
 
 .kch_feed {
     grid-area: feed;
+    margin-left: 2rem;
 }
 
 .kch_addpost {
     grid-area: addpost;
+    margin-left: 2rem;
 }

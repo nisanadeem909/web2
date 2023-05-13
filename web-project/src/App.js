@@ -2,8 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './Components/Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './Components/login';
-import Signup from './Components/signup'
+
 
 import LandingPage from './Components/LandingPage'
 import HomePage from './Components/HomePage'
@@ -43,9 +42,6 @@ import CompanyVacancies from './Components/CompanyVacancies';
 import ApplicantsView from './Components/ApplicantsView';
 
 import CompareApplicants from './Components/CompareApplicants';
-import Login from './Components/login.js'
-import Signup from './Components/signup.js'
-
 
 
 function App() {

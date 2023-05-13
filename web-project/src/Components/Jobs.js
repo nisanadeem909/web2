@@ -2,9 +2,35 @@ import React from 'react'
 import './Jobs.css';
 import findjob from './findjob3.png';
 import jobicon from './workk.png'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 export default function Jobs() {
+
+    const [alljobs, setAllJobs] = useState([]);
+    useEffect(() => {
+        
+        
+       
+       axios.get(`http://localhost:8000/alljobs`)
+          .then(res => {        
+            setAllJobs(res.data);            
+           res.end();           
+          })
+          .catch(error => console.log(error));
+
+      }, []);
+
+
+
+
   return (
+
+    
+
+
+
     <div className='nisa-job-container'>
 
        <div className='nisa-job-container1'>
@@ -16,27 +42,21 @@ export default function Jobs() {
       
         <button className='nisa-job-btn2'>Compare Jobs</button>
 
-        <div class="dropdown">
-            <button class="dropbtn">Filters</button>
-            <div class="dropdown-content">
-                <a href="#">Salary</a>
-                <a href="#">Location</a>
-                <a href="#">Skill</a>
-            </div>
-        </div>       
 
 
-
+<ul>
+{alljobs.map(job => (
+ <li  key={job._id}>   
         <div className='nisa-job-list'>
         <div className='nisa-notify-container2'>
             <img className='nisa-notify-img2' src={jobicon} alt="" />
                 <div className='nisa-notify-container3'>
                     <div className='nisa-notify-container4'>
-                    <label className='nisa-notify-lb'>Project Manager</label>
+                    <label className='nisa-notify-lb'>{job.Designation}</label>
         
                     </div>
-                    <p className='nisa-notify-p2'>ABC Software House </p>
-                     <p className='nisa-notify-p3'>Lahore, Pakistan </p>
+                    <p className='nisa-notify-p2'>{job.CompanyName} </p>
+                     <p className='nisa-notify-p3'>Experience Required: {job.YearsofExperience}yrs </p>
                 </div>
           </div>
 
@@ -49,52 +69,11 @@ export default function Jobs() {
 
          
         </div>
+        </li>
+                ))}
+        </ul>
 
-        <div className='nisa-job-list'>
-        <div className='nisa-notify-container2'>
-            <img className='nisa-notify-img2' src={jobicon} alt="" />
-                <div className='nisa-notify-container3'>
-                    <div className='nisa-notify-container4'>
-                    <label className='nisa-notify-lb'>Project Manager</label>
-        
-                    </div>
-                    <p className='nisa-notify-p2'>ABC Software House </p>
-                     <p className='nisa-notify-p3'>Lahore, Pakistan </p>
-                </div>
-          </div>
-
-          <div className='nisa-notify-post'>
-          
-           <button className='nisa-job-btn1'>Apply</button>
-           <button className='nisa-job-btn1'>View Details</button>
-     
-          </div>
-         
-        </div>
-
-        <div className='nisa-job-list'>
-        <div className='nisa-notify-container2'>
-            <img className='nisa-notify-img2' src={jobicon} alt="" />
-                <div className='nisa-notify-container3'>
-                    <div className='nisa-notify-container4'>
-                    <label className='nisa-notify-lb'>Project Manager</label>
-        
-                    </div>
-                    <p className='nisa-notify-p2'>ABC Software House </p>
-                     <p className='nisa-notify-p3'>Lahore, Pakistan </p>
-                </div>
-          </div>
-
-          <div className='nisa-notify-post'>
-          
-          <button className='nisa-job-btn1'>Apply</button>
-          <button className='nisa-job-btn1'>View Details</button>
-    
-         </div>
-         
-        </div>
-
-
+       
     </div>
   )
 }

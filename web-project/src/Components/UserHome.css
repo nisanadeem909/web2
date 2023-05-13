@@ -1,44 +1,56 @@
 .uh_container {
     display: grid;
     grid-template-columns: 0.75fr 1.5fr 0.75fr;
-    grid-template-areas: ". search ." 
-                        "profcv addpost jobs" 
-                        "profcv feed jobs" 
-                        "footer footer footer";
-    grid-template-rows: 0.2fr 0.5fr 2.7fr 0.6fr;
+    grid-template-areas:
+      ". search ."
+      "profcv addpost jobs"
+      "profcv feed jobs"
+      "footer footer footer";
+    grid-template-rows: auto 1fr auto; /* Adjusted the rows for better responsiveness */
     grid-gap: 2rem;
-    width:100%;
- 
-}
-
-.uh_prof_cv {
+    width: 100%;
+    min-height: 100vh; /* Ensures the container takes up at least the full viewport height */
+  }
+  
+  .uh_prof_cv {
     grid-area: profcv;
     display: flex;
     flex-direction: column;
-}
-
-.uh_searchbar {
+    margin-left: 2rem;
+  }
+  
+  .uh_searchbar {
     grid-area: search;
-    /*position: sticky;
-    top: 8vh;*/
-}
-
-.uh_cv {
+    /* position: sticky;
+      top: 8vh; */
+    margin-left: 2rem;
+  }
+  
+  .uh_cv {
     margin-top: 5%;
-}
-
-.uh_jobrecs {
+  }
+  
+  .uh_jobrecs {
     grid-area: jobs;
-}
-
-.uh_footer {
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+  
+  .uh_footer {
     grid-area: footer;
-}
-
-.uh_feed {
+  
+    bottom: 0; /* Ensure the footer sticks to the bottom of the container */
+   
+  }
+  
+  .uh_feed {
     grid-area: feed;
-}
-
-.uh_addpost {
+    margin-left: 2rem;
+  }
+  
+  .uh_addpost {
     grid-area: addpost;
-}
+    margin-left: 2rem;
+    margin-bottom: 5rem;
+  }
+  
