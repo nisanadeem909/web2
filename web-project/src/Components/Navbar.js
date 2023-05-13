@@ -1,10 +1,23 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import './Navbar.css';
 import logo1 from './logo1.png';
 import nabhumanicon from './personcircle.png';
 import nablogouticon from './nab-logout-icon.png';
 import nabprofileicon from './nab-profile-icon.png';
 const Layout = (props) => {
+
+  let navigate = useNavigate(); 
+  const companyRouteChange =() =>{
+    let path = '/company/ownprofile'; 
+    navigate(path);
+    handleProfile();
+  }
+  const userRouteChange = () =>{ 
+    let path = '/user/ownprofile'; 
+    navigate(path);
+    handleProfile();
+  }
+
 
   const handleProfile = () =>{
     document.getElementById("myDropdown").classList.toggle("show");
@@ -51,10 +64,11 @@ const Layout = (props) => {
                         <div class="nab-dropdown" >
                            
                         <button class="nab-dropbtn" onClick={handleProfile}>
-                            <Link to="/user/ownprofile"> 
+                           Profile
+                            {/*<Link to="/user/ownprofile"> 
                               Profile
                               
-                            </Link>
+                            </Link>*/}
                           
                         </button>
                            
@@ -71,7 +85,8 @@ const Layout = (props) => {
                                 <div id="profile-head-section">
                                   <img src={nabprofileicon} id="nab-profile-icon"></img>
                                   &nbsp;&nbsp;
-                                  <button class="editprofile-button" onClick={handleProfile}> <span>Edit Profile </span></button>
+                                  
+                                    <button class="editprofile-button" onClick={userRouteChange}>My Profile </button>
                                   
                                 </div>
                                 <div id="profile-head-section">
@@ -116,12 +131,12 @@ const Layout = (props) => {
                       <li className="navb_li">
                         <div class="nab-dropdown" >
                            
-                        <button class="nab-dropbtn">
-                        
-                          <Link to="/company/ownprofile" onClick={handleProfile}>
+                        <button class="nab-dropbtn" onClick={handleProfile}>
+                        Profile
+                          {/*<Link to="/company/ownprofile" onClick={handleProfile}>
                               Profile
                               
-                          </Link>
+                          </Link>*/}
                           
                         </button>
                            
@@ -138,7 +153,7 @@ const Layout = (props) => {
                                 <div id="profile-head-section">
                                   <img src={nabprofileicon} id="nab-profile-icon"></img>
                                   &nbsp;&nbsp;
-                                  <button class="editprofile-button" onClick={handleProfile}> <span>Edit Profile </span></button>
+                                  <button class="editprofile-button" onClick={companyRouteChange}> My Profile</button>
                                   
                                 </div>
                                 <div id="profile-head-section">

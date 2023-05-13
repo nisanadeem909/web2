@@ -115,7 +115,7 @@
 .nab-dropbtn {
   
   cursor: pointer;
-  
+  color:white;
   width:0vh;
   height:0vh;
   background-color: bisque;

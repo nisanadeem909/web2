@@ -57,7 +57,7 @@ app.post("/signupuser", async(req,res)=>{
          res.end();
      }
      else {
-             const user = new User({username:u,email:e,password:p,education:edu,name:n});
+             const user = new User({username:u,email:e,password:p,name:n});
              console.log("user =" + user);
              user.save().then(()=>{
                  console.log("account created successfully");
@@ -235,10 +235,8 @@ app.get('/:sessionID', (req, res) => {
 
 
 app.post("/getuserprofiledetails", async(req,res)=>{
-    //console.log(req.body);
-
-    // get username from session!!!
-    var uname = 'komal';
+    console.log(req.body);
+    var uname = req.body.user;
 
     var user = await User.findOne({username: uname});
 
@@ -252,7 +250,7 @@ app.post("/getuserprofiledetails", async(req,res)=>{
 
     var info = {'user':user,'cons':{'followers': followers, 'following': following}}
 
-    //user = {...user, 'cons':}
+    console.log(info);
     
     res.json(info);
 
@@ -261,10 +259,8 @@ app.post("/getuserprofiledetails", async(req,res)=>{
 })
 
 app.post("/getcompanyprofiledetails", async(req,res)=>{
-    //console.log(req.body);
-
-    // get username from session!!!
-    var uname = 'fastlhr';
+    console.log(req.body);
+    var uname = req.body.user;
 
     var user = await Company.findOne({username: uname});
 
@@ -278,7 +274,7 @@ app.post("/getcompanyprofiledetails", async(req,res)=>{
 
     var info = {'company':user,'cons':{'followers': followers, 'following': following}}
 
-    //user = {...user, 'cons':}
+    console.log(info);
     
     res.json(info);
 
@@ -534,6 +530,354 @@ app.post("/postjob", async(req,res)=>{
 
 
 /*******************************************************************************************************/
+
+/***KOMAL NEW **************/
+
+app.post("/setaboutus", async(req,res)=>{
+    console.log(req.body);
+
+    const newAboutUs = req.body.aboutUs;
+    const company = req.body.user;
+
+    var newAbout = {"country":newAboutUs.country,"city":newAboutUs.city,"website":newAboutUs.website,"text":newAboutUs.text,"startYear":newAboutUs.startYear,"endYear":newAboutUs.endYear};
+
+    var msg;
+
+    await Company.updateOne(
+        { username: company },
+        { $set: { aboutUs: newAbout } });  
+
+    res.json(msg);
+
+    res.end();
+
+})
+
+app.post("/getavgrating", async(req,res)=>{
+    console.log(req.body);
+
+    const company = req.body.user;
+
+    var msg;
+
+    try {
+
+        const rating  = await Company.aggregate([
+            { $match: { username: company } },
+            { $unwind: "$ratings" },
+            {
+              $group: {
+                _id: "$_id",
+                averageRating: { $avg: "$ratings.rating" }
+              }
+            }
+          ])
+        if (!rating[0])
+            msg = {"rating": "none"}
+        else 
+            msg = {"rating": rating[0].averageRating}
+        
+    }
+        catch (error) {
+            console.error('Error adding job:', error);
+            msg = {"rating": "error"};
+
+    } 
+    console.log(msg);
+
+    res.json(msg);
+
+    res.end();
+
+})
+
+app.post("/setcontact", async(req,res)=>{
+    console.log(req.body);
+
+    const newContact = req.body.contact;
+    const company = req.body.user;
+
+    var msg;
+
+    try {
+        await Company.updateOne(
+            { username: company },
+            { $set: { contact: newContact } });  
+        msg = {"status": "success"};
+    }
+    catch (error) {
+        console.error('Error adding job:', error);
+        msg = {"status": error};
+    } 
+
+    res.json(msg);
+
+    res.end();
+
+})
+
+app.post("/getcompanyjobs", async(req,res)=>{
+    console.log(req.body);
+
+    const company = req.body.user;
+
+    var msg;
+
+    try {
+        const jobs = await Jobs.find({ CompanyUsername: company })
+        .sort({ JobId: -1 })
+        .limit(5);
+        msg = {"data": jobs};
+    }
+    catch (error) {
+        console.error('Error adding job:', error);
+        msg = {"data": "error"};
+    } 
+
+    res.json(msg);
+
+    res.end();
+
+})
+
+/************************* */
+
+
+/****NABEEHA 2 */
+app.post("/comparejobs", async(req,res)=>{
+  console.log(req.body);
+  console.log(req.body.job1);
+  console.log( req.body.job2);
+  
+
+  /*res.send("Hello from compare jobs");
+  res.end();*/
+ let ajob;
+  try{
+    ajob = await Jobs.findOne({ Designation: req.body.job1,CompanyName: req.body.comp1 });
+    
+      if (ajob) {
+        console.log("found a job " + ajob);
+      // res.json(ajob);
+       
+      }
+      else{
+        console.log("ERRORERRORERROR");
+        //console.log(err);
+        res.json(err);
+        
+      }
+    }
+    catch(err){
+        console.log("ERROR = " + err);
+        res.json(err);
+    }
+    
+    try{
+      let ajob2 = await Jobs.findOne({ Designation: req.body.job2,CompanyName: req.body.comp2 });
+      
+        if (ajob2) {
+          console.log("found a job " + ajob2);
+        
+        res.json({"job1": ajob,"job2":ajob2}); 
+        
+         
+        }
+        else{
+          console.log("ERRORERRORERROR");
+          //console.log(err);
+          res.json(err);
+          
+        }
+      }
+      catch(err){
+          console.log("ERROR = " + err);
+          res.json(err);
+      }
+      
+      res.end();
+
+    
+});
+
+/************ */
+
+
+/****** NISA 2 */
+
+app.post("/addlikes/:sessionID:username", async (req, res) => {
+  const postId = req.params.sessionID;
+  const username = req.params.username;
+
+  try {
+    const post = await Post.findOne({ postID: postId });
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    if (post.likedBy.includes(username)) {
+      return res.status(400).json({ error: "User already liked the post" });
+    }
+
+    post.likedBy.push(username);
+    await post.save();
+
+    return res.status(200).json({ message: "Post liked successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+
+app.get('/likes/:sessionID',async (req, res) => {
+  const postId = req.params.sessionID; 
+
+  try {
+   
+    const post = await Post.findOne({ postID: postId });
+  
+    if (!post) {
+      
+      console.log('Post not found');
+      return;
+    }
+  
+    const numberOfLikes = post.likedBy.length;
+    console.log(`Number of likes: ${numberOfLikes}`);
+    res.json(numberOfLikes);
+  } catch (err) {
+   
+    console.error(err);
+  }
+  
+});
+
+app.get('/comments/:sessionID',async (req, res) => {
+  const postId = req.params.sessionID; 
+
+  try {
+   
+    const post = await Post.findOne({ postID: postId });
+  
+    if (!post) {
+      
+      console.log('Post not found');
+      return;
+    }
+  
+    const numberOfLikes = post.comments.length;
+    console.log(`Number of likes: ${numberOfLikes}`);
+    res.json(numberOfLikes);
+  } catch (err) {
+   
+    console.error(err);
+  }
+  
+});
+
+app.get('/shares/:sessionID',async (req, res) => {
+  const postId = req.params.sessionID; 
+
+  try {
+   
+    const post = await Post.findOne({ postID: postId });
+  
+    if (!post) {
+      
+      console.log('Post not found');
+      return;
+    }
+  
+    const numberOfLikes = post.sharedBy.length;
+    console.log(`Number of likes: ${numberOfLikes}`);
+    res.json(numberOfLikes);
+  } catch (err) {
+   
+    console.error(err);
+  }
+  
+});
+
+app.get('/allposts/:sessionID', async (req, res) => {
+ 
+  const username = req.params.sessionID; 
+
+  Connection.find({ follower: username })
+    .then(connections => {
+      const followingUsers = connections.map(connection => connection.following);
+  
+      Post.find({ username: { $in: followingUsers } })
+        .then(posts => {
+          res.json(posts);
+        })
+        .catch(error => {
+          console.log(error);
+          res.status(500).json({ error: 'An error occurred' });
+        });
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'An error occurred' });
+    });
+  
+ 
+ 
+ 
+ 
+  
+});
+
+
+app.get('/jobs/:sessionID', async (req, res) => {
+  const sessionID = req.params.sessionID;
+  
+  let major;
+  let degree;
+
+  try {
+    const user = await User.findOne({ username: sessionID })
+    if (user) {
+      major = user.education[0].major;
+      degree = user.education[0].degree;
+      const jobs = await Jobs.find({ MajorRequired: major, DegreeRequired: degree });
+      if (jobs.length > 0) {
+        res.json(jobs);
+      } else {
+        res.status(404).json({ error: 'No jobs found for the specified degree and major' });
+      }
+    } else {
+      res.status(404).json({ error: 'User not really found' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+
+
+app.get('/alljobs', async (req, res) => {
+
+ 
+   Jobs.find()
+    .then(jobs => {
+      if (jobs) {
+        
+        res.json(jobs);
+
+      } else {
+        res.status(404).json({ error: 'Job not marjao found' });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
+/************* */
+
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
