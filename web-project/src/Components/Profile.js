@@ -3,7 +3,7 @@ import './Profile.css';
 
 import person from './person.png';
 
-export default function Profile() {
+export default function Profile(props) {
   return (
     <div>
         <div className='profile-container'>
@@ -12,7 +12,7 @@ export default function Profile() {
             </div>
             <br />
             <div className='prof_upper'>
-            <strong>Nisa Nadeem</strong>
+            <strong>{props.user}</strong>
             </div>
             <div className='prof_middle'>
             <p>BS Software Engineering Student at FAST Nuces Lahore </p>

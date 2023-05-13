@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './signup.css';
 import axios from 'axios'
 import img from './people.jpeg';
-//import img from './signupimg.JPG';
 import SignUpUser from './signup-user'
 import SignUpCompany from './signup-company'
 //import {useState} from 'react'

@@ -6,8 +6,9 @@
                         "profcv feed jobs" 
                         "footer footer footer";
     grid-template-rows: 0.2fr 0.5fr 2.7fr 0.6fr;
-    grid-gap: 3rem;
+    grid-gap: 2rem;
     width:100%;
+ 
 }
 
 .uh_prof_cv {
