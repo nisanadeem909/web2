@@ -36,7 +36,7 @@ function CurrentJobRow(props)
     </tr>);
 }
 
-function CurrentJobsPage() {
+function CurrentJobsPage(props) {
     
     const [componentArray, setJobs] = useState([]);
     const JobsArray = [
@@ -56,12 +56,12 @@ function CurrentJobsPage() {
     }
     const [checkedcomp, setCheckedComp] = useState([]);
     const [checkeddes, setCheckedDes] = useState([]);
-    const handleCheckboxChange = (event, rowid, comp, desig) => {
+    const handleCheckboxChange = (event, desig, comp) => {
         
         incrementID();
-        if (checkedcomp.length >= 2){const empty = []; setCheckedComp(empty);setCheckedDes(empty);}
+        //if (checkedcomp.length > 2){const empty = []; setCheckedComp(empty);setCheckedDes(empty); return;}
         if (event.target.checked === true) {
-            alert("Setting company = " + comp + " des= " + desig)
+            //alert("Setting company = " + comp.compName + " des= " + desig.des)
             setCheckedComp([
                 ...checkedcomp,
                 comp
@@ -73,15 +73,17 @@ function CurrentJobsPage() {
             
         }
         else{
-            /*this isnt working */
-            /*const nextSelectedRows = checkedcomp.filter(selectedRow => selectedRow != comp);
-            alert("I am here");
-            console.log("filetered: " + nextSelectedRows)
-            setCheckedComp(nextSelectedRows)
-                
-            const nextSelectedRow = checkeddes.filter(selectedRow => selectedRow != desig);
-            setCheckedDes(nextSelectedRow)*/
-                
+            
+            const newDesignations = checkeddes.filter((selectedRow) => selectedRow.des !== desig.des);
+            setCheckedDes(newDesignations);
+
+            const newComps = checkedcomp.filter((selectedRow) => selectedRow.compName !== comp.compName);
+            setCheckedComp(newComps);
+
+            console.log("HEREEE Filtering = ");
+            console.log(newComps);
+            console.log(newDesignations);
+            
         }
       };
     
@@ -112,30 +114,36 @@ function CurrentJobsPage() {
     function countCheckboxes () {
         if (document.querySelectorAll('input[type="checkbox"]:checked').length != 2)
             alert("Only 2 Jobs are Allowed for Comparison");
-        else{ alert("Checked boxes = " + checkeddes);
+        else{ //alert("Checked boxes = " + checkeddes);
             console.log(checkeddes);
-            console.log(checkedcomp);}
-           // console.log(checked[0] + "," + checked[1]);
+            console.log(checkedcomp);
+        
+            /* Setting the props */
+            props.jobset(checkeddes);
+            props.compset(checkedcomp);
+        
+        }
+           
         
     }
     const returnRow = ()=>{
-        return  companyName.map((item, index) => {
+        return  companyName.map((compName, index) => {
             
-            const correspondingItem = designations[index];
+            const des = designations[index];
             return (<tr key={index}>
                 <td>
                     <img className='works-emp-icon' src={empicon}></img>
                         &nbsp;&nbsp;
-                        <a href="/">{item}</a>
+                        <a href="/">{compName}</a>
                 </td>
                     <td>
-                        {correspondingItem}
+                        {des}
                     </td>
                     <td>
                         <div id="nab-currentjobs-btn-group">
                         
                             <div id="nab-currentjobs-checkbox-wrapper">
-                                <input id="nab-currentjobs-checkbox" onChange={event => handleCheckboxChange(event, uniqueid, {correspondingItem},{item})} type="checkbox"></input>
+                                <input id="nab-currentjobs-checkbox" onChange={event => handleCheckboxChange(event, {des},{compName})} type="checkbox"></input>
                                 &nbsp;&nbsp;
                                 <label id="select-for-comp">Add to Compare</label>
                             </div>
@@ -145,6 +153,7 @@ function CurrentJobsPage() {
                 </tr>);
             })
     }
+    
     return (
 
 

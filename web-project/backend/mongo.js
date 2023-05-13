@@ -76,7 +76,7 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-//module.exports = User;
+
 
 const companySchema = new Schema({
   username: {
@@ -144,7 +144,7 @@ const companySchema = new Schema({
 });
 
 const Company = mongoose.model('Company', companySchema);
-/*-------------------------Current Employees Table----------------------*/
+
 const CurrentEmployeesSchema = new Schema(
   {
 
@@ -175,9 +175,7 @@ const CurrentEmployeesSchema = new Schema(
   }
 );
 const CurrentEmployees = mongoose.model('CurrentEmployees',CurrentEmployeesSchema);
-//module.exports = CurrentEmployees;
 
-/*-------------------------Employee Request Table----------------------*/
 const EmployeeRequestSchema = new Schema(
   {
     EmployeeUsername:{
@@ -204,7 +202,7 @@ const EmployeeRequestSchema = new Schema(
    );
 
    const EmployeeRequests = mongoose.model('EmployeeRequests',EmployeeRequestSchema);
-   //module.exports = EmployeeRequests;
+ 
 
 
 
@@ -222,10 +220,6 @@ const connection = new Schema({
 
 
 const Connection = mongoose.model('Connection', connection);
-
-//module.exports = Connection;
-
-
 
 const notificationSchema = new Schema({
   username: {
@@ -262,9 +256,6 @@ const notificationSchema = new Schema({
 });
 
 const Notification = mongoose.model('Notification', notificationSchema);
-
-//module.exports = Notification;
-
 
 
 const jobapplication = new Schema({
@@ -309,7 +300,6 @@ const jobapplication = new Schema({
 
 const Jobapplication = mongoose.model('Jobapplication', jobapplication);
 
-//module.exports = Jobapplication;
 
 const postSchema = new Schema({
   username: {
@@ -363,12 +353,7 @@ const postSchema = new Schema({
 
 const Post = mongoose.model('Post', postSchema);
 
-//module.exports = Post;
 
-
-
-
-/*------------------------------JOBS TABLE-------------------------------- */
 const JobsSchema = new Schema(
   {
 
@@ -414,7 +399,7 @@ const JobsSchema = new Schema(
   }
 );
 const Jobs = mongoose.model('Jobs',JobsSchema);
-//module.exports = Jobs;
+
 module.exports ={
   User,
   Company,
