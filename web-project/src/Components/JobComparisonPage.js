@@ -11,33 +11,55 @@ function JobComparisonPage() {
     
    const [compJobs,setjobs] = useState([]);
    const [comps,setcomps] = useState([]);
-   
+   const [call,setCall] = useState("false");
+
    const jobset = (message) => {
-      //alert("Setting Jobs in Parent");
+      alert("Setting Jobs in Parent");
       setjobs(message);
+      
+      setCall("true");
     };
     const compset = (message) => {
-      //alert("Setting Company in Parent");
+      alert("Setting Company in Parent");
       setcomps(message);
     };
-   return (
-        <div>
-        <div id="nab-alljobs-wrapper">
-             <div id="alljobs-currentemp">
-                <CurrentJobs jobset={jobset} compset={compset} />
-             </div>
 
-             <div id="alljobs-empreq">
-                <JobComparison jobset={compJobs} compset={comps} />
-             </div>
-
-
-       </div>
-
-       <br></br>
-       <Footer></Footer>
-       </div>
-    );
+    if (call === "false"){
+            return (
+               <div>
+               <div id="nab-alljobs-wrapper">
+                     <div id="alljobs-currentemp">
+                        <CurrentJobs jobset={jobset} compset={compset} />
+                     </div>
+         {/*I don't know what to show here */}
+                     <div id="alljobs-empreq">
+                        {/*<JobComparison />*/}
+            </div>
+               </div>
+               <br></br>
+               <Footer></Footer>
+               </div>
+    );}
+    else{
+      return (
+         <div>
+         <div id="nab-alljobs-wrapper">
+              <div id="alljobs-currentemp">
+                 <CurrentJobs jobset={jobset} compset={compset} />
+              </div>
+ 
+              <div id="alljobs-empreq">
+                 <JobComparison jobset={compJobs} compset={comps}/>
+              </div>
+ 
+ 
+        </div>
+ 
+        <br></br>
+        <Footer></Footer>
+        </div>
+     );
+    }
   }
   
   export default JobComparisonPage;

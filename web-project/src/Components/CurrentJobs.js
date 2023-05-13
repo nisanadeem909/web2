@@ -89,7 +89,7 @@ function CurrentJobsPage(props) {
     
     const getData = async () => {
         const msg = await axios.get("http://localhost:8000/currentjobs");
-        alert("I am in get data");
+        //alert("I am in get data");
         //alert("I am in axios = " + msg.data[0].JobId);
         let des_list = msg.data.map(cname => cname.Designation);
         let comp_list = msg.data.map(comp => comp.CompanyName);
