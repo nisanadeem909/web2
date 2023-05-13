@@ -14,9 +14,7 @@ import axios from 'axios';
 export default function UserHome() {
     const [user, setUser] = useState('');
     const [username, setUsername] = useState('');
-    /*const location = useLocation();
-  const user = location.state.user;*/
-  
+ 
 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
