@@ -11,8 +11,8 @@ export default function ProfileDetails(props) {
     var user;
 
     var cons = {'followers':0,'following':0};
-    var username = "username";
-    var name = "Full Name";
+    var username = "loading";
+    var name = "Loading";
     var bio;
     var worksAt = <></>;
     //const [contact,setDetails] = useState({name: 'Jobify User',username:'someone@jobify.com',Bio:'This is biooo bioooo biooo biooooooooooooooooooo'});

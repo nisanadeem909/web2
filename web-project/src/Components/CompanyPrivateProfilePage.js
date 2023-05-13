@@ -16,8 +16,11 @@ export default function UserPrivateProfilePage() {
     const [cons,setCons] = useState(null);
 
     useEffect(() => {
+        const sessionID = sessionStorage.getItem('sessionID');
+        const param = {"user":sessionID}
+
         //post request to server to get profile details 
-        axios.post("http://localhost:8000/getcompanyprofiledetails").then((response) => {
+        axios.post("http://localhost:8000/getcompanyprofiledetails",param).then((response) => {
             //alert(response.data);
             setCompany(response.data.company);
             setCons(response.data.cons);
@@ -28,6 +31,23 @@ export default function UserPrivateProfilePage() {
         });
     }, []);
 
+    const setAboutUs=(newAboutUs)=>{
+        var copy = company;
+        //alert(JSON.stringify(company));
+        copy = {...copy, "aboutUs":newAboutUs}
+        //alert(JSON.stringify(copy));
+        setCompany(copy);
+    }
+
+    const setContact=(newContact)=>{
+        var copy = company;
+        //alert(JSON.stringify(company));
+        copy = {...copy, "contact":newContact}
+        //alert(JSON.stringify(copy));
+        setCompany(copy);
+    }
+
+
     return (
         <div className='companyprof_container'>
             <div className="companyprof_header">
@@ -35,13 +55,13 @@ export default function UserPrivateProfilePage() {
             </div>
             <div className="companyprof_left">
                 <div className="companyprof_history">
-                    <CompanyHistory/>
+                    <CompanyHistory company={company} setAboutUs={setAboutUs}/>
                 </div>
                 <div className="companyprof_rating">
-                    <Rating/>
+                    <Rating company={company} type="private"/>
                 </div>
                 <div className="companyprof_emp">
-                    <Employees/>
+                    <Employees company={company}/>
                 </div>
             </div>
             <div className="companyprof_activity">
@@ -49,10 +69,10 @@ export default function UserPrivateProfilePage() {
             </div>
             <div className='companyprof_right'>
                 <div className='companyprof_contact'>
-                    <Contact/>
+                    <Contact company={company} add={setContact}/>
                 </div>
                 <div className='companyprof_vacancies'>
-                    <OpenVacancies/>
+                    <OpenVacancies company={company}/>
                 </div>
             </div>
             <div className="companyprof_footer">

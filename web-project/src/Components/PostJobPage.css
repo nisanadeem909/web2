@@ -24,7 +24,7 @@
 }
 
 .kpostjobform-header {
-    background-color: #0e312f;
+    background-color: #016960;
     color: white;
     padding-top: 1vh;
     padding-bottom: 1vh;
@@ -90,12 +90,12 @@
 
 .kpostjobform-postbtn {
     margin-right: 2%;
-    background-color: #0e312f;
+    background-color: #016960;
     color: white;
 }
 
 .kpostjobform-postbtn:hover {
-    background-color: #016960;
+    background-color: #09a093;
 }
 
 .kpostjobform-cancelbtn {

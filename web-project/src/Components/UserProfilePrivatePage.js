@@ -14,8 +14,11 @@ export default function UserPrivateProfilePage() {
     const [cons,setCons] = useState(null);
 
     useEffect(() => {
+        const sessionID = sessionStorage.getItem('sessionID');
+        const param = {"user":sessionID}
+        
         //post request to server to get profile details 
-        axios.post("http://localhost:8000/getuserprofiledetails").then((response) => {
+        axios.post("http://localhost:8000/getuserprofiledetails",param).then((response) => {
             //alert(response.data);
             setUser(response.data.user);
             setCons(response.data.cons);
