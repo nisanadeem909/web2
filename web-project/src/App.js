@@ -14,7 +14,8 @@ import CompanyPublicProfilePage from './Components/CompanyPublicProfilePage';
 import UserPrivateProfilePage from './Components/UserProfilePrivatePage';
 import CompanyPrivateProfilePage from './Components/CompanyPrivateProfilePage';
 
-
+import Login from './Components/login'
+import Signup from './Components/signup'
 import ViewJobDetails from './Components/ViewJobDetails'
 
 import ManageEmp from './Components/ManageEmployees';
