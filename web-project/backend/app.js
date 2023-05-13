@@ -168,7 +168,9 @@ app.post("/signupuser", async(req,res)=>{
 
 /**NISA */
 
-app.get('/:sessionID', (req, res) => {
+
+
+app.get('/user/:sessionID', (req, res) => {
     const sessionID = req.params.sessionID;
    
      User.findOne({ username: sessionID })
@@ -176,7 +178,7 @@ app.get('/:sessionID', (req, res) => {
         if (user) {
           res.json(user);
         } else {
-          res.status(404).json({ error: 'User not found' });
+          res.status(404).json({ error: 'User not now found' });
         }
       })
       .catch(error => {
@@ -185,7 +187,181 @@ app.get('/:sessionID', (req, res) => {
       });
   });
   
+  //NEW
+
+  app.post("/addlikes/:sessionID:username", async (req, res) => {
+    const postId = req.params.sessionID;
+    const username = req.params.username;
   
+    try {
+      const post = await Post.findOne({ postID: postId });
+      if (!post) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+  
+      if (post.likedBy.includes(username)) {
+        return res.status(400).json({ error: "User already liked the post" });
+      }
+  
+      post.likedBy.push(username);
+      await post.save();
+  
+      return res.status(200).json({ message: "Post liked successfully" });
+    } catch (error) {
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  });
+  
+
+
+app.get('/likes/:sessionID',async (req, res) => {
+    const postId = req.params.sessionID; 
+
+    try {
+     
+      const post = await Post.findOne({ postID: postId });
+    
+      if (!post) {
+        
+        console.log('Post not found');
+        return;
+      }
+    
+      const numberOfLikes = post.likedBy.length;
+      console.log(`Number of likes: ${numberOfLikes}`);
+      res.json(numberOfLikes);
+    } catch (err) {
+     
+      console.error(err);
+    }
+    
+  });
+
+  app.get('/comments/:sessionID',async (req, res) => {
+    const postId = req.params.sessionID; 
+
+    try {
+     
+      const post = await Post.findOne({ postID: postId });
+    
+      if (!post) {
+        
+        console.log('Post not found');
+        return;
+      }
+    
+      const numberOfLikes = post.comments.length;
+      console.log(`Number of likes: ${numberOfLikes}`);
+      res.json(numberOfLikes);
+    } catch (err) {
+     
+      console.error(err);
+    }
+    
+  });
+
+  app.get('/shares/:sessionID',async (req, res) => {
+    const postId = req.params.sessionID; 
+
+    try {
+     
+      const post = await Post.findOne({ postID: postId });
+    
+      if (!post) {
+        
+        console.log('Post not found');
+        return;
+      }
+    
+      const numberOfLikes = post.sharedBy.length;
+      console.log(`Number of likes: ${numberOfLikes}`);
+      res.json(numberOfLikes);
+    } catch (err) {
+     
+      console.error(err);
+    }
+    
+  });
+
+  app.get('/allposts/:sessionID', async (req, res) => {
+   
+    const username = req.params.sessionID; 
+
+    Connection.find({ follower: username })
+      .then(connections => {
+        const followingUsers = connections.map(connection => connection.following);
+    
+        Post.find({ username: { $in: followingUsers } })
+          .then(posts => {
+            res.json(posts);
+          })
+          .catch(error => {
+            console.log(error);
+            res.status(500).json({ error: 'An error occurred' });
+          });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
+    
+   
+   
+   
+   
+    
+ });
+
+
+  app.get('/jobs/:sessionID', async (req, res) => {
+    const sessionID = req.params.sessionID;
+    
+    let major;
+    let degree;
+  
+    try {
+      const user = await User.findOne({ username: sessionID })
+      if (user) {
+        major = user.education[0].major;
+        degree = user.education[0].degree;
+        const jobs = await Jobs.find({ MajorRequired: major, DegreeRequired: degree });
+        if (jobs.length > 0) {
+          res.json(jobs);
+        } else {
+          res.status(404).json({ error: 'No jobs found for the specified degree and major' });
+        }
+      } else {
+        res.status(404).json({ error: 'User not really found' });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
+  
+
+
+ app.get('/alljobs', async (req, res) => {
+
+   
+     Jobs.find()
+      .then(jobs => {
+        if (jobs) {
+          
+          res.json(jobs);
+
+        } else {
+          res.status(404).json({ error: 'Job not marjao found' });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
+  });
+
+
+
     app.post('/login', async (req, res) => {
       const { username, password } = req.body;
       try {
@@ -193,18 +369,18 @@ app.get('/:sessionID', (req, res) => {
         if (!users) {
           const companys = await Company.findOne({ username: username, password: password });
           if (!companys) {
-            console.log("Login Unsuccessful Company!");
+           
             res.status(401).json({ message: "Login failed" }); 
           } else {
             req.session.username = username;
-            console.log("Login Successful Company!");
+           
             res.json({ userType: "company", sessionId: req.session.username }); 
           }
         } else {
           req.session.username = username;
           req.session.save();
-          console.log(req.session.username);
-          console.log("Login Successful!");
+       
+         
           res.json({ userType: "user", sessionId: req.session.username }); 
         }
       } catch (err) {

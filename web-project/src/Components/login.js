@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './login.css';
-import img from './people.jpeg';
+import img from './loginnew.gif';
 import Footer from './Footer';
 import UserHome from './UserHome';
 import CompanyHome from './CompanyHome';

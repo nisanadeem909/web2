@@ -14,19 +14,26 @@ import axios from 'axios';
 export default function UserHome() {
     const [user, setUser] = useState('');
     const [username, setUsername] = useState('');
- 
+    const [jobs, setJobs] = useState('');
 
-  useEffect(() => {
-    const sessionID = sessionStorage.getItem('sessionID');
-    setUsername(sessionID);
-   
-    axios.get(`http://localhost:8000/${sessionID}`)
-      .then(res => {
-        console.log(res.data);
-        setUser(res.data.username); 
-      })
-      .catch(error => console.log(error));
-  }, []);
+    useEffect(() => {
+        const sessionID = sessionStorage.getItem('sessionID');
+        setUsername(sessionID);
+       
+        axios.get(`http://localhost:8000/user/${sessionID}`)
+          .then(res => {
+           
+            setUser(res.data.username); 
+          })
+          .catch(error => console.log(error));
+    
+         
+
+      }, []);
+    
+
+
+  
 
 
 
