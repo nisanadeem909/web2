@@ -6,6 +6,7 @@ import networkicon from './network.png'
 import workicon from './workk.png'
 import { useNavigate } from 'react-router-dom';
 import EditProfile from './EditProfile';
+import axios from 'axios';
 export default function ProfileDetails(props) {
 
     var user;
@@ -15,10 +16,10 @@ export default function ProfileDetails(props) {
     var name = "Loading";
     var bio;
     var worksAt = <></>;
+    const [profilepic,setPic] = useState(picture); // dummy picture to use if no profile picture applied
     //const [contact,setDetails] = useState({name: 'Jobify User',username:'someone@jobify.com',Bio:'This is biooo bioooo biooo biooooooooooooooooooo'});
 
     //alert(props.user);
-
     if (props.user)
     {
         user = props.user;
@@ -46,7 +47,6 @@ export default function ProfileDetails(props) {
         }
 
         cons = props.cons;
-
     }
   
     const navigate = useNavigate();
@@ -60,14 +60,39 @@ export default function ProfileDetails(props) {
                
     }
 
+    useEffect(()=>{
+        if (props.user)
+        {
+            user = props.user;
+            if (user.profilePicture)
+            {
+                var param = {"pfp":user.profilePicture}
+                /*axios.get("http://localhost:8000/getprofilepicture",param).then((response) => {
+                    alert(JSON.stringify(response));
+                    //alert(__dirname);
+                    const imageData = Buffer.from(response.data, 'binary').toString('base64');
 
+                    // Create the data URL for the image
+                    const dataUrl = `data:image/jpeg;base64,${imageData}`;
+                    const imgElement = document.getElementById('myImage');
+                    // Set the absolute path as the src attribute of the <img> tag
+                    imgElement.src = dataUrl;
 
-    var profilepic = picture; // dummy picture to use if no profile picture applied
+                    //setCon(<img src={response.data} className="profdetails_profilePic"/>);
+            })
+            .catch(function (error) {
+                alert(error);
+            });*/
+                
+            }
+        }
+    },[profilepic,props.user]);
+
     
     return (
         <div className="profdetails_container">
             <div id="profdetails_imgedit">
-                <img src={profilepic} className="profdetails_profilePic"/>
+            <img src={picture} id="myImage" className="profdetails_profilePic"/>
             
             </div>
             <div className="profdetails_details">

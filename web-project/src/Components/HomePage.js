@@ -30,7 +30,7 @@ function HomePage() {
    <div className='sld'>
    <Slideshow/>
    </div>
-   <div className='service'>
+   {/*<div className='service'>
    <div className='box3'>CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf
    <button className='bs1'>Go</button>
    </div>
@@ -40,8 +40,8 @@ function HomePage() {
    <div className='box5'>CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf
    <button className='bs1'>Go</button>
 
-   </div>
-   </div>
+    </div>
+   </div>*/}
 
    <div className='ft'>
    <Footer/>

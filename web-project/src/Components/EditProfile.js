@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './EditProfile.css'
 import editpic from './editpic.png';
 import person from './dummy.jpg';
 import editicon from './edit.png';
 import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Select from 'react-select'
 import Footer from './Footer';
 import axios from 'axios'
@@ -20,6 +20,14 @@ export default function EditProfile() {
   const [name,setName] = useState("");
   const [companyType,setCompanyType] = useState("");
   const [bio,setBio] = useState("");
+
+  const des = useRef(null);
+
+  const navigate = useNavigate();
+
+  const [img,setImg] = useState(null);
+
+  const refBio = useRef(bio);
   
  
   useEffect(() => {
@@ -35,7 +43,7 @@ export default function EditProfile() {
     .catch(function (error) {
         alert(error);
     });
-  }, [companyList]);
+  }, []);
 
   useEffect(() => {
     const userType = sessionStorage.getItem("userType");
@@ -44,22 +52,32 @@ export default function EditProfile() {
     if (userType == "user")
     {
           setVarField(<><label className='nisa-edit-label'>
-                          Current Working Place:  
+                          Request for New Working Place:  
                         </label>
                         <Select options={companyList}
                         placeholder="Company you worked for"
                         className='nisa-edit-input'
-                        onChange={(choice) => setSelectedCompany(choice)}/></>);
+                        onChange={(choice) => setSelectedCompany(choice)}/>
+                        <label className='nisa-edit-label'>
+                        Designation:  
+                      </label>
+                      <input className='nisa-edit-input' type="text" ref={des}/>
+                      </>);
 
           const param = {"user":username}
 
           //post request to server to get profile details 
           axios.post("http://localhost:8000/getuserprofiledetails",param).then((response) => {
-              //alert(response.data);
-              //setUser(response.data.user);
-              //alert(response.data.user);
+              //alert(JSON.stringify(response.data))
+              //alert(response.data.user.bio)
               setName(response.data.user.name);
-              //alert('hi');
+              if (response.data.user.bio)
+                setBio(response.data.user.bio);
+              /*if (response.data.user.worksAt)
+              {
+                setDes(response.data.user.worksAt.Designation);
+                setS
+              }*/
           })
           .catch(function (error) {
               alert(error);
@@ -85,7 +103,7 @@ export default function EditProfile() {
               alert(error);
           });
     }
-  }, []);
+  }, [companyList]);
 
   useEffect(() => {
     
@@ -99,6 +117,64 @@ export default function EditProfile() {
                         </>);
      }
   }, [companyType]);
+
+  const HandleUpload=(t)=>{
+    //console.log(t.handle.files);
+    alert("image set");
+    setImg(t.target.files[0]);
+  }
+
+  const upload = () =>{
+
+      const uname = sessionStorage.getItem("sessionID");
+      const utype = sessionStorage.getItem("userType");
+
+      if (!name)
+      {
+          alert("Please fill name!");
+          return;
+      }
+      
+      if  (utype == "user" && ((selectedCompany && !des.current.value) || (!selectedCompany && des.current.value)))
+      {
+        alert("Please fill both fields required for new workplace request!");
+        return;
+      }
+
+      if (img)
+      {
+        var fdata = new FormData();
+        fdata.append("Image", img);
+        fdata.append("Username", uname);
+        fdata.append("UserType", utype);
+        axios.post('http://localhost:8000/uploadprofilepic',fdata)
+        .then(res => {alert("Respnse" + JSON.stringify(res.data))})
+        .catch(err=>{alert("ERROR IN UPLOADAXIOS : "+err)});
+      }
+      const param = {"uname": uname, "utype":utype, "bio": refBio.current.value, "name":name,"worksAt":selectedCompany,"ctype":companyType};
+      
+      if (des)
+        if (des.current)
+          param.des = des.current.value;
+
+      axios.post("http://localhost:8000/updateprofiledetails",param).then((response) => {
+        //alert(response.data);
+        
+        //alert('hi');
+      })
+      .catch(function (error) {
+          alert(error);
+      });
+      cancel();
+  }
+
+  const cancel=()=>{
+    const utype = sessionStorage.getItem("userType");
+    if (utype == "user")
+          navigate("/user/ownprofile");
+        else
+          navigate("/company/ownprofile");
+  }
 
 
   return (
@@ -119,7 +195,7 @@ export default function EditProfile() {
       <div className='nisa-edit-container2'>
           <img src={person} className="edit-nisa-img1"/>
           <label class="custom-file-upload">
-            <input type="file" accept=".jpeg,.jpg,.png"/>
+            <input id="displaynone" type="file" onChange={HandleUpload}/>
             Upload image
           </label>
 
@@ -135,11 +211,11 @@ export default function EditProfile() {
                 <label className='nisa-edit-label'>
                   Bio:  
                 </label>
-                <textarea className='nisa-edit-input kta-editprof' >{bio}</textarea>
+                <textarea className='nisa-edit-input kta-editprof' ref={refBio} value={bio} onChange={(event)=>{setBio(event.target.value)}}></textarea>
                 
                 <div className='keditprof-btns'>
-                  <button className="keditprof-savebtn">Save Changes</button>
-                  <button className="keditprof-cancelbtn">Cancel</button>
+                  <button className="keditprof-savebtn" onClick={upload}>Save Changes</button>
+                  <button className="keditprof-cancelbtn" onClick={cancel}>Cancel</button>
                 </div>
            
       </div>

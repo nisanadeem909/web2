@@ -23,6 +23,10 @@ const Layout = (props) => {
     document.getElementById("myDropdown").classList.toggle("show");
   }
 
+  const getUserName =() =>{
+    return sessionStorage.getItem("sessionID");
+  }
+
   var navlayout = 
     <ul className="navb_ul">
           <li className="navb_li">
@@ -78,7 +82,7 @@ const Layout = (props) => {
                                 <div id="profile-head-section">
                                   <img src={nabhumanicon} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
-                                  <label>Nisa Nadeem</label>
+                                  <label>{getUserName()}</label>
                                   
                                 </div>
                                 <div id="profile-line-hr"></div>
@@ -146,7 +150,7 @@ const Layout = (props) => {
                                 <div id="profile-head-section">
                                   <img src={nabhumanicon} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
-                                  <label>Nisa Nadeem</label>
+                                  <label>{getUserName()}</label>
                                   
                                 </div>
                                 <div id="profile-line-hr"></div>
