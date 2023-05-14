@@ -168,7 +168,7 @@ app.post("/signupuser", async(req,res)=>{
 
 /**NISA */
 
-app.get('/:sessionID', (req, res) => {
+app.get('/user/:sessionID', (req, res) => {
     const sessionID = req.params.sessionID;
    
      User.findOne({ username: sessionID })
@@ -215,18 +215,7 @@ app.get('/:sessionID', (req, res) => {
     
   
     
-    
-    app.get('/logout', (req, res) => {
-     
-      req.session.destroy((err) => {
-        if (err) {
-          console.error('Error destroying session:', err);
-          res.status(500).json({ message: 'Server error' });
-        } else {
-          res.redirect('/login');
-        }
-      });
-    });
+
 
 /**** */
 
@@ -704,10 +693,52 @@ app.post("/comparejobs", async(req,res)=>{
 
 
 /****** NISA 2 */
+app.post('/posts', async (req, res) => {
+  try {
+    const { username, text, postID, date, imagePath} = req.body;
 
-app.post("/addlikes/:sessionID:username", async (req, res) => {
-  const postId = req.params.sessionID;
-  const username = req.params.username;
+    // Create a new post object
+    const newPost = new Post({
+      username,
+      text,
+      postID,
+      date,
+      imagePath,
+      
+    });
+
+    // Save the post to the database
+    const savedPost = await newPost.save();
+
+    res.status(200).json(savedPost);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add the post to the database' });
+  }
+});
+
+
+app.get('/showcomment/:postId', async (req, res) => {
+  const postId = req.params.postId;
+
+  try {
+    const post = await Post.findOne({ postID: postId });
+
+    if (!post) {
+      console.log('Post not found');
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    const comments = post.comments;
+    res.json(comments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+app.post("/addlikes", async (req, res) => {
+  const { postId, username } = req.body;
 
   try {
     const post = await Post.findOne({ postID: postId });
@@ -723,6 +754,29 @@ app.post("/addlikes/:sessionID:username", async (req, res) => {
     await post.save();
 
     return res.status(200).json({ message: "Post liked successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post("/addcomment", async (req, res) => {
+  const { postId, username, text } = req.body;
+
+  try {
+    const post = await Post.findOne({ postID: postId });
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    post.comments.push({
+      username: username,
+      date: new Date(),
+      text: text
+    });
+
+    await post.save();
+
+    return res.status(200).json({ message: "Comment added successfully" });
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }
@@ -744,7 +798,7 @@ app.get('/likes/:sessionID',async (req, res) => {
     }
   
     const numberOfLikes = post.likedBy.length;
-    console.log(`Number of likes: ${numberOfLikes}`);
+   
     res.json(numberOfLikes);
   } catch (err) {
    
@@ -875,6 +929,221 @@ app.get('/alljobs', async (req, res) => {
       res.status(500).json({ error: 'An error occurred' });
     });
 });
+
+app.get('/allvacancy/:sessionID', (req, res) => {
+  const sessionID = req.params.sessionID;
+ 
+   Jobs.find({ CompanyUsername: sessionID })
+    .then(user => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
+app.get('/company/:sessionID', (req, res) => {
+  const sessionID = req.params.sessionID;
+ 
+   Company.findOne({ username: sessionID })
+    .then(user => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
+app.delete('/delvacancy/:id', async (req, res) => {
+  const vacancyId = req.params.id;
+
+  try {
+   
+    const deletedVacancy = await Jobs.findOneAndDelete({ _id: vacancyId });
+    
+    if (deletedVacancy) {
+      res.json({ message: 'Vacancy deleted successfully' });
+    } else {
+      res.status(404).json({ error: 'Vacancy not found' });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Failed to delete vacancy' });
+  }
+});
+
+app.get('/allapps/:id', async (req, res) => {
+  const vacancyId = req.params.id;
+
+  try {
+    
+    const applicants = await Jobapplication.find({jobid : vacancyId });
+    res.json(applicants);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Failed to retrieve applicants' });
+  }
+});
+
+app.get('/allNetwork/:userId', (req, res) => {
+  const userId = req.params.userId;
+
+  Connection.find({ following: userId })
+    .then(followers => {
+      res.json(followers);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to retrieve followers' });
+    });
+});
+
+app.get('/allFollowing/:userId', (req, res) => {
+  const userId = req.params.userId;
+
+  Connection.find({ follower: userId })
+    .then(following => {
+      res.json(following);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to retrieve following users' });
+    });
+});
+
+app.get('/allpostsmy/:sessionID', async (req, res) => {
+ 
+  const username = req.params.sessionID; 
+
+
+  
+      Post.find({ username: username })
+        .then(posts => {
+          res.json(posts);
+        })
+        .catch(error => {
+          console.log(error);
+          res.status(500).json({ error: 'An error occurred' });
+        });
+  
+ 
+ 
+ 
+  
+});
+
+app.post('/addnotif', async (req, res) => {
+  const { postId, username,notifusername } = req.body;
+   
+  const notification = new Notification({
+    username: username,
+    notifusername: notifusername, // Replace 'user' with the username of the user who performed the like
+    text: 'liked your post', // Modify the notification text as desired
+    notificationType: 1, // Assuming 1 represents a like notification
+    notificationID: postId, // Assuming postId represents a unique identifier for the post
+    date: new Date()
+  });
+
+  notification.save()
+    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to add notification' });
+    });
+});
+
+
+
+function generateRandomId() {
+  const length = 8; // Specify the desired length of the random ID
+  let id = '';
+
+  // Generate random digits for the ID
+  for (let i = 0; i < length; i++) {
+    const digit = Math.floor(Math.random() * 10); // Generate a random digit from 0 to 9
+    id += digit.toString();
+  }
+
+  return id;
+}
+
+app.post('/addnotifcom', async (req, res) => {
+  const { postId, username, notifusername, commentText } = req.body;
+  const randomId = generateRandomId();
+  const notification = new Notification({
+    username: username,
+    notifusername: notifusername,
+    text: 'commented on your post',
+    notificationType: 2, 
+    notificationID: randomId,
+    date: new Date(),
+    comment: commentText 
+  });
+
+  notification
+    .save()
+    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to add notification' });
+    });
+});
+
+
+
+app.get('/allnotifs/:sessionID', async (req, res) => {
+  const username = req.params.sessionID;
+
+Connection.find({ follower: username })
+  .then(connections => {
+    const followingUsers = connections.map(connection => connection.following);
+
+    Notification.find({ notifusername: { $in: followingUsers } })
+      .then(notifications => {
+        res.json(notifications);
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
+  });
+
+});
+
+    
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).json({ message: 'Server error' });
+    } else {
+      console.log('Logout Successful!');
+      
+    }
+  });
+});
+
+
+
+
+
+
+
+
 
 /************* */
 

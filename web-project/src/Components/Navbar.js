@@ -4,9 +4,10 @@ import logo1 from './logo1.png';
 import nabhumanicon from './personcircle.png';
 import nablogouticon from './nab-logout-icon.png';
 import nabprofileicon from './nab-profile-icon.png';
+import axios from "axios";
 const Layout = (props) => {
 
-  let navigate = useNavigate(); 
+  const navigate = useNavigate(); 
   const companyRouteChange =() =>{
     let path = '/company/ownprofile'; 
     navigate(path);
@@ -16,6 +17,30 @@ const Layout = (props) => {
     let path = '/user/ownprofile'; 
     navigate(path);
     handleProfile();
+  }
+
+  const logoutSession = () =>{ 
+    navigate("/login");
+  axios.get('http://localhost:8000/logout')
+  .then(response => {
+    navigate("/login");
+  })
+  .catch(error => {
+    console.error('Error logging out:', error);
+    
+  });
+  }
+
+  const logoutSessiontwo = () =>{ 
+    navigate("/login");
+  axios.get('http://localhost:8000/logout')
+  .then(response => {
+    navigate("/login");
+  })
+  .catch(error => {
+    console.error('Error logging out:', error);
+    
+  });
   }
 
 
@@ -93,7 +118,7 @@ const Layout = (props) => {
                                   <img src={nablogouticon} id="nab-logout-icon"></img>
                                   &nbsp;&nbsp;
                                   
-                                  <button class="editprofile-button" > <span>Logout </span></button>
+                                  <button onClick={logoutSession} class="editprofile-button" > <span>Logout </span></button>
                                   
                                 </div>
                                 
@@ -160,7 +185,7 @@ const Layout = (props) => {
                                   <img src={nablogouticon} id="nab-logout-icon"></img>
                                   &nbsp;&nbsp;
                                   
-                                  <button class="editprofile-button" > <span>Logout </span></button>
+                                  <button onClick={logoutSessiontwo} class="editprofile-button" > <span>Logout </span></button>
                                   
                                 </div>
                                 

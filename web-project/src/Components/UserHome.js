@@ -12,7 +12,7 @@ import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 export default function UserHome() {
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState([]);
     const [username, setUsername] = useState('');
     const [jobs, setJobs] = useState('');
 
@@ -23,7 +23,7 @@ export default function UserHome() {
         axios.get(`http://localhost:8000/user/${sessionID}`)
           .then(res => {
            
-            setUser(res.data.username); 
+            setUser(res.data); 
           })
           .catch(error => console.log(error));
     

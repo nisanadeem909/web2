@@ -4,7 +4,7 @@ import ProfileDetails from './ProfileDetailsPublic'
 import CompanyHistory from './companyhistory'
 import Rating from './ratingcompany'
 import Employees from './workshere'
-import Feed from './Feed';
+import OwnFeed from './OwnFeed';
 import Footer from './Footer';
 import Contact from './contactcompany';
 import OpenVacancies from './openvacancies'
@@ -27,7 +27,7 @@ export default function UserPrivateProfilePage() {
                 </div>
             </div>
             <div className="companyprof_activity">
-                <Feed/>
+                <OwnFeed/>
             </div>
             <div className='companyprof_right'>
                 <div className='companyprof_contact'>

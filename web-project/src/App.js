@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './Components/Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Login from './Components/login.js'
+import Signup from './Components/signup.js'
 
 import LandingPage from './Components/LandingPage'
 import HomePage from './Components/HomePage'
@@ -97,8 +99,7 @@ function App() {
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
             <Route path="viewotherjob" element={<ViewJobDetails />} />
-            <Route path="editvacancy" element={<EditJobDetails />} />
-            <Route path="postjob" element={<PostJobPage />} />
+            
             <Route path="viewapplication" element={<ViewApplicationPage />} />
             <Route path="*" element={<Error/>}></Route>
             
@@ -106,8 +107,8 @@ function App() {
 
             <Route path='vacancies' element={<CompanyVacancies />} /> 
             <Route path='vacancies/viewapplicants' element={<ApplicantsView />} /> 
-
-            
+            <Route path="vacancies/postjob" element={<PostJobPage />} />
+            <Route path="vacancies/editvacancy" element={<EditJobDetails />} />
            
             <Route path='compareapplicants' element={<CompareApplicants/>} />  
 

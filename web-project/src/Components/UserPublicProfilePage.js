@@ -4,7 +4,7 @@ import ProfileDetails from './ProfileDetailsPublic'
 import Skills from './PublicProfileSkills'
 import Education from './PublicProfileEducation'
 import Work from './PublicProfileWork'
-import Feed from './Feed';
+import OwnFeed from './OwnFeed';
 import Footer from './Footer';
 
 export default function UserPublicProfilePage() {
@@ -25,7 +25,7 @@ export default function UserPublicProfilePage() {
                 </div>
             </div>
             <div className="userprof_public_activity">
-                <Feed/>
+                <OwnFeed/>
             </div>
             <div className="userprof_public_footer">
                 <Footer/>
