@@ -30,8 +30,15 @@ const SignupUser = () => {
         alert(user.password);*/
         if (fullname && username && email && password)
         {
-                axios.post("http://localhost:8000/signupuser",user )
-                    .then((res => {alert(res.data)}));
+            try{    
+            axios.post("http://localhost:8000/signupuser",user )
+                    .then(res => {alert(JSON.stringify(res.data.message))
+                    console.log(res.data.message)});
+            }
+            catch(err)
+            {
+                alert(err);
+            }
         }
         else{
             alert("invalid input")
@@ -43,7 +50,7 @@ const SignupUser = () => {
     <div>
         <div id="nab-user-wrapper">
 
-        <form>
+        <div>
             <div>
                 <input id="nab-signup-username" value={user.username} onChange={handleChange} type="text" name="username" placeholder="Username" required/>
             </div>
@@ -58,17 +65,14 @@ const SignupUser = () => {
                 <input id="nab-signup-password" value={user.password} onChange={handleChange} type="password" name="password" placeholder="Password" required/>
             </div>
             
-            {/*<div >
-               
-                <input id="nab-signup-password"type="password" name="password" placeholder="Confirm Password" required/>
-</div>*/}
+            
            
             <div>
 
                <button id="nab-signup-submit-btn" type="submit" onClick={registerUser}>Sign Up As User</button>
                
             </div>
-        </form>
+        </div>
 
         </div>
     </div>

@@ -58,10 +58,6 @@ const EmployeeRequestSchema = new Schema(
       type: String,
       required: true
     },
-    CompanyName :{
-      type:String,
-      required: true
-    },
     CompanyUsername :{
       type:String,
       required: true
@@ -161,7 +157,15 @@ const Connection = mongoose.model('Connection', connection);
 const notificationSchema = new Schema({
   username: {
     type: String,
+    unique: false,
+    trim: true,
+    minlength: 3
+  },
+
+  notifusername: {
+    type: String,
     required: true,
+    unique: false,
     trim: true,
     minlength: 3
   },
@@ -184,7 +188,11 @@ const notificationSchema = new Schema({
 
   date:{
     type: Date,
-    required: true
+   
+  },
+
+  comment:{
+    type : String,
   }
 
 
@@ -220,11 +228,11 @@ const jobapplication = new Schema({
   phone: {
    type: Number
   },
-  lastdegree: [
-   "degree",
-   "major",
-   "university"
-  ],
+  lastdegree: {
+    degree:String,
+    major: String,
+    university:String
+   },
   yearsExp : {
     type: Number
   },
@@ -371,11 +379,13 @@ const userSchema = new Schema({
     type: String
 
   },
-
+  
   worksAt:{
-    type: String
+    CompanyUsername: String,
+    Designation: String
 
-  },
+  },
+
 
   profilePicture:{
     type: String

@@ -33,7 +33,7 @@ function SignupCompany() {
         {
             /*alert("I am in axios");*/
                 axios.post("http://localhost:8000/signupcompany",companyuser )
-                .then((res => {alert(res.data)}));
+                .then((res => {alert(JSON.stringify(res.data.message))}));
         }
         else{
             alert("invalid input")
@@ -45,7 +45,7 @@ function SignupCompany() {
     <div>
         <div id="nab-company-wrapper">
 
-        <form>
+        <div>
             <div>
                 
                 <input id="nab-signup-companyname" type="text" value={companyuser.fullname} onChange={handleChangeCompany} name="fullname" placeholder="Registered Company Name" required/>
@@ -70,7 +70,7 @@ function SignupCompany() {
             <button id="nab-signup-submit-btn" type="submit" onClick={registerCompany} >Sign Up As Company</button>
             </div>
             
-        </form>
+        </div>
 
         </div>
     </div>

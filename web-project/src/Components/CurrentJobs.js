@@ -47,7 +47,7 @@ function CurrentJobsPage(props) {
     
     const [companyName,setCompanyNames] = useState([]);
     const [designations,setDesignations] = useState([]);
-   
+    const [jobsId,setJobId] = useState([]);
     let uniqueid = 31;
     const incrementID = ()=>{
         
@@ -56,7 +56,9 @@ function CurrentJobsPage(props) {
     }
     const [checkedcomp, setCheckedComp] = useState([]);
     const [checkeddes, setCheckedDes] = useState([]);
-    const handleCheckboxChange = (event, desig, comp) => {
+    const[checkedid,setCheckedId] = useState([]);
+    
+    const handleCheckboxChange = (event, desig, comp,jobid) => {
         
         incrementID();
         //if (checkedcomp.length > 2){const empty = []; setCheckedComp(empty);setCheckedDes(empty); return;}
@@ -70,7 +72,10 @@ function CurrentJobsPage(props) {
                 ...checkeddes,
                 desig
              ]);
-            
+             setCheckedId([
+                ...checkedid,
+                jobid
+             ]);
         }
         else{
             
@@ -80,9 +85,12 @@ function CurrentJobsPage(props) {
             const newComps = checkedcomp.filter((selectedRow) => selectedRow.compName !== comp.compName);
             setCheckedComp(newComps);
 
+            const newId = checkedid.filter((selectedRow) => selectedRow.j_id !== jobid.j_id);
+            setCheckedId(newId);
             console.log("HEREEE Filtering = ");
             console.log(newComps);
             console.log(newDesignations);
+            console.log(newId);
             
         }
       };
@@ -93,7 +101,11 @@ function CurrentJobsPage(props) {
         //alert("I am in axios = " + msg.data[0].JobId);
         let des_list = msg.data.map(cname => cname.Designation);
         let comp_list = msg.data.map(comp => comp.CompanyName);
-        
+        let jobid_list = msg.data.map(comp => comp.JobId);
+        console.log(jobid_list);
+
+
+        setJobId(jobid_list);
         setCompanyNames(comp_list);
         setDesignations(des_list);
         
@@ -121,7 +133,7 @@ function CurrentJobsPage(props) {
             /* Setting the props */
             props.jobset(checkeddes);
             props.compset(checkedcomp);
-        
+            props.idset(checkedid);
         }
            
         
@@ -130,6 +142,7 @@ function CurrentJobsPage(props) {
         return  companyName.map((compName, index) => {
             
             const des = designations[index];
+            const j_id = jobsId[index];
             return (<tr key={index}>
                 <td>
                     <img className='works-emp-icon' src={empicon}></img>
@@ -143,7 +156,7 @@ function CurrentJobsPage(props) {
                         <div id="nab-currentjobs-btn-group">
                         
                             <div id="nab-currentjobs-checkbox-wrapper">
-                                <input id="nab-currentjobs-checkbox" onChange={event => handleCheckboxChange(event, {des},{compName})} type="checkbox"></input>
+                                <input id="nab-currentjobs-checkbox" onChange={event => handleCheckboxChange(event, {des},{compName},{j_id})} type="checkbox"></input>
                                 &nbsp;&nbsp;
                                 <label id="select-for-comp">Add to Compare</label>
                             </div>
