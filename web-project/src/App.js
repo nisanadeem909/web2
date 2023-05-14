@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Components/login.js'
 import Signup from './Components/signup.js'
 
+import Login from './Components/login.js'
+import Signup from './Components/signup.js'
+
+
 import LandingPage from './Components/LandingPage'
 import HomePage from './Components/HomePage'
 import Post from './Components/Post'
@@ -42,7 +46,7 @@ import CompanyVacancies from './Components/CompanyVacancies';
 import ApplicantsView from './Components/ApplicantsView';
 
 import CompareApplicants from './Components/CompareApplicants';
-
+import SearchResults from './Components/SearchResults'
 
 
 function App() {
@@ -68,7 +72,7 @@ function App() {
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<UserPrivateProfilePage />} />
             <Route path="ownprofile/editprofile" element={<EditProfile />} />
-
+            <Route path="searchresults" element={<SearchResults />} />
             <Route path="viewjob" element={<ViewJobDetails />} />
 
             <Route path="myjobs" element={<AllJobs />} />
@@ -93,14 +97,13 @@ function App() {
             <Route path="publiccompanyprofile" element={<CompanyPublicProfilePage />} />
             <Route path="ownprofile" element={<CompanyPrivateProfilePage />} />
             <Route path="ownprofile/editprofile" element={<EditProfile />} />
-
+            <Route path="searchresults" element={<SearchResults />} />
             <Route path="manageemployees" element={<ManageEmp />} />
 
             <Route path='network' element={<Network />} /> 
             <Route path='notifications' element={<Notifications/>} />  
             <Route path="viewotherjob" element={<ViewJobDetails />} />
-            <Route path="editvacancy" element={<EditJobDetails />} />
-            <Route path="postjob" element={<PostJobPage />} />
+            
             <Route path="viewapplication" element={<ViewApplicationPage />} />
             <Route path="*" element={<Error/>}></Route>
             
@@ -108,8 +111,8 @@ function App() {
 
             <Route path='vacancies' element={<CompanyVacancies />} /> 
             <Route path='vacancies/viewapplicants' element={<ApplicantsView />} /> 
-
-            
+            <Route path="vacancies/postjob" element={<PostJobPage />} />
+            <Route path="vacancies/editvacancy" element={<EditJobDetails />} />
            
             <Route path='compareapplicants' element={<CompareApplicants/>} />  
 

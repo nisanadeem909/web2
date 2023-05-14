@@ -6,11 +6,18 @@
 
 .feed_ul_k {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
    
    
 }
 
 .feed_li_k{
     margin-bottom: 5%;
+}
+
+.nisa-f-pp{
+    margin-left: 300px;
+    margin-bottom: 200px;
+    color: maroon;
+    font-size: 20px;
 }

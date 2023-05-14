@@ -1,11 +1,21 @@
 .profile-container{
     width: 100%;
-    height: 40vh;
+    height: 45vh;
     border: 1px solid gray;
     background-color: rgba(255,255,255,0.6);
     box-shadow: 10px;
     border-radius: 2vh;
     text-align: center;
+}
+
+.nisa-pf-btn{
+    background-color:#267571 ;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    margin-top: 19px;
+    cursor: pointer;
 }
 
 .profile_box{

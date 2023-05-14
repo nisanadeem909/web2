@@ -4,7 +4,7 @@ import ProfileDetails from './ProfileDetailsPrivate'
 import Skills from './PrivateProfileSkills'
 import Education from './PrivateProfileEducation'
 import Work from './PrivateProfileWork'
-import Feed from './Feed';
+import OwnFeed from './OwnFeed';
 import Footer from './Footer';
 import axios from 'axios';
 
@@ -116,7 +116,7 @@ export default function UserPrivateProfilePage() {
                 </div>
             </div>
             <div className="userprof_public_activity">
-                <Feed/>
+                <OwnFeed/>
             </div>
             <div className="userprof_public_footer">
                 <Footer/>

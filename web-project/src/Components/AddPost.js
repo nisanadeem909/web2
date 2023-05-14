@@ -16,26 +16,47 @@ export default function AddPost() {
     
    
 
-    
-    
+    function generateRandomId() {
+        const min = 1000; // Minimum ID value
+        const max = 9999; // Maximum ID value
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      
 
     const cancel = () => {
         txt.current.value = "";
-        img2.current.value = null;
+       /* img2.current.value = null;
         var div = document.getElementById("apost_image");
-        div.innerText = "";
+        div.innerText = "";*/
     }
 
     const upload = () => {
-        var fdata = new FormData();
+        const text1 = txt.current.value;
+        const sessionID = sessionStorage.getItem('sessionID');
+        const pID = generateRandomId();
+        axios
+        .post(`http://localhost:8000/posts`, {
+          username: sessionID,
+          text : text1,
+          postID : pID,
+          date : "2023-08-01",
+          imagePath : "./post.jpg",
+          
+      })
+        .then((res) => {
+            txt.current.value = "";
+        })
+        .catch((error) => console.log(error));
+    }
+       /* var fdata = new FormData();
         fdata.append("Image", img);    
         alert("hel");
         axios.post('http://localhost:8000/upload',fdata).then(res => {alert("Respnse" + JSON.stringify(res.data))});
        
 
-        //<Feed data={images}/>
+        //<Feed data={images}/>*/
 
-    }
+    
 
     return (
         <div className="apost_container">

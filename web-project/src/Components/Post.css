@@ -1,9 +1,12 @@
 .post-container{
     width: 100%;
-    height: 130vh;
+    height: 110vh;
     background-color: rgba(255,255,255,0.6);
     border-radius: 10px;
     border: 0.5px solid gray;
+    display: flex;
+  flex-direction: column; /* Added to make the container expand vertically */
+ position: relative;
     
 }
 .nisa-post-p9{
@@ -42,6 +45,7 @@
     height: 40%;
     width: 100%;
     margin-top: 3%;
+    min-height: 520px;
 }
 
 .post_btnpara {
@@ -100,6 +104,7 @@
     width: 30px;
     height: 30px;
    border-radius: 50%;
+   cursor: pointer;
 
 }
 
@@ -107,7 +112,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-   
+   cursor: pointer;
 
 }
 
@@ -115,13 +120,16 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-   
+   cursor: pointer;
 
 }
 
 .post_icons2{
-   background: none;
+   background-color: none;
    border: none;
+   cursor: pointer;
+   z-index: 1;
+   
 }
 
 .post_p3{
@@ -133,11 +141,79 @@
     
 }
 
-.post_last{
-    display: flex;
-    flex-direction: row;
-    margin-top: 40%;
+.post_last {
+  /* Adjust the value to leave space for the buttons and images */
+  overflow-y: auto;
+    /* Customizing the scrollbar */
+    scrollbar-width: thin; /* thin, auto, or none */
+    scrollbar-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5); /* thumb color, track color */
+  
+    /* For WebKit browsers (Chrome, Safari) */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* For WebKit browsers (Chrome, Safari) */
+  .post_last::-webkit-scrollbar {
+    width: 7px; /* width of the scrollbar */
+    height: 10px;
+  }
+  
+  .post_last::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.5); /* color of the track */
+    height: 30px;
+  }
+  
+  .post_last::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* color of the thumb */
+    border-radius: 3px; /* radius of the thumb */
+    height: 10px;
+  }  
+
+
+  
+ 
+.post_comment-list {
+  flex-shrink: 1;
+  margin-top: -120px;
+  margin-bottom: 15px;
 }
+  
+  .post_last ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  
+  .post_last li {
+    display: flex;
+    align-items: center;
+   
+  }
+  
+  .post_p3 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .post_comment-l {
+    flex: 1;
+  }
+  
+  .post_h6 {
+    margin-bottom: 5px;
+  }
+  
+  .post_lp {
+    margin: 0;
+  }
+  
+
+
 
 .post_comment-part{
     width: 150px;
@@ -164,4 +240,64 @@
     font-size: 14px;
 
 }
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    border: 1px solid black;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .comment-textarea {
+    width: 300px;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  
+  .add-comment-button {
+    background-color: #0E312F;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .cancel-button {
+    background-color: #ccc;
+    color:black;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
 
