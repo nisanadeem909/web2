@@ -12,28 +12,31 @@ function JobComparisonPage() {
    const [compJobs,setjobs] = useState([]);
    const [comps,setcomps] = useState([]);
    const [call,setCall] = useState("false");
-
+   const [jobid,setJobId] = useState([]);
    const jobset = (message) => {
-      alert("Setting Jobs in Parent");
+      //alert("Setting Jobs in Parent");
       setjobs(message);
       
       setCall("true");
     };
     const compset = (message) => {
-      alert("Setting Company in Parent");
+      //alert("Setting Company in Parent");
       setcomps(message);
     };
-
+    const idset = (message) =>{
+      //alert("Setting Jobids in Parent");
+      setJobId(message);
+    }
     if (call === "false"){
             return (
                <div>
                <div id="nab-alljobs-wrapper">
                      <div id="alljobs-currentemp">
-                        <CurrentJobs jobset={jobset} compset={compset} />
+                        <CurrentJobs jobset={jobset} compset={compset} idset={idset} />
                      </div>
          {/*I don't know what to show here */}
                      <div id="alljobs-empreq">
-                        {/*<JobComparison />*/}
+                        <JobComparison />
             </div>
                </div>
                <br></br>
@@ -45,11 +48,11 @@ function JobComparisonPage() {
          <div>
          <div id="nab-alljobs-wrapper">
               <div id="alljobs-currentemp">
-                 <CurrentJobs jobset={jobset} compset={compset} />
+                 <CurrentJobs jobset={jobset} compset={compset} idset={idset}/>
               </div>
  
               <div id="alljobs-empreq">
-                 <JobComparison jobset={compJobs} compset={comps}/>
+                 <JobComparison jobset={compJobs} compset={comps} idset={jobid}/>
               </div>
  
  

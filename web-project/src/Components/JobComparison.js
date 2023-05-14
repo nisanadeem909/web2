@@ -22,50 +22,75 @@ function JobComparison(props) {
     const [jobs,setJobs] = useState([]);
     const [comps,setComps] = useState([]);
     const inputRef = useRef(null);
+    const [sal1,setSal1] = useState("Nothing Selected");
+    const [sal2,setSal2] = useState("Nothing Selected");
+    const [deg1,setdeg1] = useState("Nothing Selected");
+    const [deg2,setdeg2] = useState("Nothing Selected");
+    const [exp1,setexp1] = useState("Nothing Selected");
+    const [exp2,setexp2] = useState("Nothing Selected");
+    const [wh1,setwh1] = useState("Nothing Selected");
+    const [wh2,setwh2] = useState("Nothing Selected");
+    const [leaves1,setleaves1] = useState("Nothing Selected");
+    const [leaves2,setleaves2] = useState("Nothing Selected");
+    const[major1,setmaj1] = useState("Nothing Selected");
+    const[major2,setmaj2] = useState("Nothing Selected");
+    const[des1,setdes1] = useState("Job-1");
+    const[des2,setdes2] = useState("Job-2");
+    const[c1,setc1] = useState("Company-1");
+    const[c2,setc2] = useState("Company-2");
     const setData = async () => {
-        alert("I am in axios of job comp");
+        /*alert("I am in axios of job comp");
         alert("props.jobset " + JSON.stringify(props.jobset));
         alert("props.compset " + JSON.stringify(props.compset));
+        alert("props.ideset " + JSON.stringify(props.idset));*/
         setJobs(props.jobset);
         setComps(props.compset);
         
         
-        let newobj = {"comp1": props.compset[0].compName, "comp2":props.compset[1].compName,"job1":props.jobset[0].des,"job2":props.jobset[1].des};
-        
+        //let newobj = {"comp1": props.compset[0].compName, "comp2":props.compset[1].compName,"job1":props.jobset[0].des,"job2":props.jobset[1].des};
+        //console.log("Job ids = ");
+        //console.log(props.idset[0].j_id);
+        let newobj = {"jobid1":props.idset[0].j_id,"jobid2":props.idset[1].j_id};
         //setObj({"comp1": props.compset[0].compName, "comp2":props.compset[1].compName,"job1":props.jobset[0].des,"job2":props.jobset[1].des});
-        alert("hello");
-        alert(JSON.stringify(newobj));
+        //alert("hello");
+        //alert(JSON.stringify(newobj));
         
-        
-        let salary1,degree1,exp1,wh1,paidleaves1,location1;
-        let salary2,degree2,exp2,wh2,paidleaves2,location2;
+       
         axios.post('http://localhost:8000/comparejobs', newobj)
-        .then(response => {alert(JSON.stringify(response.data.job1));
-            alert(JSON.stringify(response.data.job2));
-            
-            salary1 = response.data.job1.Salary;
-            inputRef.current.value = salary1;
-            //console.log("input ref = " + inputRef.current.value);
-            salary2 = response.data.job2.Salary;
-            
-            exp1 = response.data.job1.Experience;
-            exp2 = response.data.job2.Experience;
-            wh1 = response.data.job1.WeeklyWorkingHours;
-            wh2 = response.data.job2.WeeklyWorkingHours;
-            paidleaves1 = response.data.job1.YearlyPaidLeaves;
-            paidleaves2 = response.data.job2.YearlyPaidLeaves;
+        .then(response => {
+            //alert(JSON.stringify(response.data.job1));
+            //alert(JSON.stringify(response.data.job2));
+           
+            setc1(response.data.job1.CompanyName);
+            setc2(response.data.job2.CompanyName);
+            setdes1(response.data.job1.Designation);
+            setdes2(response.data.job2.Designation);
+           setSal1(response.data.job1.Salary);
+           setSal2(response.data.job2.Salary);
+           setexp1(response.data.job1.YearsofExperience)
+           setexp2(response.data.job2.YearsofExperience)
+           setwh1(response.data.job1.WeeklyWorkingHours)
+           setwh2(response.data.job2.WeeklyWorkingHours)
+           setleaves1(response.data.job1.YearlyPaidLeaves)
+           setleaves2(response.data.job2.YearlyPaidLeaves)
+           setdeg1(response.data.job1.DegreeRequired);
+           setdeg2(response.data.job2.DegreeRequired);
+           setmaj1(response.data.job1.MajorRequired);
+           setmaj2(response.data.job2.MajorRequired);
 
-           degree1 = response.data.job1.DegreeRequired;
-           degree2 = response.data.job2.DegreeRequired;
+           
             });
         
         //alert("Showing salary = " + job1details);
         
         
       };
+      
     useEffect(() => {
+        if (props.jobset && props.compset)
         setData();
-      }, []);
+        
+      }, [props.jobset,props.compset]);
     
     return (
 
@@ -85,8 +110,8 @@ function JobComparison(props) {
                 </tr>
                 
                 <tr>
-                    <td><button class="uides-btn"><span>UI Designer at Narsun Studios </span></button></td>
-                    <td><button class="uides-btn"><span>UI Designer at Mindstorm </span></button></td>
+                    <td><button class="uides-btn"><span>{des1} at {c1} </span></button></td>
+                    <td><button class="uides-btn"><span>{des2} at {c2} </span></button></td>
                     
                 </tr>
                 <tr>
@@ -96,63 +121,63 @@ function JobComparison(props) {
                     
                 </tr>
                 <tr>
-                    <td  colspan="2">Salary & Yearly Bonus</td>
+                    <td  colspan="2"><strong>Salary & Yearly Bonus</strong></td>
                     <td></td>
                     
                 </tr>
                 <tr>
-                    <td ref={inputRef}></td>
-                    <td>$9k Yearly + $0.5K Yearly Bonus</td>
+                    <td >{sal1} </td>
+                    <td>{sal2}</td>
                     
                 </tr>
                 <tr>
-                    <td  colspan="2">Degree Required</td>
+                    <td  colspan="2"><strong>Degree of Preference</strong></td>
                     <td></td>
                     
                 </tr>
                 <tr>
-                    <td>MPhil Degree in any CS Field</td>
-                    <td>Bachelors in CS + industry experience</td>
+                    <td>{deg1}</td>
+                    <td>{deg2}</td>
                     
                 </tr>
                 <tr>
-                    <td  colspan="2">Experience Required</td>
+                    <td  colspan="2"><strong>Preferred Experience in Years</strong></td>
                     <td></td>
                     
                 </tr>
                 <tr>
-                    <td>10 Years in Data Mining</td>
-                    <td>5 Years in Field Work</td>
+                    <td>{exp1}</td>
+                    <td>{exp2}</td>
                     
                 </tr>
                 <tr>
-                    <td  colspan="2">Working Hours</td>
+                    <td  colspan="2"><strong>Average Working Hours</strong></td>
                     <td></td>
                     
                 </tr>
                 <tr>
-                    <td>10 to 6 with WFH Available</td>
-                    <td>40 Hours Flexible Weekly</td>
+                    <td>{wh1}</td>
+                    <td>{wh2}</td>
                     
                 </tr>
                 <tr>
-                    <td  colspan="2">Paid Leaves</td>
+                    <td  colspan="2"><strong>Yearly Paid Leaves</strong></td>
                     <td></td>
                     
                 </tr>
                 <tr>
-                    <td>3 month-Paid-Maternity Leave</td>
-                    <td>1 month-Paid-Leave</td>
+                    <td>{leaves1}</td>
+                    <td>{leaves2}</td>
                     
                 </tr>
                 <tr>
-                    <td  colspan="2">Location</td>
+                    <td  colspan="2"><strong>Major Preferred</strong></td>
                     <td></td>
                     
                 </tr>
                 <tr>
-                    <td>Silicon Valley, USA</td>
-                    <td>Texas</td>
+                    <td>{major1}</td>
+                    <td>{major2}</td>
                     
                 </tr>
             </table>

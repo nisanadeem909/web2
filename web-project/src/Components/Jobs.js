@@ -5,10 +5,18 @@ import jobicon from './workk.png'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function Jobs() {
 
     const [alljobs, setAllJobs] = useState([]);
+    const navigate = useNavigate();
+    const compareJobsRoute = () =>{ 
+      let path = '/user/myjobs'; 
+      navigate(path);
+      
+    }
+    
     useEffect(() => {
         
         
@@ -40,7 +48,7 @@ export default function Jobs() {
 
         <hr className='job'/>  
       
-        <button className='nisa-job-btn2'>Compare Jobs</button>
+        <button className='nisa-job-btn2' onClick={compareJobsRoute}>Compare Jobs</button>
 
 
 
