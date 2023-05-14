@@ -58,10 +58,6 @@ const EmployeeRequestSchema = new Schema(
       type: String,
       required: true
     },
-    CompanyName :{
-      type:String,
-      required: true
-    },
     CompanyUsername :{
       type:String,
       required: true
@@ -383,11 +379,13 @@ const userSchema = new Schema({
     type: String
 
   },
-
+  
   worksAt:{
-    type: String
+    CompanyUsername: String,
+    Designation: String
 
-  },
+  },
+
 
   profilePicture:{
     type: String
