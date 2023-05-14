@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Post.css';
+import './OwnPost.css';
 import person from './person.png';
 import post from './post.jpg';
 import like from './like.webp';
@@ -80,7 +81,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         setLikes(likes + 1);
         setLiked(true);
   
-    
+       
         await axios.post(`http://localhost:8000/addnotif`, {
           postId: props.postcurr.postID,
           username: props.postcurr.username,
@@ -92,7 +93,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       }
     }
   };
-  
+
   const handleComment = () => {
     const username = sessionStorage.getItem('sessionID');
   
@@ -119,7 +120,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       .post(`http://localhost:8000/addnotifcom`, {
         postId: props.postcurr.postID,
         username: props.postcurr.username,
-        notifusername: username, // person who performed the like stored in session ;)
+        notifusername: username,
         commentText: commentText
       })
       .then((res) => {
@@ -155,7 +156,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       <button className="cancel-button" onClick={() => setModalIsOpen(false)}>Cancel</button>
     </Modal>
       
-      <div className='post-container'>
+      <div className='post-containernew'>
         <div className='post_upper'>
           <img className='post_p1' src={person} alt='' />
 
@@ -165,7 +166,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
           </div>
         </div>
 
-        <div className='post_middle'>
+        <div className='post_middlenew'>
           <img className='post_p2' src={post} alt='' />
           <div className='post_btnpara'>
             <div className='post_btns'>
@@ -193,7 +194,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 
      
         <div className='post_last'>
-  <div className='post_comment-list'>
+  <div className='post_comment-listnew'>
     <ul>
       {allcomments.map((cm) => (
         <li key={cm._id}>

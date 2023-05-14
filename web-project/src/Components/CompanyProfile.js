@@ -2,20 +2,15 @@ import React from 'react'
 import './Profile.css';
 import person from './person.png';
 
-export default function Profile(props) {
+export default function CompanyProfile(props) {
  
   if (!props.user) {
     return null; 
   }
 
   
-  if (!props.user.education) {
-    return null; 
-  }
 
-  const degree = props.user.education[0]?.degree;
-  const major = props.user.education[0]?.major;
-  const school = props.user.education[0]?.school; 
+
 
   return (
     <div>
@@ -28,7 +23,7 @@ export default function Profile(props) {
             <strong>{props.user.name}</strong>
             </div>
             <div className='prof_middle'>
-            <p>{degree} {major} Student at {school} </p>
+            <p>Company Type:  {props.user.companyType} </p>
             <button className='nisa-pf-btn' >Open Profile</button>
             </div>
            

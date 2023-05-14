@@ -1,6 +1,6 @@
 import React from 'react';
 import './Feed.css';
-import Post from './Post';
+import OwnPost from './OwnPost';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ export default function Feed(props) {
     const sessionID = sessionStorage.getItem('sessionID');
 
     axios
-      .get(`http://localhost:8000/allposts/${sessionID}`)
+      .get(`http://localhost:8000/allpostsmy/${sessionID}`)
       .then(res => {
         setAllPosts(res.data);
       })
@@ -33,7 +33,7 @@ export default function Feed(props) {
           ) : (
             allposts.map(post => (
               <li className='feed_li_k' key={post._id}>
-                <Post postcurr={post} />
+                <OwnPost postcurr={post} />
               </li>
             ))
           )}

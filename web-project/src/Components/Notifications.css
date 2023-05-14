@@ -5,6 +5,11 @@
     height: 100vh;
 }
 
+.nisa-ll{
+    font-size: 28px;
+    margin-left: 45%;
+    color: maroon;
+}
 .notif{
    border: 0.3px solid rgb(28, 27, 27,0.6);
    margin-left: 20%;

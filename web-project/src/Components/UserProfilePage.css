@@ -21,6 +21,7 @@
   .userprof_public_left {
     grid-area: left;
     margin-left: 2rem;
+    margin-top: -7rem;
   }
   
   .userprof_public_education {
