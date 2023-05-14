@@ -4,10 +4,22 @@ import ReactDOM from "react-dom";
 import jobicon from './workk.png'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
 export default function RecentlyAddedJobs() {
     const [jobs, setJobs] = useState([]);
+    const navigate = useNavigate();
+
+    const handleView = (job) => {
+        //alert(job.JobId);
+        navigate('/user/viewjob', { state: job });
+      };
+
+      const handleApply = (job) => {
+        //alert(job.JobId);
+        navigate('/user/applyjob', { state: job });
+      };
 
     useEffect(() => {
         const sessionID = sessionStorage.getItem('sessionID');
@@ -43,8 +55,8 @@ export default function RecentlyAddedJobs() {
                                 <label className="uhjobs_listsubheading1">{job.CompanyName}</label>
                                 <label className="uhjobs_listsubheading2">Experience Required: {job.YearsofExperience}yrs</label>
                                 <div className="uhjobs_buttons">
-                                    <button className="uhjobs_button">Apply</button>
-                                    <button className="uhjobs_button">View Details</button>
+                                    <button className="uhjobs_button" onClick={()=>{handleApply(job)}}>Apply</button>
+                                    <button className="uhjobs_button" onClick={()=>handleView(job)}>View Details</button>
                                 </div>
                             </div>
                     

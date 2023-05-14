@@ -4,6 +4,7 @@ import findjob from './findjob3.png';
 import jobicon from './workk.png'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +12,7 @@ export default function Jobs() {
 
     const [alljobs, setAllJobs] = useState([]);
     const navigate = useNavigate();
+
     const compareJobsRoute = () =>{ 
       let path = '/user/myjobs'; 
       navigate(path);
@@ -29,6 +31,16 @@ export default function Jobs() {
           .catch(error => console.log(error));
 
       }, []);
+
+      const handleView = (job) => {
+        //alert(job.JobId);
+        navigate('/user/viewjob', { state: job });
+      };
+
+      const handleApply = (job) => {
+        //alert(job.JobId);
+        navigate('/user/applyjob', { state: job });
+      };
 
 
 
@@ -70,8 +82,8 @@ export default function Jobs() {
 
           <div className='nisa-notify-post'>
           
-          <button className='nisa-job-btn1'>Apply</button>
-          <button  className='nisa-job-btn1'>View Details</button>
+          <button className='nisa-job-btn1' onClick={()=>{handleApply(job)}}>Apply</button>
+          <button  className='nisa-job-btn1' onClick={()=>handleView(job)}>View Details</button>
     
          </div>
 
