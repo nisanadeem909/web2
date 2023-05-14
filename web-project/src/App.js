@@ -6,9 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Components/login.js'
 import Signup from './Components/signup.js'
 
-import Login from './Components/login.js'
-import Signup from './Components/signup.js'
-
 
 import LandingPage from './Components/LandingPage'
 import HomePage from './Components/HomePage'

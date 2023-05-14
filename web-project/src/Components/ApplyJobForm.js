@@ -129,7 +129,7 @@ export default function ApplyJob(props) {
           </div>
           <div className='kpostjobform-field'>
             <label className='kpostjobform-field-heading'>Email:</label>
-            <input type="text" className='kpostjobform-field-input' ref={email} placeholder='Email for Contact'></input>
+            <input type="email" className='kpostjobform-field-input' ref={email} placeholder='Email for Contact'></input>
           </div>
           <div className='kpostjobform-field'>
             <label className='kpostjobform-field-heading'>Contact Number:</label>
