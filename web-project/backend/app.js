@@ -1850,6 +1850,66 @@ app.get('/logout', (req, res) => {
 /************* */
 
 
+/*************************** KOMAL 4 ****************************/
+
+app.post('/getusertype', async (req, res) => {
+    console.log(req.body);
+    var uname = req.body.user;
+    var data;
+
+    try {
+      const user = await User.findOne({ username: uname });
+      if (user) {
+        console.log('User exists');
+        data = {"type":"user","user":user};
+      } else {
+        console.log('User does not exist');
+        const company = await Company.findOne({ username: uname });
+        if (company) {
+          console.log('Company exists');
+          data = {"type":"company","user":company};
+        } else {
+          console.log('Company does not exist');
+          data = {"type":"none"}
+        }
+      }
+    } catch(err) {
+        console.log(err);
+        data = {"type":"none"}
+    }
+
+    console.log(data);
+
+    res.json(data);
+
+    res.end();
+});
+
+
+app.post('/getconnections', async (req, res) => {
+    console.log(req.body);
+    var uname = req.body.username;
+    // var data;
+
+    var following = await Connection.countDocuments({ follower: uname });
+    var followers = await Connection.countDocuments({ following: uname });
+
+    if (!followers)
+        followers = 0;
+    if (!following)
+        following = 0;
+
+    var cons = {'followers': followers, 'following': following};
+
+    console.log(cons);
+
+    res.json(cons);
+    res.end();
+});
+
+/****************************************************************/
+
+
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
 })

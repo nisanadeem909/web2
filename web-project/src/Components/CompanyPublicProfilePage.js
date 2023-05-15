@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './CompanyProfilePage.css'
 import ProfileDetails from './ProfileDetailsPublic'
 import CompanyHistory from './companyhistory'
@@ -8,22 +8,39 @@ import OwnFeed from './OwnFeed';
 import Footer from './Footer';
 import Contact from './contactcompany';
 import OpenVacancies from './openvacancies'
+import axios from 'axios'
+import { useLocation } from 'react-router-dom'
 
 export default function UserPrivateProfilePage() {
+
+    const location = useLocation();
+    const user = location.state;
+    const [cons,setCons] = useState();
+    
+    useEffect(()=>{
+        var param = {"username":user.username};
+        axios.post(`http://localhost:8000/getconnections`,param)
+      .then(res => {
+          setCons(res.data);
+          //alert(JSON.stringify(res.data));
+      })
+      .catch(error => alert(error));
+    },[]);
+
     return (
         <div className='companyprof_container'>
             <div className="companyprof_header">
-                <ProfileDetails/>
+                <ProfileDetails user={user} type="company" cons={cons}/>
             </div>
             <div className="companyprof_left">
                 <div className="companyprof_history">
-                    <CompanyHistory/>
+                    <CompanyHistory company={user}/>
                 </div>
                 <div className="companyprof_rating">
-                    <Rating/>
+                    <Rating company={user}/>
                 </div>
                 <div className="companyprof_emp">
-                    <Employees/>
+                    <Employees company={user}/>
                 </div>
             </div>
             <div className="companyprof_activity">
@@ -31,10 +48,10 @@ export default function UserPrivateProfilePage() {
             </div>
             <div className='companyprof_right'>
                 <div className='companyprof_contact'>
-                    <Contact/>
+                    <Contact company={user}/>
                 </div>
                 <div className='companyprof_vacancies'>
-                    <OpenVacancies/>
+                    <OpenVacancies company={user}/>
                 </div>
             </div>
             <div className="companyprof_footer">

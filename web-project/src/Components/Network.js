@@ -4,13 +4,14 @@ import './Network.css';
 import connecticon from './pfneto.png';
 import person from './person.png';
 import bgnetwork from './networkpic.png';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Network() {
   const [allFollower, setAllFollower] = useState([]);
   const [allFollowing, setAllFollowing] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
@@ -29,6 +30,34 @@ export default function Network() {
       })
       .catch(error => console.log(error));
   }, []);
+
+  const openProfile=(username)=>{
+    //find user type
+    var param = {"user":username};
+    axios.post(`http://localhost:8000/getusertype`,param)
+      .then(res => {
+          if (res.data.type != "none")
+          {
+              var utype = sessionStorage.getItem("userType");
+              var path = "/" + utype + "/";
+
+              if (res.data.type == "user")
+              {
+                  path += "publicuserprofile";
+              }
+              else {
+                  path += "publiccompanyprofile";
+              }
+
+             // alert(path);
+
+              navigate(path, { state: res.data.user });
+          }
+          else 
+            console.log("error");
+      })
+      .catch(error => alert(error));
+  }
 
   return (
     <div className='nisa-network-container'>
@@ -56,7 +85,7 @@ export default function Network() {
                       </div>
                     </div>
                     <div className='btnnnn'>
-                      <button className='nisa-network-btn'>
+                      <button className='nisa-network-btn' onClick={()=>{openProfile(follow.follower)}}>
                        Open Profile
                       </button>
                     </div>
@@ -86,7 +115,7 @@ export default function Network() {
                       </div>
                     </div>
                     <div>
-                      <button className='nisa-network-btn'>
+                      <button className='nisa-network-btn' onClick={()=>{openProfile(followi.following)}}>
                        Open Profile
                       </button>
                     </div>

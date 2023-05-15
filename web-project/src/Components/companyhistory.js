@@ -1,26 +1,51 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import './companyhistory.css';
+import axios from 'axios';
 
 
-function CompanyHistory() {
+function CompanyHistory(props) {
 
-    const [aboutUs,setAboutUs] = useState({'website':'www.example-website.com','startYear': '2010', 'years':'23', 'Location': {'city': 'Texas', 'country': 'USA'}, 'aboutUsText':'We specialise in manufacturing shoes and serve major clients like Adidas and Nike. We have been listed #7 in Forbes Highly Ranked Companies in 2020.'});
+    const [aboutUs,setAboutUs] = useState(null);
+    const [aboutUsCon,setAboutUsCon] = useState(<label className='komal-noinfoyet'>No information added yet</label>);
+
+    useEffect(() => {
+        var totalYears;
+
+        if (props.company)
+        {
+            if (props.company.aboutUs){
+                setAboutUs(props.company.aboutUs);
+               // alert(JSON.stringify(aboutUs));
+                if (props.company.aboutUs.endYear == 'present')
+                {
+                    var currYear = (new Date()).getFullYear();
+                    totalYears = parseInt(currYear - props.company.aboutUs.startYear);
+                }
+                else 
+                {
+                    totalYears = parseInt(props.company.aboutUs.endYear - props.company.aboutUs.startYear);
+                }
+                setAboutUsCon(<><div id="companyhistory-website">{props.company.aboutUs.website}
+            
+                </div>
+                <div id="companyhistory-years">{props.company.aboutUs.startYear}-present . {props.company.aboutUs.years} years</div>
+                <div id="companyhistory-location">{props.company.aboutUs.city},{props.company.aboutUs.country}</div>
+                <br></br>
+                <p id="about-text">
+    
+                    {props.company.aboutUs.text}
+                    
+                </p></>);
+            }
+        }
+    }, [props.company]);
 
     return (
         <div id="companyhistory-box">
             <div id="about-company">About Us</div>
             <br></br>
-            <div id="companyhistory-website">{aboutUs.website}
-            
-            </div>
-            <div id="companyhistory-years">{aboutUs.startYear}-present . {aboutUs.years} years</div>
-            <div id="companyhistory-location">{aboutUs.Location.city},{aboutUs.Location.country}</div>
-            <br></br>
-            <p id="about-text">
-
-                {aboutUs.aboutUsText}
-                
-            </p> 
+            {aboutUsCon}
+            {/**  */}
  
        </div>
     );
