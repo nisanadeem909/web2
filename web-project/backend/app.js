@@ -2227,40 +2227,7 @@ app.post("/addcomment", async (req, res) => {
   }
 });
 
-app.get('/allNetwork/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
 
-    const followers = await Connection.find({ following: userId }).exec();
-
-    const followerUsernames = followers.map(follower => follower.follower);
-
-    const users = await User.find({ username: { $in: followerUsernames } }).exec();
-
-    res.json(users);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Failed to retrieve followers' });
-  }
-});
-
-
-app.get('/allFollowing/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-
-    const following = await Connection.find({ follower: userId }).exec();
-
-    const followingUsernames = following.map(follow => follow.following);
-
-    const users = await User.find({ username: { $in: followingUsernames } }).exec();
-
-    res.json(users);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Failed to retrieve following users' });
-  }
-});
 
 
 app.post('/uploadpostpic', function(req,res){
@@ -2353,6 +2320,41 @@ app.get('/findjob/:jobId', (req, res) => {
 });
 
 /****************************************************/
+
+app.get('/allNetwork/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const followers = await Connection.find({ following: userId });
+
+    const followerUsernames = followers.map(follower => follower.follower);
+
+    const users = await User.find({ username: { $in: followerUsernames } });
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve followers' });
+  }
+});
+
+
+app.get('/allFollowing/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const following = await Connection.find({ follower: userId }).exec();
+
+    const followingUsernames = following.map(follow => follow.following);
+
+    const users = await User.find({ username: { $in: followingUsernames } }).exec();
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve following users' });
+  }
+});
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
