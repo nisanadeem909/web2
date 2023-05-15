@@ -1929,6 +1929,81 @@ app.post("/getemployeesk", async(req,res)=>{
 
 })
 
+app.post("/checkifconnected", async(req,res)=>{
+  console.log(req.body);
+
+  const curruser = req.body.curruser;
+  const conuser = req.body.conuser;
+
+  var msg;
+
+  try {
+    const result = await Connection.findOne({ follower: curruser, following: conuser });
+    if (result)
+      msg = {"exists":true};
+    else 
+      msg = {"exists":false};
+  }
+  catch (error) {
+      console.error('Error getting employees:', error);
+      msg = {"exists": "error"};
+  } 
+
+  res.json(msg);
+
+  res.end();
+
+})
+
+app.post("/connectk", async(req,res)=>{
+  console.log(req.body);
+
+  const curruser = req.body.curruser;
+  const conuser = req.body.conuser;
+
+  var msg;
+
+  try {
+    
+      const newConnection = new Connection({
+        follower: curruser,
+        following: conuser
+      });
+
+      await newConnection.save();
+      console.log("saved");
+      
+  }
+  catch (error) {
+      console.error('Error connecting:', error);
+  } 
+
+  res.end();
+
+})
+
+app.post("/disconnectk", async(req,res)=>{
+  console.log(req.body);
+
+  const curruser = req.body.curruser;
+  const conuser = req.body.conuser;
+
+  var msg;
+
+  try {
+    
+      await Connection.deleteOne({ follower: curruser, following: conuser });
+      console.log("deleted");
+      
+  }
+  catch (error) {
+      console.error('Error disconnecting:', error);
+  } 
+
+  res.end();
+
+})
+
 
 /****************************************************************/
 

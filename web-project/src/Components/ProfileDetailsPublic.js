@@ -4,30 +4,63 @@ import picture from './dummy.jpg'
 import connecticon from './follow.png'
 import networkicon from './network.png'
 import workicon from './workk.png'
+import axios from 'axios'
+
 export default function ProfileDetails(props) {
 
+    const [btn,setBtn] = useState(<></>);
+    const [connected,setConctd] = useState(false);
+
     const checkConnected = () =>{
-        var curruser = sessionStorage.getItem("sessionID");
-        //complete
+        //alert(props.user.username);
+        var param = {"curruser":sessionStorage.getItem("sessionID"),"conuser":props.user.username};
+        axios.post("http://localhost:8000/checkifconnected",param).then((response) => {
+            //alert(response.data);
+            if (response.data.exists == "error")
+                alert("db error!");
+            else if (response.data.exists == true)
+                setConctd(true);
+            else
+                setConctd(false);
+            console.log(response.data.exists);
+        })
+        .catch(function (error) {
+            alert(error);
+        });
     }
 
     const connect=(conuser)=>{
         var curruser = sessionStorage.getItem("sessionID");
-        alert(conuser);
+        //alert(conuser);
+        var param = {"curruser":sessionStorage.getItem("sessionID"),"conuser":props.user.username};
+        axios.post("http://localhost:8000/connectk",param).then((response) => {
+            //alert(response.data);
+            setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
+        })
+        .catch(function (error) {
+            alert(error);
+        });
     }
 
     const disconnect=(conuser)=>{
         var curruser = sessionStorage.getItem("sessionID");
+       // alert(conuser);
+       var param = {"curruser":sessionStorage.getItem("sessionID"),"conuser":props.user.username};
+        axios.post("http://localhost:8000/disconnectk",param).then((response) => {
+            //alert(response.data);
+            setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{connect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Connect</label></div></button>); // changes if already connected);
+        })
+        .catch(function (error) {
+            alert(error);
+        });
     }
-
-    const [btn,setBtn] = useState(<></>);
     
     useEffect(()=>{
-
-        if (!checkConnected)
+        checkConnected();
+        if (!connected)
             setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{connect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Connect</label></div></button>); // changes if already connected);
         else
-        setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
+            setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
 
     },[])
     
