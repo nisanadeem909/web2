@@ -621,6 +621,7 @@ app.post("/getcompanydropdownlist", async(req,res)=>{
         }
       ]);
 
+      console.log(companies);
     res.json(companies);
 
     res.end();
