@@ -1,19 +1,34 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 
 import './contactcompany.css';
 
 
-function ContactCompany() {
+function ContactCompany(props) {
 
-    const [contact,setContact] = useState({'website': 'www.some-website.com','email':'someone@example.com','phone':'042-3537791'});
+    const [contactCon,setContactCon] = useState(<><label className='komal-noinfoyet'>No information added yet.</label></>);
+
+    useEffect(() => {
+      var totalYears;
+
+      //alert(props.company);
+
+      if (props.company)
+      {
+          if (props.company.contact){
+              //setAboutUs(props.company.aboutUs);
+             // alert(JSON.stringify(aboutUs));
+              setContactCon(<><div id="contactcompany-email"><a className='contactcompany-a' href={"//".concat(props.company.contact.website)}>{props.company.contact.website}</a></div>
+              <div id="contactcompany-website">{props.company.contact.email}</div>
+              <div id="contactcompany-landline">{props.company.contact.phone}</div></>);
+          }
+      }
+  }, [props.company]);
 
     return (
         <div id="contactcompany-box">
              <div id="contactcompany-contactus">Contact Us</div>
              <br></br>
-             <div id="contactcompany-email"><a className='contactcompany-a' href={"//".concat(contact.website)}>{contact.website}</a></div>
-             <div id="contactcompany-website">{contact.email}</div>
-             <div id="contactcompany-landline">{contact.phone}</div>
+             {contactCon}
        </div>
     );
   }

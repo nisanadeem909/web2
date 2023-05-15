@@ -14,6 +14,34 @@ export default function JobDetails(props) {
 
     const navigate = useNavigate();
 
+    const openProfile=(username)=>{
+        //find user type
+        var param = {"user":username};
+        axios.post(`http://localhost:8000/getusertype`,param)
+          .then(res => {
+              if (res.data.type != "none")
+              {
+                  var utype = sessionStorage.getItem("userType");
+                  var path = "/" + utype + "/";
+    
+                  if (res.data.type == "user")
+                  {
+                      path += "publicuserprofile";
+                  }
+                  else {
+                      path += "publiccompanyprofile";
+                  }
+    
+                 // alert(path);
+    
+                  navigate(path, { state: res.data.user });
+              }
+              else 
+                console.log("error");
+          })
+          .catch(error => alert(error));
+      }
+
     //salary, location, working hours, paid leaves, degree, experience, description, company,
 
     //var jobDetails = {'salary': 'Loading','workingHours':'Loading','paidLeaves':'8', 'position': 'Internship', 'datePosted':'12/12/2022','requirements':{'degree':'Bachelors', 'major':'Computer Science','experience':'2'},'description':'This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. This is a job description. '};
@@ -104,7 +132,7 @@ export default function JobDetails(props) {
                     <label className='kjobdetails_aboutcompany_title'>{company.name}</label>
                     <label className='kjobdetails_aboutcompany_location'>{Location}</label>
                 </div>
-                <button className='kjobdetails_companyBtn' onClick={()=>navigate('/user/publiccompanyprofile')}>View Company</button>
+                <button className='kjobdetails_companyBtn' onClick={()=>openProfile(company.username)}>View Company</button>
             </div>
         </div></>);
         }
