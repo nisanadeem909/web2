@@ -85,7 +85,7 @@ export default function Network() {
                       </div>
                     </div>
                     <div className='btnnnn'>
-                      <button className='nisa-network-btn' onClick={()=>{openProfile(follow.follower)}}>
+                      <button className='nisa-network-btn' onClick={()=>{openProfile(follow.username)}}>
                        Open Profile
                       </button>
                     </div>
@@ -115,7 +115,7 @@ export default function Network() {
                       </div>
                     </div>
                     <div>
-                      <button className='nisa-network-btn' onClick={()=>{openProfile(followi.following)}}>
+                      <button className='nisa-network-btn' onClick={()=>{openProfile(followi.username)}}>
                        Open Profile
                       </button>
                     </div>
