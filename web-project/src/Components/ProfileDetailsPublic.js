@@ -11,19 +11,23 @@ export default function ProfileDetails(props) {
     const [btn,setBtn] = useState(<></>);
     const [connected,setConctd] = useState(false);
 
-    const checkConnected = () =>{
+    const checkConnected = async() =>{
         //alert(props.user.username);
         var param = {"curruser":sessionStorage.getItem("sessionID"),"conuser":props.user.username};
-        axios.post("http://localhost:8000/checkifconnected",param).then((response) => {
+        await axios.post("http://localhost:8000/checkifconnected",param).then((response) => {
             //alert(response.data);
             if (response.data.exists == "error")
                 alert("db error!");
             else if (response.data.exists == true)
-                setConctd(true);
+                setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);    
             else
-                setConctd(false);
-            console.log(response.data.exists);
-        })
+                setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{connect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Connect</label></div></button>); // changes if already connected);
+            /*if (!connected)
+                setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{connect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Connect</label></div></button>); // changes if already connected);
+            else
+                setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);    
+        */
+            })
         .catch(function (error) {
             alert(error);
         });
@@ -57,11 +61,6 @@ export default function ProfileDetails(props) {
     
     useEffect(()=>{
         checkConnected();
-        if (!connected)
-            setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{connect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Connect</label></div></button>); // changes if already connected);
-        else
-            setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
-
     },[])
     
 

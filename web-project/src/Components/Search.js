@@ -12,6 +12,42 @@ export default function Search() {
   const [isInputSelected, setIsInputSelected] = useState(false); // Track whether the input field is selected or not
   const navigate = useNavigate();
 
+  const openProfile=(username)=>{
+    alert("hi");
+
+    if (username == sessionStorage.getItem("sessionID"))
+    {
+      navigate("/user/ownprofile");
+      return;
+    }
+
+    //find user type
+    var param = {"user":username};
+    axios.post(`http://localhost:8000/getusertype`,param)
+      .then(res => {
+          if (res.data.type != "none")
+          {
+              var utype = sessionStorage.getItem("userType");
+              var path = "/" + utype + "/";
+
+              if (res.data.type == "user")
+              {
+                  path += "publicuserprofile";
+              }
+              else {
+                  path += "publiccompanyprofile";
+              }
+
+             // alert(path);
+
+              navigate(path, { state: res.data.user });
+          }
+          else 
+            console.log("error");
+      })
+      .catch(error => alert(error));
+  }
+
   useEffect(() => {
     if (searchQuery) {
       performSearch();
@@ -58,9 +94,9 @@ export default function Search() {
           {searchResults.length > 0 && isInputSelected && (
             <div className="search_results_k">
               {searchResults.map((result) => (
-                <a className="nisa-w" key={result.id} href={result.link}>
+                <button className="nisa-w" key={result.id} onClick={()=>openProfile(result.username)}>
                   {result.username || result.Designation}
-                </a>
+                </button>
               ))}
             </div>
           )}

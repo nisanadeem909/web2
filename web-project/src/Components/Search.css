@@ -69,6 +69,7 @@
     font-size: 16px;
     color: #016960;
     cursor: pointer;
+    pointer-events: none;
 }
 
 .nisa-w:hover{

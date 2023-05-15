@@ -7,6 +7,7 @@ const express = require('express');
 var app =express();
 app.use(cors());
 app.use(express.static('public'));
+app.use('/profilepictures', express.static('profilepictures'));
 app.use(express.static('backend/profilepictures'));
 app.use('/images', express.static('uploads'));
 app.use(express.static('files'));
@@ -2149,6 +2150,45 @@ app.get('/profilepicture/:username', async (req, res) => {
 });
 
 /**********************************************************************/
+
+
+
+/*************** KOMAL 5 ****************/
+
+app.post('/updatevacancy', async (req, res) => {
+  console.log(req.body);
+  var newJob = req.body.newJob;
+  var data;
+
+  try {
+    await Jobs.findOneAndUpdate({ JobId: newJob.JobId }, {
+      $set: {
+        Designation: newJob.Designation,
+        Description: newJob.Description,
+        DegreeRequired: newJob.DegreeRequired,
+        MajorRequired: newJob.MajorRequired,
+        YearsofExperience: newJob.YearsofExperience,
+        Salary: newJob.Salary,
+        WeeklyWorkingHours: newJob.WeeklyWorkingHours,
+        YearlyPaidLeaves: newJob.YearlyPaidLeaves
+      }
+    }, { new: true, overwrite: false })
+
+    data = {"type":"saved"}
+    
+  } catch(err) {
+      console.log(err);
+      data = {"type":err}
+  }
+
+  console.log(data);
+
+  res.json(data);
+
+  res.end();
+});
+
+/****************************************/
 
 
 app.listen(8000, () => {

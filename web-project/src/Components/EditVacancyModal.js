@@ -29,39 +29,39 @@ export default function BasicModal(props) {
   }
   //const handleClose = () => setOpen(false);
 
-  const newWorkHours = useRef(props.selectedItem.workingHours);
-  const newSalary = useRef(props.selectedItem.salary);
-  const newPaidLeaves = useRef(props.selectedItem.paidLeaves);
-  const newPosition = useRef(props.selectedItem.position);
-  const newExpReq = useRef(props.selectedItem.requirements.experience);
-  const newDesc = useRef(props.selectedItem.description);
+  const newWorkHours = useRef(props.selectedItem.WeeklyWorkingHours);
+  const newSalary = useRef(props.selectedItem.Salary);
+  const newPaidLeaves = useRef(props.selectedItem.YearlyPaidLeaves);
+  const newPosition = useRef(props.selectedItem.Designation);
+  const newExpReq = useRef(props.selectedItem.YearsofExperience);
+  const newDesc = useRef(props.selectedItem.Description);
 
   const [degreeList,setDegreeList] = useState([{"label": "Bachelors", "value": "BS"}, {"label": "Masters", "value": "MS"},{"label": "A Level", "value": "AL"},{"label": "PhD", "value": "PHD"},{"label": "O Level", "value": "OL"}]);
   const [majorList,setMajorList] = useState([{"label": "Computer Science", "value": "CS"},{"label": "Software Engineering", "value": "SE"},{"label": "Mathematics", "value": "MT"},{"label": "Medical Science", "value": "MED"}]);
 
-  var tempDegree = degreeList.filter((obj)=>obj.label === props.selectedItem.requirements.degree)[0];
-  var tempMajor = majorList.filter((obj)=>obj.label === props.selectedItem.requirements.major)[0];
+  var tempDegree = degreeList.filter((obj)=>obj.label === props.selectedItem.DegreeRequired)[0];
+  var tempMajor = majorList.filter((obj)=>obj.label === props.selectedItem.MajorRequired)[0];
   
   const [selectedDegree,setSelectedDegree] = useState({"label": tempDegree.label,"value": tempDegree.value});
   const [selectedMajor,setSelectedMajor] = useState({"label": tempMajor.label,"value": tempMajor.value});
 
-  const [stateWorkHours,setWorkHours] = useState(props.selectedItem.workingHours);
-  const [stateSalary,setSalary] = useState(props.selectedItem.salary);
-  const [statePaidLeaves,setPaidLeaves] = useState(props.selectedItem.paidLeaves);
-  const [statePosition,setPosition] = useState(props.selectedItem.position);
-  const [stateExpReq,setExpReq] = useState(props.selectedItem.requirements.experience);
+  const [stateWorkHours,setWorkHours] = useState(props.selectedItem.WeeklyWorkingHours);
+  const [stateSalary,setSalary] = useState(props.selectedItem.Salary);
+  const [statePaidLeaves,setPaidLeaves] = useState(props.selectedItem.YearlyPaidLeaves);
+  const [statePosition,setPosition] = useState(props.selectedItem.Designation);
+  const [stateExpReq,setExpReq] = useState(props.selectedItem.YearsofExperience);
 
   const handleClose = () => {
-    setSelectedDegree({"label": tempDegree.label,"value": tempDegree.value});
-    setSelectedMajor({"label": tempMajor.label,"value": tempMajor.value});
+    //setSelectedDegree({"label": tempDegree.label,"value": tempDegree.value});
+    //setSelectedMajor({"label": tempMajor.label,"value": tempMajor.value});
     
     if (!changed)
     {
-        setWorkHours(props.selectedItem.workingHours);
-        setSalary(props.selectedItem.salary);
-        setPaidLeaves(props.selectedItem.paidLeaves);
-        setPosition(props.selectedItem.position);
-        setExpReq(props.selectedItem.requirements.experience);
+        setWorkHours(props.selectedItem.WeeklyWorkingHours);
+        setSalary(props.selectedItem.Salary);
+        setPaidLeaves(props.selectedItem.YearlyPaidLeaves);
+        setPosition(props.selectedItem.Designation);
+        setExpReq(props.selectedItem.YearsofExperience);
     }
 
     setOpen(false);
@@ -87,7 +87,7 @@ export default function BasicModal(props) {
 
         
 
-        var newVacancy = {'position': pos,'salary': slry, 'workingHours': hours, 'paidLeaves': leaves, 'description': desc, 'requirements':{'degree': degree, 'major': major, 'experience': exp}};
+        var newVacancy = {'Designation': pos,'Salary': slry, 'WeeklyWorkingHours': hours, 'YearlyPaidLeaves': leaves, 'Description': desc, 'DegreeRequired': degree, 'MajorRequired': major, 'YearsofExperience': exp};
 
         props.changeVacancy(newVacancy);
         handleClose();
@@ -146,7 +146,7 @@ export default function BasicModal(props) {
             </div>
             <div className='kmodal_field'>
               <label className='kmodal_large_text'>Job Description: </label>
-              <textArea className='kmodal_textarea' ref={newDesc} placeholder="Describe the job in a few words">{props.selectedItem.description}</textArea>
+              <textArea className='kmodal_textarea' ref={newDesc} placeholder="Describe the job in a few words">{props.selectedItem.Description}</textArea>
             </div>
             <button className='kmodal_buttons kmodal_center_btn' onClick={editJob}>Confirm Changes</button>
         </div>

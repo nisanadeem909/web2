@@ -192,6 +192,7 @@
     height: 4vh;
     margin-top: 0.5vh;
     margin-right: 1%;
+    min-width: 13vh;
 }
 
 .kjobdetails_smallbtn:hover {
