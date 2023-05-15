@@ -1850,6 +1850,307 @@ app.get('/logout', (req, res) => {
 /************* */
 
 
+/*************************** KOMAL 4 ****************************/
+
+app.post('/getusertype', async (req, res) => {
+    console.log(req.body);
+    var uname = req.body.user;
+    var data;
+
+    try {
+      const user = await User.findOne({ username: uname });
+      if (user) {
+        console.log('User exists');
+        data = {"type":"user","user":user};
+      } else {
+        console.log('User does not exist');
+        const company = await Company.findOne({ username: uname });
+        if (company) {
+          console.log('Company exists');
+          data = {"type":"company","user":company};
+        } else {
+          console.log('Company does not exist');
+          data = {"type":"none"}
+        }
+      }
+    } catch(err) {
+        console.log(err);
+        data = {"type":"none"}
+    }
+
+    console.log(data);
+
+    res.json(data);
+
+    res.end();
+});
+
+
+app.post('/getconnections', async (req, res) => {
+    console.log(req.body);
+    var uname = req.body.username;
+    // var data;
+
+    var following = await Connection.countDocuments({ follower: uname });
+    var followers = await Connection.countDocuments({ following: uname });
+
+    if (!followers)
+        followers = 0;
+    if (!following)
+        following = 0;
+
+    var cons = {'followers': followers, 'following': following};
+
+    console.log(cons);
+
+    res.json(cons);
+    res.end();
+});
+
+app.post("/getemployeesk", async(req,res)=>{
+  console.log(req.body);
+
+  const company = req.body.user;
+
+  var msg;
+
+  try {
+    const employees = await CurrentEmployees.find({ CompanyUsername: company });
+    msg = {"data":employees};
+  }
+  catch (error) {
+      console.error('Error getting employees:', error);
+      msg = {"data": "error"};
+  } 
+
+  res.json(msg);
+
+  res.end();
+
+})
+
+app.post("/checkifconnected", async(req,res)=>{
+  console.log(req.body);
+
+  const curruser = req.body.curruser;
+  const conuser = req.body.conuser;
+
+  var msg;
+
+  try {
+    const result = await Connection.findOne({ follower: curruser, following: conuser });
+    if (result)
+      msg = {"exists":true};
+    else 
+      msg = {"exists":false};
+  }
+  catch (error) {
+      console.error('Error getting employees:', error);
+      msg = {"exists": "error"};
+  } 
+
+  res.json(msg);
+
+  res.end();
+
+})
+
+app.post("/connectk", async(req,res)=>{
+  console.log(req.body);
+
+  const curruser = req.body.curruser;
+  const conuser = req.body.conuser;
+
+  var msg;
+
+  try {
+    
+      const newConnection = new Connection({
+        follower: curruser,
+        following: conuser
+      });
+
+      await newConnection.save();
+      console.log("saved");
+      
+  }
+  catch (error) {
+      console.error('Error connecting:', error);
+  } 
+
+  res.end();
+
+})
+
+app.post("/disconnectk", async(req,res)=>{
+  console.log(req.body);
+
+  const curruser = req.body.curruser;
+  const conuser = req.body.conuser;
+
+  var msg;
+
+  try {
+    
+      await Connection.deleteOne({ follower: curruser, following: conuser });
+      console.log("deleted");
+      
+  }
+  catch (error) {
+      console.error('Error disconnecting:', error);
+  } 
+
+  res.end();
+
+})
+
+
+/****************************************************************/
+
+
+
+/********************* NABEEHA 4 **********************/
+
+app.post("/getcurrentemployees", async(req,res)=>{
+  let msg = "I am in get current employees";
+  console.log(req.body);
+
+  const empreq = await CurrentEmployees.find({CompanyUsername:req.body.user});
+  if (empreq){
+      console.log("found");
+      res.json({"empreq":empreq});
+      res.end();
+  }
+  else{
+    console.log("error");
+    res.json({"empreq":"Error"});
+    res.end();
+  }
+
+});
+app.post("/employeerequests", async(req,res)=>{
+  let msg = "I am in employee requests";
+  console.log(req.body);
+
+  const empreq = await EmployeeRequests.find({CompanyUsername:req.body.user});
+  if (empreq){
+      console.log("found");
+      res.json({"empreq":empreq});
+      res.end();
+  }
+  else{
+    console.log("found");
+    res.json({"empreq":"Error"});
+    res.end();
+  }
+
+});
+app.post("/acceptemployeerequest", async(req,res)=>{
+  console.log(req.body);
+  const companyname = await Company.findOne({username:req.body.companyusername});
+  const deletedreq = await EmployeeRequests.findOneAndDelete({EmployeeUsername:req.body.employeeusername});
+  //console.log("empname: " + req.body.empreq);
+  const newemp = new CurrentEmployees({EmployeeUsername:req.body.employeeusername,EmployeeName:req.body.empname,Designation:req.body.designation,CompanyUsername:req.body.companyusername,CompanyName:companyname.name});
+  
+  newemp.save().then(()=>{
+      let msg = "account created successfully";   
+      console.log("employee request accepted");
+      
+      res.json({"message":msg});
+       res.end();
+   }).catch((err)=>{
+       console.log(err);
+   })
+
+
+
+  
+});
+app.post("/deleteemployeerequest", async(req,res)=>{
+  console.log(req.body);
+  const companyname = await Company.findOne({username:req.body.companyusername});
+  const deletedreq = await EmployeeRequests.findOneAndDelete({EmployeeUsername:req.body.employeeusername});
+  //console.log("empname: " + req.body.empreq);
+  console.log("Deleted Successfully");
+});
+app.post("/deleteemployee", async(req,res)=>{
+  console.log(req.body);
+  //const companyname = await Company.findOne({username:req.body.companyusername});
+  const deleted = await CurrentEmployees.findOneAndDelete({EmployeeUsername:req.body.employeeusername,CompanyUsername:req.body.companyusername});
+  //console.log("empname: " + req.body.empreq);
+  console.log("Deleted Successfully");
+});
+
+/******************************************************/
+
+
+/******************************** NISA 4 ******************************/
+
+app.get('/search/:query', async (req, res) => {
+  const searchQuery = req.params.query;
+
+  try {
+  
+    const userResults = await User.find({ username: { $regex: searchQuery, $options: 'i' } }).limit(10);
+    const companyResults = await Company.find({ name: { $regex: searchQuery, $options: 'i' } }).limit(10);
+    const jobResults = await Jobs.find({ Designation: { $regex: searchQuery, $options: 'i' } }).limit(10);
+
+ 
+    const searchResults = [...userResults, ...companyResults, ...jobResults];
+    console.log(searchResults);
+    res.json(searchResults);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while performing the search.' });
+  }
+});
+
+app.get('/finduser/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const user = await User.findOne({ username: username });
+    if (user) {
+      return res.json({ user });
+    }
+
+    const company = await Company.findOne({ username: username });
+    if (company) {
+      return res.json({ company });
+    }
+
+    res.status(404).json({ message: 'User or Company not found' });
+  } catch (error) {
+    console.error('Error retrieving user or company:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+app.get('/profilepicture/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const user = await User.findOne({ username });
+    if (user && user.profilePicture) {
+      return res.json({ user });
+    }
+
+    const company = await Company.findOne({ username });
+    if (company && company.profilePicture) {
+      return res.json({ company });
+    }
+
+    res.status(404).json({ message: 'User or company not found' });
+  } catch (error) {
+    console.error('Error retrieving user or company:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+/**********************************************************************/
+
+
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
 })
