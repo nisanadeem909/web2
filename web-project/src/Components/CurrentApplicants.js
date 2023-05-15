@@ -101,7 +101,7 @@ function CurrentAppsPage(props) {
     
     const setData = async () =>{
         //alert("I am in set data");
-        const param = {jobid:jobid};
+        const param = {jobid:props.jobid};
         //alert("param " + param.jobid);
         console.log("params: ");
         console.log(param);
