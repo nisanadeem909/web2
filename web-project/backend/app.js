@@ -7,6 +7,7 @@ const express = require('express');
 var app =express();
 app.use(cors());
 app.use(express.static('public'));
+app.use('/profilepictures', express.static('profilepictures'));
 app.use(express.static('backend/profilepictures'));
 app.use('/images', express.static('uploads'));
 app.use(express.static('files'));
@@ -620,6 +621,7 @@ app.post("/getcompanydropdownlist", async(req,res)=>{
         }
       ]);
 
+      console.log(companies);
     res.json(companies);
 
     res.end();
@@ -827,7 +829,7 @@ app.post("/comparejobs", async(req,res)=>{
   res.end();*/
  let ajob;
   try{
-    ajob = await Jobs.findOne({ Designation: req.body.job1,CompanyName: req.body.comp1 });
+    ajob = await Jobs.findOne({ JobId:req.body.jobid1 });
     
       if (ajob) {
         console.log("found a job " + ajob);
@@ -843,11 +845,11 @@ app.post("/comparejobs", async(req,res)=>{
     }
     catch(err){
         console.log("ERROR = " + err);
-        res.json(err);
+        //res.json(err);
     }
     
     try{
-      let ajob2 = await Jobs.findOne({ Designation: req.body.job2,CompanyName: req.body.comp2 });
+      let ajob2 = await Jobs.findOne({ JobId: req.body.jobid2 });
       
         if (ajob2) {
           console.log("found a job " + ajob2);
@@ -1157,23 +1159,35 @@ app.post("/updateprofiledetails", async(req,res)=>{
 
         console.log (worksAt," ",des);
 
-        try {
-          await EmployeeRequests.deleteOne({ EmployeeUsername: uname });
+        try{
+          const user = await User.findOne({ username: uname, "worksAt.CompanyUsername": worksAt })
+          if (!user)
+          {
+            await EmployeeRequests.deleteOne({ EmployeeUsername: uname });
 
-          // Create a new employee request for user X
-          const newRequest = new EmployeeRequests({
-            EmployeeUsername: uname,
-            EmployeeName: name,
-            Designation: des,
-            CompanyUsername: worksAt
-          });
-
-          console.log(newRequest);
-          
-          await newRequest.save();
-        }
-        catch(err){
-
+            // Create a new employee request for user X
+            const newRequest = new EmployeeRequests({
+              EmployeeUsername: uname,
+              EmployeeName: name,
+              Designation: des,
+              CompanyUsername: worksAt
+            });
+  
+            console.log(newRequest);
+            
+            await newRequest.save();
+          }
+          else
+          {
+              const result = await User.findOneAndUpdate(
+                { username: uname },
+                { $set: {"worksAt.Designation": des }},
+                { new: true, overwrite: false }
+              )
+              console.log("res:" +result);
+          }
+        } catch(err){
+            console.log(err);
         }
     }
   }
@@ -1469,30 +1483,6 @@ app.post("/addlikes", async (req, res) => {
   }
 });
 
-app.post("/addcomment", async (req, res) => {
-  const { postId, username, text } = req.body;
-
-  try {
-    const post = await Post.findOne({ postID: postId });
-    if (!post) {
-      return res.status(404).json({ error: "Post not found" });
-    }
-
-    post.comments.push({
-      username: username,
-      date: new Date(),
-      text: text
-    });
-
-    await post.save();
-
-    return res.status(200).json({ message: "Comment added successfully" });
-  } catch (error) {
-    return res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-
 
 app.get('/likes/:sessionID',async (req, res) => {
   const postId = req.params.sessionID; 
@@ -1703,32 +1693,6 @@ app.get('/allapps/:id', async (req, res) => {
     console.log(err);
     res.status(500).json({ error: 'Failed to retrieve applicants' });
   }
-});
-
-app.get('/allNetwork/:userId', (req, res) => {
-  const userId = req.params.userId;
-
-  Connection.find({ following: userId })
-    .then(followers => {
-      res.json(followers);
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'Failed to retrieve followers' });
-    });
-});
-
-app.get('/allFollowing/:userId', (req, res) => {
-  const userId = req.params.userId;
-
-  Connection.find({ follower: userId })
-    .then(following => {
-      res.json(following);
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'Failed to retrieve following users' });
-    });
 });
 
 app.get('/allpostsmy/:sessionID', async (req, res) => {
@@ -2028,6 +1992,7 @@ app.post("/getcurrentemployees", async(req,res)=>{
   }
 
 });
+
 app.post("/employeerequests", async(req,res)=>{
   let msg = "I am in employee requests";
   console.log(req.body);
@@ -2035,6 +2000,8 @@ app.post("/employeerequests", async(req,res)=>{
   const empreq = await EmployeeRequests.find({CompanyUsername:req.body.user});
   if (empreq){
       console.log("found");
+      
+      
       res.json({"empreq":empreq});
       res.end();
   }
@@ -2045,6 +2012,7 @@ app.post("/employeerequests", async(req,res)=>{
   }
 
 });
+
 app.post("/acceptemployeerequest", async(req,res)=>{
   console.log(req.body);
   const companyname = await Company.findOne({username:req.body.companyusername});
@@ -2056,16 +2024,32 @@ app.post("/acceptemployeerequest", async(req,res)=>{
       let msg = "account created successfully";   
       console.log("employee request accepted");
       
+      
+      
+      
       res.json({"message":msg});
        res.end();
    }).catch((err)=>{
        console.log(err);
    })
 
-
-
-  
+   try{
+    console.log("Works at Arr = ");
+   
+    let worksAtArr = {Designation:req.body.designation,CompanyUsername:req.body.companyusername};
+    console.log(worksAtArr)
+    const user = await User.findOne({username:req.body.employeeusername});
+    if (user)
+    user.worksAt = {Designation:req.body.designation,CompanyUsername:req.body.companyusername};
+    user.save();
+   }
+   catch(err)
+   {
+    console.log(err);
+   }
 });
+
+
 app.post("/deleteemployeerequest", async(req,res)=>{
   console.log(req.body);
   const companyname = await Company.findOne({username:req.body.companyusername});
@@ -2073,11 +2057,18 @@ app.post("/deleteemployeerequest", async(req,res)=>{
   //console.log("empname: " + req.body.empreq);
   console.log("Deleted Successfully");
 });
+
+
 app.post("/deleteemployee", async(req,res)=>{
   console.log(req.body);
   //const companyname = await Company.findOne({username:req.body.companyusername});
   const deleted = await CurrentEmployees.findOneAndDelete({EmployeeUsername:req.body.employeeusername,CompanyUsername:req.body.companyusername});
   //console.log("empname: " + req.body.empreq);
+  const user = await User.findOne({ username:req.body.employeeusername});
+  if (user){
+    user.worksAt = undefined;
+    await user.save();
+  }
   console.log("Deleted Successfully");
 });
 
@@ -2150,6 +2141,218 @@ app.get('/profilepicture/:username', async (req, res) => {
 
 /**********************************************************************/
 
+
+
+/*************** KOMAL 5 ****************/
+
+app.post('/updatevacancy', async (req, res) => {
+  console.log(req.body);
+  var newJob = req.body.newJob;
+  var data;
+
+  try {
+    await Jobs.findOneAndUpdate({ JobId: newJob.JobId }, {
+      $set: {
+        Designation: newJob.Designation,
+        Description: newJob.Description,
+        DegreeRequired: newJob.DegreeRequired,
+        MajorRequired: newJob.MajorRequired,
+        YearsofExperience: newJob.YearsofExperience,
+        Salary: newJob.Salary,
+        WeeklyWorkingHours: newJob.WeeklyWorkingHours,
+        YearlyPaidLeaves: newJob.YearlyPaidLeaves
+      }
+    }, { new: true, overwrite: false })
+
+    data = {"type":"saved"}
+    
+  } catch(err) {
+      console.log(err);
+      data = {"type":err}
+  }
+
+  console.log(data);
+
+  res.json(data);
+
+  res.end();
+});
+
+/****************************************/
+
+/************* NABEEHA 5 *************/
+app.post("/getcurrentapplicants", async(req,res)=>{
+  console.log("req.body ");
+  console.log(req.body.param);
+
+  const app_list = await Jobapplication.find({jobid:req.body.jobid});
+  if (app_list){
+    console.log("found apps");
+    console.log(app_list);
+    res.json({"apps":app_list});
+    res.end();
+
+  }
+  else{
+    res.json({"apps":"Could not find any jobs with this ID"});
+    res.end();
+  }
+  
+});
+/*************************************/
+
+/********************** NISA 5 **********************/
+
+app.post("/addcomment", async (req, res) => {
+  const { postId, username, text, img } = req.body;
+
+  try {
+    const post = await Post.findOne({ postID: postId });
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    post.comments.push({
+      username: username,
+      date: new Date(),
+      text: text,
+      img : img,
+    });
+
+    await post.save();
+
+    return res.status(200).json({ message: "Comment added successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get('/allNetwork/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const followers = await Connection.find({ following: userId }).exec();
+
+    const followerUsernames = followers.map(follower => follower.follower);
+
+    const users = await User.find({ username: { $in: followerUsernames } }).exec();
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve followers' });
+  }
+});
+
+
+app.get('/allFollowing/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const following = await Connection.find({ follower: userId }).exec();
+
+    const followingUsernames = following.map(follow => follow.following);
+
+    const users = await User.find({ username: { $in: followingUsernames } }).exec();
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve following users' });
+  }
+});
+
+
+app.post('/uploadpostpic', function(req,res){
+  // var name = req.body.name;
+   var form = new formidable.IncomingForm();
+   var newpath;
+   form.parse(req,async function(err,fields,files){
+       
+       var oldpath = String(files.Image.filepath); //this was files.Image.filepath
+       //console.log(oldpath);
+       const img_file = files.Image.originalFilename;
+       console.log("original file name = " + img_file);
+
+       /*var oldpath = path.resolve(img_file);*/
+       newpath = String(__dirname + '/profilepictures/' + files.Image.originalFilename);
+       
+       console.log("old path = " + oldpath);
+       console.log("new path = " + newpath);
+   
+
+       try {
+        fs.copyFileSync(oldpath,newpath);
+       }
+       catch (err) {
+          console.log(err);
+       }
+       
+       
+       var pathpfp = newpath;
+       var uname = fields.Username;
+       try {
+    
+        var ids = generateRandomId();
+          // Create a new post object
+          const newPost = new Post({
+            username: fields.Username,
+            text : fields.UserType,
+            postID : ids,
+            date :new Date(),
+            imagePath : img_file,
+            
+          });
+      
+          // Save the post to the database
+          const savedPost =  newPost.save();
+      
+          res.status(200).json(savedPost);
+        } catch (error) {
+          res.status(500).json({ error: 'Failed to add the post to the database' });
+        }
+      
+      
+         res.end();
+
+   });
+  
+   
+   
+});
+
+
+app.get('/allappl/:username', (req, res) => {
+  const { username } = req.params;
+
+  Jobapplication.findOne({ applicantusername: username })
+    .then(applications => {
+      res.json(applications);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+app.get('/findjob/:jobId', (req, res) => {
+  const { jobId } = req.params;
+
+  Jobs.findOne({ JobId: jobId })
+    .then(job => {
+      if (job) {
+        res.json(job);
+      } else {
+        res.status(404).json({ error: 'Job not found' });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+/****************************************************/
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
