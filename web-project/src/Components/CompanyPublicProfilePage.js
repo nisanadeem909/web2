@@ -44,7 +44,7 @@ export default function UserPrivateProfilePage() {
                 </div>
             </div>
             <div className="companyprof_activity">
-                <OwnFeed/>
+                <OwnFeed user={user} type="company" />
             </div>
             <div className='companyprof_right'>
                 <div className='companyprof_contact'>

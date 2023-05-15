@@ -10,9 +10,9 @@ import {useState} from 'react';
 function ManageEmployeesPage() {
     
    
-   const [empName,setEmpName] = useState([]);
-   const [empDes,setEmpDes] = useState([]);
-   const [username,setUsername] = useState([]);
+   const [empName,setEmpName] = useState();
+   const [empDes,setEmpDes] = useState();
+   const [username,setUsername] = useState();
    const [call,setCall] = useState("false");
 
    const nameSet = (m )=>{
@@ -29,7 +29,9 @@ function ManageEmployeesPage() {
       setUsername(m);
       setCall("true");
    }
-   
+   const callset = () =>{
+      setCall("false");
+   }
    if (call === "false"){
    return (
         <div>
@@ -65,7 +67,7 @@ function ManageEmployeesPage() {
          <div>
              <div id="nab-manageemp-wrapper">
                    <div id="currentemp">
-                      <CurrentEmployees empName={empName} empDes={empDes} username={username}  />
+                      <CurrentEmployees callset={callset} empName={empName} empDes={empDes} username={username}  />
                    </div>
  
                    <div id="empreq">

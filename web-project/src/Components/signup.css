@@ -1,5 +1,6 @@
 #nab-wrapsignup{
 background-color: white;
+
 }
 .nab-wrapper-signup{
 	width: 100%;
@@ -12,7 +13,7 @@ background-color: white;
 }
 #emerald{
     width:70%;
-    height:90%;
+    height:70%;
 }
 
 .nab-signup-left-side{
@@ -25,14 +26,15 @@ background-color: white;
 	flex-direction: column;
 	justify-content: center;
 	color: #fff;
+    
 }
 .nab-signuppage-right-side{
 	width: 60%;
 	height: 100vh;
 	margin-right: 5%;
 	overflow: hidden;
+	margin-top: 40px;
 	
-	border-radius: 10px;
   
 	
 }
@@ -40,8 +42,8 @@ background-color: white;
     direction: flex;
 }
 #signupuser-btn{
-    background-color: #008080; /* Green */
-    border-color: #008080;
+    background-color: #0E312F; /* Green */
+    border-color: #0E312F;
     border-width: 1px;
     padding: 8px 30px;
     text-align: center;
@@ -50,12 +52,13 @@ background-color: white;
     font-size: 20px;
     width:45%;
     color:white;
+    border-radius: 8px;
 }
 #signupcompany-btn{
     background-color: white; /* Green */
-    border-color: #008080;
+    border-color: #0E312F;
     border-width: 1px;
-    color: #008080;
+    color: #0E312F;
     padding: 10px 30px;
     padding-bottom: 8px;
     padding-top: 8px;
@@ -64,4 +67,5 @@ background-color: white;
     display: inline-block;
     font-size: 20px;
     width:45%;
+    border-radius: 8px;
 }

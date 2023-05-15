@@ -20,6 +20,7 @@ export default function Profile(props) {
   const major = props.user.education[0]?.major;
   const school = props.user.education[0]?.school; 
   const img = props.user.profilePicture;
+  var person = 'person.png';
 
   const openProfile=()=>{
     var userType = sessionStorage.getItem("userType");
@@ -31,7 +32,7 @@ export default function Profile(props) {
     <div>
         <div className='profile-container'>
             <div className='profile_box'>
-            <img className='prof_p1' src={`http://localhost:8000/profilepictures/${img}`} alt="" />
+            <img className='prof_p1' src={`http://localhost:8000/profilepictures/${img || person}`} alt="" />
             </div>
             <br />
             <div className='prof_upper'>

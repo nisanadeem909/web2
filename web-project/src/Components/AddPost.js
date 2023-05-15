@@ -30,32 +30,87 @@ export default function AddPost() {
         div.innerText = "";*/
     }
 
+
+    const HandleUpload=(t)=>{
+        //console.log(t.handle.files);
+        alert("image set");
+        setImg(t.target.files[0]);
+      }
+
     const upload = () => {
         const text1 = txt.current.value;
         const sessionID = sessionStorage.getItem('sessionID');
         const pID = generateRandomId();
+        const uname = sessionStorage.getItem("sessionID");
+        const utype = sessionStorage.getItem("userType");
+  
+
+        if (img && text1)
+        {
+            alert(img);
+          var fdata = new FormData();
+          fdata.append("Image", img);
+          fdata.append("Username", uname);
+          fdata.append("UserType", text1);
+
+          axios.post('http://localhost:8000/uploadpostpic',fdata)
+          .then(res => {
+           
+            txt.current.value = "";
+
+        })
+          .catch(err=>{alert("ERROR IN UPLOADAXIOS : "+err)});
+
+               
+
+        }
+        else if(img)
+        {
+            var fdata = new FormData();
+            fdata.append("Image", img);
+            fdata.append("Username", uname);
+            fdata.append("UserType", "");
+  
+            axios.post('http://localhost:8000/uploadpostpic',fdata)
+            .then(res => {alert("Respnse" + JSON.stringify(res.data))
+               
+          
+        
+            txt.current.value = "";
+        
+              })
+            .catch(err=>{alert("ERROR IN UPLOADAXIOS : "+err)});
+
+         
+  
+        }
+        else if(text1)
+        {
+            
         axios
         .post(`http://localhost:8000/posts`, {
           username: sessionID,
           text : text1,
           postID : pID,
           date : "2023-08-01",
-          imagePath : "./post.jpg",
+          imagePath : "",
           
       })
         .then((res) => {
             txt.current.value = "";
         })
         .catch((error) => console.log(error));
+
+      
+
+        }
+
+
+
+
+
     }
-       /* var fdata = new FormData();
-        fdata.append("Image", img);    
-        alert("hel");
-        axios.post('http://localhost:8000/upload',fdata).then(res => {alert("Respnse" + JSON.stringify(res.data))});
        
-
-        //<Feed data={images}/>*/
-
     
 
     return (
@@ -74,7 +129,7 @@ export default function AddPost() {
                 <div className="apost_buttons">
                     
                     <label id="apost_filelbl" for="apost_upload"><img id="apost_pic" src={picicon}/>Upload Photo</label>
-                    <input type="file" accept='image/*' id="apost_upload" ref={img} ></input>
+                    <input type="file" accept='image/*' onChange={HandleUpload} id="apost_upload" ref={img} ></input>
                     <div id="apost_btn">
                     <button className="apost_button" id="apost_post" onClick = {()=>upload()}>Post</button>
                     <button className="apost_button" id="apost_cancel" onClick={cancel}>Cancel</button>

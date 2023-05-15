@@ -7,9 +7,16 @@ import axios from 'axios';
 export default function Feed(props) {
   const [allposts, setAllPosts] = useState([]);
   const [error, setError] = useState(false);
-
+ var sessionID = ''; 
   useEffect(() => {
-    const sessionID = sessionStorage.getItem('sessionID');
+    if(!props.user)
+     sessionID = sessionStorage.getItem('sessionID');
+     else{
+      if(props.type == "user")
+      sessionID = props.user.username;
+      else if(props.type == "company")
+      sessionID = props.user.username;
+     }
 
     axios
       .get(`http://localhost:8000/allpostsmy/${sessionID}`)

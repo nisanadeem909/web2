@@ -79,13 +79,10 @@ function EmpRequests(props) {
                 console.log(copiedname);
 
                 if (props.usernameSet!==undefined){
-                props.usernameSet(copieduname);
-                props.nameSet(copiedname);
-                props.desSet(copieddes);}
-               // props.setPropCall();
-                //alert("I am sending props");
-                
-            
+                props.usernameSet(u);
+                props.nameSet(n);
+                props.desSet(d);}
+               
 
             let u_array = username.slice();
             let des_array = des.slice();
@@ -108,7 +105,7 @@ function EmpRequests(props) {
         
     }
     const deleteRequest = (index) =>{
-        alert("I am in delete Request = " + index);
+        //alert("I am in delete Request = " + index);
         let newobj = {"companyusername":current.user,"employeeusername":username[index],"empname":empReq[index],"designation":des[index]};
         
         

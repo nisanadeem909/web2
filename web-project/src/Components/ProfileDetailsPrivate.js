@@ -16,12 +16,29 @@ export default function ProfileDetails(props) {
     var name = "Loading";
     var bio;
     var worksAt = <></>;
-    var persons = 'flower.jpg';
-    const [profilepic,setPic] = useState(picture); // dummy picture to use if no profile picture applied
-    //const [contact,setDetails] = useState({name: 'Jobify User',username:'someone@jobify.com',Bio:'This is biooo bioooo biooo biooooooooooooooooooo'});
+    var pf = 'person.png';
+   const usernamep = sessionStorage.getItem('sessionID');
+   const [User, setUser] = useState([]);
+  
 
-   // const [work,setWork] = useState(null);
-    //alert(props.user);
+
+    useEffect(() => {
+       
+    
+            axios
+            .get(`http://localhost:8000/finduser/${usernamep}`)
+            .then((res) => {
+              
+              setUser(res.data);
+            
+            })
+            .catch((error) => console.log(error));
+    
+    
+      }, []);
+    
+    
+    
     if (props.user)
     {
         user = props.user;
@@ -35,14 +52,18 @@ export default function ProfileDetails(props) {
 
         if (props.type == "user" && user.worksAt)
         {
+            
+
             worksAt = <div className="profdetails_workplace">
-                        <img id="profdetails_neticon" src={workicon}></img>
+                        <img id="profdetails_neticon" src={pf}></img>
                         <label>Works At @{user.worksAt.CompanyUsername} as {user.worksAt.Designation}</label>
                     </div>;
         }
         
         if (props.type == "company")
         {
+          
+
             worksAt = <div className="profdetails_workplace">
                         <label>Company type: &nbsp;&nbsp;&nbsp; {user.companyType}</label>
                     </div>;
@@ -62,39 +83,12 @@ export default function ProfileDetails(props) {
                
     }
 
-    useEffect(()=>{
-        if (props.user)
-        {
-            user = props.user;
-            if (user.profilePicture)
-            {
-                var param = {"pfp":user.profilePicture}
-                /*axios.get("http://localhost:8000/getprofilepicture",param).then((response) => {
-                    alert(JSON.stringify(response));
-                    //alert(__dirname);
-                    const imageData = Buffer.from(response.data, 'binary').toString('base64');
-
-                    // Create the data URL for the image
-                    const dataUrl = `data:image/jpeg;base64,${imageData}`;
-                    const imgElement = document.getElementById('myImage');
-                    // Set the absolute path as the src attribute of the <img> tag
-                    imgElement.src = dataUrl;
-
-                    //setCon(<img src={response.data} className="profdetails_profilePic"/>);
-            })
-            .catch(function (error) {
-                alert(error);
-            });*/
-                
-            }
-        }
-    },[profilepic,props.user]);
-
+    
     
     return (
         <div className="profdetails_container">
             <div id="profdetails_imgedit">
-            <img src={`http://localhost:8000/profilepictures/${persons}`} id="myImage" className="profdetails_profilePic"/>
+            <img src={`http://localhost:8000/profilepictures/${User.user?.profilePicture || User.company?.profilePicture || pf}`} id="myImage" className="profdetails_profilePic"/>
             
             </div>
             <div className="profdetails_details">
