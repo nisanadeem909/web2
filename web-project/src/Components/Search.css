@@ -1,16 +1,19 @@
 .search_field_k {
-    width: 50%;
+    width: 70%;
     height: 3vh;
     font-size: 2.2vh;
     background-color: rgb(249, 255, 255);
     border: 1px solid #09a093;
     border-radius: 1vh;
-    margin-top: 1%;
+    margin-top: 2%;
+    margin-left: 10%;
 }
 
 #search_title_k {
     font-size: 3vh;
     font-weight: bolder;
+   margin-left: 4%;
+    margin-top: 1%;
     
 }
 
@@ -20,15 +23,13 @@
     border: 1px solid gray;
     border-radius: 2vh;
     height: 7vh;
-   
-    display: flex;
-    flex-direction: column;
+   display: flex;
     justify-content: center;
 }
 
 .search_inner_k {
     width: 100%;
-    display: flex;
+   
     justify-content: space-evenly;
 }
 
@@ -38,6 +39,7 @@
     border: none;
     background-color: #016960;
     border-radius: 50%;
+    margin-left: 5%;
 }
 
 .search_icon_k {
@@ -48,4 +50,40 @@
 
 .search_btn_k:hover {
     background-color: #09a093;
+}
+.search_results_k{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255,255,255);
+   overflow-y: auto;
+    text-align: center;
+    width: 405px;
+    margin-left: 11%;
+    z-index: 1;
+    height: 50px;
+    
+}
+
+.nisa-w{
+    border: 1px solid gainsboro;
+    font-size: 16px;
+    color: #016960;
+    cursor: pointer;
+}
+
+.nisa-w:hover{
+    background-color: rgb(203, 206, 209);
+}
+
+.search-nisa-w{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.nisa-se-ll{
+   text-align: center;
+   background-color: white;
+   width: 70%;
+   margin-left: 10%;
 }

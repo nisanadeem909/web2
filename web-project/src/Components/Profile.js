@@ -16,12 +16,13 @@ export default function Profile(props) {
   const degree = props.user.education[0]?.degree;
   const major = props.user.education[0]?.major;
   const school = props.user.education[0]?.school; 
+  const img = props.user.profilePicture;
 
   return (
     <div>
         <div className='profile-container'>
             <div className='profile_box'>
-            <img className='prof_p1' src={person} alt="" />
+            <img className='prof_p1' src={`http://localhost:8000/profilepictures/${img}`} alt="" />
             </div>
             <br />
             <div className='prof_upper'>

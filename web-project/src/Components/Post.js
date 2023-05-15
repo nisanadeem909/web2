@@ -23,11 +23,16 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   const [shares, setShares] = useState(0); // Initial number of shares
   const [liked, setLiked] = useState(false); // User's like status
   const [allcomments, setAllComments] = useState([]);
- 
+  const [Img, setImg] = useState([]);
+  const [ImgCom, setImgCom] = useState([]);
+  const [User, setUser] = useState([]);
+  
+  const username = sessionStorage.getItem('sessionID');
 
   
 
   useEffect(() => {
+   
     axios
       .get(`http://localhost:8000/likes/${props.postcurr.postID}`)
       .then((res) => {
@@ -55,6 +60,30 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         })
         .catch(error => console.log(error));
 
+        axios
+        .get(`http://localhost:8000/profilepicture/${props.postcurr.username}`)
+        .then((res) => {
+         
+          setImg(res.data);
+         
+          
+        })
+        .catch((error) => console.log(error));
+
+        
+        axios
+        .get(`http://localhost:8000/finduser/${username}`)
+        .then((res) => {
+          
+          setUser(res.data);
+          
+         
+          
+        })
+        .catch((error) => console.log(error));
+  
+
+
 
   }, []);
 
@@ -69,7 +98,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   
 
   const handleLike = async () => {
-    const username = sessionStorage.getItem('sessionID');
+   
     
     if (!liked) {
       try {
@@ -84,8 +113,11 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         await axios.post(`http://localhost:8000/addnotif`, {
           postId: props.postcurr.postID,
           username: props.postcurr.username,
-          notifusername: username
+          notifusername: username,
+          image: User.user?.profilePicture || User.company?.profilePicture || person
         });
+
+    
        
       } catch (error) {
         console.log(error);
@@ -94,8 +126,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   };
   
   const handleComment = () => {
-    const username = sessionStorage.getItem('sessionID');
-  
+    
+    
     setModalIsOpen(true);
     if (commentText.trim() === '') {
       return;
@@ -120,14 +152,15 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         postId: props.postcurr.postID,
         username: props.postcurr.username,
         notifusername: username, // person who performed the like stored in session ;)
-        commentText: commentText
+        commentText: commentText,
+        image : User.user?.profilePicture || User.company?.profilePicture || person
       })
       .then((res) => {
         
       })
       .catch((error) => console.log(error));
 
-
+      
 
   };
   
@@ -157,7 +190,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       
       <div className='post-container'>
         <div className='post_upper'>
-          <img className='post_p1' src={person} alt='' />
+          <img className='post_p1' src={`http://localhost:8000/profilepictures/${Img.user?.profilePicture || Img.company?.profilePicture || person}`} alt='' />
 
           <div className='post_u-1'>
             <strong className='post_strong'>{props.postcurr.username} </strong>
@@ -197,7 +230,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
     <ul>
       {allcomments.map((cm) => (
         <li key={cm._id}>
-          <img className='post_p3' src={person} alt='' />
+          <img className='post_p3' src={cm.ima} alt='' />
           <div className='post_comment-l'>
             <h6 className='post_h6'>{cm.username}</h6>
             <div className='post_comment-part'>

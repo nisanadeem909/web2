@@ -180,6 +180,10 @@ const notificationSchema = new Schema({
     required: true
   },
 
+  img:{
+    type: String,
+  },
+
   notificationID :{
     type: Number,
     required: true,
@@ -283,7 +287,8 @@ const postSchema = new Schema({
   comments:[{
     username: String,
     date: Date,
-    text: String
+    text: String,
+    img : String,
   }],
 
   sharedBy:{
@@ -379,7 +384,7 @@ const userSchema = new Schema({
     type: String
 
   },
-  
+
   worksAt:{
     CompanyUsername: String,
     Designation: String
@@ -414,6 +419,10 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: true
+  }
+  ,
+  image:{
+    type: String,
   }
 
 }, {

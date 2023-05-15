@@ -16,7 +16,7 @@ export default function CompanyProfile(props) {
     <div>
         <div className='profile-container'>
             <div className='profile_box'>
-            <img className='prof_p1' src={person} alt="" />
+            <img className='prof_p1' src={`http://localhost:8000/profilepictures/${props.user.profilePicture}`} alt="" />
             </div>
             <br />
             <div className='prof_upper'>
