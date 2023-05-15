@@ -7,6 +7,7 @@ const express = require('express');
 var app =express();
 app.use(cors());
 app.use(express.static('public'));
+app.use('/profilepictures', express.static('profilepictures'));
 app.use(express.static('backend/profilepictures'));
 app.use('/images', express.static('uploads'));
 app.use(express.static('files'));
@@ -1469,28 +1470,7 @@ app.post("/addlikes", async (req, res) => {
   }
 });
 
-app.post("/addcomment", async (req, res) => {
-  const { postId, username, text } = req.body;
 
-  try {
-    const post = await Post.findOne({ postID: postId });
-    if (!post) {
-      return res.status(404).json({ error: "Post not found" });
-    }
-
-    post.comments.push({
-      username: username,
-      date: new Date(),
-      text: text
-    });
-
-    await post.save();
-
-    return res.status(200).json({ message: "Comment added successfully" });
-  } catch (error) {
-    return res.status(500).json({ error: "Internal server error" });
-  }
-});
 
 
 
@@ -1705,31 +1685,7 @@ app.get('/allapps/:id', async (req, res) => {
   }
 });
 
-app.get('/allNetwork/:userId', (req, res) => {
-  const userId = req.params.userId;
 
-  Connection.find({ following: userId })
-    .then(followers => {
-      res.json(followers);
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'Failed to retrieve followers' });
-    });
-});
-
-app.get('/allFollowing/:userId', (req, res) => {
-  const userId = req.params.userId;
-
-  Connection.find({ follower: userId })
-    .then(following => {
-      res.json(following);
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'Failed to retrieve following users' });
-    });
-});
 
 app.get('/allpostsmy/:sessionID', async (req, res) => {
  
@@ -1788,15 +1744,17 @@ function generateRandomId() {
 }
 
 app.post('/addnotifcom', async (req, res) => {
-  const { postId, username, notifusername, commentText } = req.body;
+  const { postId, username, notifusername, commentText, img } = req.body;
   const randomId = generateRandomId();
   const notification = new Notification({
     username: username,
     notifusername: notifusername,
     text: 'commented on your post',
     notificationType: 2, 
+    img : img,
     notificationID: randomId,
     date: new Date(),
+
     comment: commentText 
   });
 
@@ -2149,6 +2107,157 @@ app.get('/profilepicture/:username', async (req, res) => {
 });
 
 /**********************************************************************/
+
+app.post("/addcomment", async (req, res) => {
+  const { postId, username, text, img } = req.body;
+
+  try {
+    const post = await Post.findOne({ postID: postId });
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    post.comments.push({
+      username: username,
+      date: new Date(),
+      text: text,
+      img : img,
+    });
+
+    await post.save();
+
+    return res.status(200).json({ message: "Comment added successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get('/allNetwork/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const followers = await Connection.find({ following: userId }).exec();
+
+    const followerUsernames = followers.map(follower => follower.follower);
+
+    const users = await User.find({ username: { $in: followerUsernames } }).exec();
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve followers' });
+  }
+});
+
+
+app.get('/allFollowing/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const following = await Connection.find({ follower: userId }).exec();
+
+    const followingUsernames = following.map(follow => follow.following);
+
+    const users = await User.find({ username: { $in: followingUsernames } }).exec();
+
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve following users' });
+  }
+});
+
+
+app.post('/uploadpostpic', function(req,res){
+  // var name = req.body.name;
+   var form = new formidable.IncomingForm();
+   var newpath;
+   form.parse(req,async function(err,fields,files){
+       
+       var oldpath = String(files.Image.filepath); //this was files.Image.filepath
+       //console.log(oldpath);
+       const img_file = files.Image.originalFilename;
+       console.log("original file name = " + img_file);
+
+       /*var oldpath = path.resolve(img_file);*/
+       newpath = String(__dirname + '/profilepictures/' + files.Image.originalFilename);
+       
+       console.log("old path = " + oldpath);
+       console.log("new path = " + newpath);
+   
+
+       try {
+        fs.copyFileSync(oldpath,newpath);
+       }
+       catch (err) {
+          console.log(err);
+       }
+       
+       
+       var pathpfp = newpath;
+       var uname = fields.Username;
+       try {
+    
+        var ids = generateRandomId();
+          // Create a new post object
+          const newPost = new Post({
+            username: fields.Username,
+            text : fields.UserType,
+            postID : ids,
+            date :new Date(),
+            imagePath : img_file,
+            
+          });
+      
+          // Save the post to the database
+          const savedPost =  newPost.save();
+      
+          res.status(200).json(savedPost);
+        } catch (error) {
+          res.status(500).json({ error: 'Failed to add the post to the database' });
+        }
+      
+      
+         res.end();
+
+   });
+  
+   
+   
+});
+
+
+app.get('/allappl/:username', (req, res) => {
+  const { username } = req.params;
+
+  Jobapplication.findOne({ applicantusername: username })
+    .then(applications => {
+      res.json(applications);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+app.get('/findjob/:jobId', (req, res) => {
+  const { jobId } = req.params;
+
+  Jobs.findOne({ JobId: jobId })
+    .then(job => {
+      if (job) {
+        res.json(job);
+      } else {
+        res.status(404).json({ error: 'Job not found' });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+
 
 
 app.listen(8000, () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './signup.css';
 import axios from 'axios'
-import img from './people.jpeg';
+import img from './GDPR.gif';
 import SignUpUser from './signup-user'
 import SignUpCompany from './signup-company'
 //import {useState} from 'react'
@@ -16,17 +16,17 @@ const SignUpBoth = ()=>
         //alert("in user");
         setFlag(true);
         document.getElementById("signupcompany-btn").style.backgroundColor = "white";
-        document.getElementById("signupuser-btn").style.backgroundColor = "#008080";
+        document.getElementById("signupuser-btn").style.backgroundColor = "#0E312F";
         document.getElementById("signupuser-btn").style.color = "white" ;
-        document.getElementById("signupcompany-btn").style.color = "#008080";
+        document.getElementById("signupcompany-btn").style.color = "#0E312F";
     }
     const setCompanyFlag = ()=>
     {
         //alert("in company");
         setFlag(false);
-        document.getElementById("signupcompany-btn").style.backgroundColor = "#008080";
+        document.getElementById("signupcompany-btn").style.backgroundColor = "#0E312F";
         document.getElementById("signupuser-btn").style.backgroundColor ="white";
-        document.getElementById("signupuser-btn").style.color = "#008080";
+        document.getElementById("signupuser-btn").style.color = "#0E312F";
         document.getElementById("signupcompany-btn").style.color = "white";
     }
     return(
@@ -39,7 +39,7 @@ const SignUpBoth = ()=>
           
         
         <div class="nab-signuppage-right-side">
-            <br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br>
             <div>
                 <ul class="nab-tabs">
                     <button id="signupuser-btn"onClick={setUserFlag} >Sign up as User</button>

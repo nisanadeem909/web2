@@ -101,7 +101,7 @@ function App() {
             <Route path='notifications' element={<Notifications/>} />  
             <Route path="viewotherjob" element={<ViewJobDetails />} />
             
-            <Route path="viewapplication" element={<ViewApplicationPage />} />
+            
             <Route path="*" element={<Error/>}></Route>
             
             
@@ -111,7 +111,8 @@ function App() {
             <Route path="vacancies/postjob" element={<PostJobPage />} />
             <Route path="vacancies/editvacancy" element={<EditJobDetails />} />
            
-            <Route path='compareapplicants' element={<CompareApplicants/>} />  
+            <Route path='compareapplicants' element={<CompareApplicants/>} />
+            <Route path="vacancies/viewapplicants/viewapplication" element={<ViewApplicationPage />} />  
 
 
         </Route>

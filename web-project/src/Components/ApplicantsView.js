@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ApplicantsView.css';
 import app from './app.png';
 import person from './person.png';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ApplicantsView() {
@@ -10,6 +10,11 @@ export default function ApplicantsView() {
   const propsData = location.state;
   const [allApp, setAllApp] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const gotoPage = (data)=> {
+    navigate("viewapplication" ,  {state: data });
+  }
 
   useEffect(() => {
     axios
@@ -50,7 +55,7 @@ export default function ApplicantsView() {
                   </div>
 
                   <div className="nisa-notify-post">
-                    <button className="nisa-vaca-btn1">Application</button>
+                    <button onClick={gotoPage(app.applicantusername)} className="nisa-vaca-btn1">Application</button>
                     <button className="nisa-vaca-btn1">Profile</button>
                   </div>
                 </div>

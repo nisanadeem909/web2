@@ -10,12 +10,13 @@ export default function ProfileDetails(props) {
 
     const [btn,setBtn] = useState(<></>);
     const [connected,setConctd] = useState(false);
+    var pf = 'person.png';
 
     const checkConnected = () =>{
-        //alert(props.user.username);
+       
         var param = {"curruser":sessionStorage.getItem("sessionID"),"conuser":props.user.username};
         axios.post("http://localhost:8000/checkifconnected",param).then((response) => {
-            //alert(response.data);
+            
             if (response.data.exists == "error")
                 alert("db error!");
             else if (response.data.exists == true)
@@ -62,6 +63,16 @@ export default function ProfileDetails(props) {
         else
             setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
 
+
+            axios
+            .get(`http://localhost:8000/finduser/${props.user.username}`)
+            .then((res) => {
+              
+              setUser(res.data);
+              
+            })
+            .catch((error) => console.log(error));
+
     },[])
     
 
@@ -72,6 +83,7 @@ export default function ProfileDetails(props) {
     var name = "Loading";
     var bio;
     var worksAt = <></>;
+    const [User, setUser] = useState([]);
     const [profilepic,setPic] = useState(picture);
 
     if (props.user)
@@ -106,7 +118,7 @@ export default function ProfileDetails(props) {
     
     return (
         <div className="profdetails_container">
-            <img src={`http://localhost:8000/profilepictures/${picture}`} className="profdetails_profilePic"/>
+            <img src={`http://localhost:8000/profilepictures/${User.user?.profilePicture || User.company?.profilePicture || pf}`} className="profdetails_profilePic"/>
             <div className="profdetails_details">
                 <div id="profdetails_namebtn">
                     <label id = "profdetails_name">{name}</label>

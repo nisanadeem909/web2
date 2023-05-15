@@ -42,7 +42,7 @@ export default function UserPublicProfilePage() {
                 </div>
             </div>
             <div className="userprof_public_activity">
-                <OwnFeed/>
+                <OwnFeed user={user} type="user" />
             </div>
             <div className="userprof_public_footer">
                 <Footer/>

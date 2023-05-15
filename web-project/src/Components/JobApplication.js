@@ -3,12 +3,37 @@ import './JobApplication.css';
 import { useNavigate } from "react-router-dom";
 import picture from './dummy.jpg'
 
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
 export default function Application() {
 
-    const appDetails = {'answer':'I want to apply for this job because ...... I want to apply for this job because .....', 'experience':'0','contact':{'phone':'12345678901', 'email':'kw@gmail.com'}, 'applicantName': 'Komal Waseem', 'position':'Internship','date':'06/05/2022', 'username':'komalwaseem', 'dob':'10/01/2001', 'lastDegree':{'degree':'Bachelors','major':'Software Engineering','school':'FAST'}};
-    const company = 'Devsinc';
-
+   
+    const location = useLocation();
+  const propsData = location.state;
     const navigate = useNavigate();
+    const [allApp, setAllApp] = useState([]);
+    const [job, setJob] = useState([]);
+  const none = "none";
+
+    useEffect(() => {
+        axios
+        .get(`http://localhost:8000/allappl/${propsData}`)
+        .then(res => {
+          setAllApp(res.data);
+        
+          axios
+            .get(`http://localhost:8000/findjob/${res.data.jobid}`)
+            .then(res => {
+                setJob(res.data);
+               
+            })
+            .catch(error => console.log(error));
+          
+        })
+        .catch(error => console.log(error));
+      }, []);
 
   return (
     <div className='kjobapp-container'>
@@ -17,8 +42,8 @@ export default function Application() {
         </div>
         <div className='kjobapp-content'>
             <div className='kjobapp-content-header'>
-                <label>{appDetails.position} ({company})</label>
-                <label className='kjobapp-content-header-date'>Submitted: {appDetails.date}</label>
+                <label>{job.Designation} ({job.CompanyName})</label>
+                
             </div>
             <hr className='kjobapp-content-hr'></hr>
             <div className='kjobapp-content-details'>
@@ -26,8 +51,8 @@ export default function Application() {
                     <div className='kjobapp-content-profile-summary'>
                         <img src={picture} className='kjobapp-content-profile-pic'></img>
                         <div className='kjobapp-content-profile-names'>
-                            <label className='kjobapp-content-name'>{appDetails.applicantName}</label>
-                            <label className='kjobapp-content-username'>@{appDetails.username}</label>
+                            <label className='kjobapp-content-name'>{allApp.applicantname}</label>
+                            <label className='kjobapp-content-username'>@{allApp.applicantusername}</label>
                         </div>
                     </div>
                     <button className='kjobapp-btn' onClick={()=>navigate('/company/publicuserprofile')}>View Profile</button>
@@ -36,31 +61,31 @@ export default function Application() {
                 <div className='kjobapp-content-application'>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Date of Birth:</label>
-                        <label className='kjobapp-content-appfield-value'>{appDetails.dob}</label>
+                        <label className='kjobapp-content-appfield-value'>{allApp.dob}</label>
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Contact Number:</label>
-                        <label className='kjobapp-content-appfield-value'>{appDetails.contact.phone}</label>
+                        <label className='kjobapp-content-appfield-value'>0{allApp.phone}</label>
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Email:</label>
-                        <label className='kjobapp-content-appfield-value'>{appDetails.contact.email}</label>
+                        <label className='kjobapp-content-appfield-value'>{allApp.email}</label>
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Last Degree:</label>
-                        <label className='kjobapp-content-appfield-value'>{appDetails.lastDegree.degree} in {appDetails.lastDegree.major}</label>
+                        <label className='kjobapp-content-appfield-value'></label>
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Last School/College:</label>
-                        <label className='kjobapp-content-appfield-value'>{appDetails.lastDegree.school}</label>
+                        <label className='kjobapp-content-appfield-value'></label>
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Years of Experience:</label>
-                        <label className='kjobapp-content-appfield-value'>{appDetails.experience}</label>
+                        <label className='kjobapp-content-appfield-value'></label>
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Reason for Applying:</label>
-                        <label className='kjobapp-content-appfield-value'>{appDetails.answer}</label>
+                        <label className='kjobapp-content-appfield-value'></label>
                     </div>
                 </div>
                 <hr className='kjobapp-content-hr'></hr>
