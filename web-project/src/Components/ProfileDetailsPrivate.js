@@ -16,6 +16,7 @@ export default function ProfileDetails(props) {
     var name = "Loading";
     var bio;
     var worksAt = <></>;
+    var persons = 'flower.jpg';
     const [profilepic,setPic] = useState(picture); // dummy picture to use if no profile picture applied
     //const [contact,setDetails] = useState({name: 'Jobify User',username:'someone@jobify.com',Bio:'This is biooo bioooo biooo biooooooooooooooooooo'});
 
@@ -92,7 +93,7 @@ export default function ProfileDetails(props) {
     return (
         <div className="profdetails_container">
             <div id="profdetails_imgedit">
-            <img src={picture} id="myImage" className="profdetails_profilePic"/>
+            <img src={`http://localhost:8000/profilepictures/${persons}`} id="myImage" className="profdetails_profilePic"/>
             
             </div>
             <div className="profdetails_details">

@@ -75,7 +75,11 @@
     max-width: 30%;
     width: 100%;
   }
-  
+  .nisa-vac-ll{
+    margin-left: 45%;
+    font-size: 28px;
+    color: maroon;
+  }
   .vaca-overlay {
     position: fixed;
     top: 0;

@@ -18,7 +18,7 @@ export default function ProfileDetails() {
     
     return (
         <div className="profdetails_container">
-            <img src={profilepic} className="profdetails_profilePic"/>
+            <img src={`http://localhost:8000/profilepictures/${picture}`} className="profdetails_profilePic"/>
             <div className="profdetails_details">
                 <div id="profdetails_namebtn">
                     <label id = "profdetails_name">{name}</label>

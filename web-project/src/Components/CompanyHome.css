@@ -13,7 +13,7 @@
 .kch_profile {
     grid-area: profile;
     margin-left: 2rem;
-    margin-top: -225px;
+   
 }
 
 .kch_searchbar {
@@ -27,7 +27,7 @@
     grid-area: jobs;
     margin-left: 2rem;
     margin-right: 2rem;
-    margin-top: -15rem;
+    
 }
 
 .kch_footer {
@@ -37,11 +37,12 @@
 .kch_feed {
     grid-area: feed;
     margin-left: 2rem;
-    margin-top: -725px;
+    margin-top: 7rem;
+   
 }
 
 .kch_addpost {
     grid-area: addpost;
     margin-left: 2rem;
-    margin-top: -225px;
+   
 }
