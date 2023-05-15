@@ -24,7 +24,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   const [shares, setShares] = useState(0); // Initial number of shares
   const [liked, setLiked] = useState(false); // User's like status
   const [allcomments, setAllComments] = useState([]);
- 
+  const [User, setUser] = useState([]);
+  
+  const username = sessionStorage.getItem('sessionID');
 
   
 
@@ -56,6 +58,17 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         })
         .catch(error => console.log(error));
 
+        axios
+        .get(`http://localhost:8000/finduser/${username}`)
+        .then((res) => {
+          
+          setUser(res.data);
+          
+         
+          
+        })
+        .catch((error) => console.log(error));
+
 
   }, []);
 
@@ -85,8 +98,10 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         await axios.post(`http://localhost:8000/addnotif`, {
           postId: props.postcurr.postID,
           username: props.postcurr.username,
-          notifusername: username
+          notifusername: username,
+          image: User.user?.profilePicture || User.company?.profilePicture || person
         });
+
        
       } catch (error) {
         console.log(error);
@@ -120,8 +135,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       .post(`http://localhost:8000/addnotifcom`, {
         postId: props.postcurr.postID,
         username: props.postcurr.username,
-        notifusername: username,
-        commentText: commentText
+        notifusername: username, // person who performed the like stored in session ;)
+        commentText: commentText,
+        image : User.user?.profilePicture || User.company?.profilePicture || person
       })
       .then((res) => {
         
@@ -158,7 +174,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       
       <div className='post-containernew'>
         <div className='post_upper'>
-          <img className='post_p1' src={person} alt='' />
+          <img className='post_p1' src={`http://localhost:8000/profilepictures/${User.user?.profilePicture || User.company?.profilePicture || person}`} alt='' />
 
           <div className='post_u-1'>
             <strong className='post_strong'>{props.postcurr.username} </strong>
@@ -198,7 +214,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
     <ul>
       {allcomments.map((cm) => (
         <li key={cm._id}>
-          <img className='post_p3' src={person} alt='' />
+          <img className='post_p3' src={`http://localhost:8000/profilepictures/${User.user?.profilePicture || User.company?.profilePicture || person}`} alt='' />
           <div className='post_comment-l'>
             <h6 className='post_h6'>{cm.username}</h6>
             <div className='post_comment-part'>
