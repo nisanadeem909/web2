@@ -96,7 +96,7 @@ export default function ApplicantsView() {
                   </div>
               
                   <div className="nisa-notify-post">
-                    <button onClick={gotoPage(app.applicantusername)} className="nisa-vaca-btn1">Application</button>
+                    <button onClick={()=>gotoPage(app.applicantusername)} className="nisa-vaca-btn1">Application</button>
                     <button className="nisa-vaca-btn1" onClick={()=>{openProfile(app.applicantusername)}}>Profile</button>
                   </div>
                 </div>
