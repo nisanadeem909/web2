@@ -5,7 +5,7 @@
                         "profile addpost jobs" 
                         "profile feed jobs" 
                         "footer footer footer";
-    grid-template-rows: 0.2fr 0.5fr 2.7fr 0.6fr;
+    grid-template-rows: auto auto 1fr auto;
     grid-gap: 0.8rem;
     width:100%;
 }
@@ -13,7 +13,6 @@
 .kch_profile {
     grid-area: profile;
     margin-left: 2rem;
-    margin-top: -225px;
 }
 
 .kch_searchbar {
@@ -27,7 +26,6 @@
     grid-area: jobs;
     margin-left: 2rem;
     margin-right: 2rem;
-    margin-top: -15rem;
 }
 
 .kch_footer {
@@ -37,11 +35,10 @@
 .kch_feed {
     grid-area: feed;
     margin-left: 2rem;
-    margin-top: -725px;
+    margin-top: 6rem;
 }
 
 .kch_addpost {
     grid-area: addpost;
     margin-left: 2rem;
-    margin-top: -225px;
 }

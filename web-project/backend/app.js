@@ -1907,6 +1907,29 @@ app.post('/getconnections', async (req, res) => {
     res.end();
 });
 
+app.post("/getemployeesk", async(req,res)=>{
+  console.log(req.body);
+
+  const company = req.body.user;
+
+  var msg;
+
+  try {
+    const employees = await CurrentEmployees.find({ CompanyUsername: company });
+    msg = {"data":employees};
+  }
+  catch (error) {
+      console.error('Error getting employees:', error);
+      msg = {"data": "error"};
+  } 
+
+  res.json(msg);
+
+  res.end();
+
+})
+
+
 /****************************************************************/
 
 
