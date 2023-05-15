@@ -36,7 +36,7 @@ export default function ProfileDetails(props) {
         {
             worksAt = <div className="profdetails_workplace">
                         <img id="profdetails_neticon" src={workicon}></img>
-                        <label>Works At {user.worksAt}</label>
+                        <label>Works At @{user.worksAt.CompanyUsername} as {user.worksAt.Designation}</label>
                     </div>;
         }
         
