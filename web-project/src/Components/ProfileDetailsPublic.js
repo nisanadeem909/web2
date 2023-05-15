@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ProfileDetails.css';
 import picture from './dummy.jpg'
 import connecticon from './follow.png'
@@ -6,8 +6,31 @@ import networkicon from './network.png'
 import workicon from './workk.png'
 export default function ProfileDetails(props) {
 
-    var btn = 
-    <button id="profdetails_btn" className='profdetails_button'><div><img src={connecticon} id="profdetails_conimg"></img><label>Connect</label></div></button>; // changes if already connected
+    const checkConnected = () =>{
+        var curruser = sessionStorage.getItem("sessionID");
+        //complete
+    }
+
+    const connect=(conuser)=>{
+        var curruser = sessionStorage.getItem("sessionID");
+        alert(conuser);
+    }
+
+    const disconnect=(conuser)=>{
+        var curruser = sessionStorage.getItem("sessionID");
+    }
+
+    const [btn,setBtn] = useState(<></>);
+    
+    useEffect(()=>{
+
+        if (!checkConnected)
+            setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{connect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Connect</label></div></button>); // changes if already connected);
+        else
+        setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
+
+    },[])
+    
 
     var user;
 
