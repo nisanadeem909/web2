@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Post.css';
-import person from './person.png';
+
 import post from './post.jpg';
 import like from './like.webp';
 import comment from './comment4.jpeg';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
-
+var person = 'person.png';
 
 
 
@@ -26,6 +26,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   const [Img, setImg] = useState([]);
   const [ImgCom, setImgCom] = useState([]);
   const [User, setUser] = useState([]);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   
   const username = sessionStorage.getItem('sessionID');
 
@@ -55,7 +56,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       .catch((error) => console.log(error));
       axios.get(`http://localhost:8000/showcomment/${props.postcurr.postID}`)
         .then(res => {        
-          setAllComments(res.data);            
+          setAllComments(res.data);     
+              
          res.end();           
         })
         .catch(error => console.log(error));
@@ -65,6 +67,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         .then((res) => {
          
           setImg(res.data);
+          setIsImageLoaded(true); 
          
           
         })
@@ -137,7 +140,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       .post(`http://localhost:8000/addcomment`, {
         postId: props.postcurr.postID,
         username: username,
-        text: commentText
+        text: commentText,
+        img : User.user?.profilePicture || User.company?.profilePicture || person
       })
       .then((res) => {
         setComments(comments + 1);
@@ -153,7 +157,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         username: props.postcurr.username,
         notifusername: username, // person who performed the like stored in session ;)
         commentText: commentText,
-        image : User.user?.profilePicture || User.company?.profilePicture || person
+        img : User.user?.profilePicture || User.company?.profilePicture || person
       })
       .then((res) => {
         
@@ -199,7 +203,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         </div>
 
         <div className='post_middle'>
-          <img className='post_p2' src={post} alt='' />
+        {isImageLoaded && (
+          <img className='post_p2' src={`http://localhost:8000/profilepictures/${props.postcurr?.profilePicture || Img.company?.profilePicture || person}`} alt='' />)}
           <div className='post_btnpara'>
             <div className='post_btns'>
               <button className='post_icons2' onClick={handleLike}>
@@ -230,7 +235,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
     <ul>
       {allcomments.map((cm) => (
         <li key={cm._id}>
-          <img className='post_p3' src={cm.ima} alt='' />
+          <img className='post_p3' src={`http://localhost:8000/profilepictures/${cm.img || person}`} alt='' />
           <div className='post_comment-l'>
             <h6 className='post_h6'>{cm.username}</h6>
             <div className='post_comment-part'>

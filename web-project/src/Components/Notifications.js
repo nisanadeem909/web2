@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Notifications.css';
 import notify from './notify.png';
-import person from './person.png';
+
 import post from './post.jpg';
 import axios from 'axios';
 
+const person = 'person.jpg';
 export default function Notifications() {
   const [allNotifications, setAllNotifications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,12 +55,12 @@ export default function Notifications() {
       ) : allNotifications.length === 0 ? (
         <p className='nisa-ll'>No notifications found.</p>
       ) : (
-        <ul>
+        <ul className='nisa-notif-new'>
           {allNotifications.map(not => (
             <li key={not._id}>
               <div className='nisa-notif-list'>
                 <div className='nisa-notify-container2'>
-                  <img className='nisa-notify-img2' src={person} alt='' />
+                  <img className='nisa-notify-img2' src={`http://localhost:8000/profilepictures/${not.img|| person}`} alt='' />
                   <div className='nisa-notify-container3'>
                     <div className='nisa-notify-container4'>
                       <label className='nisa-notify-lb'>@{not.notifusername}</label>

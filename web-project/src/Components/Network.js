@@ -2,11 +2,13 @@ import React from 'react';
 import Search from './Search';
 import './Network.css';
 import connecticon from './pfneto.png';
-import person from './person.png';
+
 import bgnetwork from './networkpic.png';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+const person = 'person.png';
 
 export default function Network() {
   const [allFollower, setAllFollower] = useState([]);
@@ -32,7 +34,7 @@ export default function Network() {
   }, []);
 
   const openProfile=(username)=>{
-    //find user type
+   
     var param = {"user":username};
     axios.post(`http://localhost:8000/getusertype`,param)
       .then(res => {
@@ -48,8 +50,6 @@ export default function Network() {
               else {
                   path += "publiccompanyprofile";
               }
-
-             // alert(path);
 
               navigate(path, { state: res.data.user });
           }
@@ -78,10 +78,10 @@ export default function Network() {
                   <div className='nisa-list-container'>
                     <div className='nisa-list-big'>
                       <div>
-                        <img className='nisa-network-img1' src={person} alt='' />
+                        <img className='nisa-network-img1' src={`http://localhost:8000/profilepictures/${follow.profilePicture || person}`} alt='' />
                       </div>
                       <div className='nisa-list-small'>
-                        <label className='nisa-network-ppl'>{follow.follower}</label>
+                        <label className='nisa-network-ppl'>{follow.username}</label>
                       </div>
                     </div>
                     <div className='btnnnn'>
@@ -108,10 +108,10 @@ export default function Network() {
                   <div className='nisa-list-container'>
                     <div className='nisa-list-big'>
                       <div>
-                        <img className='nisa-network-img1' src={person} alt='' />
+                        <img className='nisa-network-img1' src={`http://localhost:8000/profilepictures/${followi.profilePicture|| person}`} alt='' />
                       </div>
                       <div className='nisa-list-small'>
-                        <label className='nisa-network-ppl'>{followi.following}</label>
+                        <label className='nisa-network-ppl'>{followi.username}</label>
                       </div>
                     </div>
                     <div>

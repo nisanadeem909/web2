@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Post.css';
 import './OwnPost.css';
-import person from './person.png';
+
 import post from './post.jpg';
 import like from './like.webp';
 import comment from './comment4.jpeg';
@@ -11,7 +11,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-
+var person = 'person.png';
 
 
 export default function Post(props) {
@@ -25,6 +25,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   const [liked, setLiked] = useState(false); // User's like status
   const [allcomments, setAllComments] = useState([]);
   const [User, setUser] = useState([]);
+  const [Img, setImg] = useState([]);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   
   const username = sessionStorage.getItem('sessionID');
 
@@ -59,11 +61,22 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         .catch(error => console.log(error));
 
         axios
+        .get(`http://localhost:8000/profilepicture/${props.postcurr.username}`)
+        .then((res) => {
+         
+          setImg(res.data);
+          setIsImageLoaded(true); 
+          
+        })
+        .catch((error) => console.log(error));
+
+        axios
         .get(`http://localhost:8000/finduser/${username}`)
         .then((res) => {
           
           setUser(res.data);
           
+        
          
           
         })
@@ -121,7 +134,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       .post(`http://localhost:8000/addcomment`, {
         postId: props.postcurr.postID,
         username: username,
-        text: commentText
+        text: commentText,
+        img : User.user?.profilePicture || User.company?.profilePicture || person
       })
       .then((res) => {
         setComments(comments + 1);
@@ -174,7 +188,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       
       <div className='post-containernew'>
         <div className='post_upper'>
-          <img className='post_p1' src={`http://localhost:8000/profilepictures/${User.user?.profilePicture || User.company?.profilePicture || person}`} alt='' />
+          <img className='post_p1' src={`http://localhost:8000/profilepictures/${Img.user?.profilePicture || Img.company?.profilePicture || person}`} alt='' />
 
           <div className='post_u-1'>
             <strong className='post_strong'>{props.postcurr.username} </strong>
@@ -183,7 +197,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         </div>
 
         <div className='post_middlenew'>
-          <img className='post_p2' src={post} alt='' />
+        {isImageLoaded && (
+          <img className='post_p2' src={`http://localhost:8000/profilepictures/${props.postcurr.imagePath}`} alt='' />)}
           <div className='post_btnpara'>
             <div className='post_btns'>
               <button className='post_icons2' onClick={handleLike}>
