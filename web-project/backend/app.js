@@ -621,6 +621,7 @@ app.post("/getcompanydropdownlist", async(req,res)=>{
         }
       ]);
 
+      console.log(companies);
     res.json(companies);
 
     res.end();
@@ -828,7 +829,7 @@ app.post("/comparejobs", async(req,res)=>{
   res.end();*/
  let ajob;
   try{
-    ajob = await Jobs.findOne({ Designation: req.body.job1,CompanyName: req.body.comp1 });
+    ajob = await Jobs.findOne({ JobId:req.body.jobid1 });
     
       if (ajob) {
         console.log("found a job " + ajob);
@@ -844,11 +845,11 @@ app.post("/comparejobs", async(req,res)=>{
     }
     catch(err){
         console.log("ERROR = " + err);
-        res.json(err);
+        //res.json(err);
     }
     
     try{
-      let ajob2 = await Jobs.findOne({ Designation: req.body.job2,CompanyName: req.body.comp2 });
+      let ajob2 = await Jobs.findOne({ JobId: req.body.jobid2 });
       
         if (ajob2) {
           console.log("found a job " + ajob2);
@@ -1158,23 +1159,35 @@ app.post("/updateprofiledetails", async(req,res)=>{
 
         console.log (worksAt," ",des);
 
-        try {
-          await EmployeeRequests.deleteOne({ EmployeeUsername: uname });
+        try{
+          const user = await User.findOne({ username: uname, "worksAt.CompanyUsername": worksAt })
+          if (!user)
+          {
+            await EmployeeRequests.deleteOne({ EmployeeUsername: uname });
 
-          // Create a new employee request for user X
-          const newRequest = new EmployeeRequests({
-            EmployeeUsername: uname,
-            EmployeeName: name,
-            Designation: des,
-            CompanyUsername: worksAt
-          });
-
-          console.log(newRequest);
-          
-          await newRequest.save();
-        }
-        catch(err){
-
+            // Create a new employee request for user X
+            const newRequest = new EmployeeRequests({
+              EmployeeUsername: uname,
+              EmployeeName: name,
+              Designation: des,
+              CompanyUsername: worksAt
+            });
+  
+            console.log(newRequest);
+            
+            await newRequest.save();
+          }
+          else
+          {
+              const result = await User.findOneAndUpdate(
+                { username: uname },
+                { $set: {"worksAt.Designation": des }},
+                { new: true, overwrite: false }
+              )
+              console.log("res:" +result);
+          }
+        } catch(err){
+            console.log(err);
         }
     }
   }
@@ -1471,9 +1484,6 @@ app.post("/addlikes", async (req, res) => {
 });
 
 
-
-
-
 app.get('/likes/:sessionID',async (req, res) => {
   const postId = req.params.sessionID; 
 
@@ -1685,8 +1695,6 @@ app.get('/allapps/:id', async (req, res) => {
   }
 });
 
-
-
 app.get('/allpostsmy/:sessionID', async (req, res) => {
  
   const username = req.params.sessionID; 
@@ -1744,17 +1752,15 @@ function generateRandomId() {
 }
 
 app.post('/addnotifcom', async (req, res) => {
-  const { postId, username, notifusername, commentText, img } = req.body;
+  const { postId, username, notifusername, commentText } = req.body;
   const randomId = generateRandomId();
   const notification = new Notification({
     username: username,
     notifusername: notifusername,
     text: 'commented on your post',
     notificationType: 2, 
-    img : img,
     notificationID: randomId,
     date: new Date(),
-
     comment: commentText 
   });
 
@@ -1986,6 +1992,7 @@ app.post("/getcurrentemployees", async(req,res)=>{
   }
 
 });
+
 app.post("/employeerequests", async(req,res)=>{
   let msg = "I am in employee requests";
   console.log(req.body);
@@ -1993,6 +2000,8 @@ app.post("/employeerequests", async(req,res)=>{
   const empreq = await EmployeeRequests.find({CompanyUsername:req.body.user});
   if (empreq){
       console.log("found");
+      
+      
       res.json({"empreq":empreq});
       res.end();
   }
@@ -2003,6 +2012,7 @@ app.post("/employeerequests", async(req,res)=>{
   }
 
 });
+
 app.post("/acceptemployeerequest", async(req,res)=>{
   console.log(req.body);
   const companyname = await Company.findOne({username:req.body.companyusername});
@@ -2014,16 +2024,32 @@ app.post("/acceptemployeerequest", async(req,res)=>{
       let msg = "account created successfully";   
       console.log("employee request accepted");
       
+      
+      
+      
       res.json({"message":msg});
        res.end();
    }).catch((err)=>{
        console.log(err);
    })
 
-
-
-  
+   try{
+    console.log("Works at Arr = ");
+   
+    let worksAtArr = {Designation:req.body.designation,CompanyUsername:req.body.companyusername};
+    console.log(worksAtArr)
+    const user = await User.findOne({username:req.body.employeeusername});
+    if (user)
+    user.worksAt = {Designation:req.body.designation,CompanyUsername:req.body.companyusername};
+    user.save();
+   }
+   catch(err)
+   {
+    console.log(err);
+   }
 });
+
+
 app.post("/deleteemployeerequest", async(req,res)=>{
   console.log(req.body);
   const companyname = await Company.findOne({username:req.body.companyusername});
@@ -2031,11 +2057,18 @@ app.post("/deleteemployeerequest", async(req,res)=>{
   //console.log("empname: " + req.body.empreq);
   console.log("Deleted Successfully");
 });
+
+
 app.post("/deleteemployee", async(req,res)=>{
   console.log(req.body);
   //const companyname = await Company.findOne({username:req.body.companyusername});
   const deleted = await CurrentEmployees.findOneAndDelete({EmployeeUsername:req.body.employeeusername,CompanyUsername:req.body.companyusername});
   //console.log("empname: " + req.body.empreq);
+  const user = await User.findOne({ username:req.body.employeeusername});
+  if (user){
+    user.worksAt = undefined;
+    await user.save();
+  }
   console.log("Deleted Successfully");
 });
 
@@ -2107,6 +2140,68 @@ app.get('/profilepicture/:username', async (req, res) => {
 });
 
 /**********************************************************************/
+
+
+
+/*************** KOMAL 5 ****************/
+
+app.post('/updatevacancy', async (req, res) => {
+  console.log(req.body);
+  var newJob = req.body.newJob;
+  var data;
+
+  try {
+    await Jobs.findOneAndUpdate({ JobId: newJob.JobId }, {
+      $set: {
+        Designation: newJob.Designation,
+        Description: newJob.Description,
+        DegreeRequired: newJob.DegreeRequired,
+        MajorRequired: newJob.MajorRequired,
+        YearsofExperience: newJob.YearsofExperience,
+        Salary: newJob.Salary,
+        WeeklyWorkingHours: newJob.WeeklyWorkingHours,
+        YearlyPaidLeaves: newJob.YearlyPaidLeaves
+      }
+    }, { new: true, overwrite: false })
+
+    data = {"type":"saved"}
+    
+  } catch(err) {
+      console.log(err);
+      data = {"type":err}
+  }
+
+  console.log(data);
+
+  res.json(data);
+
+  res.end();
+});
+
+/****************************************/
+
+/************* NABEEHA 5 *************/
+app.post("/getcurrentapplicants", async(req,res)=>{
+  console.log("req.body ");
+  console.log(req.body.param);
+
+  const app_list = await Jobapplication.find({jobid:req.body.jobid});
+  if (app_list){
+    console.log("found apps");
+    console.log(app_list);
+    res.json({"apps":app_list});
+    res.end();
+
+  }
+  else{
+    res.json({"apps":"Could not find any jobs with this ID"});
+    res.end();
+  }
+  
+});
+/*************************************/
+
+/********************** NISA 5 **********************/
 
 app.post("/addcomment", async (req, res) => {
   const { postId, username, text, img } = req.body;
@@ -2257,8 +2352,7 @@ app.get('/findjob/:jobId', (req, res) => {
     });
 });
 
-
-
+/****************************************************/
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 

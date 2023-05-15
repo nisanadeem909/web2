@@ -15,14 +15,16 @@ export default function Application() {
     const navigate = useNavigate();
     const [allApp, setAllApp] = useState([]);
     const [job, setJob] = useState([]);
+    const [con,setCon] = useState();
   const none = "none";
 
     useEffect(() => {
         axios
         .get(`http://localhost:8000/allappl/${propsData}`)
         .then(res => {
+           
           setAllApp(res.data);
-        
+          alert(res.data.lastdegree.degree);
           axios
             .get(`http://localhost:8000/findjob/${res.data.jobid}`)
             .then(res => {
@@ -81,11 +83,11 @@ export default function Application() {
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Years of Experience:</label>
-                        <label className='kjobapp-content-appfield-value'></label>
+                        <label className='kjobapp-content-appfield-value'>{allApp.yearsExp}</label>
                     </div>
                     <div className='kjobapp-content-appfield'>
                         <label className='kjobapp-content-appfield-title'>Reason for Applying:</label>
-                        <label className='kjobapp-content-appfield-value'></label>
+                        <label className='kjobapp-content-appfield-value'>{allApp.answer}</label>
                     </div>
                 </div>
                 <hr className='kjobapp-content-hr'></hr>
