@@ -20,6 +20,7 @@ export default function ProfileDetails(props) {
     const [profilepic,setPic] = useState(picture); // dummy picture to use if no profile picture applied
     //const [contact,setDetails] = useState({name: 'Jobify User',username:'someone@jobify.com',Bio:'This is biooo bioooo biooo biooooooooooooooooooo'});
 
+   // const [work,setWork] = useState(null);
     //alert(props.user);
     if (props.user)
     {

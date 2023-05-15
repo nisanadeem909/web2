@@ -1159,23 +1159,35 @@ app.post("/updateprofiledetails", async(req,res)=>{
 
         console.log (worksAt," ",des);
 
-        try {
-          await EmployeeRequests.deleteOne({ EmployeeUsername: uname });
+        try{
+          const user = await User.findOne({ username: uname, "worksAt.CompanyUsername": worksAt })
+          if (!user)
+          {
+            await EmployeeRequests.deleteOne({ EmployeeUsername: uname });
 
-          // Create a new employee request for user X
-          const newRequest = new EmployeeRequests({
-            EmployeeUsername: uname,
-            EmployeeName: name,
-            Designation: des,
-            CompanyUsername: worksAt
-          });
-
-          console.log(newRequest);
-          
-          await newRequest.save();
-        }
-        catch(err){
-
+            // Create a new employee request for user X
+            const newRequest = new EmployeeRequests({
+              EmployeeUsername: uname,
+              EmployeeName: name,
+              Designation: des,
+              CompanyUsername: worksAt
+            });
+  
+            console.log(newRequest);
+            
+            await newRequest.save();
+          }
+          else
+          {
+              const result = await User.findOneAndUpdate(
+                { username: uname },
+                { $set: {"worksAt.Designation": des }},
+                { new: true, overwrite: false }
+              )
+              console.log("res:" +result);
+          }
+        } catch(err){
+            console.log(err);
         }
     }
   }
