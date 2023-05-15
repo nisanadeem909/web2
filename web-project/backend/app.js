@@ -2008,6 +2008,149 @@ app.post("/disconnectk", async(req,res)=>{
 /****************************************************************/
 
 
+
+/********************* NABEEHA 4 **********************/
+
+app.post("/getcurrentemployees", async(req,res)=>{
+  let msg = "I am in get current employees";
+  console.log(req.body);
+
+  const empreq = await CurrentEmployees.find({CompanyUsername:req.body.user});
+  if (empreq){
+      console.log("found");
+      res.json({"empreq":empreq});
+      res.end();
+  }
+  else{
+    console.log("error");
+    res.json({"empreq":"Error"});
+    res.end();
+  }
+
+});
+app.post("/employeerequests", async(req,res)=>{
+  let msg = "I am in employee requests";
+  console.log(req.body);
+
+  const empreq = await EmployeeRequests.find({CompanyUsername:req.body.user});
+  if (empreq){
+      console.log("found");
+      res.json({"empreq":empreq});
+      res.end();
+  }
+  else{
+    console.log("found");
+    res.json({"empreq":"Error"});
+    res.end();
+  }
+
+});
+app.post("/acceptemployeerequest", async(req,res)=>{
+  console.log(req.body);
+  const companyname = await Company.findOne({username:req.body.companyusername});
+  const deletedreq = await EmployeeRequests.findOneAndDelete({EmployeeUsername:req.body.employeeusername});
+  //console.log("empname: " + req.body.empreq);
+  const newemp = new CurrentEmployees({EmployeeUsername:req.body.employeeusername,EmployeeName:req.body.empname,Designation:req.body.designation,CompanyUsername:req.body.companyusername,CompanyName:companyname.name});
+  
+  newemp.save().then(()=>{
+      let msg = "account created successfully";   
+      console.log("employee request accepted");
+      
+      res.json({"message":msg});
+       res.end();
+   }).catch((err)=>{
+       console.log(err);
+   })
+
+
+
+  
+});
+app.post("/deleteemployeerequest", async(req,res)=>{
+  console.log(req.body);
+  const companyname = await Company.findOne({username:req.body.companyusername});
+  const deletedreq = await EmployeeRequests.findOneAndDelete({EmployeeUsername:req.body.employeeusername});
+  //console.log("empname: " + req.body.empreq);
+  console.log("Deleted Successfully");
+});
+app.post("/deleteemployee", async(req,res)=>{
+  console.log(req.body);
+  //const companyname = await Company.findOne({username:req.body.companyusername});
+  const deleted = await CurrentEmployees.findOneAndDelete({EmployeeUsername:req.body.employeeusername,CompanyUsername:req.body.companyusername});
+  //console.log("empname: " + req.body.empreq);
+  console.log("Deleted Successfully");
+});
+
+/******************************************************/
+
+
+/******************************** NISA 4 ******************************/
+
+app.get('/search/:query', async (req, res) => {
+  const searchQuery = req.params.query;
+
+  try {
+  
+    const userResults = await User.find({ username: { $regex: searchQuery, $options: 'i' } }).limit(10);
+    const companyResults = await Company.find({ name: { $regex: searchQuery, $options: 'i' } }).limit(10);
+    const jobResults = await Jobs.find({ Designation: { $regex: searchQuery, $options: 'i' } }).limit(10);
+
+ 
+    const searchResults = [...userResults, ...companyResults, ...jobResults];
+    console.log(searchResults);
+    res.json(searchResults);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while performing the search.' });
+  }
+});
+
+app.get('/finduser/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const user = await User.findOne({ username: username });
+    if (user) {
+      return res.json({ user });
+    }
+
+    const company = await Company.findOne({ username: username });
+    if (company) {
+      return res.json({ company });
+    }
+
+    res.status(404).json({ message: 'User or Company not found' });
+  } catch (error) {
+    console.error('Error retrieving user or company:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+app.get('/profilepicture/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const user = await User.findOne({ username });
+    if (user && user.profilePicture) {
+      return res.json({ user });
+    }
+
+    const company = await Company.findOne({ username });
+    if (company && company.profilePicture) {
+      return res.json({ company });
+    }
+
+    res.status(404).json({ message: 'User or company not found' });
+  } catch (error) {
+    console.error('Error retrieving user or company:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+/**********************************************************************/
+
+
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
 })
