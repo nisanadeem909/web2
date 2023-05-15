@@ -21,8 +21,6 @@ export default function Footer() {
   
     <a href="#">About</a>
     
-    <a href="#">Faq</a>
-    
     <a href="#">Contact</a>
   </p>
 
@@ -33,12 +31,12 @@ export default function Footer() {
 
   <div>
     <i class="fa fa-map-marker"></i>
-    <p><span>444 S. Cedros Ave</span> Solana Beach, California</p>
+    <p><span>Looking for a job?</span>Looking for an employee?</p>
   </div>
 
   <div>
     <i class="fa fa-phone"></i>
-    <p>+1.555.555.5555</p>
+    <p>You came to the right place!</p>
   </div>
 
   <div>
@@ -51,8 +49,8 @@ export default function Footer() {
 <div class="footer-right">
 
   <p class="footer-company-about">
-    <span>About the company</span>
-    Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+    <span>About JOBIFY</span>
+    Jobify: Your ultimate destination for finding the perfect job. Discover, search, and apply for a wide range of career opportunities in various industries, connecting job seekers with their dream positions.
   </p>
 
   <div class="footer-icons">

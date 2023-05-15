@@ -37,7 +37,8 @@ export default function BasicModal(props) {
   const [stateEndDate,setEndDate] = useState(props.selectedExp.endYear);
   const [statePosition,setPosition] = useState(props.selectedExp.position);
 
-  const [companyList,setCompanyList] = useState(null);
+  //alert("hi");
+  const [companyList,setCompanyList] = useState([]);
   var tempComp;
 
   const [selectedCompany,setSelectedCompany] = useState(null);
@@ -46,6 +47,8 @@ export default function BasicModal(props) {
     axios.post("http://localhost:8000/getcompanydropdownlist").then((response) => {
         //alert(response.data);
         setCompanyList(response.data);
+        //alert("1:"+ JSON.stringify(response.data));
+        //alert(JSON.stringify(companyList));
     })
     .catch(function (error) {
         alert("Edit work exp axios error: "+ error);
@@ -53,11 +56,14 @@ export default function BasicModal(props) {
   }, []);
 
   useEffect(() => {
+    //alert("3:"+JSON.stringify(companyList));
     if (companyList)
     {
-        //alert("i am here");
+        
         tempComp = companyList.filter((obj)=>obj.label === props.selectedExp.company)[0];
-        setSelectedCompany({"label": tempComp.label,"value": tempComp.value});
+        //alert(JSON.stringify(tempComp));
+        setSelectedCompany(tempComp);
+        //alert("i am here now hi");
     }
 }, [companyList]);
 

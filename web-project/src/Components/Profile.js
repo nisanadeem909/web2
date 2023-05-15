@@ -1,8 +1,11 @@
 import React from 'react'
 import './Profile.css';
 import person from './person.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile(props) {
+
+  const navigate = useNavigate();
  
   if (!props.user) {
     return null; 
@@ -19,6 +22,12 @@ export default function Profile(props) {
   const img = props.user.profilePicture;
   var person = 'person.png';
 
+  const openProfile=()=>{
+    var userType = sessionStorage.getItem("userType");
+    var path = "/" + userType + "/ownprofile";
+    navigate(path);
+  }
+
   return (
     <div>
         <div className='profile-container'>
@@ -31,7 +40,7 @@ export default function Profile(props) {
             </div>
             <div className='prof_middle'>
             <p>{degree} {major} Student at {school} </p>
-            <button className='nisa-pf-btn' >Open Profile</button>
+            <button className='nisa-pf-btn' onClick={openProfile} >Open Profile</button>
             </div>
            
            <hr className='prof_hr'/>

@@ -3,19 +3,21 @@ import './HomePage.css';
 import home from './finalhome.png';
 import Slideshow from './Slideshow';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
+  const navigate=useNavigate();
   return (
     <div>
       <div className="container-home">
         <div className="box1">
           <h2>Connecting Applicants And Companies At One Place</h2>
           <div>
-            <button className="b1">Get a Job</button>
-            <button className="b2">Own Company</button>
+            <button className="b1" onClick={()=>navigate("/signup")}>Get a Job</button>
+            <button className="b2" onClick={()=>navigate("/signup")}>Own Company</button>
           </div>
           <div className="l">
-            <p id="loginp">Already have an account? <a href="/">Login</a></p>
+            <p id="loginp">Already have an account? <a  onClick={()=>navigate("/login")}>Login</a></p>
           </div>
         </div>
 

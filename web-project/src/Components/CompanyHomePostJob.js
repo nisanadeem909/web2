@@ -16,7 +16,7 @@ export default function RecentlyAddedJobs() {
                 <hr className='ch_postjob_hr'></hr>
                 <div className="ch_postjob_inner">
                     <p>Do you want to post a new vacancy at your company?</p>
-                    <button className='ch_postjob_button' onClick={()=>navigate('/company/postjob')}>Post Job</button>
+                    <button className='ch_postjob_button' onClick={()=>navigate('/company/vacancies/postjob')}>Post Job</button>
                 </div>
             </div>
         </div>

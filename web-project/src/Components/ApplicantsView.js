@@ -12,17 +12,19 @@ export default function ApplicantsView() {
   const propsData = location.state;
   const [allApp, setAllApp] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
 
   const gotoPage = (data)=> {
     navigate("viewapplication" ,  {state: data });
   }
 
+  const navigate = useNavigate();
+
   const goToCompare = (nv)=>{
     //alert("Location.state " + location.state);
     navigate('/company/compareapplicants' ,{ state: { propsData} });
   }
+  
   useEffect(() => {
     axios
       .get(`http://localhost:8000/allapps/${propsData}`)
@@ -32,6 +34,34 @@ export default function ApplicantsView() {
       })
       .catch(error => console.log(error));
   }, []);
+
+  const openProfile=(username)=>{
+    //find user type
+    var param = {"user":username};
+    axios.post(`http://localhost:8000/getusertype`,param)
+      .then(res => {
+          if (res.data.type != "none")
+          {
+              var utype = sessionStorage.getItem("userType");
+              var path = "/" + utype + "/";
+
+              if (res.data.type == "user")
+              {
+                  path += "publicuserprofile";
+              }
+              else {
+                  path += "publiccompanyprofile";
+              }
+
+             // alert(path);
+
+              navigate(path, { state: res.data.user });
+          }
+          else 
+            console.log("error");
+      })
+      .catch(error => alert(error));
+  }
 
   return (
     <div className="nisa-app-container1">
@@ -67,7 +97,7 @@ export default function ApplicantsView() {
               
                   <div className="nisa-notify-post">
                     <button onClick={gotoPage(app.applicantusername)} className="nisa-vaca-btn1">Application</button>
-                    <button className="nisa-vaca-btn1">Profile</button>
+                    <button className="nisa-vaca-btn1" onClick={()=>{openProfile(app.applicantusername)}}>Profile</button>
                   </div>
                 </div>
               </li>

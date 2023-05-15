@@ -37,8 +37,9 @@ export default function CompanyVacancies() {
     navigate("postjob");
   };
 
-  const openEditModal = () => {
-    navigate("editvacancy");
+  const handleView = (job) => {
+    //alert(job.JobId);
+    navigate('editvacancy', { state: job });
   };
 
   const deleteVacancy = () => {
@@ -98,7 +99,7 @@ export default function CompanyVacancies() {
                   <button onClick={() => viewApplicants(vac.JobId)} className='nisa-vaca-btn1'>
                     Applicants
                   </button>
-                  <button onClick={openEditModal} className='nisa-vaca-btn1'>
+                  <button  onClick={()=>handleView(vac)} className='nisa-vaca-btn1'>
                     Edit
                   </button>
                   
