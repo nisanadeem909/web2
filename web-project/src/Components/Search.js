@@ -94,7 +94,7 @@ export default function Search() {
           {searchResults.length > 0 && isInputSelected && (
             <div className="search_results_k">
               {searchResults.map((result) => (
-                <button className="nisa-w" key={result.id} onClick={()=>openProfile(result.username)}>
+                <button className="nisa-w" key={result.id} onClick={()=>{openProfile(result.username)}}>
                   {result.username || result.Designation}
                 </button>
               ))}
