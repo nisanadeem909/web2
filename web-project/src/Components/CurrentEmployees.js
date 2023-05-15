@@ -5,8 +5,13 @@ import './CurrentEmployees.css';
 import empicon from './dummy.jpg'
 import axios from 'axios'
 import './workshere.css';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function CurrentEmployeesComponent(props) {
+    
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     
     const [empReq,setEmpReq] = useState([]);
     const [des,setDes] = useState([]);
@@ -49,23 +54,34 @@ function CurrentEmployeesComponent(props) {
        
        
         if (props.empName !== undefined){
-            alert("I am in current employees. I have received");
-            alert(props.empName + "," + props.empDes + "," + props.username);
-            /*console.log(props.empName);
+            //alert("I am in current employees. I have received");
+            //alert(props.empName + "," + props.empDes + "," + props.username);
+            console.log("props: ");
+            console.log(props.empName);
             console.log(props.empDes);
             console.log(props.username);
-            */
             
-            setUsername(prevArray => [...prevArray, ...props.username]);
+            /*YEH CHANGE KARO */
+            /*setUsername(prevArray => [...prevArray, ...props.username]);
             setDes(prevArray => [...prevArray, ...props.empDes]);
             setEmpReq(prevArray => [...prevArray,... props.empName]);
-            
-            alert("New state = " + username);
-            alert("New state "+ des);
+            */
+
+
+            props.callset();
+
+            setUsername(prevArray => [...prevArray,props.username]);
+            setDes(prevArray => [...prevArray,props.empDes]);
+            setEmpReq(prevArray => [...prevArray,props.empName]);
+            //alert("New state = " + username);
+            alert("Employee will be added to current employees."); //IF I REMOVE THIS ALERT IT DOES NOT WORK
+            console.log("New States = ");
+            console.log(username);
+            console.log(des);
         }
         setEmployees();
         
-      },[props.empName,props.empDes,props.username]);
+      },[props.empName,props.empDes,props.username,props.callset]);
 
     const removeEmployee =(index)=>{
         //alert("I am in remove employee = " + index);
@@ -95,6 +111,15 @@ function CurrentEmployeesComponent(props) {
                 setEmpReq(names_array);
             }
     }
+
+    const  openDeleteModal = (index)=>{
+
+        setDeleteModalOpen(true);
+
+        removeEmployee(index);
+
+        setDeleteModalOpen(false);
+    }
     const empRow = () =>{
         return empReq.map((name, index) => {
             const desig = des[index];
@@ -108,7 +133,7 @@ function CurrentEmployeesComponent(props) {
             {desig}
         </td>
         <td>
-            <button class="nab-openvacancies-button" onClick={() => removeEmployee(index)}>Remove</button>    
+            <button class="nab-openvacancies-button" onClick={() =>  openDeleteModal(index)}>Remove</button>    
         </td>
     </tr>
     );})}
