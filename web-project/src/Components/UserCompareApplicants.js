@@ -1,7 +1,23 @@
-import React from 'react' 
+import React, { useEffect } from 'react' 
 import './KCompareApps.css';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 export default function CompareApps() {
+
+    
+    const location = useLocation();
+    const stateData = location.state;
+
+    useEffect(()=>{
+        //get all data from db based on username, applicationID, and other applications based on jobid
+        var username = sessionStorage.getItem("sessionID");
+        var param = {"username":username,"jobID":stateData.jobID,"appID":stateData.appID};
+        axios.post('http://localhost:8000/getotherappscomparisondata',param).then(res => {
+                //alert("Respnse" + JSON.stringify(res.data))
+        })
+              .catch(err=>{alert("ERROR IN AXIOS : "+err)});
+    },[]);
 
     return (
       <div className='kcompareapp-container'>

@@ -88,7 +88,7 @@ export default function ApplyJob(props) {
     }
 
     const handleApply=()=>{
-        if (!DOB.current.value || !email.current.value  || !ans.current.value  || !phone.current.value  || !resume || !selectedDegree || !selectedMajor || !selectedSchool )
+        if (!exp.current.value || !DOB.current.value || !email.current.value  || !ans.current.value  || !phone.current.value  || !resume || !selectedDegree || !selectedMajor || !selectedSchool )
         {
             alert("Please fill all fields!");
             return;
@@ -96,23 +96,28 @@ export default function ApplyJob(props) {
 
         var uname = sessionStorage.getItem("sessionID");
         
-        var param = {"username": uname,"name":name,"jobid":job.JobId, "companyusername":job.CompanyUsername, "dob":DOB.current.value,"email":email.current.value,"phone":phone.current.value,"answer":ans.current.value,"degree":selectedDegree.label,"school":selectedSchool.value,"major":selectedMajor.label};
+        var param = {"username": uname,"name":name,"jobid":job.JobId, "companyusername":job.CompanyUsername, "dob":DOB.current.value,"email":email.current.value,"phone":phone.current.value,"answer":ans.current.value,"degree":selectedDegree.label,"school":selectedSchool.value,"major":selectedMajor.label,"exp":exp.current.value};
         axios.post("http://localhost:8000/postjobapplication",param).then((response) => {
             //alert(response.data);
-            alert(response.data.id)
+            //alert(response.data.id)
             if (response.data.id != -1)
             {
               var fdata = new FormData();
+              var appID = response.data.id;
               fdata.append("Resume", resume);
               fdata.append("AppID", response.data.id);
               axios.post('http://localhost:8000/uploadresume',fdata)
-              .then(res => {alert("Respnse" + JSON.stringify(res.data))})
-              .catch(err=>{alert("ERROR IN UPLOADAXIOS : "+err)});
+              .then(res => {
+                //alert("Respnse" + JSON.stringify(res.data))
+                navigate("applied", {state:{appID:appID,jobID:job.JobId}});
+              })
+              .catch(err=>{alert("ERROR IN AXIOS : "+err)});
             }
         })
         .catch(function (error) {
             alert(error);
         });
+
 
     }
 
