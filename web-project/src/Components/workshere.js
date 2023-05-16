@@ -13,6 +13,12 @@ function WorksHere(props) {
   const navigate = useNavigate();
 
   const openProfile=(username)=>{
+    if (username == sessionStorage.getItem("sessionID"))
+        {
+            var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+            navigate(path);
+            return;
+        }
     //find user type
     var param = {"user":username};
     axios.post(`http://localhost:8000/getusertype`,param)

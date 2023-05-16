@@ -1,15 +1,22 @@
 import React from 'react'
 import './Profile.css';
 import person from './person.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function CompanyProfile(props) {
  
+  const navigate = useNavigate();
+  
   if (!props.user) {
     return null; 
   }
-
   
 
+  const openProfile=()=>{
+    var userType = sessionStorage.getItem("userType");
+    var path = "/" + userType + "/ownprofile";
+    navigate(path);
+  }
 
 
   return (
@@ -24,7 +31,7 @@ export default function CompanyProfile(props) {
             </div>
             <div className='prof_middle'>
             <p>Company Type:  {props.user.companyType} </p>
-            <button className='nisa-pf-btn' >Open Profile</button>
+            <button className='nisa-pf-btn' onClick={openProfile}>Open Profile</button>
             </div>
            
            <hr className='prof_hr'/>
