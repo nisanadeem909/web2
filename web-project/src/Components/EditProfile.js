@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import './EditProfile.css'
 import editpic from './editpic.png';
-//import person from './flower.jpg';
+
 import editicon from './edit.png';
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import Footer from './Footer';
 import axios from 'axios'
 import { SettingsOverscanSharp } from '@material-ui/icons';
 export default function EditProfile() {
-  const person = 'flower.jpg'
+
   const [companyList,setCompanyList] = useState([]);
 
   const [selectedCompany,setSelectedCompany] = useState(null);
@@ -28,7 +28,10 @@ export default function EditProfile() {
   const [img,setImg] = useState(null);
 
   const refBio = useRef(bio);
-  
+  const [User, setUser] = useState([]);
+
+  const imgs = 'person.png'
+  const username = sessionStorage.getItem('sessionID');
  
   useEffect(() => {
     axios.post("http://localhost:8000/getcompanydropdownlist").then((response) => {
@@ -43,6 +46,19 @@ export default function EditProfile() {
     .catch(function (error) {
         alert(error);
     });
+
+    axios
+    .get(`http://localhost:8000/finduser/${username}`)
+    .then((res) => {
+      
+      setUser(res.data);
+      
+      
+    })
+    .catch((error) => console.log(error));
+
+
+
   }, []);
 
   useEffect(() => {
@@ -193,7 +209,7 @@ export default function EditProfile() {
     <div className='nisa-edit-container3'>
 
       <div className='nisa-edit-container2'>
-          <img src={`http://localhost:8000/profilepictures/${person}`} className="edit-nisa-img1"/>
+          <img src={`http://localhost:8000/profilepictures/${User.user?.profilePicture || User.company?.profilePicture || imgs}`} className="edit-nisa-img1"/>
           <label class="custom-file-upload">
             <input id="displaynone" type="file" onChange={HandleUpload}/>
             Upload image
