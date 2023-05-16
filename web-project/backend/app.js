@@ -2268,14 +2268,45 @@ app.post('/getotherappscomparisondata', async (req, res) => {
   const yearsExpList = await Jobapplication.find({ jobid: jobID }).select('yearsExp -_id');
   const yearsExpValues = yearsExpList.map(app => app.yearsExp);
   console.log(yearsExpValues);
-  
-    //data = {"topSkills": top6Skills, "presentSkills":skillCountsPresent, "top2degrees":degreeCounts, "top2majors":majorCounts,"totalApplications":totalApplications, "expYearList":yearsExpValues};
 
+  var expArray = {"entry": 0, "senior": 0, "manager": 0,"director":0};
+  expArray.entry = yearsExpValues.filter((element)=>(element <=2)).length / totalApplications * 100;
+  expArray.senior = yearsExpValues.filter((element)=>(element >2 && element<=6)).length / totalApplications * 100;
+  expArray.manager = yearsExpValues.filter((element)=>(element >6 && element<=12)).length / totalApplications * 100;
+  expArray.director = yearsExpValues.filter((element)=>(element >12)).length / totalApplications * 100;
+  console.log("bro");
+  console.log(expArray);
+
+  for (i = 0; i < top6Skills.length; i++)
+  {
+    if (skillCountsPresent.includes(top6Skills[i]))
+        top6Skills[i].present = "ktopskills-skill-have";
+    else
+        top6Skills[i].present = "ktopskills-skill-nothave";
+  }
+
+  console.log(top6Skills);
+
+  const application = await Jobapplication.findOne({ _id: appID }, 'yearsExp');
+  const appExp = application.yearsExp;
+
+  var lowerExp = yearsExpValues.filter((element)=>(element <= appExp)).length / totalApplications * 100;
+  var skillPercent = skillCountsPresent.length / top6Skills.length * 100;
+
+  var percentage = Math.floor((lowerExp + skillPercent) / 2);
+
+  console.log(lowerExp);
+  console.log(skillPercent);
+  console.log(percentage);
   
+  data = {"ranking":percentage,"topSkills": top6Skills, "presentSkills":skillCountsPresent, "top2degrees":degreeCounts, "top2majors":majorCounts,"totalApplications":totalApplications, "expYearList":expArray};
+
+  res.json({"status":"success","data":data});
   }
   catch (err)
   {
     console.log("Error getting top 6 skills: "+err)
+    res.json({"status":"error","data":err})
   }
 
   res.end();

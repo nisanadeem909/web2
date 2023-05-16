@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react' 
+import React, { useEffect, useState } from 'react' 
 import './KCompareApps.css';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -8,13 +8,85 @@ export default function CompareApps() {
     
     const location = useLocation();
     const stateData = location.state;
+    const [con,setCon] = useState(<label>Loading</label>);
 
     useEffect(()=>{
         //get all data from db based on username, applicationID, and other applications based on jobid
         var username = sessionStorage.getItem("sessionID");
         var param = {"username":username,"jobID":stateData.jobID,"appID":stateData.appID};
         axios.post('http://localhost:8000/getotherappscomparisondata',param).then(res => {
-                //alert("Respnse" + JSON.stringify(res.data))
+                //alert("Response" + JSON.stringify(res.data))
+                if (res.data.status == "success")
+                {
+                    var data = res.data.data;
+                    setCon(<><div className='kcompareapp-topapps kcompareapp-section'>
+                    <label className='kcompareapp-section-label'>Top Applicants</label>
+                    <hr className='kcompareapp-section-hr'></hr>
+                    <div className='ktopapps-content'>
+                        <div className='ktopapps-percent-con'>
+                            <label className='ktopapps-percent'>{data.ranking}%</label>
+                            <p className='ktopapps-percent-text'>You are in top {data.ranking}% of the total {data.totalApplications} applicants based your application and profile.</p>
+                        </div>
+                        <div className='ktopapps-flexcon'>
+                            <div>
+                                <label className='ktopapps-number'>{data.totalApplications} &nbsp;</label>
+                                <label className='ktopapps-label'>Applicants for this job</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div className='kcompareapp-topappskills kcompareapp-section'>
+                    <label className='kcompareapp-section-label'>Top Skills</label>
+                    <hr className='kcompareapp-section-hr'></hr>
+                    <div className='ktopskills-content'>
+                        <p className='ktopskills-heading'>You have {data.presentSkills.length} out of the {data.topSkills.length} top skills among other applicants.</p>
+                        <ul className='ktopskills-skill-con'>
+                            {data.topSkills.map((item)=><li className={item.present}>{item._id}</li>)}
+                        </ul>
+                    </div>
+                  </div>
+                  <div className='kcompareapp-appexplevel kcompareapp-section'>
+                    <label className='kcompareapp-section-label'>Experience Level</label>
+                    <hr className='kcompareapp-section-hr'></hr>
+                    <div className='kexplevel-content'>
+                        <div className='kexplevel-exp'>
+                            <label className='kexplevel-exp-lbl'>{data.expYearList.entry}% Entry Level Applicants</label>
+                            <progress className="kexplevel-progress" value={data.expYearList.entry} max="100"></progress>
+                        </div>
+                        <div className='kexplevel-exp'>
+                            <label className='kexplevel-exp-lbl'>{data.expYearList.senior}% Senior Level Applicants</label>
+                            <progress className="kexplevel-progress" value={data.expYearList.senior} max="100"></progress>
+                        </div>
+                        <div className='kexplevel-exp'>
+                            <label className='kexplevel-exp-lbl'>{data.expYearList.manager}% Manager Level Applicants</label>
+                            <progress className="kexplevel-progress" value={data.expYearList.manager} max="100"></progress>
+                        </div>
+                        <div className='kexplevel-exp'>
+                            <label className='kexplevel-exp-lbl'>{data.expYearList.director}% Director Level Applicants</label>
+                            <progress className="kexplevel-progress" value={data.expYearList.director} max="100"></progress>
+                        </div>
+                    </div>
+                  </div>
+                  <div className='kcompareapp-appedulevel kcompareapp-section'>
+                    <label className='kcompareapp-section-label'>Education Level</label>
+                    <hr className='kcompareapp-section-hr'></hr>
+                    <div className='kedulevel-content'>
+                        {data.top2degrees.map((item)=><div className='kedulevel-field'>
+                            <label className='kedulevel-percent'>{item.count / data.totalApplications * 100}% &nbsp;</label>
+                            <label className='kedulevel-lbl'>have a {item._id} degree</label>
+                        </div>)}
+                        {data.top2majors.map((item)=><div className='kedulevel-field'>
+                            <label className='kedulevel-percent'>{item.count / data.totalApplications * 100}% &nbsp;</label>
+                            <label className='kedulevel-lbl'>have majored in {item._id}</label>
+                        </div>)}
+                    </div>
+                  </div></>);
+                }
+                else
+                {
+                    console.log(res.data.data);
+                    setCon(<label>Error loading data!</label>);
+                }
         })
               .catch(err=>{alert("ERROR IN AXIOS : "+err)});
     },[]);
@@ -24,85 +96,7 @@ export default function CompareApps() {
         <div className='kcompareapp-header'>
             <label>See how you compare to other applicants</label>
         </div>
-        <div className='kcompareapp-topapps kcompareapp-section'>
-            <label className='kcompareapp-section-label'>Top Applicants</label>
-            <hr className='kcompareapp-section-hr'></hr>
-            <div className='ktopapps-content'>
-                <div className='ktopapps-percent-con'>
-                    <label className='ktopapps-percent'>25%</label>
-                    <p className='ktopapps-percent-text'>You are in top 25% of the total 12 applicants based your application and profile.</p>
-                </div>
-                <div className='ktopapps-flexcon'>
-                    <div>
-                        <label className='ktopapps-number'>12 &nbsp;</label>
-                        <label className='ktopapps-label'>Applicants</label>
-                    </div>
-                    <div>
-                        <label className='ktopapps-number'>3 &nbsp;</label>
-                        <label className='ktopapps-label'>Applicants today</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-          <div className='kcompareapp-topappskills kcompareapp-section'>
-            <label className='kcompareapp-section-label'>Top Skills</label>
-            <hr className='kcompareapp-section-hr'></hr>
-            <div className='ktopskills-content'>
-                <p className='ktopskills-heading'>You have 3 out of the 6 top skills among other applicants.</p>
-                <ul className='ktopskills-skill-con'>
-                    <li className='ktopskills-skill ktopskills-skill-have'>JavaScript</li>
-                    <li className='ktopskills-skill ktopskills-skill-have'>HTML</li>
-                    <li className='ktopskills-skill ktopskills-skill-have'>CSS</li>
-                    <li className='ktopskills-skill ktopskills-skill-nothave'>MERN Stack</li>
-                    <li className='ktopskills-skill ktopskills-skill-nothave'>MySQL</li>
-                    <li className='ktopskills-skill ktopskills-skill-nothave'>ASP.net</li>
-                </ul>
-            </div>
-          </div>
-          <div className='kcompareapp-appexplevel kcompareapp-section'>
-            <label className='kcompareapp-section-label'>Experience Level</label>
-            <hr className='kcompareapp-section-hr'></hr>
-            <div className='kexplevel-content'>
-                <div className='kexplevel-exp'>
-                    <label className='kexplevel-exp-lbl'>75% Entry Level Applicants</label>
-                    <progress className="kexplevel-progress" value="75" max="100"></progress>
-                </div>
-                <div className='kexplevel-exp'>
-                    <label className='kexplevel-exp-lbl'>25% Senior Level Applicants</label>
-                    <progress className="kexplevel-progress" value="25" max="100"></progress>
-                </div>
-                <div className='kexplevel-exp'>
-                    <label className='kexplevel-exp-lbl'>0% Manager Level Applicants</label>
-                    <progress className="kexplevel-progress" value="0" max="100"></progress>
-                </div>
-                <div className='kexplevel-exp'>
-                    <label className='kexplevel-exp-lbl'>0% Director Level Applicants</label>
-                    <progress className="kexplevel-progress" value="0" max="100"></progress>
-                </div>
-            </div>
-          </div>
-          <div className='kcompareapp-appedulevel kcompareapp-section'>
-            <label className='kcompareapp-section-label'>Education Level</label>
-            <hr className='kcompareapp-section-hr'></hr>
-            <div className='kedulevel-content'>
-                <div className='kedulevel-field'>
-                    <label className='kedulevel-percent'>50% &nbsp;</label>
-                    <label className='kedulevel-lbl'>have a Bachelors Degree</label>
-                </div>
-                <div className='kedulevel-field'>
-                    <label className='kedulevel-percent'>25% &nbsp;</label>
-                    <label className='kedulevel-lbl'>have a Masters Degree</label>
-                </div>
-                <div className='kedulevel-field'>
-                    <label className='kedulevel-percent'>60% &nbsp;</label>
-                    <label className='kedulevel-lbl'>have majored in Software Engineering</label>
-                </div>
-                <div className='kedulevel-field'>
-                    <label className='kedulevel-percent'>35% &nbsp;</label>
-                    <label className='kedulevel-lbl'>have majored in Software Engineering</label>
-                </div>
-            </div>
-          </div>
+        {con}
       </div>
     )
   }
