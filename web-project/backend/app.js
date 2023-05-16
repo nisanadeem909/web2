@@ -2417,6 +2417,105 @@ app.post('/signupuser', async (req, res) => {
 
 /**********************************************************/
 
+/******************** KOMAL 7 **********************/
+
+app.post('/checkifemployee', async (req, res) => {
+  console.log(req.body);
+  var employeeUsername = req.body.username;
+  var companyUsername = req.body.company;
+
+  var flag, status;
+
+  try {
+    const employee = await CurrentEmployees.findOne({
+      EmployeeUsername: employeeUsername,
+      CompanyUsername: companyUsername,
+    });
+  
+    if (employee) {
+      flag = true;
+    } else {
+      flag = false;
+    }
+
+    console.log(flag);
+
+    res.json({"status":"success","flag":flag})
+  } catch (error) {
+    console.error(error);
+    res.json({"status":"error","flag":error})
+  }
+
+  res.end();
+});
+
+app.post('/addRating', async (req, res) => {
+  console.log(req.body);
+  var employeeUsername = req.body.username;
+  var companyUsername = req.body.company;
+  var newRating = req.body.rating;
+
+  var flag, status;
+
+  try {
+    const company = await Company.findOne({ username: companyUsername });
+    console.log(company);
+
+    const existingRating = company.ratings.find((rating) => rating.username === employeeUsername);
+
+    if (existingRating) {
+      // Update the existing rating
+      existingRating.rating = newRating;
+    } else {
+      // Add a new rating to the ratings array
+      company.ratings.push({ username: employeeUsername, rating: newRating });
+    }
+
+    await company.save();
+  } catch (error) {
+    console.error(error);
+  }
+
+  res.end();
+});
+
+app.post('/getspecificuserrating', async (req, res) => {
+  console.log(req.body);
+  var employeeUsername = req.body.username;
+  var companyUsername = req.body.company;
+
+  var rating;
+
+  try {
+    const company = await Company.findOne(
+      { username: companyUsername },
+      { ratings: { $elemMatch: { username: employeeUsername } } }
+    );
+    if (!company) {
+      console.log('Company not found');
+      rating = -1;
+    }
+
+    else if (company.ratings.length === 0) {
+      console.log(`No rating found for ${employeeUsername} in ${companyUsername}`);
+      rating = 0;
+    }
+    else {
+      rating = company.ratings[0].rating;
+      console.log(`Rating for ${employeeUsername} in ${companyUsername}: ${rating}`);
+    }
+
+  } catch (error) {
+    console.error(error);
+    rating = -1;
+  }
+  console.log(rating);
+  res.json({"rating":rating});
+  res.end();
+});
+
+/***************************************************/
+
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
 })

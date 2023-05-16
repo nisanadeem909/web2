@@ -37,7 +37,7 @@ export default function UserPrivateProfilePage() {
                     <CompanyHistory company={user}/>
                 </div>
                 <div className="companyprof_rating">
-                    <Rating company={user}/>
+                    <Rating company={user} type="public"/>
                 </div>
                 <div className="companyprof_emp">
                     <Employees company={user}/>

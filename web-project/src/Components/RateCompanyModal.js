@@ -19,7 +19,19 @@ const style = {
 
 export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [currRatingCon,setCon] = useState(<label className='currratinglabl'>Loading</label>);
+
+  const handleOpen = async() => 
+  {
+    setOpen(true);
+    var a = await props.currRating();
+    if (a === 0)
+      setCon(<label className='currratinglabl'>Not Rated by you.</label>);
+    else if (a === -1)
+      setCon(<label className='currratinglabl'>Error Loading Data</label>);
+    else
+      setCon(<label className='currratinglabl'>Your Current Rating: {a}</label>);
+  }
   const newRating = useRef(5);
 
   const [selectedRating,setSelectedRating] = useState(5);
@@ -50,9 +62,10 @@ export default function BasicModal(props) {
                 <button className="kmodal_crossBtn" onClick={handleClose}>X</button>
             </div>
             <hr className='kmodal_hr'/>
+            {currRatingCon}
           <div className='kmodal_container'>
-            <label>Your Rating: </label>
-            <input ref={newRating} type="range" className='kmodal_inputrange' min="0" max="5" onChange={()=>setSelectedRating(newRating.current.value)}></input>
+            <label>Your New Rating: </label>
+            <input ref={newRating} type="range" className='kmodal_inputrange' min="1" max="5" onChange={()=>setSelectedRating(newRating.current.value)}></input>
             <label>{selectedRating}</label>
             <button className='kmodal_buttons' onClick={updateRating}>Add Rating</button>
           </div>

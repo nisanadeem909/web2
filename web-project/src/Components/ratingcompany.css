@@ -52,3 +52,9 @@
     font-size: 2.7vh;
     color: rgb(1, 105, 96,0.7);
 }
+
+.currratinglabl {
+    margin-left: 27%;
+    font-weight: bold;
+    color:darkgray;
+}
