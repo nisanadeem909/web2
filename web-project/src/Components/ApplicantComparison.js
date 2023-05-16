@@ -7,9 +7,21 @@ import './ApplicantComparison.css';
 import narsun from './narsun.jpg'
 import mindstorm from './mindstorm.jpg'
 import empicon from './dummy.jpg'
-
+import axios from 'axios';
+import {useState} from 'react';
 function ApplicantComparison() {
     
+    /*const[message,setmsg ]= useState();
+    const setData = async()=>{
+            
+           
+        
+    }*/
+    useEffect(() => {
+        
+        //setData();
+        
+      }, []);
     return (
 
 
