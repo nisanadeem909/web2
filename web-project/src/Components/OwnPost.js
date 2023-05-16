@@ -33,6 +33,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   
 
   useEffect(() => {
+    if(props.postcurr.imagePath)
+    setIsImageLoaded(true); 
+    
     axios
       .get(`http://localhost:8000/likes/${props.postcurr.postID}`)
       .then((res) => {
@@ -65,7 +68,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         .then((res) => {
          
           setImg(res.data);
-          setIsImageLoaded(true); 
+          
           
         })
         .catch((error) => console.log(error));

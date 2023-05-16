@@ -58,41 +58,72 @@ h2{
 .box3{
     height: 350px;
     width: 300px;
-    background-color: #0E312F;
-    border-radius: 70px;
-    margin-left: 220px;
+    background-color: white;
+    
+    margin-left: 170px;
     margin-top: 100px;
     text-align: center;
     padding: 80px;
-    color: white;
+    color: #0E312F;
     font-size: 16px;
+    box-shadow: 10px 5px 30px 0.02px #acaaaa;
    
+}
+
+.box3:hover{
+    height: 370px;
+    width: 330px;
+    background-color: white;
+    
+    
+    color: #0E312F;
+
+}
+.box4:hover{
+    height: 370px;
+    width: 330px;
+    background-color: white;
+    
+    
+    color: #0E312F;
+
+}
+.box5:hover{
+    height: 370px;
+    width: 330px;
+    background-color: white;
+    
+    
+    color: #0E312F;
+
 }
 
 .box4{
     height: 350px;
     width: 300px;
-    background-color: #0E312F;
-    border-radius: 70px;
-    margin-left: 100px;
+    background-color: white;
+    
+    margin-left: 170px;
     margin-top: 100px;
     text-align: center;
     padding: 80px;
-    color: white;
+    color: #0E312F;
     font-size: 16px;
+    box-shadow: 10px 5px 30px 0.02px #acaaaa;
 }
 
 .box5{
     height: 350px;
     width: 300px;
-    background-color: #0E312F;
-    border-radius: 70px;
-    margin-left: 100px;
+    background-color: white;
+    
+    margin-left: 170px;
     margin-top: 100px;
     text-align: center;
     padding: 80px;
-    color: white;
+    color: #0E312F;
     font-size: 16px;
+    box-shadow: 10px 5px 30px 0.02px #acaaaa;
 }
 
 .l{
@@ -102,10 +133,11 @@ h2{
 .bs1{
     width: 120px;
     height: 35px;
-    background-color: #C6CDC0;
+    background-color: #0E312F;
     border-radius: 50px;
     border: 1px solid #C6CDC0;
     margin-top: 20px;
+    color: white;
     
 }
 

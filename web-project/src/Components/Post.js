@@ -33,6 +33,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   
 
   useEffect(() => {
+    if(props.postcurr.imagePath)
+    setIsImageLoaded(true); 
    
     axios
       .get(`http://localhost:8000/likes/${props.postcurr.postID}`)
@@ -204,7 +206,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 
         <div className='post_middle'>
         {isImageLoaded && (
-          <img className='post_p2' src={`http://localhost:8000/profilepictures/${props.postcurr?.profilePicture || Img.company?.profilePicture || person}`} alt='' />)}
+          <img className='post_p2' src={`http://localhost:8000/profilepictures/${props.postcurr.imagePath }`} alt='' />)}
           <div className='post_btnpara'>
             <div className='post_btns'>
               <button className='post_icons2' onClick={handleLike}>

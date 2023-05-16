@@ -6,10 +6,12 @@ import pic2 from './image2.png';
 import pic3 from './image3.png';
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Slideshow() {
 
-
+  const navigate=useNavigate();
   
   return (
     
@@ -19,19 +21,19 @@ export default function Slideshow() {
       
         <div className='nisa-img1' ><img src={pic1} className="sliderimg1"/>  <div className='nisa-text1'> <label className='nisatt1'>Connect with Comapnies and Employees!</label>
        
-        <button>Let's Get Started!</button>
+        <button onClick={()=>navigate("/signup")} className='nisa-ss-btn1'>Let's Get Started!</button>
         </div></div>
-      <button></button>
+      <button className='nisa-ss-btn1'></button>
       </div>
       
       <div className='nisa-img2'><img src={pic2} className="sliderimg2"/>
-      <div className='nisa-text1'> <label className='nisatt1'>Connect with Comapnies and Employees!</label>
+      <div className='nisa-text1'> <label className='nisatt1'>Free CV Maker Just One Click Away!</label>
        
-       <button>Let's Get Started!</button>
+       <button onClick={()=>navigate("/signup")} className='nisa-ss-btn1'>Let's Get Started!</button>
        </div> </div>
-      <div><img src={pic3} className="sliderimg"/> <div className='nisa-text1'> <label className='nisatt1'>Connect with Comapnies and Employees!</label>
+      <div><img src={pic3} className="sliderimg"/> <div className='nisa-text1'> <label className='nisatt1'>Get Yourself Hired with Jobify!</label>
        
-       <button>Let's Get Started!</button>
+       <button onClick={()=>navigate("/signup")} className='nisa-ss-btn1'>Let's Get Started!</button>
        </div> </div>
       
     </AliceCarousel>  

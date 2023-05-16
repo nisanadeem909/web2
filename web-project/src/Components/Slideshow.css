@@ -6,6 +6,23 @@
   margin-left: 40px;
 }
 
+.nisa-ss-btn1{
+  width: 150px;
+  height: 50px;
+  background-color: #0b8881;
+  color: white;
+  border: none;
+  border-radius: 1px;
+  margin-top: 5px;
+}
+
+.nisa-ss-btn1:hover{
+  width: 160px;
+  height: 60px;
+  background-color: #045d58;
+  font-size: 18px;
+}
+
 .sliderimg2 {
   width: 30%;
   margin: 0 auto;

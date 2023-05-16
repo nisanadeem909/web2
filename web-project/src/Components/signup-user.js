@@ -4,6 +4,7 @@ import img from './people.jpeg';
 import './signup-user.css';
 import axios from 'axios';
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignupUser = () => {
     const [user,setUser] = useState({
@@ -20,20 +21,31 @@ const SignupUser = () => {
         [name]:value
         })
     };
+
+    const navigate = useNavigate();
+
+    const gotoHome = () => {
+        navigate("/user", { state: { user } });
+      }
+    
     
     const registerUser = ({}) =>{
         const {fullname,username,email,password} = user;    
-        /*alert("i am in register name = ");
-        alert(user.fullname);
-        alert(user.username);
-        alert(user.email);
-        alert(user.password);*/
+       
         if (fullname && username && email && password)
         {
             try{    
-            axios.post("http://localhost:8000/signupuser",user )
-                    .then(res => {alert(JSON.stringify(res.data.message))
-                    console.log(res.data.message)});
+            axios.post("http://localhost:8000/signupuser",{ username,fullname,email, password} )
+                    .then(res => {
+                        const userType = "user";
+                        sessionStorage.setItem('sessionID', username);
+                        sessionStorage.setItem('userType', userType);
+                        gotoHome();
+                    }
+                    
+                   
+                    
+                    );
             }
             catch(err)
             {
