@@ -6,6 +6,7 @@ import empicon from './dummy.jpg'
 import axios from 'axios'
 import './workshere.css';
 import Modal from 'react-modal';
+import DeleteModal from './DeleteConfirmationEmployee';
 
 Modal.setAppElement('#root');
 
@@ -133,7 +134,7 @@ function CurrentEmployeesComponent(props) {
             {desig}
         </td>
         <td>
-            <button class="nab-openvacancies-button" onClick={() =>  openDeleteModal(index)}>Remove</button>    
+            <DeleteModal remove={removeEmployee} selectedItem={index}/>   
         </td>
     </tr>
     );})}

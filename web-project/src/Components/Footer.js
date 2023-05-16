@@ -12,7 +12,7 @@ export default function Footer() {
 
 <img class="logo" src={logo1}/>
 
-  <p class="footer-links">
+ {/* <p class="footer-links">
     <a href="#" class="link-1">Home</a>
     
     <a href="#">Blog</a>
@@ -22,7 +22,7 @@ export default function Footer() {
     <a href="#">About</a>
     
     <a href="#">Contact</a>
-  </p>
+  </p>*/}
 
   <p class="footer-company-name">Jobify © 2015</p>
 </div>

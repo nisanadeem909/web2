@@ -11,6 +11,11 @@ function OpenVacanciesEditable() {
   const navigate=useNavigate();
   const [vacancyCon,setVacCon] = useState(<label>Loading</label>);
 
+  const handleView = (job) => {
+    //alert(job.JobId);
+    navigate('/company/vacancies/editvacancy', { state: job });
+  };
+
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
     const param = {"user":sessionID};
@@ -22,7 +27,7 @@ function OpenVacanciesEditable() {
               alert("error");
             else
                setVacCon(<ul>{response.data.data.map((list_item)=><li> <div id="openvacancies-emp-img"><img className='openvacancies-emp-icon' src={jobicon}/></div>
-               <div id="openvacancies-emp-name">&nbsp;&nbsp;{list_item.Designation}</div>&nbsp;&nbsp;
+               <div id="openvacancies-emp-name">&nbsp;&nbsp;<a onClick={()=>handleView(list_item)}>{list_item.Designation}</a></div>&nbsp;&nbsp;
  
                <br></br><br></br></li>)}</ul>);
             //{educList.map((list_item)=>
