@@ -41,26 +41,40 @@ function CurrentAppsPage(props) {
     const [appname,setappname] = useState([]);
     const [appusername,setappusername] = useState([]);
     const [checkedapp, setCheckedApp] = useState([]);
-    const [checkedid,setCheckedId] = useState([]);
+    const [checkeduname,setCheckedUname] = useState([]);
 
-    const handleCheckboxChange = (event, name, id) => {
+    
+    const handleCheckboxChange =  ( event, nam, unam,index) => {
         
-       
-        if (event.target.checked === true) {
+       alert("In checkbox: name= "+nam.aname+ "," + unam.uname);
+        if (event.target.checked) {
+            alert("index= " + index.index);
+            alert("showing appusername array "+ appname[index.index] + "," + appusername[index.index]);
             //alert("Setting company = " + comp.compName + " des= " + desig.des)
-            setCheckedApp([
-                ...checkedapp,
-                name
-             ]);
-             setCheckedId([
-                ...checkedid,
-                id
-             ]);
+           
+            setCheckedApp([...checkedapp,
+                nam.aname]);
+            setCheckedUname([...checkeduname,
+                    unam.uname]);
+             console.log("Checking");
+             console.log(checkedapp);
+             console.log(checkeduname);
              
         }
         else{
             
-            
+            if (checkedapp.length!=0){
+            const newNames = checkedapp.filter((selectedRow) => selectedRow.aname !== nam.aname);
+            setCheckedApp(newNames);
+            }
+            if (checkeduname.length!=0){
+            const newUsernames = checkeduname.filter((selectedRow) => selectedRow.uname !== unam.uname);
+            setCheckedUname(newUsernames);
+            }
+           
+            console.log("unchecking: ")
+            console.log(checkedapp);
+            console.log(checkeduname);
             
         }
       };
@@ -70,6 +84,7 @@ function CurrentAppsPage(props) {
         
         
             return appname.map((aname, index) => {
+                const uname = appusername[index];
                 return (<tr key={index}>
             <td>
             <img className='works-emp-icon' src={empicon}></img>
@@ -81,7 +96,7 @@ function CurrentAppsPage(props) {
                 <div id="nab-currentapps-btn-group">
                    
                     <div id="nab-currentapps-checkbox-wrapper">
-                        <input id="nab-currentapps-checkbox" type="checkbox" onChange={event => handleCheckboxChange(event,{aname})}></input>
+                        <input id="nab-currentapps-checkbox" type="checkbox" onChange={event => handleCheckboxChange(event,{aname},{uname},{index})}></input>
                         &nbsp;&nbsp;
                         <label id="select-for-comp" >Add to Compare</label>
                     </div>
@@ -94,7 +109,19 @@ function CurrentAppsPage(props) {
     
     function countCheckboxes () {
         if (document.querySelectorAll('input[type="checkbox"]:checked').length != 2)
-            alert("Only 2 Jobs are Allowed for Comparison");
+            alert("Only 2 Applicants are Allowed for Comparison");
+        else{
+                /* Setting the props */
+                
+                console.log("Sending");
+                console.log(checkeduname);
+                console.log(checkedapp);
+                
+                props.appusernameset(checkeduname);
+                props.appnameset(checkedapp);
+                
+                
+        }
         
     }
     
@@ -114,7 +141,8 @@ function CurrentAppsPage(props) {
        
         setappname(name_list);
         setappusername(u_list);
-
+        alert("In axios appname = " + appname);
+        alert("In axios appusernamename = " + appusername);
         console.log(appname);
         console.log(appusername);
         /*let des_list = msg.data.map(cname => cname.Designation);

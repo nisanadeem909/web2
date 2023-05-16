@@ -31,115 +31,6 @@ app.use(session({
 }));
 
 /***NABEEHA */
-app.post("/signupuser", async(req,res)=>{
-  console.log("I am in signup user");
-   console.log(req.body);
-   
-   /*User Signup - yeh chal raha hai perfectly(response nai send aur recive ho raha) */
-   var e = req.body.email;
-   var p = req.body.password;
-   var u = req.body.username;
-   var n = req.body.fullname;
-
-   var edu = [{'school':'FAST','degree':"Bachelors",'major':'Software Engineering','startYear':2020,'endYear':2024}];
-   
-   const existingUser = await Company.findOne({ username:u });
-   const anotherExisting = await User.findOne({username: u});
-   if (existingUser) {
-    let msg = "this username is already taken";   
-    console.log("Username already exists in  company db");
-   res.json({"message":msg});
-       //return res.status(500).json({message:"this username is taken"});
-       res.end();
-   }
-   else if(anotherExisting) {
-    let msg = "this username is already taken";   
-        console.log("Username already exists in users db");
-       res.json({"message":msg});
-       //return res.status(500).json({message:"this username is taken"});
-       res.end();
-   }
-   else {
-           const user = new User({username:u,email:e,password:p,name:n});
-           console.log("user =" + user);
-           user.save().then(()=>{
-            let msg = "account created successfully";   
-            console.log("account created");
-           res.json({"message":msg});
-               //return res.json({message:"account created successfully"});
-               res.end();
-           }).catch((err)=>{
-               console.log(err);
-               //res.send("technical difficulty in creating your account");
-               //return res.json({message:"technical difficulty in creating your account"});
-               let msg = "technical difficulty in creating account";   
-        //console.log("Username already exists in users db");
-       res.json({"message":msg});
-               res.end();
-               //res.send("username is taken already");
-           })
-       }
-   
-   
-});
- 
- app.post("/signupcompany", async(req,res)=>{
-  console.log("in am in signup company");
-   //console.log(req.body);
-   
-   
-   var e = req.body.email;
-   var p = req.body.password;
-   var u = req.body.username;
-   var n = req.body.fullname;
-   //var t = req.body.type;
-   var t = "education";
-  
-   let message = "message: ";
-   let sendmsg;
-   const existingUser = await Company.findOne({ username:u });
-   const anotherExisting = await User.findOne({username: u});
-   if (existingUser) {
-       console.log("Username already exists in company db");
-       let msg = "username is taken";
-       res.json({"message":msg});
-       res.end();
-       //res.send("this Username already taken");
-       //return res.status(500).json({message:"this username is taken"});
-      // res.end();
-   }
-   else if(anotherExisting) {
-    let msg = "username is taken";
-    res.json({"message":msg});
-    res.end();
-       //res.send("this Username already taken");
-       //return res.status(500).json({message:"this username is taken"});
-       //res.end();
-   }
-   else {
-           const company = new Company({username:u,email:e,password:p,companyType:t,name:n});
-           console.log("user =" + company);
-           company.save().then(()=>{
-            let msg = "account created successfully";
-            res.json({"message":msg});
-            
-            res.end();
-               //res.send("account created successfully!");
-               //return res.json({message:"account created successfully"});
-         //      res.end();
-           }).catch((err)=>{
-               console.log(err);
-               let msg = "technical issue in creating account";
-       res.json({"message":msg});
-       res.end();
-               //res.send("technical difficulty in creating your account");
-               //return res.json({message:"technical difficulty in creating your account"});
-           //    res.end();
-               
-           })
-       }
-  
-});
  
  app.get("/currentjobs", async(req,res)=>{
      /*Delete this later - temporarily added to insert some jobs */       
@@ -1311,6 +1202,7 @@ app.post('/uploadresume', function(req,res){
 });
 
 app.post('/postjobapplication', async function(req,res){
+  console.log(req.body);
   // var name = req.body.name;
   //var param = {"username": uname,"name":name,"jobid":job.JobId, 
   //"companyusername":job.CompanyUsername, "dob":DOB,"email":email,
@@ -1326,13 +1218,13 @@ app.post('/postjobapplication', async function(req,res){
           applicantusername: req.body.username,
           email: req.body.email,
           phone: req.body.phone,
+          yearsExp: req.body.exp,
+          answer: req.body.answer,
           lastdegree: {
             degree: req.body.degree,
             major: req.body.major,
             university: req.body.school
-          },
-          yearsExp: req.body.exp,
-          answer: req.body.ans
+          }
         });
 
         console.log(newJobApplication);
@@ -2227,42 +2119,6 @@ app.post("/addcomment", async (req, res) => {
   }
 });
 
-app.get('/allNetwork/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-
-    const followers = await Connection.find({ following: userId }).exec();
-
-    const followerUsernames = followers.map(follower => follower.follower);
-
-    const users = await User.find({ username: { $in: followerUsernames } }).exec();
-
-    res.json(users);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Failed to retrieve followers' });
-  }
-});
-
-
-app.get('/allFollowing/:userId', async (req, res) => {
-  try {
-    const userId = req.params.userId;
-
-    const following = await Connection.find({ follower: userId }).exec();
-
-    const followingUsernames = following.map(follow => follow.following);
-
-    const users = await User.find({ username: { $in: followingUsernames } }).exec();
-
-    res.json(users);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Failed to retrieve following users' });
-  }
-});
-
-
 app.post('/uploadpostpic', function(req,res){
   // var name = req.body.name;
    var form = new formidable.IncomingForm();
@@ -2353,6 +2209,182 @@ app.get('/findjob/:jobId', (req, res) => {
 });
 
 /****************************************************/
+
+
+/********************* KOMAL 6 *********************/
+
+app.post('/getotherappscomparisondata', async (req, res) => {
+  console.log(req.body);
+
+  var jobID = req.body.jobID;
+  var uname = req.body.username;
+  var appID = req.body.appID;
+
+  var top6Skills;
+  var data;
+
+  try {
+    const applications = await Jobapplication.find({ jobid: jobID })
+   // console.log(applications);
+   const userApplications = await User.find({ username: { $in: applications.map(application => application.applicantusername) } });
+   //console.log(userApplications);
+   top6Skills = await User.aggregate([
+    { $match: { _id: { $in: userApplications.map(user => user._id) } } },
+    { $unwind: '$skills' },
+    { $group: { _id: '$skills', count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 6 },
+    { $project: { _id: 1, count: 1 } }
+  ]);
+  console.log(top6Skills);
+  const user = await User.findOne({ username: uname });
+  const userSkillIds = user.skills;
+  //console.log(userSkillIds);
+  const skillCountsPresent = top6Skills.filter(skill => userSkillIds.includes(skill._id));
+  console.log(skillCountsPresent);
+
+  const degreeCounts = await Jobapplication.aggregate([
+    { $match: { jobid: jobID } },
+    { $group: { _id: "$lastdegree.degree", count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 2 }
+  ]);
+
+  console.log(degreeCounts);
+
+  const majorCounts = await Jobapplication.aggregate([
+    { $match: { jobid: jobID } },
+    { $group: { _id: "$lastdegree.major", count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 2 }
+  ]);
+
+  console.log(majorCounts);
+
+  const totalApplications = await Jobapplication.countDocuments({ jobid: jobID });
+
+  console.log(totalApplications);
+
+  const yearsExpList = await Jobapplication.find({ jobid: jobID }).select('yearsExp -_id');
+  const yearsExpValues = yearsExpList.map(app => app.yearsExp);
+  console.log(yearsExpValues);
+  
+    //data = {"topSkills": top6Skills, "presentSkills":skillCountsPresent, "top2degrees":degreeCounts, "top2majors":majorCounts,"totalApplications":totalApplications, "expYearList":yearsExpValues};
+
+  
+  }
+  catch (err)
+  {
+    console.log("Error getting top 6 skills: "+err)
+  }
+
+  res.end();
+});
+
+/***************************************************/
+
+/************************ NISA 6 *************************/
+
+app.get('/allNetwork/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const followers = await Connection.find({ following: userId });
+
+    const followerUsernames = followers.map(follower => follower.follower);
+
+    const users = await User.find({ username: { $in: followerUsernames } }).exec();
+    const companies = await Company.find({ username: { $in: followerUsernames } }).exec();
+
+    res.json(users.concat(companies));
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve followers' });
+  }
+});
+
+
+
+app.get('/allFollowing/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const following = await Connection.find({ follower: userId }).exec();
+
+    const followingUsernames = following.map(follow => follow.following);
+
+    const users = await User.find({ username: { $in: followingUsernames } }).exec();
+    const companies = await Company.find({ username: { $in: followingUsernames } }).exec();
+
+    res.json(users.concat(companies));
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Failed to retrieve following users' });
+  }
+});
+
+
+
+
+app.post('/signupcompany', async (req, res) => {
+ 
+  const { fullname, username, email, password, type } = req.body;
+  
+  const existingUser = await Company.findOne({ $or: [{ username }, { email }] });
+  if (existingUser) {
+    return res.status(400).json({ message: 'Username or email already exists' });
+  } 
+
+
+  const newCompany = new Company({
+    username: username,
+    email: email,
+    password: password,
+    companyType: type,
+    name: fullname
+  });
+
+ 
+  newCompany.save()
+    .then(() => {
+      req.session.username = username;
+      res.json({ message: 'Company signup successful' });
+    })
+    .catch((error) => {
+    
+      res.status(500).json({ error: 'Failed to signup company' });
+    });
+});
+
+app.post('/signupuser', async (req, res) => {
+  try {
+    const { username, fullname, email, password } = req.body;
+
+    
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username or email already exists' });
+    }
+
+    const newUser = new User({
+      username,
+      name :fullname,
+      email,
+      password
+    });
+
+    req.session.username = username;
+
+    await newUser.save();
+
+    res.status(200).json({ message: 'User registered successfully' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+/**********************************************************/
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 

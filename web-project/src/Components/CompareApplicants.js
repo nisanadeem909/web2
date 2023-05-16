@@ -18,12 +18,24 @@ function ApplicantComparisonPage() {
       console.log(propsData);
       setJobId(propsData);
     }, []);
-   
+   const [name,setName] = useState([]);
+   const[username,setUsername] = useState([]);
+   const appusernameset= (n)=>{
+      setUsername(n);
+      alert("I am in Parent.usernames=" + username);
+      console.log(username);
+   }
+   const appnameset= (n)=>{
+      setName(n);
+      alert("I am in Parent. names=" + name);
+      
+      console.log(name);
+   }
    return (
         <div>
         <div id="nab-allapps-wrapper">
              <div id="allapps-currentemp">
-                <CurrentApplicants jobid={jobId} />
+                <CurrentApplicants jobid={jobId} appusernameset={appusernameset} appnameset={appnameset}/>
              </div>
 
              <div id="allapps-empreq">
