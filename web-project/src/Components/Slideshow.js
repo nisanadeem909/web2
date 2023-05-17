@@ -29,7 +29,7 @@ export default function Slideshow() {
       <div className='nisa-img2'><img src={pic2} className="sliderimg2"/>
       <div className='nisa-text1'> <label className='nisatt1'>Free CV Maker Just One Click Away!</label>
        
-       <button onClick={()=>navigate("/signup")} className='nisa-ss-btn1'>Let's Get Started!</button>
+       <button onClick={()=>navigate("/cvviewer")} className='nisa-ss-btn1'>Build CV Now!</button>
        </div> </div>
       <div><img src={pic3} className="sliderimg"/> <div className='nisa-text1'> <label className='nisatt1'>Get Yourself Hired with Jobify!</label>
        

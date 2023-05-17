@@ -56,6 +56,8 @@ function App() {
           <Route path="login" element={<Login/>}></Route>
           <Route path="signup" element={<Signup/>}></Route>
           <Route path="about" element={<AboutUs/>}></Route>
+            <Route path='cvviewer' element={<CVViewer />} />
+            <Route path="cvviewer/userform" element={<UserForm/>} />
           <Route path="*" element={<Error/>}></Route>
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
