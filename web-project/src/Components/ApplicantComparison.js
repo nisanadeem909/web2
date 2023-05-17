@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import jobicon from './workk.png'
 import Footer from './Footer'
 
@@ -6,11 +6,15 @@ import './ApplicantComparison.css';
 
 import narsun from './narsun.jpg'
 import mindstorm from './mindstorm.jpg'
-import empicon from './dummy.jpg'
+
 import axios from 'axios';
-import {useState} from 'react';
+
+
+//import person from './dummy.jpg'
+const person = 'dummy.jpg';
 function ApplicantComparison(props) {
-    
+    const[img1,setImg1] = useState(person);
+    const[img2,setImg2] = useState(person);
     const[message,setmsg ]= useState();
     const[name1,setName1] = useState("Applicant 1");
     const[name2,setName2] = useState("Applicant 2");
@@ -53,12 +57,22 @@ function ApplicantComparison(props) {
         setAns1(msg.data.user1.answer);
         setAns2(msg.data.user2.answer);
 
+//alert("hello")
+        //const uimg = {username1:props.appusernameset[0],username2:props.appusername[1]};
+        console.log(param.unames[0] + "," + param.unames[1]);
+        const uimg = {username1:param.unames[0],username2:param.unames[1]};
+        const res = await axios.post("http://localhost:8000/getusersimg",uimg);
+        //alert(JSON.stringify(res.data));
+        if (res.data.img1 == "") setImg1()
+        setImg1(res.data.img1);
+        setImg2(res.data.img2);
+
     }
     useEffect(() => {
         console.log("In Applicant Comparison ");
         console.log(props.appnameset);
         console.log(props.appusernameset);
-/*START FROM HERE */
+
         setName1(props.appnameset[0]);
         setName2(props.appnameset[1]);
         console.log("name1 = ");
@@ -66,8 +80,14 @@ function ApplicantComparison(props) {
         console.log(name1);
         setData();
         
+
+        
       }, [props.appusernameset, props.appnameset]);
-    return (
+    
+    
+    
+    
+      return (
 
 
         <div id="nab-currentapp-wrapper">
@@ -90,9 +110,9 @@ function ApplicantComparison(props) {
                     
                 </tr>
                 <tr>
-                    <td><img id="appcomp-img" src={empicon}/>
+                    <td><img id="appcomp-img" src={`http://localhost:8000/profilepictures/${img1 || person}`}/>
                     </td>
-                    <td><img  id="appcomp-img" src={empicon}/></td>
+                    <td><img  id="appcomp-img"  src={`http://localhost:8000/profilepictures/${img2|| person}`} /></td>
                     
                 </tr>
                 <tr>

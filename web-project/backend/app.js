@@ -30,6 +30,57 @@ app.use(session({
  
 }));
 
+app.post("/getcompanyimg",async(req,res)=>{
+    console.log("I am in get company img");
+    console.log(req.body);
+
+    const c1 = await Company.findOne({username:req.body.username1});
+    const c2 = await Company.findOne({username:req.body.username2});
+
+    res.json({img1:c1.profilePicture,img2:c2.profilePicture});
+    res.end();
+})
+app.post("/getusersimg",async(req,res)=>{
+  console.log("I am in get 2 users img");
+  console.log(req.body);
+
+  
+  const c1 = await User.findOne({username:req.body.username1});
+  const c2 = await User.findOne({username:req.body.username2});
+
+  res.json({img1:c1.profilePicture,img2:c2.profilePicture});
+  res.end();
+})
+app.post("/getuserimg",async(req,res)=>{
+  console.log("I am in get userimg");
+  console.log(req.body);
+
+  const c1 = await User.findOne({username:req.body.username1});
+  
+
+  res.json({img1:c1.profilePicture});
+  res.end();
+})
+app.post("/getcompimg",async(req,res)=>{
+  console.log("I am in get compimg");
+  console.log(req.body);
+
+  const c1 = await Company.findOne({username:req.body.username1});
+  
+
+  res.json({img1:c1.profilePicture});
+  res.end();
+})
+app.post("/getapplicantimages",async(req,res)=>{
+  console.log("I am in get applicant images");
+  console.log(req.body);
+
+  const c1 = await User.find({username:req.body.username1});
+  
+
+  res.json({img1:c1.profilePicture});
+  res.end();
+})
 /***NABEEHA */
  
  app.get("/currentjobs", async(req,res)=>{
