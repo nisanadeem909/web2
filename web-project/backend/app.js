@@ -1608,26 +1608,6 @@ app.get('/allpostsmy/:sessionID', async (req, res) => {
   
 });
 
-app.post('/addnotif', async (req, res) => {
-  const { postId, username,notifusername } = req.body;
-   
-  const notification = new Notification({
-    username: username,
-    notifusername: notifusername, // Replace 'user' with the username of the user who performed the like
-    text: 'liked your post', // Modify the notification text as desired
-    notificationType: 1, // Assuming 1 represents a like notification
-    notificationID: postId, // Assuming postId represents a unique identifier for the post
-    date: new Date()
-  });
-
-  notification.save()
-    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'Failed to add notification' });
-    });
-});
-
 
 
 function generateRandomId() {
@@ -2515,6 +2495,70 @@ app.post('/getspecificuserrating', async (req, res) => {
 });
 
 /***************************************************/
+
+
+/** NABEEHA 7 **/
+
+app.post("/getcomparisondata", async(req,res)=>{
+
+  console.log("I am in comparison data");
+  console.log(req.body);
+  
+  const user1 = await Jobapplication.findOne({applicantusername: req.body.unames[0]});
+  const user2 = await Jobapplication.findOne({applicantusername:req.body.unames[1]});
+
+  res.json({user1:user1,user2:user2});
+  res.end();
+
+});
+
+/***************/
+
+/** NISA 7 */
+
+app.post('/addnotifconnect', async (req, res) => {
+  const { usernames,notifusername, image } = req.body;
+   var pid = generateRandomId();
+  const notification = new Notification({
+    username : usernames,
+    notifusername: notifusername, // Replace 'user' with the username of the user who performed the like
+    text: 'started following you', // Modify the notification text as desired
+    notificationType: 3, // Assuming 1 represents a like notification
+    notificationID: pid, // Assuming postId represents a unique identifier for the post
+    img : image,
+    date: new Date()
+  });
+
+  notification.save()
+    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to add notification' });
+    });
+});
+
+app.post('/addnotif', async (req, res) => {
+  const { postId, username,notifusername, img } = req.body;
+   id = generateRandomId();
+  const notification = new Notification({
+    username: username,
+    notifusername: notifusername, // Replace 'user' with the username of the user who performed the like
+    text: 'liked your post', // Modify the notification text as desired
+    notificationType: 1, // Assuming 1 represents a like notification
+    notificationID: id, // Assuming postId represents a unique identifier for the post
+    img : img,
+    date: new Date()
+  });
+
+  notification.save()
+    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to add notification' });
+    });
+});
+
+/***********/
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
