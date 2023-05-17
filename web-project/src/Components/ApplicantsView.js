@@ -1,18 +1,19 @@
 import React,{ useState, useEffect } from 'react';
 import './ApplicantsView.css';
 import app from './app.png';
-import person from './person.png';
+
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
+const person='dummy.jpg';
 
 export default function ApplicantsView() {
   const location = useLocation();
   const propsData = location.state;
   const [allApp, setAllApp] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const[img,setImages]=useState([]);
 
   const gotoPage = (data)=> {
     navigate("viewapplication" ,  {state: data });
@@ -31,8 +32,18 @@ export default function ApplicantsView() {
       .then(res => {
         setAllApp(res.data);
         setLoading(false);
+
+
+        const u_list = allApp.map(item=>item.applicantusername);
+        console.log(u_list);
+        const u = {u_list:u_list};
+        const profpic = axios.post("http://localhost:8000/getapplicantimages",u_list);
+        const pictures = profpic.data.c1.map(item => item.profilePicture);
+        setImages(pictures);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error));  
+      
+       
   }, []);
 
   const openProfile=(username)=>{
@@ -86,7 +97,7 @@ export default function ApplicantsView() {
             <p className='nisa-vac-ll'>No applications found.</p>
           ) : (
             
-            allApp.map(app => (
+            allApp.map((app,index) => (
               
               <li key={app._id}>
                 
