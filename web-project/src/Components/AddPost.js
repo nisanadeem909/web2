@@ -98,6 +98,7 @@ export default function AddPost() {
       })
         .then((res) => {
             txt.current.value = "";
+           
         })
         .catch((error) => console.log(error));
 
@@ -106,9 +107,7 @@ export default function AddPost() {
         }
 
 
-
-
-
+        window.location.reload();
     }
        
     

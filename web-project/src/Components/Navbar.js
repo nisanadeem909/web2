@@ -20,21 +20,15 @@ const Layout = (props) => {
   }
 
   const logoutSession = () =>{ 
-    navigate("/login");
-  axios.get('http://localhost:8000/logout')
+  
+  
+ axios.get('http://localhost:8000/logout')
   .then(response => {
-    navigate("/login");
-  })
-  .catch(error => {
-    console.error('Error logging out:', error);
-    
-  });
-  }
+   
+    sessionStorage.removeItem("sessionID");
+   
+    sessionStorage.removeItem("userType");
 
-  const logoutSessiontwo = () =>{ 
-    navigate("/login");
-  axios.get('http://localhost:8000/logout')
-  .then(response => {
     navigate("/login");
   })
   .catch(error => {
@@ -189,7 +183,7 @@ const Layout = (props) => {
                                   <img src={nablogouticon} id="nab-logout-icon"></img>
                                   &nbsp;&nbsp;
                                   
-                                  <button onClick={logoutSessiontwo} class="editprofile-button" > <span>Logout </span></button>
+                                  <button onClick={logoutSession} class="editprofile-button" > <span>Logout </span></button>
                                   
                                 </div>
                                 

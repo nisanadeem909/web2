@@ -16,6 +16,12 @@
  position: relative;
     
 }
+
+.pp-nisa-r-n{
+  float: right;
+  margin-left: 520px;
+  color: rgb(125, 122, 122);
+}
  
 .post_comment-listnew{
     flex-shrink: 1;

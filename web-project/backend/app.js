@@ -186,34 +186,6 @@ app.get('/likes/:sessionID',async (req, res) => {
     
   });
 
-  app.get('/allposts/:sessionID', async (req, res) => {
-   
-    const username = req.params.sessionID; 
-
-    Connection.find({ follower: username })
-      .then(connections => {
-        const followingUsers = connections.map(connection => connection.following);
-    
-        Post.find({ username: { $in: followingUsers } })
-          .then(posts => {
-            res.json(posts);
-          })
-          .catch(error => {
-            console.log(error);
-            res.status(500).json({ error: 'An error occurred' });
-          });
-      })
-      .catch(error => {
-        console.log(error);
-        res.status(500).json({ error: 'An error occurred' });
-      });
-    
-   
-   
-   
-   
-    
- });
 
 
   app.get('/jobs/:sessionID', async (req, res) => {
@@ -865,34 +837,7 @@ app.get('/shares/:sessionID',async (req, res) => {
   
 });
 
-app.get('/allposts/:sessionID', async (req, res) => {
- 
-  const username = req.params.sessionID; 
 
-  Connection.find({ follower: username })
-    .then(connections => {
-      const followingUsers = connections.map(connection => connection.following);
-  
-      Post.find({ username: { $in: followingUsers } })
-        .then(posts => {
-          res.json(posts);
-        })
-        .catch(error => {
-          console.log(error);
-          res.status(500).json({ error: 'An error occurred' });
-        });
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'An error occurred' });
-    });
-  
- 
- 
- 
- 
-  
-});
 
 
 app.get('/jobs/:sessionID', async (req, res) => {
@@ -1445,34 +1390,6 @@ app.get('/shares/:sessionID',async (req, res) => {
   
 });
 
-app.get('/allposts/:sessionID', async (req, res) => {
- 
-  const username = req.params.sessionID; 
-
-  Connection.find({ follower: username })
-    .then(connections => {
-      const followingUsers = connections.map(connection => connection.following);
-  
-      Post.find({ username: { $in: followingUsers } })
-        .then(posts => {
-          res.json(posts);
-        })
-        .catch(error => {
-          console.log(error);
-          res.status(500).json({ error: 'An error occurred' });
-        });
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'An error occurred' });
-    });
-  
- 
- 
- 
- 
-  
-});
 
 
 app.get('/jobs/:sessionID', async (req, res) => {
@@ -1624,13 +1541,14 @@ function generateRandomId() {
 }
 
 app.post('/addnotifcom', async (req, res) => {
-  const { postId, username, notifusername, commentText } = req.body;
+  const { postId, username, notifusername, commentText, img } = req.body;
   const randomId = generateRandomId();
   const notification = new Notification({
     username: username,
     notifusername: notifusername,
     text: 'commented on your post',
     notificationType: 2, 
+    img : img,
     notificationID: randomId,
     date: new Date(),
     comment: commentText 
@@ -1681,6 +1599,7 @@ app.get('/logout', (req, res) => {
       
     }
   });
+  res.end();
 });
 
 /************* */
@@ -2559,6 +2478,23 @@ app.post('/addnotif', async (req, res) => {
 });
 
 /***********/
+app.get('/allposts/:sessionID', async (req, res) => {
+  const username = req.params.sessionID;
+  console.log(username);
+  try {
+    const connections = await Connection.find({ follower: username });
+    const followingUsers = connections.map(connection => connection.following);
+    followingUsers.push(username); // Include the user themselves
+ 
+    console.log(followingUsers);
+    const posts = await Post.find({ username: { $in: followingUsers } });
+
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
