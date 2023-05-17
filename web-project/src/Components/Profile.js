@@ -39,7 +39,7 @@ export default function Profile(props) {
             <strong>{props.user.name}</strong>
             </div>
             <div className='prof_middle'>
-            <p>{degree} {major} Student at {school} </p>
+            <p><label id="userlabel_profk">@{props.user.username}</label> <br/> {props.user.bio} </p>
             <button className='nisa-pf-btn' onClick={openProfile} >Open Profile</button>
             </div>
            
