@@ -6,6 +6,8 @@ import networkicon from './network.png'
 import workicon from './workk.png'
 import axios from 'axios'
 
+var person = 'person.png';
+
 export default function ProfileDetails(props) {
 
     const [btn,setBtn] = useState(<></>);
@@ -38,11 +40,24 @@ export default function ProfileDetails(props) {
         var param = {"curruser":sessionStorage.getItem("sessionID"),"conuser":props.user.username};
         axios.post("http://localhost:8000/connectk",param).then((response) => {
             //alert(response.data);
+           
+           
+           
             setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
+
+      axios.post(`http://localhost:8000/addnotifconnect`, {
+        
+         usernames: props.user.username,
+          notifusername: curruser,
+          image: curruser.user?.profilePicture || curruser.company?.profilePicture || person
+        });
+       
         })
         .catch(function (error) {
             alert(error);
         });
+
+      
     }
 
     const disconnect=(conuser)=>{

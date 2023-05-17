@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import './Notifications.css';
 import notify from './notify.png';
@@ -73,7 +74,7 @@ export default function Notifications() {
                   </div>
                 </div>
                 <div className='nisa-notify-post'>
-                  <img className='nisa-notify-img3' src={post} alt='' />
+                
                 </div>
               </div>
             </li>

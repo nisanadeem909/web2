@@ -18,20 +18,20 @@ import Footer from './Footer'
   {
 
     setSubmitted(true);
-    <UserForm type = {submitted}/>
-    navigate("userform");
+    var data = true;
+    navigate("userform" ,  {state: data });
   }
 
   const gotoContactTwo = () =>
   {
     setSubmitted(false);
-    <UserForm type = {submitted}/>
-    navigate("userform");
+    var data = false;
+    navigate("userform" , {state: data });
   }
 
    return (
-    <div>
-    <label className='nisa-cv-label'> Choose Your Template... </label>
+    <div className='cv-nisa'>
+    <label className='nisa-cv-label'> Your Template Design... </label>
      <div className='nisa-cv-container'>
       
        <div class="nisa-cv-container2">
@@ -43,14 +43,7 @@ import Footer from './Footer'
 
     </div>
 
-    <div class="nisa-cv-container2">
-      <img src={cvtwo} alt="Avatar" class="nisa-cv-image2" />
-      <div class="nisa-cv-middle2">
-        <button onClick={() =>gotoContactTwo()} class="nisa-cv-text2">Let's Start!</button>
-       
-      </div>
-      
-    </div>
+  
 
      </div>
 

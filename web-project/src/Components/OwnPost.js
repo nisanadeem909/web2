@@ -102,6 +102,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
     const username = sessionStorage.getItem('sessionID');
     
     if (!liked) {
+      alert(User.user?.profilePicture || User.company?.profilePicture || person);
       try {
         await axios.post(`http://localhost:8000/addlikes`, {
           postId: props.postcurr.postID,
@@ -154,7 +155,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         username: props.postcurr.username,
         notifusername: username, // person who performed the like stored in session ;)
         commentText: commentText,
-        image : User.user?.profilePicture || User.company?.profilePicture || person
+        img : User.user?.profilePicture || User.company?.profilePicture || person
       })
       .then((res) => {
         
