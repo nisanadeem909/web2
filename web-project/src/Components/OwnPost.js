@@ -96,6 +96,26 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       })
       .catch((error) => console.log(error));
   };
+
+  const calculateTimeDuration = timestamp => {
+    const currentTime = new Date().getTime();
+    const notificationTime = new Date(timestamp).getTime();
+    const timeDifference = currentTime - notificationTime;
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return `${days} day${days > 1 ? 's' : ''} ago`;
+    } else if (hours > 0) {
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else if (minutes > 0) {
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    } else {
+      return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    }
+  };
   
 
   const handleLike = async () => {
@@ -196,6 +216,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 
           <div className='post_u-1'>
             <strong className='post_strong'>{props.postcurr.username} </strong>
+            {props.postcurr.imagePath && isImageLoaded && (
+            <p className='pp-nisa-r-n'>{calculateTimeDuration(props.postcurr.date)}</p>
+            )}
             <p className='nisa-post-p9'>{props.postcurr.text}</p>
           </div>
         </div>

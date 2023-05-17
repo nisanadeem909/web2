@@ -42,7 +42,7 @@ export default function CVView() {
     <div>
     <div className="cv-view-container">
       <Document
-        file={`http://localhost:8000/resumes/${propsData}`}
+        file={`http://localhost:8000/resumes/resume.pdf`}
         onLoadSuccess={onDocumentLoadSuccess}
         onError={onError}
       >
