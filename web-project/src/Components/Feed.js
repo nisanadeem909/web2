@@ -4,10 +4,13 @@ import Post from './Post';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
+
 export default function Feed(props) {
   const [allposts, setAllPosts] = useState([]);
   const [error, setError] = useState(false);
-
+ var sortedPosts;
+ 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
 
@@ -15,15 +18,27 @@ export default function Feed(props) {
       .get(`http://localhost:8000/allposts/${sessionID}`)
       .then(res => {
         setAllPosts(res.data);
+        
+        allposts.sort((a, b) => new Date(b.date) - new Date(a.date));
+       
       })
       .catch(error => {
         console.log(error);
         setError(true);
       });
+
+     
+
   }, []);
+
+ 
+
+
+  
 
   return (
     <div className='feed_container_k'>
+      
       {error ? (
         <p>Error occurred while loading posts.</p>
       ) : (

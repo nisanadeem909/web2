@@ -32,16 +32,25 @@ function HomePage() {
 
       <div className="service">
         <div className="box3">
-          <p className="service-text">CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf</p>
-          <button className="bs1">Go</button>
+          
+            <div id="nab-discover-opp">Discover Opportunities</div>
+          <div id="nab-text">Easily browse and filter through options that match your skills, experience, and preferences</div>
+         
         </div>
         <div className="box4">
-          <p className="service-text">CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf</p>
-          <button className="bs1">Go</button>
+         
+          <div id="nab-discover-opp">Personalised Recommendations</div>
+          <div id="nab-text">Applying for jobs has never been easier through our CV Maker.</div>
+           
+          
+          
         </div>
         <div className="box5">
-          <p className="service-text">CV Builder just one click away jdhshu fdghdgdkh ifdkufdhdk kufhkudhf</p>
-          <button className="bs1">Go</button>
+         
+          
+          <div id="nab-discover-opp">Smart Job Matches</div>
+          <div id="nab-text">With our streamlined hiring process, companies can find and compare applicants</div>
+           
         </div>
       </div>
 

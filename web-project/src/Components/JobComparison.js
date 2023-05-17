@@ -38,29 +38,25 @@ function JobComparison(props) {
     const[des2,setdes2] = useState("Job-2");
     const[c1,setc1] = useState("Company-1");
     const[c2,setc2] = useState("Company-2");
+    const[uname1,setuname1] = useState();
+    const[uname2,setuname2] = useState();
+
+    const[img1,setImg1] = useState();
+    const[img2,setImg2] = useState();
     const setData = async () => {
-        /*alert("I am in axios of job comp");
-        alert("props.jobset " + JSON.stringify(props.jobset));
-        alert("props.compset " + JSON.stringify(props.compset));
-        alert("props.ideset " + JSON.stringify(props.idset));*/
+        
         setJobs(props.jobset);
         setComps(props.compset);
         
         
-        //let newobj = {"comp1": props.compset[0].compName, "comp2":props.compset[1].compName,"job1":props.jobset[0].des,"job2":props.jobset[1].des};
-        //console.log("Job ids = ");
-        //console.log(props.idset[0].j_id);
         let newobj = {"jobid1":props.idset[0].j_id,"jobid2":props.idset[1].j_id};
-        //setObj({"comp1": props.compset[0].compName, "comp2":props.compset[1].compName,"job1":props.jobset[0].des,"job2":props.jobset[1].des});
-        //alert("hello");
-        //alert(JSON.stringify(newobj));
         
-       
         axios.post('http://localhost:8000/comparejobs', newobj)
         .then(response => {
-            //alert(JSON.stringify(response.data.job1));
-            //alert(JSON.stringify(response.data.job2));
-           
+       // alert(JSON.stringify(response.data));   
+            setuname1(response.data.job1.CompanyUsername);
+            setuname2(response.data.job2.CompanyUsername);
+            console.log(uname1);console.log(uname2);
             setc1(response.data.job1.CompanyName);
             setc2(response.data.job2.CompanyName);
             setdes1(response.data.job1.Designation);
@@ -78,9 +74,16 @@ function JobComparison(props) {
            setmaj1(response.data.job1.MajorRequired);
            setmaj2(response.data.job2.MajorRequired);
 
+           const c_img = {username1:response.data.job1.CompanyUsername,username2:response.data.job2.CompanyUsername};
+
+           axios.post('http://localhost:8000/getcompanyimg', c_img)
+           .then(response => {
+                                setImg1(response.data.img1);
+                                setImg2(response.data.img2);
+                            });
            
             });
-        
+           
         //alert("Showing salary = " + job1details);
         
         
@@ -115,9 +118,9 @@ function JobComparison(props) {
                     
                 </tr>
                 <tr>
-                    <td><img id="jobcomp-img" src={narsun}/>
+                    <td><img id="jobcomp-img" src={`http://localhost:8000/profilepictures/${img1}`}/>
                     </td>
-                    <td><img  id="jobcomp-img" src={mindstorm}/></td>
+                    <td><img  id="jobcomp-img"  src={`http://localhost:8000/profilepictures/${img2}`}/></td>
                     
                 </tr>
                 <tr>

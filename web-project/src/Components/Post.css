@@ -164,6 +164,12 @@
     
 }
 
+.pp-nisa-r{
+  float: right;
+  margin-left: 420px;
+  color: rgb(125, 122, 122);
+}
+
 .post_last {
   /* Adjust the value to leave space for the buttons and images */
   overflow-y: auto;
