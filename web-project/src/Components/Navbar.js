@@ -7,6 +7,9 @@ import nablogouticon from './nab-logout-icon.png';
 import nabprofileicon from './nab-profile-icon.png';
 import axios from "axios";
 import { useEffect } from "react";
+
+const person = 'person.png';
+
 const Layout = (props) => {
 
   useEffect(()=>{
@@ -47,7 +50,7 @@ const Layout = (props) => {
   });
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     
     if (props.type == "user" || props.type == "company")
     {
@@ -67,10 +70,10 @@ const Layout = (props) => {
       axios.post('http://localhost:8000/getcompimg', uimg)
           .then(response => {
             setImg1(response.data.img1);
-            
           });
     }}
-  }, [props]);
+  }, [props]);*/
+
   const handleProfile = () =>{
     document.getElementById("myDropdown").classList.toggle("show");
   }
@@ -135,7 +138,7 @@ const Layout = (props) => {
                            <div class="nab-dropdown-content" id="myDropdown">
                            <div id="nab-dropdown-items">
                                 <div id="profile-head-section">
-                                  <img src={`http://localhost:8000/profilepictures/${img1}`} id="nab-human-icon"></img>
+                                  <img src={`http://localhost:8000/profilepictures/${person}`} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
                                   <label>{getUserName()}</label>
                                   
@@ -203,7 +206,7 @@ const Layout = (props) => {
                            <div class="nab-dropdown-content" id="myDropdown">
                            <div id="nab-dropdown-items">
                                 <div id="profile-head-section">
-                                  <img src={`http://localhost:8000/profilepictures/${img1}`} id="nab-human-icon"></img>
+                                  <img src={`http://localhost:8000/profilepictures/${person}`} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
                                   <label>{getUserName()}</label>
                                   

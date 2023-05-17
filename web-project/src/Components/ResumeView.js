@@ -32,7 +32,7 @@ export default function CVView() {
           {/* Render your CV data here */}
         </div>
         <div className="cv-pagination">
-          Page {pageNumber} of {numPages}
+          
         </div>
       </div>
     );
@@ -42,7 +42,7 @@ export default function CVView() {
     <div>
     <div className="cv-view-container">
       <Document
-        file={`http://localhost:8000/resumes/resume.pdf`}
+        file={`http://localhost:8000/resumes/${propsData}`}
         onLoadSuccess={onDocumentLoadSuccess}
         onError={onError}
       >

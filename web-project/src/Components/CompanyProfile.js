@@ -1,7 +1,9 @@
 import React from 'react'
 import './Profile.css';
-import person from './person.png';
+//import person from './person.png';
 import { useNavigate } from 'react-router-dom';
+
+const person = 'person.png';
 
 export default function CompanyProfile(props) {
  
@@ -23,7 +25,7 @@ export default function CompanyProfile(props) {
     <div>
         <div className='profile-container'>
             <div className='profile_box'>
-            <img className='prof_p1' src={`http://localhost:8000/profilepictures/${props.user.profilePicture}`} alt="" />
+            <img className='prof_p1' src={`http://localhost:8000/profilepictures/${props.user.profilePicture || person}`} alt="" />
             </div>
             <br />
             <div className='prof_upper'>

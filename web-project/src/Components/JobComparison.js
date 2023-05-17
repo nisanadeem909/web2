@@ -9,6 +9,7 @@ import mindstorm from './mindstorm.jpg'
 import empicon from './dummy.jpg'
 import axios from 'axios';
 import {useState} from 'react';
+const person = 'person.png'
 function JobComparison(props) {
     const [obj,setObj] = useState({
         comp1:"",
@@ -118,9 +119,9 @@ function JobComparison(props) {
                     
                 </tr>
                 <tr>
-                    <td><img id="jobcomp-img" src={`http://localhost:8000/profilepictures/${img1}`}/>
+                    <td><img id="jobcomp-img" src={`http://localhost:8000/profilepictures/${img1 || person}`}/>
                     </td>
-                    <td><img  id="jobcomp-img"  src={`http://localhost:8000/profilepictures/${img2}`}/></td>
+                    <td><img  id="jobcomp-img"  src={`http://localhost:8000/profilepictures/${img2 || person}`}/></td>
                     
                 </tr>
                 <tr>

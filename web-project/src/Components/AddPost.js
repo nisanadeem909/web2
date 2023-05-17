@@ -33,7 +33,7 @@ export default function AddPost() {
 
     const HandleUpload=(t)=>{
         //console.log(t.handle.files);
-        alert("image set");
+        //alert("image set");
         setImg(t.target.files[0]);
       }
 
@@ -47,7 +47,7 @@ export default function AddPost() {
 
         if (img && text1)
         {
-            alert(img);
+           // alert(img);
           var fdata = new FormData();
           fdata.append("Image", img);
           fdata.append("Username", uname);
@@ -72,7 +72,7 @@ export default function AddPost() {
             fdata.append("UserType", "");
   
             axios.post('http://localhost:8000/uploadpostpic',fdata)
-            .then(res => {alert("Respnse" + JSON.stringify(res.data))
+            .then(res => {/*alert("Respnse" + JSON.stringify(res.data))*/
                
           
         
