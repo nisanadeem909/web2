@@ -2582,6 +2582,69 @@ app.post("/getapplicantimages",async(req,res)=>{
 
 /*****************/
 
+/******** NISA 9 ********/
+
+app.post('/uploadcvpic', function(req,res){
+  // var name = req.body.name;
+   var form = new formidable.IncomingForm();
+   var newpath;
+   form.parse(req,async function(err,fields,files){
+       
+       var oldpath = String(files.Image.filepath); //this was files.Image.filepath
+       //console.log(oldpath);
+       const img_file = files.Image.originalFilename;
+       console.log("original file name = " + img_file);
+
+       /var oldpath = path.resolve(img_file);/
+       newpath = String(__dirname + '/profilepictures/' + files.Image.originalFilename);
+       
+       console.log("old path = " + oldpath);
+       console.log("new path = " + newpath);
+   
+
+       try {
+        fs.copyFileSync(oldpath,newpath);
+       }
+       catch (err) {
+          console.log(err);
+       }
+       
+       
+       var pathpfp = newpath;
+       var uname = fields.Username;
+       
+          res.send(img_file);
+         res.end();
+
+   });
+  
+   
+   
+});
+
+/************************/
+
+/******** NABEEHA 9 ********/
+
+app.post("/getapplicantimages",async(req,res)=>{
+  console.log("I am in get applicant images");
+  console.log(req.body);
+
+  try{
+  const c1 = await User.find({ username: { $in: req.body.u_list } },{ profilePicture: 1, _id: 0 });
+  console.log(c1);
+  res.json({c1:c1});
+  res.end();
+  }
+  catch(err)
+  {
+    console.log(err);
+    console.log("Error in get applicant images");
+  }
+})
+
+/***************************/
+
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
 })

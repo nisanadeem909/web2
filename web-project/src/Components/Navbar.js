@@ -9,8 +9,15 @@ import axios from "axios";
 import { useEffect } from "react";
 const Layout = (props) => {
 
-  const [img1,setImg1] = useState();
+  useEffect(()=>{
+      if ((props.type == "user" || props.type == "company") && !sessionStorage.getItem("sessionID"))
+      {
+        navigate('/login');
+      }
+  },[])
+
   const navigate = useNavigate(); 
+  const [img1,setImg1] = useState();
   const companyRouteChange =() =>{
     let path = '/company/ownprofile'; 
     navigate(path);
