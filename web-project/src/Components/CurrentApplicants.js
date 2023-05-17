@@ -46,30 +46,49 @@ function CurrentAppsPage(props) {
     
     const handleCheckboxChange =  ( event, nam, unam,index) => {
         
-       alert("In checkbox: name= "+nam.aname+ "," + unam.uname);
+      // alert("In checkbox: name= "+nam.aname+ "," + unam.uname);
         if (event.target.checked) {
-            alert("index= " + index.index);
+           /* alert("index= " + index.index);
             alert("showing appusername array "+ appname[index.index] + "," + appusername[index.index]);
-            //alert("Setting company = " + comp.compName + " des= " + desig.des)
+            
+            *///alert("Setting company = " + comp.compName + " des= " + desig.des)
            
-            setCheckedApp([...checkedapp,
+            const updatednames = [...checkedapp,appname[index.index]];
+            setCheckedApp(updatednames);
+            const updatedunames = [...checkeduname,appusername[index.index]];
+            setCheckedUname(updatedunames);
+
+            /*setCheckedApp([...checkedapp,
                 nam.aname]);
             setCheckedUname([...checkeduname,
                     unam.uname]);
              console.log("Checking");
              console.log(checkedapp);
-             console.log(checkeduname);
+             console.log(checkeduname);*/
              
         }
         else{
             
             if (checkedapp.length!=0){
-            const newNames = checkedapp.filter((selectedRow) => selectedRow.aname !== nam.aname);
-            setCheckedApp(newNames);
+                /*const newNames = checkedapp.filter((selectedRow) => selectedRow !== appname[index]);
+                setCheckedApp(newNames);*/
+                const i = checkedapp.indexOf(appname[index]);
+                const updatednames = [...checkedapp];
+                updatednames.splice(i,1);
+                setCheckedApp(updatednames);
             }
             if (checkeduname.length!=0){
-            const newUsernames = checkeduname.filter((selectedRow) => selectedRow.uname !== unam.uname);
-            setCheckedUname(newUsernames);
+                /*const newUsernames = checkeduname.filter((selectedRow) => selectedRow !== appusername[index]);
+                console.log("Filterin")
+                //const newUsernames = checkeduname.filter((selectedRow) => console.log(selectedRow));
+                console.log(newUsernames);
+                setCheckedUname([newUsernames]);*/
+
+                const i = checkeduname.indexOf(appusername[index]);
+                const updatedUsernames = [...checkeduname];
+               updatedUsernames.splice(i,1);
+                setCheckedUname(updatedUsernames);
+                
             }
            
             console.log("unchecking: ")
@@ -134,15 +153,15 @@ function CurrentAppsPage(props) {
         console.log(param);
         const msg = await axios.post("http://localhost:8000/getcurrentapplicants",param);
         //alert(JSON.stringify(msg.data.apps));
-        alert("Showing All Applicants");
+       // alert("Showing All Applicants");
         let name_list = msg.data.apps.map(cname => cname.applicantname);
         let u_list = msg.data.apps.map(comp => comp.applicantusername);
         
        
         setappname(name_list);
         setappusername(u_list);
-        alert("In axios appname = " + appname);
-        alert("In axios appusernamename = " + appusername);
+        //alert("In axios appname = " + appname);
+        //alert("In axios appusernamename = " + appusername);
         console.log(appname);
         console.log(appusername);
         /*let des_list = msg.data.map(cname => cname.Designation);

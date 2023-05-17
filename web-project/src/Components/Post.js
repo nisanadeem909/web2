@@ -104,6 +104,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleLike = async () => {
    
+    alert(User.user?.profilePicture || User.company?.profilePicture || person);
     
     if (!liked) {
       try {
@@ -119,7 +120,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
           postId: props.postcurr.postID,
           username: props.postcurr.username,
           notifusername: username,
-          image: User.user?.profilePicture || User.company?.profilePicture || person
+          img: User.user?.profilePicture || User.company?.profilePicture || person,
         });
 
     
@@ -143,7 +144,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         postId: props.postcurr.postID,
         username: username,
         text: commentText,
-        img : User.user?.profilePicture || User.company?.profilePicture || person
+        img : User.user?.profilePicture || User.company?.profilePicture || person,
       })
       .then((res) => {
         setComments(comments + 1);
@@ -204,9 +205,18 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
           </div>
         </div>
 
+     
+
         <div className='post_middle'>
+       <div className='nisa-haha'>
         {isImageLoaded && (
-          <img className='post_p2' src={`http://localhost:8000/profilepictures/${props.postcurr.imagePath }`} alt='' />)}
+        
+          <img className='post_p2' src={`http://localhost:8000/profilepictures/${props.postcurr.imagePath }`} alt='' />
+         
+         
+          )}
+       </div>
+      
           <div className='post_btnpara'>
             <div className='post_btns'>
               <button className='post_icons2' onClick={handleLike}>
@@ -215,16 +225,13 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
               <button className='post_icons2' onClick={handleComment}>
                 <img className='post_icons12' src={comment} alt='cmnt' />
               </button>
-              <button className='post_icons2' onClick={handleShare}>
-                <img className='post_icons13' src={share} alt='shr' />
-              </button>
+             
             </div>
             <div className='post_para'>
               <p className='post_pp1'>{likes} likes</p>
               &nbsp; &nbsp;
               <p className='post_pp1'>{comments} comments</p>
-              &nbsp;&nbsp;
-              <p className='post_pp1'>{shares} shares</p>
+             
             </div>
           </div>
 

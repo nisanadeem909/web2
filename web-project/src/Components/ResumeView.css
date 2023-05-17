@@ -1,0 +1,40 @@
+.cv-view-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300vh;
+    margin-top: -15%;
+    margin-left: 45%;
+  }
+  
+  .cv-view-error {
+    font-size: 18px;
+    color: red;
+  }
+  
+  .cv-view-pdf-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+  }
+  
+  .cv-view-page-number {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .cv-pagination {
+    margin-top: -140%;
+    font-size: 17px;
+    color: #484444;
+  }
+
+  .cv-page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }

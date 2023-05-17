@@ -12,8 +12,8 @@ export default function Search() {
   const [isInputSelected, setIsInputSelected] = useState(false); // Track whether the input field is selected or not
   const navigate = useNavigate();
 
-  const openProfile=(username)=>{
-    alert("hi");
+  const openProfilenew=(username)=>{
+   
 
     if (username == sessionStorage.getItem("sessionID"))
         {
@@ -95,7 +95,7 @@ export default function Search() {
           {searchResults.length > 0 && isInputSelected && (
             <div className="search_results_k">
               {searchResults.map((result) => (
-                <button className="nisa-w" key={result.id} onClick={()=>{openProfile(result.username)}}>
+                <button className="nisa-new-w" key={result.id} onMouseEnter={()=>{openProfilenew(result.username)}}>
                   {result.username || result.Designation}
                 </button>
               ))}
