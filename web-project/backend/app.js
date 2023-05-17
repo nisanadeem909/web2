@@ -2602,7 +2602,8 @@ const c1 = await User.find({username:req.body.username1});
 res.json({img1:c1.profilePicture});
 res.end();
 })
-//dndnd
+
+
 
 /*****************/
 
