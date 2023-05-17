@@ -59,21 +59,25 @@
     text-align: center;
     width: 405px;
     margin-left: 11%;
-    z-index: 1;
+   
     height: 50px;
     
 }
 
-.nisa-w{
+.nisa-new-w{
     border: 1px solid gainsboro;
     font-size: 16px;
     color: #016960;
     cursor: pointer;
-    pointer-events: none;
+    
+    z-index: 2;
 }
 
-.nisa-w:hover{
-    background-color: rgb(203, 206, 209);
+
+
+.nisa-new-w:hover{
+    background-color: rgb(74, 77, 80);
+    color: white;
 }
 
 .search-nisa-w{
