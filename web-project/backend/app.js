@@ -187,34 +187,7 @@ app.get('/likes/:sessionID',async (req, res) => {
     
   });
 
-  app.get('/allposts/:sessionID', async (req, res) => {
-   
-    const username = req.params.sessionID; 
-
-    Connection.find({ follower: username })
-      .then(connections => {
-        const followingUsers = connections.map(connection => connection.following);
-    
-        Post.find({ username: { $in: followingUsers } })
-          .then(posts => {
-            res.json(posts);
-          })
-          .catch(error => {
-            console.log(error);
-            res.status(500).json({ error: 'An error occurred' });
-          });
-      })
-      .catch(error => {
-        console.log(error);
-        res.status(500).json({ error: 'An error occurred' });
-      });
-    
-   
-   
-   
-   
-    
- });
+  
 
 
   app.get('/jobs/:sessionID', async (req, res) => {
@@ -866,34 +839,7 @@ app.get('/shares/:sessionID',async (req, res) => {
   
 });
 
-app.get('/allposts/:sessionID', async (req, res) => {
- 
-  const username = req.params.sessionID; 
 
-  Connection.find({ follower: username })
-    .then(connections => {
-      const followingUsers = connections.map(connection => connection.following);
-  
-      Post.find({ username: { $in: followingUsers } })
-        .then(posts => {
-          res.json(posts);
-        })
-        .catch(error => {
-          console.log(error);
-          res.status(500).json({ error: 'An error occurred' });
-        });
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'An error occurred' });
-    });
-  
- 
- 
- 
- 
-  
-});
 
 
 app.get('/jobs/:sessionID', async (req, res) => {
@@ -1446,34 +1392,6 @@ app.get('/shares/:sessionID',async (req, res) => {
   
 });
 
-app.get('/allposts/:sessionID', async (req, res) => {
- 
-  const username = req.params.sessionID; 
-
-  Connection.find({ follower: username })
-    .then(connections => {
-      const followingUsers = connections.map(connection => connection.following);
-  
-      Post.find({ username: { $in: followingUsers } })
-        .then(posts => {
-          res.json(posts);
-        })
-        .catch(error => {
-          console.log(error);
-          res.status(500).json({ error: 'An error occurred' });
-        });
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'An error occurred' });
-    });
-  
- 
- 
- 
- 
-  
-});
 
 
 app.get('/jobs/:sessionID', async (req, res) => {
@@ -1681,6 +1599,7 @@ app.get('/logout', (req, res) => {
       
     }
   });
+  res.end();
 });
 
 /************* */
@@ -2559,6 +2478,82 @@ app.post('/addnotif', async (req, res) => {
 });
 
 /***********/
+
+/*** NABEEHA 8 ***/
+
+app.post("/getcompanyimg",async(req,res)=>{
+  console.log("I am in get company img");
+  console.log(req.body);
+
+  const c1 = await Company.findOne({username:req.body.username1});
+  const c2 = await Company.findOne({username:req.body.username2});
+
+  res.json({img1:c1.profilePicture,img2:c2.profilePicture});
+  res.end();
+})
+app.post("/getusersimg",async(req,res)=>{
+console.log("I am in get 2 users img");
+console.log(req.body);
+
+
+const c1 = await User.findOne({username:req.body.username1});
+const c2 = await User.findOne({username:req.body.username2});
+
+res.json({img1:c1.profilePicture,img2:c2.profilePicture});
+res.end();
+})
+app.post("/getuserimg",async(req,res)=>{
+console.log("I am in get userimg");
+console.log(req.body);
+
+const c1 = await User.findOne({username:req.body.username1});
+
+
+res.json({img1:c1.profilePicture});
+res.end();
+})
+app.post("/getcompimg",async(req,res)=>{
+console.log("I am in get compimg");
+console.log(req.body);
+
+const c1 = await Company.findOne({username:req.body.username1});
+
+
+res.json({img1:c1.profilePicture});
+res.end();
+})
+app.post("/getapplicantimages",async(req,res)=>{
+console.log("I am in get applicant images");
+console.log(req.body);
+
+const c1 = await User.find({username:req.body.username1});
+
+
+res.json({img1:c1.profilePicture});
+res.end();
+})
+
+app.get('/allposts/:sessionID', async (req, res) => {
+  const username = req.params.sessionID;
+  console.log(username);
+  try {
+    const connections = await Connection.find({ follower: username });
+    const followingUsers = connections.map(connection => connection.following);
+    followingUsers.push(username); // Include the user themselves
+
+    console.log(followingUsers);
+    const posts = await Post.find({ username: { $in: followingUsers } });
+
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+
+
+/*****************/
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
