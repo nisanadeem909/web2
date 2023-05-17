@@ -1608,26 +1608,6 @@ app.get('/allpostsmy/:sessionID', async (req, res) => {
   
 });
 
-app.post('/addnotif', async (req, res) => {
-  const { postId, username,notifusername } = req.body;
-   
-  const notification = new Notification({
-    username: username,
-    notifusername: notifusername, // Replace 'user' with the username of the user who performed the like
-    text: 'liked your post', // Modify the notification text as desired
-    notificationType: 1, // Assuming 1 represents a like notification
-    notificationID: postId, // Assuming postId represents a unique identifier for the post
-    date: new Date()
-  });
-
-  notification.save()
-    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
-    .catch(error => {
-      console.log(error);
-      res.status(500).json({ error: 'Failed to add notification' });
-    });
-});
-
 
 
 function generateRandomId() {
@@ -2268,14 +2248,45 @@ app.post('/getotherappscomparisondata', async (req, res) => {
   const yearsExpList = await Jobapplication.find({ jobid: jobID }).select('yearsExp -_id');
   const yearsExpValues = yearsExpList.map(app => app.yearsExp);
   console.log(yearsExpValues);
-  
-    //data = {"topSkills": top6Skills, "presentSkills":skillCountsPresent, "top2degrees":degreeCounts, "top2majors":majorCounts,"totalApplications":totalApplications, "expYearList":yearsExpValues};
 
+  var expArray = {"entry": 0, "senior": 0, "manager": 0,"director":0};
+  expArray.entry = yearsExpValues.filter((element)=>(element <=2)).length / totalApplications * 100;
+  expArray.senior = yearsExpValues.filter((element)=>(element >2 && element<=6)).length / totalApplications * 100;
+  expArray.manager = yearsExpValues.filter((element)=>(element >6 && element<=12)).length / totalApplications * 100;
+  expArray.director = yearsExpValues.filter((element)=>(element >12)).length / totalApplications * 100;
+  console.log("bro");
+  console.log(expArray);
+
+  for (i = 0; i < top6Skills.length; i++)
+  {
+    if (skillCountsPresent.includes(top6Skills[i]))
+        top6Skills[i].present = "ktopskills-skill-have";
+    else
+        top6Skills[i].present = "ktopskills-skill-nothave";
+  }
+
+  console.log(top6Skills);
+
+  const application = await Jobapplication.findOne({ _id: appID }, 'yearsExp');
+  const appExp = application.yearsExp;
+
+  var lowerExp = yearsExpValues.filter((element)=>(element <= appExp)).length / totalApplications * 100;
+  var skillPercent = skillCountsPresent.length / top6Skills.length * 100;
+
+  var percentage = Math.floor((lowerExp + skillPercent) / 2);
+
+  console.log(lowerExp);
+  console.log(skillPercent);
+  console.log(percentage);
   
+  data = {"ranking":percentage,"topSkills": top6Skills, "presentSkills":skillCountsPresent, "top2degrees":degreeCounts, "top2majors":majorCounts,"totalApplications":totalApplications, "expYearList":expArray};
+
+  res.json({"status":"success","data":data});
   }
   catch (err)
   {
     console.log("Error getting top 6 skills: "+err)
+    res.json({"status":"error","data":err})
   }
 
   res.end();
@@ -2385,6 +2396,169 @@ app.post('/signupuser', async (req, res) => {
 });
 
 /**********************************************************/
+
+/******************** KOMAL 7 **********************/
+
+app.post('/checkifemployee', async (req, res) => {
+  console.log(req.body);
+  var employeeUsername = req.body.username;
+  var companyUsername = req.body.company;
+
+  var flag, status;
+
+  try {
+    const employee = await CurrentEmployees.findOne({
+      EmployeeUsername: employeeUsername,
+      CompanyUsername: companyUsername,
+    });
+  
+    if (employee) {
+      flag = true;
+    } else {
+      flag = false;
+    }
+
+    console.log(flag);
+
+    res.json({"status":"success","flag":flag})
+  } catch (error) {
+    console.error(error);
+    res.json({"status":"error","flag":error})
+  }
+
+  res.end();
+});
+
+app.post('/addRating', async (req, res) => {
+  console.log(req.body);
+  var employeeUsername = req.body.username;
+  var companyUsername = req.body.company;
+  var newRating = req.body.rating;
+
+  var flag, status;
+
+  try {
+    const company = await Company.findOne({ username: companyUsername });
+    console.log(company);
+
+    const existingRating = company.ratings.find((rating) => rating.username === employeeUsername);
+
+    if (existingRating) {
+      // Update the existing rating
+      existingRating.rating = newRating;
+    } else {
+      // Add a new rating to the ratings array
+      company.ratings.push({ username: employeeUsername, rating: newRating });
+    }
+
+    await company.save();
+  } catch (error) {
+    console.error(error);
+  }
+
+  res.end();
+});
+
+app.post('/getspecificuserrating', async (req, res) => {
+  console.log(req.body);
+  var employeeUsername = req.body.username;
+  var companyUsername = req.body.company;
+
+  var rating;
+
+  try {
+    const company = await Company.findOne(
+      { username: companyUsername },
+      { ratings: { $elemMatch: { username: employeeUsername } } }
+    );
+    if (!company) {
+      console.log('Company not found');
+      rating = -1;
+    }
+
+    else if (company.ratings.length === 0) {
+      console.log(`No rating found for ${employeeUsername} in ${companyUsername}`);
+      rating = 0;
+    }
+    else {
+      rating = company.ratings[0].rating;
+      console.log(`Rating for ${employeeUsername} in ${companyUsername}: ${rating}`);
+    }
+
+  } catch (error) {
+    console.error(error);
+    rating = -1;
+  }
+  console.log(rating);
+  res.json({"rating":rating});
+  res.end();
+});
+
+/***************************************************/
+
+
+/** NABEEHA 7 **/
+
+app.post("/getcomparisondata", async(req,res)=>{
+
+  console.log("I am in comparison data");
+  console.log(req.body);
+  
+  const user1 = await Jobapplication.findOne({applicantusername: req.body.unames[0]});
+  const user2 = await Jobapplication.findOne({applicantusername:req.body.unames[1]});
+
+  res.json({user1:user1,user2:user2});
+  res.end();
+
+});
+
+/***************/
+
+/** NISA 7 */
+
+app.post('/addnotifconnect', async (req, res) => {
+  const { usernames,notifusername, image } = req.body;
+   var pid = generateRandomId();
+  const notification = new Notification({
+    username : usernames,
+    notifusername: notifusername, // Replace 'user' with the username of the user who performed the like
+    text: 'started following you', // Modify the notification text as desired
+    notificationType: 3, // Assuming 1 represents a like notification
+    notificationID: pid, // Assuming postId represents a unique identifier for the post
+    img : image,
+    date: new Date()
+  });
+
+  notification.save()
+    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to add notification' });
+    });
+});
+
+app.post('/addnotif', async (req, res) => {
+  const { postId, username,notifusername, img } = req.body;
+   id = generateRandomId();
+  const notification = new Notification({
+    username: username,
+    notifusername: notifusername, // Replace 'user' with the username of the user who performed the like
+    text: 'liked your post', // Modify the notification text as desired
+    notificationType: 1, // Assuming 1 represents a like notification
+    notificationID: id, // Assuming postId represents a unique identifier for the post
+    img : img,
+    date: new Date()
+  });
+
+  notification.save()
+    .then(() => res.status(200).json({ message: 'Notification added successfully' }))
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'Failed to add notification' });
+    });
+});
+
+/***********/
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
