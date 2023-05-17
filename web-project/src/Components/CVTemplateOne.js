@@ -58,7 +58,7 @@ flexDirection: 'row'
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginLeft : 50,
+    marginLeft : 25,
     marginTop : 2,
     
   },
@@ -67,7 +67,7 @@ flexDirection: 'row'
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginLeft : 10,
+    marginLeft : 40,
     marginTop : 40,
   
     
@@ -190,16 +190,18 @@ flexDirection: 'row'
 
 class CVTemplateOne extends Component {
 
+  constructor(props) {
+    super(props); 
+}
  
   render() {
     const { values } = this.props;
  alert(values.image);
-const newi = 'sip34.jpg'
+
    return(
     <Document style={styles.doc}>
    <Page  style={styles.page}>
    <View style={styles.sectionO}>
-   <Image style={styles.image} src={`http://localhost:8000/profilepictures/${newi}`} />
      <View>
           <Text style={styles.title}>{values.name} </Text>
           <Text style={styles.content}>{values.skills}</Text>

@@ -23,7 +23,7 @@ export default class Education extends Component {
             //console.log(t.handle.files);
            
          
-           
+           img = t.target.files[0];
             values.image = img;
           
           }
@@ -33,7 +33,7 @@ export default class Education extends Component {
           const upload = () => {
            
       
-    
+            alert(img);
             if(img)
             {
                 var fdata = new FormData();
