@@ -333,4 +333,10 @@
     cursor: pointer;
   }
   
+#linktoprof {
+  cursor: pointer;
+} 
 
+#linktoprof:hover {
+  text-decoration: underline;
+}

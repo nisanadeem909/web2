@@ -45,6 +45,8 @@ import ApplicantsView from './Components/ApplicantsView';
 import CompareApplicants from './Components/CompareApplicants';
 import SearchResults from './Components/SearchResults'
 
+import ResumeView from './Components/ResumeView'
+
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
           <Route path="login" element={<Login/>}></Route>
           <Route path="signup" element={<Signup/>}></Route>
           <Route path="about" element={<AboutUs/>}></Route>
+            <Route path='cvviewer' element={<CVViewer />} />
+            <Route path="cvviewer/userform" element={<UserForm/>} />
           <Route path="*" element={<Error/>}></Route>
           {/*<Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
@@ -113,6 +117,7 @@ function App() {
            
             <Route path='compareapplicants' element={<CompareApplicants/>} />
             <Route path="vacancies/viewapplicants/viewapplication" element={<ViewApplicationPage />} />  
+            <Route path="vacancies/viewapplicants/viewapplication/view" element={<ResumeView />} />  
 
 
         </Route>

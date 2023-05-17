@@ -256,3 +256,12 @@ background: none;
 .editprofile-button:hover{
   text-decoration: underline;
 }
+
+#cvbutton_navbar {
+  background-color: white;
+  color:#027e74;
+}
+
+#cvbutton_navbar:hover {
+  background-color:gainsboro;
+}

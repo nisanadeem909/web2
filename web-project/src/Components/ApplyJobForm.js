@@ -173,7 +173,7 @@ export default function ApplyJob(props) {
           </div>
           <div className='kpostjobform-field'>
             <label className='kpostjobform-field-heading'>Upload your latest CV:</label>
-            <input type="file" className='kpostjobform-field-input' onChange={HandleUpload}></input>
+            <input type="file" accept="application/pdf" className='kpostjobform-field-input' onChange={HandleUpload}></input>
           </div>
           <div className='kpostjobform-btns'>
             <button className='kpostjobform-postbtn' onClick={handleApply}>Apply</button>

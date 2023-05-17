@@ -96,7 +96,6 @@ export default function Application() {
             <div className='kjobapp-content-details'>
               <div className='kjobapp-content-profile'>
                 <div className='kjobapp-content-profile-summary'>
-                  <img src={picture} className='kjobapp-content-profile-pic'></img>
                   <div className='kjobapp-content-profile-names'>
                     <label className='kjobapp-content-name'>{allApp.applicantname}</label>
                     <label className='kjobapp-content-username'>@{allApp.applicantusername}</label>
