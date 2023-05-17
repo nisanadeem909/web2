@@ -61,7 +61,7 @@ export default function Notifications() {
             <li key={not._id}>
               <div className='nisa-notif-list'>
                 <div className='nisa-notify-container2'>
-                  <img className='nisa-notify-img2' src={`http://localhost:8000/profilepictures/${not.img|| person}`} alt='' />
+                  <img className='nisa-notify-img2' src={`http://localhost:8000/profilepictures/${not.img || person}`} alt='' />
                   <div className='nisa-notify-container3'>
                     <div className='nisa-notify-container4'>
                       <label className='nisa-notify-lb'>@{not.notifusername}</label>

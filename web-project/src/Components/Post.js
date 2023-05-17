@@ -132,7 +132,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleLike = async () => {
    
-    alert(User.user?.profilePicture || User.company?.profilePicture || person);
+    //alert(User.user?.profilePicture || User.company?.profilePicture || person);
     
     if (!liked) {
       try {
@@ -143,13 +143,21 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         setLikes(likes + 1);
         setLiked(true);
   
-    
-        await axios.post(`http://localhost:8000/addnotif`, {
-          postId: props.postcurr.postID,
-          username: props.postcurr.username,
-          notifusername: username,
-          img: User.user?.profilePicture || User.company?.profilePicture || person,
-        });
+        axios
+        .get(`http://localhost:8000/finduser/${username}`)
+        .then((res) => {
+          
+          var nUser =res.data;
+          //alert(nUser.user?.profilePicture || nUser.company?.profilePicture);
+          
+          axios.post(`http://localhost:8000/addnotif`, {
+            postId: props.postcurr.postID,
+            username: props.postcurr.username,
+            notifusername: username,
+            image: nUser.user?.profilePicture || nUser.company?.profilePicture || person
+          }).then((res) => {/*alert("hello: "+JSON.stringify(res))*/}).catch((error) => alert(error));
+        })
+        .catch((error) => alert(error));
 
     
        

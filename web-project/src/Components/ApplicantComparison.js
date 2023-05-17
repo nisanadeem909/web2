@@ -8,17 +8,16 @@ import narsun from './narsun.jpg'
 import mindstorm from './mindstorm.jpg'
 
 import axios from 'axios';
-import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-function ApplicantComparison(props) {
 
+    
+function ApplicantComparison(props) {
     const navigate = useNavigate();
 
 
 
-//import person from './dummy.jpg'
-const person = 'dummy.jpg';
-function ApplicantComparison(props) {
+    //import person from './dummy.jpg'
+    const person = 'dummy.jpg';
     const[img1,setImg1] = useState(person);
     const[img2,setImg2] = useState(person);
     const[message,setmsg ]= useState();

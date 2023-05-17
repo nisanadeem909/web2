@@ -1506,6 +1506,24 @@ app.get('/allapps/:id', async (req, res) => {
   }
 });
 
+app.get('/allposts/:sessionID', async (req, res) => {
+  const username = req.params.sessionID;
+  console.log(username);
+  try {
+    const connections = await Connection.find({ follower: username });
+    const followingUsers = connections.map(connection => connection.following);
+    followingUsers.push(username); // Include the user themselves
+ 
+    console.log(followingUsers);
+    const posts = await Post.find({ username: { $in: followingUsers } });
+
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 app.get('/allpostsmy/:sessionID', async (req, res) => {
  
   const username = req.params.sessionID; 
@@ -2456,8 +2474,9 @@ app.post('/addnotifconnect', async (req, res) => {
     });
 });
 
-app.post('/addnotif', async (req, res) => {
-  const { postId, username,notifusername, img } = req.body;
+app.post('/addnotif', async (req, res) => { //MODIFIED BY KOMAL 8
+  const { postId, username,notifusername, image } = req.body;
+  console.log(req.body);
    id = generateRandomId();
   const notification = new Notification({
     username: username,
@@ -2465,7 +2484,7 @@ app.post('/addnotif', async (req, res) => {
     text: 'liked your post', // Modify the notification text as desired
     notificationType: 1, // Assuming 1 represents a like notification
     notificationID: id, // Assuming postId represents a unique identifier for the post
-    img : img,
+    img : image,
     date: new Date()
   });
 
@@ -2532,24 +2551,6 @@ const c1 = await User.find({username:req.body.username1});
 res.json({img1:c1.profilePicture});
 res.end();
 })
-
-app.get('/allposts/:sessionID', async (req, res) => {
-  const username = req.params.sessionID;
-  console.log(username);
-  try {
-    const connections = await Connection.find({ follower: username });
-    const followingUsers = connections.map(connection => connection.following);
-    followingUsers.push(username); // Include the user themselves
-
-    console.log(followingUsers);
-    const posts = await Post.find({ username: { $in: followingUsers } });
-
-    res.json(posts);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'An error occurred' });
-  }
-});
 
 
 

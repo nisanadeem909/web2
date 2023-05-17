@@ -122,7 +122,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
     const username = sessionStorage.getItem('sessionID');
     
     if (!liked) {
-      alert(User.user?.profilePicture || User.company?.profilePicture || person);
+      //alert(User.user?.profilePicture || User.company?.profilePicture || person);
       try {
         await axios.post(`http://localhost:8000/addlikes`, {
           postId: props.postcurr.postID,
@@ -131,13 +131,23 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         setLikes(likes + 1);
         setLiked(true);
   
+        axios
+        .get(`http://localhost:8000/finduser/${username}`)
+        .then((res) => {
+          
+          var nUser =res.data;
+          //alert(nUser.user?.profilePicture || nUser.company?.profilePicture);
+          
+          axios.post(`http://localhost:8000/addnotif`, {
+            postId: props.postcurr.postID,
+            username: props.postcurr.username,
+            notifusername: username,
+            image: nUser.user?.profilePicture || nUser.company?.profilePicture || person
+          }).then((res) => {/*alert("hello: "+JSON.stringify(res))*/}).catch((error) => alert(error));
+        })
+        .catch((error) => alert(error));
        
-        await axios.post(`http://localhost:8000/addnotif`, {
-          postId: props.postcurr.postID,
-          username: props.postcurr.username,
-          notifusername: username,
-          image: User.user?.profilePicture || User.company?.profilePicture || person
-        });
+        
 
        
       } catch (error) {
