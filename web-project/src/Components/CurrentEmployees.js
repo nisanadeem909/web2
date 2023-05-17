@@ -7,6 +7,7 @@ import axios from 'axios'
 import './workshere.css';
 import Modal from 'react-modal';
 import DeleteModal from './DeleteConfirmationEmployee';
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -22,6 +23,7 @@ function CurrentEmployeesComponent(props) {
     let sessionID;
     let param;
     const[current,setCurrent] = useState();
+    const navigate = useNavigate();
     const  setEmployees = async() =>{
         
         let sessionID = sessionStorage.getItem('sessionID');
@@ -113,6 +115,43 @@ function CurrentEmployeesComponent(props) {
             }
     }
 
+    const openProfile=(username)=>{
+   
+
+        if (username == sessionStorage.getItem("sessionID"))
+            {
+                var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+                navigate(path);
+                return;
+            }
+    
+        //find user type
+        var param = {"user":username};
+        axios.post(`http://localhost:8000/getusertype`,param)
+          .then(res => {
+              if (res.data.type != "none")
+              {
+                  var utype = sessionStorage.getItem("userType");
+                  var path = "/" + utype + "/";
+    
+                  if (res.data.type == "user")
+                  {
+                      path += "publicuserprofile";
+                  }
+                  else {
+                      path += "publiccompanyprofile";
+                  }
+    
+                 // alert(path);
+    
+                  navigate(path, { state: res.data.user });
+              }
+              else 
+                console.log("error");
+          })
+          .catch(error => alert(error));
+      }
+
     const  openDeleteModal = (index)=>{
 
         setDeleteModalOpen(true);
@@ -124,11 +163,11 @@ function CurrentEmployeesComponent(props) {
     const empRow = () =>{
         return empReq.map((name, index) => {
             const desig = des[index];
-
+            const uname = username[index];
             return (<tr><td>
         <img className='works-emp-icon' src={empicon}></img>
             &nbsp;&nbsp;
-            <a href="/">{name}</a>
+            <a onClick={()=>openProfile(uname)}>{name}</a>
         </td>
         <td>
             {desig}

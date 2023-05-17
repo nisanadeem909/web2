@@ -147,7 +147,7 @@ function CurrentJobsPage(props) {
                 <td>
                     <img className='works-emp-icon' src={empicon}></img>
                         &nbsp;&nbsp;
-                        <a href="/">{compName}</a>
+                        <label>{compName}</label>
                 </td>
                     <td>
                         {des}

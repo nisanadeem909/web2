@@ -113,8 +113,8 @@ function JobComparison(props) {
                 </tr>
                 
                 <tr>
-                    <td><button class="uides-btn"><span>{des1} at {c1} </span></button></td>
-                    <td><button class="uides-btn"><span>{des2} at {c2} </span></button></td>
+                    <td><label class="uides-btn"><span>{des1} at {c1} </span></label></td>
+                    <td><label class="uides-btn"><span>{des2} at {c2} </span></label></td>
                     
                 </tr>
                 <tr>

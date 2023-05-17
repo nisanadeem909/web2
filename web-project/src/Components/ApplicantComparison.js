@@ -8,6 +8,12 @@ import narsun from './narsun.jpg'
 import mindstorm from './mindstorm.jpg'
 
 import axios from 'axios';
+import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+function ApplicantComparison(props) {
+
+    const navigate = useNavigate();
+
 
 
 //import person from './dummy.jpg'
@@ -32,6 +38,43 @@ function ApplicantComparison(props) {
     const[exp2,setExp2] = useState("Not Selected");
     const[ans1,setAns1] = useState("Not Selected");
     const[ans2,setAns2] = useState("Not Selected");
+
+    const openProfile=(username)=>{
+   
+        if (username == sessionStorage.getItem("sessionID"))
+            {
+                var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+                navigate(path);
+                return;
+            }
+    
+        //find user type
+        var param = {"user":username};
+        axios.post(`http://localhost:8000/getusertype`,param)
+          .then(res => {
+              if (res.data.type != "none")
+              {
+                  var utype = sessionStorage.getItem("userType");
+                  var path = "/" + utype + "/";
+    
+                  if (res.data.type == "user")
+                  {
+                      path += "publicuserprofile";
+                  }
+                  else {
+                      path += "publiccompanyprofile";
+                  }
+    
+                 // alert(path);
+    
+                  navigate(path, { state: res.data.user });
+              }
+              else 
+                console.log("error");
+          })
+          .catch(error => alert(error));
+      }
+
     const setData = async()=>{
         let param = {unames:props.appusernameset,names:props.appnameset};
         console.log("param")
@@ -41,6 +84,9 @@ function ApplicantComparison(props) {
 
         setName1(msg.data.user1.applicantname);
         setName2(msg.data.user2.applicantname);
+
+        setUname1(msg.data.user1.applicantusername);
+        setUname2(msg.data.user2.applicantusername);
         
         setDeg1(msg.data.user1.lastdegree.degree);
         setDeg2(msg.data.user2.lastdegree.degree);
@@ -105,8 +151,8 @@ function ApplicantComparison(props) {
                 </tr>
                 
                 <tr>
-                    <td><button class="uides-btn"><span>{name1} </span></button></td>
-                    <td><button class="uides-btn"><span>{name2} </span></button></td>
+                    <td><button class="uides-btn" onClick={() => openProfile(uname1)}><span>{name1} </span></button></td>
+                    <td><button class="uides-btn" onClick={() => openProfile(uname2)}><span>{name2} </span></button></td>
                     
                 </tr>
                 <tr>

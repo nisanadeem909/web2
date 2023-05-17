@@ -8,6 +8,8 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Footer from './Footer'
+
 const person = 'person.png';
 
 export default function Network() {
@@ -68,9 +70,6 @@ export default function Network() {
 
   return (
     <div className='nisa-network-container'>
-      <div className='nisa-search-bar'>
-        <Search></Search>
-      </div>
 
       <div className='nisa-network-parent'>
         <div className='nisa-network-lp'>
@@ -133,6 +132,7 @@ export default function Network() {
           )}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

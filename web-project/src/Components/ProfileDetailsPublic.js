@@ -13,6 +13,8 @@ export default function ProfileDetails(props) {
 
     const [btn,setBtn] = useState(<></>);
     const [connected,setConctd] = useState(false);
+    const [sessionUser, setSessionUser] = useState([]);
+    
     var pf = 'person.png';
     const navigate = useNavigate();
 
@@ -46,18 +48,30 @@ export default function ProfileDetails(props) {
            
            
             setBtn(<button id="profdetails_btn" className='profdetails_button' onClick={()=>{disconnect(props.user.username)}}><div><img src={connecticon} id="profdetails_conimg"></img><label>Disconnect</label></div></button>); // changes if already connected);
-
-      axios.post(`http://localhost:8000/addnotifconnect`, {
+            axios
+            .get(`http://localhost:8000/finduser/${sessionStorage.getItem("sessionID")}`)
+            .then((res) => {
+            //alert("HELLO");
+              //setSessionUser(res.data);
+              var sesUser = res.data;
+              //alert(JSON.stringify(res.data));
+              //alert(JSON.stringify(sessionUser));
+              //alert("Please wait.");
+              axios.post(`http://localhost:8000/addnotifconnect`, {
         
-         usernames: props.user.username,
-          notifusername: curruser,
-          image: curruser.user?.profilePicture || curruser.company?.profilePicture || person
-        });
-       
-        })
-        .catch(function (error) {
-            alert(error);
-        });
+                usernames: props.user.username,
+                notifusername: curruser,
+                image: sesUser.user?.profilePicture || sesUser.company?.profilePicture || person
+                });
+            
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
+              
+            })
+            .catch((error) => console.log(error));
+      
 
       
     }
@@ -86,6 +100,7 @@ export default function ProfileDetails(props) {
               
             })
             .catch((error) => console.log(error));
+
 
     },[])
     

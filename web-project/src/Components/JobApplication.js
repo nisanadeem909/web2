@@ -26,7 +26,42 @@ export default function Application() {
     navigate("view" ,  {state: data });
 
   };
+  const openProfile=(username)=>{
+   
 
+    if (username == sessionStorage.getItem("sessionID"))
+        {
+            var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+            navigate(path);
+            return;
+        }
+
+    //find user type
+    var param = {"user":username};
+    axios.post(`http://localhost:8000/getusertype`,param)
+      .then(res => {
+          if (res.data.type != "none")
+          {
+              var utype = sessionStorage.getItem("userType");
+              var path = "/" + utype + "/";
+
+              if (res.data.type == "user")
+              {
+                  path += "publicuserprofile";
+              }
+              else {
+                  path += "publiccompanyprofile";
+              }
+
+             // alert(path);
+
+              navigate(path, { state: res.data.user });
+          }
+          else 
+            console.log("error");
+      })
+      .catch(error => alert(error));
+  }
 
   useEffect(() => {
     axios
@@ -67,7 +102,7 @@ export default function Application() {
                     <label className='kjobapp-content-username'>@{allApp.applicantusername}</label>
                   </div>
                 </div>
-                <button className='kjobapp-btn' onClick={() => navigate('/company/publicuserprofile')}>
+                <button className='kjobapp-btn' onClick={() => openProfile(allApp.applicantusername)}>
                   View Profile
                 </button>
               </div>
@@ -113,7 +148,6 @@ export default function Application() {
                 >
                   View Resume
                 </button>
-                <button className='kjobapp-btn'>Delete Application</button>
               </div>
             </div>
           </div>
