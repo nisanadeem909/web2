@@ -225,16 +225,13 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
               <button className='post_icons2' onClick={handleComment}>
                 <img className='post_icons12' src={comment} alt='cmnt' />
               </button>
-              <button className='post_icons2' onClick={handleShare}>
-                <img className='post_icons13' src={share} alt='shr' />
-              </button>
+             
             </div>
             <div className='post_para'>
               <p className='post_pp1'>{likes} likes</p>
               &nbsp; &nbsp;
               <p className='post_pp1'>{comments} comments</p>
-              &nbsp;&nbsp;
-              <p className='post_pp1'>{shares} shares</p>
+             
             </div>
           </div>
 
