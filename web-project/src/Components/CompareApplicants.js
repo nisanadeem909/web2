@@ -12,22 +12,23 @@ function ApplicantComparisonPage() {
    const location = useLocation();
    const propsData = location.state.propsData;
    const [jobId,setJobId] = useState();
+   const [name,setName] = useState([]);
+   const[username,setUsername] = useState([]);
    useEffect(() => {
       
       //alert(propsData);
       console.log(propsData);
       setJobId(propsData);
     }, []);
-   const [name,setName] = useState([]);
-   const[username,setUsername] = useState([]);
+   
    const appusernameset= (n)=>{
       setUsername(n);
-      alert("I am in Parent.usernames=" + username);
+      //alert("I am in Parent.usernames=" + username);
       console.log(username);
    }
    const appnameset= (n)=>{
       setName(n);
-      alert("I am in Parent. names=" + name);
+      //alert("I am in Parent. names=" + name);
       
       console.log(name);
    }
@@ -39,7 +40,7 @@ function ApplicantComparisonPage() {
              </div>
 
              <div id="allapps-empreq">
-                <ApplicantComparison  />
+                <ApplicantComparison appusernameset={username} appnameset={name} />
              </div>
     
 
