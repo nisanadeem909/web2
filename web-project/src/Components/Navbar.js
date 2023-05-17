@@ -42,6 +42,9 @@ const Layout = (props) => {
 
   useEffect(() => {
     
+    if (props.type == "user" || props.type == "company")
+    {
+
     const u = sessionStorage.getItem('sessionID');
     const t = sessionStorage.getItem('userType');
     const uimg = {username1:u};
@@ -59,8 +62,8 @@ const Layout = (props) => {
             setImg1(response.data.img1);
             
           });
-    }
-  }, []);
+    }}
+  }, [props]);
   const handleProfile = () =>{
     document.getElementById("myDropdown").classList.toggle("show");
   }

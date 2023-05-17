@@ -1506,6 +1506,24 @@ app.get('/allapps/:id', async (req, res) => {
   }
 });
 
+app.get('/allposts/:sessionID', async (req, res) => {
+  const username = req.params.sessionID;
+  console.log(username);
+  try {
+    const connections = await Connection.find({ follower: username });
+    const followingUsers = connections.map(connection => connection.following);
+    followingUsers.push(username); // Include the user themselves
+ 
+    console.log(followingUsers);
+    const posts = await Post.find({ username: { $in: followingUsers } });
+
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 app.get('/allpostsmy/:sessionID', async (req, res) => {
  
   const username = req.params.sessionID; 
@@ -2480,7 +2498,7 @@ app.post('/addnotif', async (req, res) => {
 /***********/
 
 /*** NABEEHA 8 ***/
-
+/*
 app.post("/getcompanyimg",async(req,res)=>{
   console.log("I am in get company img");
   console.log(req.body);
@@ -2533,27 +2551,54 @@ res.json({img1:c1.profilePicture});
 res.end();
 })
 
-app.get('/allposts/:sessionID', async (req, res) => {
-  const username = req.params.sessionID;
-  console.log(username);
-  try {
-    const connections = await Connection.find({ follower: username });
-    const followingUsers = connections.map(connection => connection.following);
-    followingUsers.push(username); // Include the user themselves
+*/
 
-    console.log(followingUsers);
-    const posts = await Post.find({ username: { $in: followingUsers } });
+/*****************/
 
-    res.json(posts);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'An error occurred' });
-  }
+app.post('/uploadcvpic', function(req,res){
+  // var name = req.body.name;
+   var form = new formidable.IncomingForm();
+   var newpath;
+   form.parse(req,async function(err,fields,files){
+       
+       var oldpath = String(files.Image.filepath); //this was files.Image.filepath
+       //console.log(oldpath);
+       const img_file = files.Image.originalFilename;
+       console.log("original file name = " + img_file);
+
+       /*var oldpath = path.resolve(img_file);*/
+       newpath = String(__dirname + '/profilepictures/' + files.Image.originalFilename);
+       
+       console.log("old path = " + oldpath);
+       console.log("new path = " + newpath);
+   
+
+       try {
+        fs.copyFileSync(oldpath,newpath);
+       }
+       catch (err) {
+          console.log(err);
+       }
+       
+       
+       var pathpfp = newpath;
+       var uname = fields.Username;
+       
+          res.send(img_file);
+         res.end();
+
+   });
+  
+   
+   
 });
 
 
 
-/*****************/
+
+
+
+
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 
