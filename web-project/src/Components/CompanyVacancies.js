@@ -14,6 +14,7 @@ export default function CompanyVacancies() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedVacancyId, setSelectedVacancyId] = useState('');
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const sessionID = sessionStorage.getItem('sessionID');
@@ -27,6 +28,9 @@ export default function CompanyVacancies() {
         console.log(error);
         setLoading(false);
       });
+
+      
+
   }, []);
 
   const viewApplicants = (id) => {

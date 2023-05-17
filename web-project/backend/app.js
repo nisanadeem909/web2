@@ -1506,6 +1506,24 @@ app.get('/allapps/:id', async (req, res) => {
   }
 });
 
+app.get('/allposts/:sessionID', async (req, res) => {
+  const username = req.params.sessionID;
+  console.log(username);
+  try {
+    const connections = await Connection.find({ follower: username });
+    const followingUsers = connections.map(connection => connection.following);
+    followingUsers.push(username); // Include the user themselves
+ 
+    console.log(followingUsers);
+    const posts = await Post.find({ username: { $in: followingUsers } });
+
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 app.get('/allpostsmy/:sessionID', async (req, res) => {
  
   const username = req.params.sessionID; 
@@ -2456,8 +2474,9 @@ app.post('/addnotifconnect', async (req, res) => {
     });
 });
 
-app.post('/addnotif', async (req, res) => {
-  const { postId, username,notifusername, img } = req.body;
+app.post('/addnotif', async (req, res) => { //MODIFIED BY KOMAL 8
+  const { postId, username,notifusername, image } = req.body;
+  console.log(req.body);
    id = generateRandomId();
   const notification = new Notification({
     username: username,
@@ -2465,7 +2484,7 @@ app.post('/addnotif', async (req, res) => {
     text: 'liked your post', // Modify the notification text as desired
     notificationType: 1, // Assuming 1 represents a like notification
     notificationID: id, // Assuming postId represents a unique identifier for the post
-    img : img,
+    img : image,
     date: new Date()
   });
 
@@ -2479,81 +2498,152 @@ app.post('/addnotif', async (req, res) => {
 
 /***********/
 
-/*** NABEEHA 8 ***/
+/* NABEEHA 8 */
 
 app.post("/getcompanyimg",async(req,res)=>{
   console.log("I am in get company img");
   console.log(req.body);
+    try{
+      const c1 = await Company.findOne({username:req.body.username1});
+      const c2 = await Company.findOne({username:req.body.username2});
 
-  const c1 = await Company.findOne({username:req.body.username1});
-  const c2 = await Company.findOne({username:req.body.username2});
-
-  res.json({img1:c1.profilePicture,img2:c2.profilePicture});
-  res.end();
-})
+      res.json({img1:c1.profilePicture,img2:c2.profilePicture});
+      res.end();
+    }
+    catch(err)
+    {
+      console.log(err);
+    }
+  })
 app.post("/getusersimg",async(req,res)=>{
 console.log("I am in get 2 users img");
 console.log(req.body);
 
+    try{
+    const c1 = await User.findOne({username:req.body.username1});
+    const c2 = await User.findOne({username:req.body.username2});
 
-const c1 = await User.findOne({username:req.body.username1});
-const c2 = await User.findOne({username:req.body.username2});
-
-res.json({img1:c1.profilePicture,img2:c2.profilePicture});
-res.end();
+    res.json({img1:c1.profilePicture,img2:c2.profilePicture});
+    res.end();
+    }
+    catch(err)
+    {
+      console.log(err);
+    }
 })
 app.post("/getuserimg",async(req,res)=>{
 console.log("I am in get userimg");
 console.log(req.body);
+    try{
+    const c1 = await User.findOne({username:req.body.username1});
 
-const c1 = await User.findOne({username:req.body.username1});
 
-
-res.json({img1:c1.profilePicture});
-res.end();
+    res.json({img1:c1.profilePicture});
+    res.end();
+    }
+    catch(err)
+    {
+      console.log(err);
+    }
 })
 app.post("/getcompimg",async(req,res)=>{
-console.log("I am in get compimg");
-console.log(req.body);
+    console.log("I am in get compimg");
+    console.log(req.body);
 
-const c1 = await Company.findOne({username:req.body.username1});
+    try{
+    const c1 = await Company.findOne({username:req.body.username1});
 
 
-res.json({img1:c1.profilePicture});
-res.end();
+    res.json({img1:c1.profilePicture});
+    res.end();
+    }
+    catch(err)
+    {
+      console.log(err);
+    }
 })
 app.post("/getapplicantimages",async(req,res)=>{
-console.log("I am in get applicant images");
-console.log(req.body);
+  console.log("I am in get applicant images");
+  console.log(req.body);
 
-const c1 = await User.find({username:req.body.username1});
+  try{
+  const c1 = await User.find({username:req.body.username1});
 
 
-res.json({img1:c1.profilePicture});
-res.end();
+  res.json({img1:c1.profilePicture});
+  res.end();
+  }
+  catch(err)
+  {
+    console.log(err);
+    console.log("Error in get applicant images");
+  }
 })
 
-app.get('/allposts/:sessionID', async (req, res) => {
-  const username = req.params.sessionID;
-  console.log(username);
-  try {
-    const connections = await Connection.find({ follower: username });
-    const followingUsers = connections.map(connection => connection.following);
-    followingUsers.push(username); // Include the user themselves
+/*****************/
 
-    console.log(followingUsers);
-    const posts = await Post.find({ username: { $in: followingUsers } });
+/******** NISA 9 ********/
 
-    res.json(posts);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'An error occurred' });
-  }
+app.post('/uploadcvpic', function(req,res){
+  // var name = req.body.name;
+   var form = new formidable.IncomingForm();
+   var newpath;
+   form.parse(req,async function(err,fields,files){
+       
+       var oldpath = String(files.Image.filepath); //this was files.Image.filepath
+       //console.log(oldpath);
+       const img_file = files.Image.originalFilename;
+       console.log("original file name = " + img_file);
+
+       /var oldpath = path.resolve(img_file);/
+       newpath = String(__dirname + '/profilepictures/' + files.Image.originalFilename);
+       
+       console.log("old path = " + oldpath);
+       console.log("new path = " + newpath);
+   
+
+       try {
+        fs.copyFileSync(oldpath,newpath);
+       }
+       catch (err) {
+          console.log(err);
+       }
+       
+       
+       var pathpfp = newpath;
+       var uname = fields.Username;
+       
+          res.send(img_file);
+         res.end();
+
+   });
+  
+   
+   
 });
 
+/************************/
 
+/******** NABEEHA 9 ********/
 
-/*****************/
+app.post("/getapplicantimages",async(req,res)=>{
+  console.log("I am in get applicant images");
+  console.log(req.body);
+
+  try{
+  const c1 = await User.find({ username: { $in: req.body.u_list } },{ profilePicture: 1, _id: 0 });
+  console.log(c1);
+  res.json({c1:c1});
+  res.end();
+  }
+  catch(err)
+  {
+    console.log(err);
+    console.log("Error in get applicant images");
+  }
+})
+
+/***************************/
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000"); 

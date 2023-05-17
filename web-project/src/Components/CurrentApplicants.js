@@ -48,23 +48,13 @@ function CurrentAppsPage(props) {
         
       // alert("In checkbox: name= "+nam.aname+ "," + unam.uname);
         if (event.target.checked) {
-           /* alert("index= " + index.index);
-            alert("showing appusername array "+ appname[index.index] + "," + appusername[index.index]);
-            
-            *///alert("Setting company = " + comp.compName + " des= " + desig.des)
-           
+          
             const updatednames = [...checkedapp,appname[index.index]];
             setCheckedApp(updatednames);
             const updatedunames = [...checkeduname,appusername[index.index]];
             setCheckedUname(updatedunames);
 
-            /*setCheckedApp([...checkedapp,
-                nam.aname]);
-            setCheckedUname([...checkeduname,
-                    unam.uname]);
-             console.log("Checking");
-             console.log(checkedapp);
-             console.log(checkeduname);*/
+          
              
         }
         else{
@@ -97,17 +87,16 @@ function CurrentAppsPage(props) {
             
         }
       };
-    
+      
     const returnRow = () =>{
-        
-        //const [myimages,setMyImages] = useState();
-        
             return appname.map((aname, index) => {
                 const uname = appusername[index];
-                const img1 = images[index];
+                const img = images[index];
+                
+                    
                 return (<tr key={index}>
             <td>
-            <img className='works-emp-icon' src={`http://localhost:8000/profilepictures/${img1|| person}`}></img>
+            <img className='works-emp-icon'src={`http://localhost:8000/profilepictures/${img|| person}`} ></img>
                 &nbsp;&nbsp;
                 <label>{aname}</label>
             </td>
@@ -125,6 +114,7 @@ function CurrentAppsPage(props) {
             </td>
         </tr>);
             })
+        
     }
     
     function countCheckboxes () {
@@ -163,9 +153,12 @@ function CurrentAppsPage(props) {
         
         console.log(appname);
         console.log(appusername);
-
-        
-        
+        const u = {u_list:u_list};
+        const profpic = await axios.post("http://localhost:8000/getapplicantimages",u);
+        //alert(JSON.stringify(profpic.data.c1));
+        const pictures = profpic.data.c1.map(item => item.profilePicture);
+        console.log(pictures);
+        setImages(pictures);
     }
     useEffect(() => {
       
