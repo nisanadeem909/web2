@@ -1,3 +1,16 @@
+#nab-discover-opp{
+    text-align:center;
+    font-size: 22px;
+    font-weight: bold;
+    width:100%;
+    color:#016960;
+
+    
+}
+#nab-text{
+    font-size: 17px;
+    text-align:left;
+}
 .container-home{
     display: flex;
     flex-direction: row;
@@ -100,7 +113,7 @@ h2{
 
 .box4{
     height: 350px;
-    width: 300px;
+    width: 350px;
     background-color: white;
     
     margin-left: 170px;

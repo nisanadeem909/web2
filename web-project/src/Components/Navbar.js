@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import './Navbar.css';
 import logo1 from './logo1.png';
@@ -5,8 +6,10 @@ import nabhumanicon from './personcircle.png';
 import nablogouticon from './nab-logout-icon.png';
 import nabprofileicon from './nab-profile-icon.png';
 import axios from "axios";
+import { useEffect } from "react";
 const Layout = (props) => {
 
+  const [img1,setImg1] = useState();
   const navigate = useNavigate(); 
   const companyRouteChange =() =>{
     let path = '/company/ownprofile'; 
@@ -20,9 +23,15 @@ const Layout = (props) => {
   }
 
   const logoutSession = () =>{ 
-    navigate("/login");
-  axios.get('http://localhost:8000/logout')
+  
+  
+ axios.get('http://localhost:8000/logout')
   .then(response => {
+   
+    sessionStorage.removeItem("sessionID");
+   
+    sessionStorage.removeItem("userType");
+
     navigate("/login");
   })
   .catch(error => {
@@ -31,19 +40,27 @@ const Layout = (props) => {
   });
   }
 
-  const logoutSessiontwo = () =>{ 
-    navigate("/login");
-  axios.get('http://localhost:8000/logout')
-  .then(response => {
-    navigate("/login");
-  })
-  .catch(error => {
-    console.error('Error logging out:', error);
+  useEffect(() => {
     
-  });
-  }
-
-
+    const u = sessionStorage.getItem('sessionID');
+    const t = sessionStorage.getItem('userType');
+    const uimg = {username1:u};
+    if (t === "user")
+    {
+        axios.post('http://localhost:8000/getuserimg', uimg)
+          .then(response => {
+            setImg1(response.data.img1);
+            
+          });
+    }
+    else{
+      axios.post('http://localhost:8000/getcompimg', uimg)
+          .then(response => {
+            setImg1(response.data.img1);
+            
+          });
+    }
+  }, []);
   const handleProfile = () =>{
     document.getElementById("myDropdown").classList.toggle("show");
   }
@@ -105,7 +122,7 @@ const Layout = (props) => {
                            <div class="nab-dropdown-content" id="myDropdown">
                            <div id="nab-dropdown-items">
                                 <div id="profile-head-section">
-                                  <img src={nabhumanicon} id="nab-human-icon"></img>
+                                  <img src={`http://localhost:8000/profilepictures/${img1}`} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
                                   <label>{getUserName()}</label>
                                   
@@ -173,7 +190,7 @@ const Layout = (props) => {
                            <div class="nab-dropdown-content" id="myDropdown">
                            <div id="nab-dropdown-items">
                                 <div id="profile-head-section">
-                                  <img src={nabhumanicon} id="nab-human-icon"></img>
+                                  <img src={`http://localhost:8000/profilepictures/${img1}`} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
                                   <label>{getUserName()}</label>
                                   
@@ -189,7 +206,7 @@ const Layout = (props) => {
                                   <img src={nablogouticon} id="nab-logout-icon"></img>
                                   &nbsp;&nbsp;
                                   
-                                  <button onClick={logoutSessiontwo} class="editprofile-button" > <span>Logout </span></button>
+                                  <button onClick={logoutSession} class="editprofile-button" > <span>Logout </span></button>
                                   
                                 </div>
                                 

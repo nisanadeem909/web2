@@ -7,7 +7,7 @@ import './CurrentApps.css';
 
 
 import empicon from './dummy.jpg'
-
+const person='dummy.jpg';
 function CurrentAppRow(props)
 {
     
@@ -42,7 +42,7 @@ function CurrentAppsPage(props) {
     const [appusername,setappusername] = useState([]);
     const [checkedapp, setCheckedApp] = useState([]);
     const [checkeduname,setCheckedUname] = useState([]);
-
+    const [images,setImages] = useState([]);
     
     const handleCheckboxChange =  ( event, nam, unam,index) => {
         
@@ -100,13 +100,14 @@ function CurrentAppsPage(props) {
     
     const returnRow = () =>{
         
-        
+        //const [myimages,setMyImages] = useState();
         
             return appname.map((aname, index) => {
                 const uname = appusername[index];
+                const img1 = images[index];
                 return (<tr key={index}>
             <td>
-            <img className='works-emp-icon' src={empicon}></img>
+            <img className='works-emp-icon' src={`http://localhost:8000/profilepictures/${img1|| person}`}></img>
                 &nbsp;&nbsp;
                 <label>{aname}</label>
             </td>
@@ -152,22 +153,19 @@ function CurrentAppsPage(props) {
         console.log("params: ");
         console.log(param);
         const msg = await axios.post("http://localhost:8000/getcurrentapplicants",param);
-        //alert(JSON.stringify(msg.data.apps));
-       // alert("Showing All Applicants");
+        
         let name_list = msg.data.apps.map(cname => cname.applicantname);
         let u_list = msg.data.apps.map(comp => comp.applicantusername);
         
        
         setappname(name_list);
         setappusername(u_list);
-        //alert("In axios appname = " + appname);
-        //alert("In axios appusernamename = " + appusername);
+        
         console.log(appname);
         console.log(appusername);
-        /*let des_list = msg.data.map(cname => cname.Designation);
-        let comp_list = msg.data.map(comp => comp.CompanyName);
-        let jobid_list = msg.data.map(comp => comp.JobId);
-        console.log(jobid_list);*/
+
+        
+        
     }
     useEffect(() => {
       

@@ -44,7 +44,6 @@ import ApplicantsView from './Components/ApplicantsView';
 
 import CompareApplicants from './Components/CompareApplicants';
 import SearchResults from './Components/SearchResults'
-import ResumeView from './Components/ResumeView'
 
 
 function App() {
@@ -114,7 +113,6 @@ function App() {
            
             <Route path='compareapplicants' element={<CompareApplicants/>} />
             <Route path="vacancies/viewapplicants/viewapplication" element={<ViewApplicationPage />} />  
-            <Route path="vacancies/viewapplicants/viewapplication/view" element={<ResumeView />} />  
 
 
         </Route>
