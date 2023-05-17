@@ -136,7 +136,7 @@ export default function EditProfile() {
 
   const HandleUpload=(t)=>{
     //console.log(t.handle.files);
-    alert("image set");
+    //alert("image set");
     setImg(t.target.files[0]);
   }
 
@@ -164,7 +164,7 @@ export default function EditProfile() {
         fdata.append("Username", uname);
         fdata.append("UserType", utype);
         axios.post('http://localhost:8000/uploadprofilepic',fdata)
-        .then(res => {alert("Respnse" + JSON.stringify(res.data))})
+        .then(res => {/*alert("Respnse" + JSON.stringify(res.data))*/})
         .catch(err=>{alert("ERROR IN UPLOADAXIOS : "+err)});
       }
       const param = {"uname": uname, "utype":utype, "bio": refBio.current.value, "name":name,"worksAt":selectedCompany,"ctype":companyType};

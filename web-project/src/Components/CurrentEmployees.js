@@ -77,7 +77,7 @@ function CurrentEmployeesComponent(props) {
             setDes(prevArray => [...prevArray,props.empDes]);
             setEmpReq(prevArray => [...prevArray,props.empName]);
             //alert("New state = " + username);
-            alert("Employee will be added to current employees."); //IF I REMOVE THIS ALERT IT DOES NOT WORK
+            //alert("Employee will be added to current employees."); //IF I REMOVE THIS ALERT IT DOES NOT WORK
             console.log("New States = ");
             console.log(username);
             console.log(des);

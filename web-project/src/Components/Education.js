@@ -33,7 +33,7 @@ export default class Education extends Component {
           const upload = () => {
            
       
-            alert(img);
+           // alert(img);
             if(img)
             {
                 var fdata = new FormData();
@@ -43,7 +43,7 @@ export default class Education extends Component {
                 axios.post('http://localhost:8000/uploadcvpic',fdata)
                 .then(res => {
                     
-                    alert(res.data);
+                    //alert(res.data);
                    
               
             
@@ -149,8 +149,6 @@ export default class Education extends Component {
 
                     <br />
                     <div className="container text-center">
-                    <input className='nisa-cv-img' type="file" accept='image/*' onChange={HandleUpload}   ></input>
-                        
                         <button type="button" className="btn btn-info" onClick={this.back}><i className="fas fa-angle-left mr-1"></i>Back</button>
                         <button onClick={upload} type="submit" className="btn btn-info">Generate CV<i className="fas fa-angle-right ml-1"></i></button>
                     </div>

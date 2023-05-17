@@ -74,7 +74,7 @@
   transition: 0.5s;
 }
 
-.uides-btn span:after {
+/*.uides-btn span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -90,4 +90,4 @@
 .uides-btn:hover span:after {
   opacity: 1;
   right: 0;
-}
+}*/

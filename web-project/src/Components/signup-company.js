@@ -40,7 +40,7 @@ function SignupCompany() {
                     const userType = "company";
                     sessionStorage.setItem('sessionID', username);
                     sessionStorage.setItem('userType', userType);
-                    alert(JSON.stringify(res.data.message))
+                   // alert(JSON.stringify(res.data.message))
                     gotoHome();
                 }));
         }

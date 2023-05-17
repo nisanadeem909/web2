@@ -58,7 +58,7 @@ flexDirection: 'row'
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginLeft : 25,
+    marginLeft : 50,
     marginTop : 2,
     
   },
@@ -67,7 +67,7 @@ flexDirection: 'row'
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginLeft : 40,
+    marginLeft : 10,
     marginTop : 40,
   
     
@@ -196,7 +196,7 @@ class CVTemplateOne extends Component {
  
   render() {
     const { values } = this.props;
- alert(values.image);
+ //alert(values.image);
 
    return(
     <Document style={styles.doc}>

@@ -3,7 +3,7 @@
     border: 1px solid gray;
     width:85%;
     height: 100%;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 20px 20px 20px 20px;
     background-color:rgba(255,255,255,0.6);
 }
 
@@ -20,8 +20,8 @@
 
   #appcomp-img{
     border-radius: 50%;
-    width: 7vh;
-    height:7vh;
+    width: 10vh;
+    height:10vh;
   }
   #appcomparison-table {
     font-family: Arial, Helvetica, sans-serif;
@@ -39,12 +39,12 @@
     
     background-color: #f2f2f2;
     text-decoration: underline;
-    font-size: 12px;
+    font-size: 2.3vh;
 }
 
 #appcomparison-table tr:nth-child(odd){
     
-    font-size: 13px;
+    font-size: 2.2vh;
     
 } 
   
@@ -55,10 +55,10 @@
   border: none;
   color: #FFFFFF;
   text-align: center;
-  font-size: 2vh;
+  font-size: 2.5vh;
   background-color: #016960;
   width: 60%;
-  height:20px;
+  height:3vh;
   transition: all 0.5s;
   cursor: pointer;
 
@@ -71,7 +71,7 @@
   transition: 0.5s;
 }
 
-.uides-btn span:after {
+/*.uides-btn span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -87,4 +87,4 @@
 .uides-btn:hover span:after {
   opacity: 1;
   right: 0;
-}
+}*/

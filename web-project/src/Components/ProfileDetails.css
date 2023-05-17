@@ -145,3 +145,11 @@ label, p, button{
     margin-left: 2vh;
     color: rgb(118, 118, 118);
 }
+
+#kcolorchange {
+    color:#016960;
+}
+
+#kcolorchange:hover {
+    text-decoration: underline;
+}

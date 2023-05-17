@@ -162,7 +162,7 @@ export default function ProfileDetails(props) {
         {
             worksAt = <div className="profdetails_workplace">
                         <img id="profdetails_neticon" src={workicon}></img>
-                        <label>Works At <a onClick={()=>openProfile(user.worksAt.CompanyUsername)}>@{user.worksAt.CompanyUsername}</a> as {user.worksAt.Designation}</label>
+                        <label>Works At <a  id="kcolorchange" onClick={()=>openProfile(user.worksAt.CompanyUsername)}>@{user.worksAt.CompanyUsername}</a> as {user.worksAt.Designation}</label>
                     </div>;
         }
         

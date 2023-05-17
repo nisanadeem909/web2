@@ -200,17 +200,6 @@ function ApplicantComparison(props) {
                     <td>{maj2}</td>
                     
                 </tr>
-               
-                <tr>
-                    <td  colspan="2">Job Motivation</td>
-                    <td></td>
-                    
-                </tr>
-                <tr>
-                    <td>{ans1}</td>
-                    <td>{ans2}</td>
-                    
-                </tr>
             </table>
             </div>
 

@@ -54,11 +54,10 @@
 
 .btn.btn-info{
     background-color: #0E312F;
-    width: 13%;
     color: white;
     border: 1px solid white;
     height: 30px;
     margin-right: 2%;
     margin-top: 5%;
-
+    padding-bottom: 4%;
 }

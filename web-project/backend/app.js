@@ -1586,25 +1586,31 @@ app.post('/addnotifcom', async (req, res) => {
 app.get('/allnotifs/:sessionID', async (req, res) => {
   const username = req.params.sessionID;
 
-Connection.find({ follower: username })
-  .then(connections => {
-    const followingUsers = connections.map(connection => connection.following);
+  Connection.find({ follower: username })
+    .then(connections => {
+      const followingUsers = connections.map(connection => connection.following);
+      followingUsers.push(username); // Include current user as well
 
-    Notification.find({ notifusername: { $in: followingUsers } })
-      .then(notifications => {
-        res.json(notifications);
+      Notification.find({
+        $or: [
+          { notifusername: { $in: followingUsers }, notificationType: 3 },
+          { username: { $in: followingUsers } }
+        ]
       })
-      .catch(error => {
-        console.log(error);
-        res.status(500).json({ error: 'An error occurred' });
-      });
-  })
-  .catch(error => {
-    console.log(error);
-    res.status(500).json({ error: 'An error occurred' });
-  });
-
+        .then(notifications => {
+          res.json(notifications);
+        })
+        .catch(error => {
+          console.log(error);
+          res.status(500).json({ error: 'An error occurred' });
+        });
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: 'An error occurred' });
+    });
 });
+
 
     
 app.get('/logout', (req, res) => {
@@ -2507,13 +2513,21 @@ app.post("/getcompanyimg",async(req,res)=>{
       const c1 = await Company.findOne({username:req.body.username1});
       const c2 = await Company.findOne({username:req.body.username2});
 
-      res.json({img1:c1.profilePicture,img2:c2.profilePicture});
-      res.end();
+      var data = {img1:null,img2:null}
+
+    if (c1)
+    data.img1 = c1.profilePicture;
+
+    if (c2)
+    data.img2 = c2.profilePicture;
+
+    res.json(data);
     }
     catch(err)
     {
       console.log(err);
     }
+    res.end();
   })
 app.post("/getusersimg",async(req,res)=>{
 console.log("I am in get 2 users img");
@@ -2523,13 +2537,21 @@ console.log(req.body);
     const c1 = await User.findOne({username:req.body.username1});
     const c2 = await User.findOne({username:req.body.username2});
 
-    res.json({img1:c1.profilePicture,img2:c2.profilePicture});
-    res.end();
+    var data = {img1:null,img2:null}
+
+    if (c1)
+    data.img1 = c1.profilePicture;
+
+    if (c2)
+    data.img2 = c2.profilePicture;
+
+    res.json(data);
     }
     catch(err)
     {
       console.log(err);
     }
+    res.end();
 })
 app.post("/getuserimg",async(req,res)=>{
 console.log("I am in get userimg");
@@ -2537,14 +2559,14 @@ console.log(req.body);
     try{
     const c1 = await User.findOne({username:req.body.username1});
 
-
+    if (c1)
     res.json({img1:c1.profilePicture});
-    res.end();
     }
     catch(err)
     {
       console.log(err);
     }
+    res.end();
 })
 app.post("/getcompimg",async(req,res)=>{
     console.log("I am in get compimg");
@@ -2553,13 +2575,14 @@ app.post("/getcompimg",async(req,res)=>{
     try{
     const c1 = await Company.findOne({username:req.body.username1});
 
-
-    res.json({img1:c1.profilePicture});
-    res.end();
+      if (c1)
+        res.json({img1:c1.profilePicture});
+        res.end();
     }
     catch(err)
     {
       console.log(err);
+      res.end();
     }
 })
 app.post("/getapplicantimages",async(req,res)=>{
@@ -2571,13 +2594,13 @@ app.post("/getapplicantimages",async(req,res)=>{
 
 
   res.json({img1:c1.profilePicture});
-  res.end();
   }
   catch(err)
   {
     console.log(err);
     console.log("Error in get applicant images");
   }
+  res.end();
 })
 
 /*****************/

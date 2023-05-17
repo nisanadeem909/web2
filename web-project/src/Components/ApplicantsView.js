@@ -6,7 +6,7 @@ import app from './app.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-const person='dummy.jpg';
+import person from './person.png';
 
 export default function ApplicantsView() {
   const location = useLocation();
