@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 export default class Education extends Component {
+  
 
     back = e => {
         e.preventDefault();
@@ -12,8 +14,53 @@ export default class Education extends Component {
         this.props.nextStep();
     }
 
+
     render() {
         const { values, handleChange } = this.props;
+        var img;
+
+        const HandleUpload=(t)=>{
+            //console.log(t.handle.files);
+           
+         
+           img = t.target.files[0];
+            values.image = img;
+          
+          }
+
+
+
+          const upload = () => {
+           
+      
+            alert(img);
+            if(img)
+            {
+                var fdata = new FormData();
+                fdata.append("Image", img);
+               
+      
+                axios.post('http://localhost:8000/uploadcvpic',fdata)
+                .then(res => {
+                    
+                    alert(res.data);
+                   
+              
+            
+               
+            
+                  })
+                .catch(err=>{alert("ERROR IN UPLOADAXIOS : "+err)});
+    
+             
+      
+            }
+           
+        }
+           
+
+
+
         return (
 
             <div className="card animated fadeInLeft">
@@ -94,6 +141,7 @@ export default class Education extends Component {
                             <input type="text" name="edu3_qualification" className="form-control" defaultValue={values.status === 1 ? '' : values.edu3_qualification} onChange={handleChange} required/>
                         </div>
 
+                      
                     </div>
                   
 
@@ -101,8 +149,10 @@ export default class Education extends Component {
 
                     <br />
                     <div className="container text-center">
+                    <input className='nisa-cv-img' type="file" accept='image/*' onChange={HandleUpload}   ></input>
+                        
                         <button type="button" className="btn btn-info" onClick={this.back}><i className="fas fa-angle-left mr-1"></i>Back</button>
-                        <button type="submit" className="btn btn-info">Generate CV<i className="fas fa-angle-right ml-1"></i></button>
+                        <button onClick={upload} type="submit" className="btn btn-info">Generate CV<i className="fas fa-angle-right ml-1"></i></button>
                     </div>
                     <br />
 

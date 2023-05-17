@@ -10,7 +10,7 @@ import mindstorm from './mindstorm.jpg'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const person = 'dummy.jpg';
+    
 function ApplicantComparison(props) {
     const navigate = useNavigate();
 

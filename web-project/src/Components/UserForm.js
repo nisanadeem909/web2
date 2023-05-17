@@ -64,6 +64,7 @@ class UserForm extends Component {
         extra_4: '',
         extra_5: '',
 
+        image:'',
 
         status: 0
 

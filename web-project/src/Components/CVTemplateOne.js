@@ -11,11 +11,11 @@ import ReactPDF, {
   Path,
   Image,
 } from '@react-pdf/renderer'
-import person from './person.png';
+
 import { Height } from '@material-ui/icons';
 import React, { Component } from 'react'
 
-
+var person = "person.png";
 
 const styles = StyleSheet.create({
   page: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     
     backgroundColor: '#F5F5F5',
     height : 735,
-    width : 160,
+    width : 190,
     borderRightColor : 'black'
     
     
@@ -49,12 +49,16 @@ const styles = StyleSheet.create({
     
   },
 
+  data:{
+flexDirection: 'row'
+  },
+
   title: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginLeft : 50,
+    marginLeft : 25,
     marginTop : 2,
     
   },
@@ -63,9 +67,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10,
-    marginLeft : 10,
+    marginLeft : 40,
     marginTop : 40,
-    textDecoration :'underline'
+  
     
   },
   titleU: {
@@ -75,6 +79,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft : 40,
     marginTop : 40,
+   
+    
+  },
+  titleG: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginLeft : 40,
+    marginTop : -10,
    
     
   },
@@ -142,12 +156,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   image: {
-		width: '18%',
+		width: 90,
 		borderColor : 'black',
     borderRadius: 50,
     marginLeft : 10,
     marginTop : 2,
     marginBottom : 5,
+    height:90,
 	},
   container: {
     flexDirection: 'row',
@@ -162,7 +177,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    textDecoration : 'underline'
+   
   },
 });
 
@@ -175,16 +190,18 @@ const styles = StyleSheet.create({
 
 class CVTemplateOne extends Component {
 
+  constructor(props) {
+    super(props); 
+}
  
   render() {
     const { values } = this.props;
-
+ alert(values.image);
 
    return(
     <Document style={styles.doc}>
    <Page  style={styles.page}>
    <View style={styles.sectionO}>
-   <Image style={styles.image} src={person} />
      <View>
           <Text style={styles.title}>{values.name} </Text>
           <Text style={styles.content}>{values.skills}</Text>
@@ -213,6 +230,8 @@ class CVTemplateOne extends Component {
 
           </View>
 
+          <View style={styles.data}>
+
           <View style={styles.sectionU}>
           <Text style={styles.titleU}>Experience</Text>
           <View style={styles.container}>
@@ -226,14 +245,8 @@ class CVTemplateOne extends Component {
         <Text style={styles.text}>{values.exp2_org}                                                         {values.exp2_dur}</Text>
       </View>
       <Text style={styles.contentU}>{values.exp2_desc}</Text>
-      
 
-     
-
-          </View>
-
-          <View style={styles.sectionU}>
-          <Text style={styles.titleU}>Projects</Text>
+      <Text style={styles.titleG}>Projects</Text>
           <View style={styles.container}>
           <Text style={styles.bulletPoint}>•</Text>
           <Text style={styles.text}>{values.proj1_title}                     </Text>
@@ -245,9 +258,9 @@ class CVTemplateOne extends Component {
         <Text style={styles.text}>{values.proj2_title}                           </Text>
       </View>
       <Text style={styles.contentU}>{values.proj2_desc}</Text>
-      
+          </View>
 
-     
+          
 
           </View>
 
