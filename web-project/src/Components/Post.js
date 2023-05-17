@@ -7,6 +7,7 @@ import comment from './comment4.jpeg';
 import share from './share.png';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 var person = 'person.png';
@@ -30,6 +31,41 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   
   const username = sessionStorage.getItem('sessionID');
  var t;
+
+ const navigate  = useNavigate();
+
+ const openProfile=(username)=>{
+   
+  if (username == sessionStorage.getItem("sessionID"))
+      {
+          var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+          navigate(path);
+          return;
+      }
+
+  var param = {"user":username};
+  axios.post(`http://localhost:8000/getusertype`,param)
+    .then(res => {
+        if (res.data.type != "none")
+        {
+            var utype = sessionStorage.getItem("userType");
+            var path = "/" + utype + "/";
+
+            if (res.data.type == "user")
+            {
+                path += "publicuserprofile";
+            }
+            else {
+                path += "publiccompanyprofile";
+            }
+
+            navigate(path, { state: res.data.user });
+        }
+        else 
+          console.log("error");
+    })
+    .catch(error => alert(error));
+}
   
 
   useEffect(() => {
@@ -236,7 +272,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
           <img className='post_p1' src={`http://localhost:8000/profilepictures/${Img.user?.profilePicture || Img.company?.profilePicture || person}`} alt='' />
           
           <div className='post_u-1'>
-            <strong className='post_strong'>{props.postcurr.username} </strong>
+            <strong id="linktoprof" className='post_strong' onClick={()=>{openProfile(props.postcurr.username)}}>{props.postcurr.username} </strong>
             {props.postcurr.imagePath && isImageLoaded && (
             <p className='pp-nisa-r'>{calculateTimeDuration(new Date(props.postcurr.date))}</p>
             )}
@@ -286,7 +322,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
         <li key={cm._id}>
           <img className='post_p3' src={`http://localhost:8000/profilepictures/${cm.img || person}`} alt='' />
           <div className='post_comment-l'>
-            <h6 className='post_h6'>{cm.username}</h6>
+          <h6 className='post_h6' id="linktoprof" onClick={()=>{openProfile(cm.username)}}>{cm.username}</h6>
             <div className='post_comment-part'>
               <p className='post_lp'>{cm.text}</p>
             </div>
