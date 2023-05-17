@@ -37,7 +37,38 @@ export default function ProfileDetails(props) {
     
       }, []);
     
+      const openProfile=(username)=>{
+
+        if (username == sessionStorage.getItem("sessionID"))
+        {
+            var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+            navigate(path);
+            return;
+        }
+   
+        var param = {"user":username};
+        axios.post(`http://localhost:8000/getusertype`,param)
+          .then(res => {
+              if (res.data.type != "none")
+              {
+                  var utype = sessionStorage.getItem("userType");
+                  var path = "/" + utype + "/";
     
+                  if (res.data.type == "user")
+                  {
+                      path += "publicuserprofile";
+                  }
+                  else {
+                      path += "publiccompanyprofile";
+                  }
+    
+                  navigate(path, { state: res.data.user });
+              }
+              else 
+                console.log("error");
+          })
+          .catch(error => alert(error));
+      }
     
     if (props.user)
     {
@@ -55,8 +86,8 @@ export default function ProfileDetails(props) {
             
 
             worksAt = <div className="profdetails_workplace">
-                        <img id="profdetails_neticon" src={pf}></img>
-                        <label>Works At @{user.worksAt.CompanyUsername} as {user.worksAt.Designation}</label>
+                        <img id="profdetails_neticon" src={workicon}></img>
+                        <label id="cursor_pointer_lbl">Works At <a onClick={()=>openProfile(user.worksAt.CompanyUsername)}>@{user.worksAt.CompanyUsername}</a> as {user.worksAt.Designation}</label>
                     </div>;
         }
         

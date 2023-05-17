@@ -35,6 +35,13 @@ export default function Network() {
 
   const openProfile=(username)=>{
    
+    if (username == sessionStorage.getItem("sessionID"))
+        {
+            var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+            navigate(path);
+            return;
+        }
+
     var param = {"user":username};
     axios.post(`http://localhost:8000/getusertype`,param)
       .then(res => {

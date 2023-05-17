@@ -83,7 +83,7 @@ export default function ApplyJob(props) {
 
     const HandleUpload=(t)=>{
       //console.log(t.handle.files);
-      alert("resume set");
+      //alert("resume set");
       setResume(t.target.files[0]);
     }
 

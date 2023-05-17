@@ -16,10 +16,11 @@ export default function Search() {
    
 
     if (username == sessionStorage.getItem("sessionID"))
-    {
-      navigate("/user/ownprofile");
-      return;
-    }
+        {
+            var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+            navigate(path);
+            return;
+        }
 
     //find user type
     var param = {"user":username};
