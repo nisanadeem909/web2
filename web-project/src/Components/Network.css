@@ -50,6 +50,7 @@
 .nisa-network-parent{
     display: flex;
     flex-direction: row;
+    min-height: 95vh;
 }
 
 .nisa-network-container{

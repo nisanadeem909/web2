@@ -59,7 +59,8 @@
   text-align: center;
   font-size: 2vh;
   background-color: #016960;
-  width: 60%;
+  padding-left: 1vh;
+  padding-right: 1vh;
   height:20px;
   transition: all 0.5s;
   cursor: pointer;

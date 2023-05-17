@@ -8,6 +8,7 @@ var app =express();
 app.use(cors());
 app.use(express.static('public'));
 app.use('/profilepictures', express.static('profilepictures'));
+app.use('/resumes', express.static('resumes'));
 app.use(express.static('backend/profilepictures'));
 app.use('/images', express.static('uploads'));
 app.use(express.static('files'));
@@ -1624,13 +1625,14 @@ function generateRandomId() {
 }
 
 app.post('/addnotifcom', async (req, res) => {
-  const { postId, username, notifusername, commentText } = req.body;
+  const { postId, username, notifusername, commentText, img } = req.body;
   const randomId = generateRandomId();
   const notification = new Notification({
     username: username,
     notifusername: notifusername,
     text: 'commented on your post',
     notificationType: 2, 
+    img : img,
     notificationID: randomId,
     date: new Date(),
     comment: commentText 
@@ -1644,8 +1646,6 @@ app.post('/addnotifcom', async (req, res) => {
       res.status(500).json({ error: 'Failed to add notification' });
     });
 });
-
-
 
 app.get('/allnotifs/:sessionID', async (req, res) => {
   const username = req.params.sessionID;

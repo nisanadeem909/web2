@@ -5,6 +5,7 @@ import jobicon from './workk.png'
 import './EmployeeRequests.css';
 import empicon from './dummy.jpg';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 
 function EmpRequests(props) {
@@ -14,6 +15,7 @@ function EmpRequests(props) {
     const[username,setUsername] = useState([]);
     const[empName,setEmpName] = useState([]);
     const[count,setCount] = useState(0);
+    const navigate = useNavigate();
     
     const[current,setCurrent] = useState();
    const  setEmployeeRequests = async() =>{
@@ -132,10 +134,47 @@ function EmpRequests(props) {
             }
         
     }
+    const openProfile=(username)=>{
+   
+
+        if (username == sessionStorage.getItem("sessionID"))
+            {
+                var path = "/" + sessionStorage.getItem("userType") + "/ownprofile";
+                navigate(path);
+                return;
+            }
+    
+        //find user type
+        var param = {"user":username};
+        axios.post(`http://localhost:8000/getusertype`,param)
+          .then(res => {
+              if (res.data.type != "none")
+              {
+                  var utype = sessionStorage.getItem("userType");
+                  var path = "/" + utype + "/";
+    
+                  if (res.data.type == "user")
+                  {
+                      path += "publicuserprofile";
+                  }
+                  else {
+                      path += "publiccompanyprofile";
+                  }
+    
+                 // alert(path);
+    
+                  navigate(path, { state: res.data.user });
+              }
+              else 
+                console.log("error");
+          })
+          .catch(error => alert(error));
+      }
     const reqRow = () =>{
         return empReq.map((name, index) => {
             
             const desig = des[index];
+            const uname = username[index];
             return (<tr>
         <td>
         <div id="wrap-wrap-wrap">
@@ -144,7 +183,7 @@ function EmpRequests(props) {
             &nbsp;&nbsp;
             
             <div id="nab-emp-detail-wrapper">
-                <a id="nab-empreq-name" href="/">{name}</a>
+                <a id="nab-empreq-name" onClick={()=>openProfile(uname)}>{name}</a>
                 
                 <label id="nab-emp-des">{desig}</label>
             </div>

@@ -17,7 +17,7 @@ function CurrentAppRow(props)
         <td>
         <img className='works-emp-icon' src={empicon}></img>
             &nbsp;&nbsp;
-            <a href="/">Nabeeha Mudassir</a>
+            <a>Nabeeha Mudassir</a>
         </td>
         <td>
             DevOpsEngineer
@@ -108,7 +108,7 @@ function CurrentAppsPage(props) {
             <td>
             <img className='works-emp-icon' src={empicon}></img>
                 &nbsp;&nbsp;
-                <a href="/">{aname}</a>
+                <label>{aname}</label>
             </td>
             
             <td>
