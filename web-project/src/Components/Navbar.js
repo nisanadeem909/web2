@@ -19,8 +19,25 @@ const Layout = (props) => {
       }
   },[])
 
+  useEffect(()=>{
+    if (props.type == "user" || props.type == "company")
+    {
+    var username = sessionStorage.getItem('sessionID');
+    //alert(username);
+    //const t = sessionStorage.getItem('userType');
+    
+        axios.get(`http://localhost:8000/finduser/${username}`)
+          .then(res => {
+            setUser(res.data);
+            //alert(JSON.stringify(res.data));
+            //alert(JSON.stringify(currUser));
+          });
+    }
+},[props])
+
   const navigate = useNavigate(); 
   const [img1,setImg1] = useState();
+  const [currUser,setUser] = useState([]);
   const companyRouteChange =() =>{
     let path = '/company/ownprofile'; 
     navigate(path);
@@ -49,30 +66,6 @@ const Layout = (props) => {
     
   });
   }
-
-  /*useEffect(() => {
-    
-    if (props.type == "user" || props.type == "company")
-    {
-
-    const u = sessionStorage.getItem('sessionID');
-    const t = sessionStorage.getItem('userType');
-    const uimg = {username1:u};
-    if (t === "user")
-    {
-        axios.post('http://localhost:8000/getuserimg', uimg)
-          .then(response => {
-            setImg1(response.data.img1);
-            
-          });
-    }
-    else{
-      axios.post('http://localhost:8000/getcompimg', uimg)
-          .then(response => {
-            setImg1(response.data.img1);
-          });
-    }}
-  }, [props]);*/
 
   const handleProfile = () =>{
     document.getElementById("myDropdown").classList.toggle("show");
@@ -138,7 +131,7 @@ const Layout = (props) => {
                            <div class="nab-dropdown-content" id="myDropdown">
                            <div id="nab-dropdown-items">
                                 <div id="profile-head-section">
-                                  <img src={`http://localhost:8000/profilepictures/${person}`} id="nab-human-icon"></img>
+                                  <img src={`http://localhost:8000/profilepictures/${currUser.user?.profilePicture || currUser.company?.profilePicture || person}`} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
                                   <label>{getUserName()}</label>
                                   
@@ -206,7 +199,7 @@ const Layout = (props) => {
                            <div class="nab-dropdown-content" id="myDropdown">
                            <div id="nab-dropdown-items">
                                 <div id="profile-head-section">
-                                  <img src={`http://localhost:8000/profilepictures/${person}`} id="nab-human-icon"></img>
+                                  <img src={`http://localhost:8000/profilepictures/${currUser.user?.profilePicture || currUser.company?.profilePicture || person}`} id="nab-human-icon"></img>
                                   &nbsp;&nbsp;
                                   <label>{getUserName()}</label>
                                   

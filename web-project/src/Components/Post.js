@@ -269,8 +269,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
       
       <div className='post-container'>
         <div className='post_upper'>
+          <div>
           <img className='post_p1' src={`http://localhost:8000/profilepictures/${Img.user?.profilePicture || Img.company?.profilePicture || person}`} alt='' />
-          
+          </div>
           <div className='post_u-1'>
             <strong id="linktoprof" className='post_strong' onClick={()=>{openProfile(props.postcurr.username)}}>{props.postcurr.username} </strong>
             {props.postcurr.imagePath && isImageLoaded && (

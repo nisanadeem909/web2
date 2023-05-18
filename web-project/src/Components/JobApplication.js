@@ -109,7 +109,7 @@ export default function Application() {
               <div className='kjobapp-content-application'>
                 <div className='kjobapp-content-appfield'>
                   <label className='kjobapp-content-appfield-title'>Date of Birth:</label>
-                  <label className='kjobapp-content-appfield-value'>{allApp.dob}</label>
+                  <label className='kjobapp-content-appfield-value'>{allApp.dob.substring(0,11)}</label>
                 </div>
                 <div className='kjobapp-content-appfield'>
                   <label className='kjobapp-content-appfield-title'>Contact Number:</label>
