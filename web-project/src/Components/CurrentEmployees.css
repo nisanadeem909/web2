@@ -25,6 +25,7 @@
   #customers td, #customers th {
     border: 0px solid #ddd;
     padding: 8px;
+    text-align: left;
   }
   
   #customers tr:nth-child(even){background-color: #f2f2f2;}
@@ -77,4 +78,8 @@
   .nab-openvacancies-button:hover span:after {
     opacity: 1;
     right: 0;
+  }
+
+  .works-emp-icon {
+    margin-left: 10vh;
   }

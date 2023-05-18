@@ -6,7 +6,7 @@ import app from './app.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-import person from './person.png';
+import person from './employeee.png';
 
 export default function ApplicantsView() {
   const location = useLocation();
@@ -33,13 +33,12 @@ export default function ApplicantsView() {
         setAllApp(res.data);
         setLoading(false);
 
-
-        const u_list = allApp.map(item=>item.applicantusername);
+        /*const u_list = allApp.map(item=>item.applicantusername);
         console.log(u_list);
         const u = {u_list:u_list};
-        const profpic = axios.post("http://localhost:8000/getapplicantimages",u_list);
+        /*const profpic = axios.post("http://localhost:8000/getapplicantimages",u_list);
         const pictures = profpic.data.c1.map(item => item.profilePicture);
-        setImages(pictures);
+        setImages(pictures);*/
       })
       .catch(error => console.log(error));  
       

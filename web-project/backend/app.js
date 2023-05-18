@@ -1589,12 +1589,12 @@ app.get('/allnotifs/:sessionID', async (req, res) => {
   Connection.find({ follower: username })
     .then(connections => {
       const followingUsers = connections.map(connection => connection.following);
-      followingUsers.push(username); // Include current user as well
+      //followingUsers.push(username); // Include current user as well
 
       Notification.find({
         $or: [
-          { notifusername: { $in: followingUsers }, notificationType: 3 },
-          { username: { $in: followingUsers } }
+          { notifusername: { $in: followingUsers }, username: username },
+          {notificationType: 3, username: username }
         ]
       })
         .then(notifications => {

@@ -2,7 +2,7 @@
 import jobicon from './workk.png'
 import React,{useState,useEffect} from 'react'
 import './CurrentEmployees.css';
-import empicon from './dummy.jpg'
+import empicon from './employeee.png'
 import axios from 'axios'
 import './workshere.css';
 import Modal from 'react-modal';

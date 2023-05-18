@@ -296,7 +296,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
     <ul>
       {allcomments.map((cm) => (
         <li key={cm._id}>
+          <div>
           <img className='post_p3' src={`http://localhost:8000/profilepictures/${User.user?.profilePicture || User.company?.profilePicture || person}`} alt='' />
+          </div>
           <div className='post_comment-l'>
             <h6 className='post_h6' id="linktoprof" onClick={()=>{openProfile(cm.username)}}>{cm.username}</h6>
             <div className='post_comment-part'>
